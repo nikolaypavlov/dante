@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inf. IV — Інтертекстуальне дерево</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<link rel="stylesheet" href="../dante-theme.css">
+</head>
+<body>
+<div class="side-panel-overlay" id="overlay" onclick="togglePanel()"></div>
+<div class="side-panel" id="sidePanel"><div class="side-panel-header"><h2>Навігація</h2><button class="side-panel-close" onclick="togglePanel()">✕</button></div><div id="panelContent"></div></div>
+
+<header>
+  <button class="nav-btn" onclick="togglePanel()" title="Навігація">☰</button>
+  <div class="header-center">
+    <a class="nav-arrow" href="inf_03.html">← Inf. III</a>
+    <div class="title-block"><h1>Inferno IV</h1><p>Інтертекстуальне дерево джерел</p></div>
+    <a class="nav-arrow" href="inf_05.html">Inf. V →</a>
+  </div>
+</header>
+
+<div class="legend">
+  <div class="legend-item"><div class="legend-swatch" style="background:#d4a853"></div>Алюзія</div>
+  <div class="legend-item"><div class="legend-swatch thick" style="background:#7ea88e"></div>Структура</div>
+  <div class="legend-item"><div class="legend-swatch dashed" style="border-color:#8a7eb8"></div>Тематика</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:#c45c5c"></div>Інверсія</div>
+  <div class="legend-item"><div class="legend-swatch dotted" style="border-color:#5c8ab8"></div>Ономастика</div>
+</div>
+<div id="chart-container"></div>
+<div class="tooltip" id="tooltip"></div>
+
+<script>
+const TYPE_UA = { ALLUSION:"Алюзія", STRUCTURE:"Структура", THEMATIC:"Тематика", INVERSION:"Інверсія", ONOMASTIC:"Ономастика" };
+
+const LINKS_DATA = [
+  { from:"d_01", to:"aen_vi_426", type:"STRUCTURE",
+    dF:"Данте описує Лімб як місце, де немає тортур — лише зітхання (sospiri). Тут перебувають нехрещені діти і доброчесні язичники, що жили «sanza speme» — без надії.",
+    dT:"В Aeneis VI Вергілій поміщає невинних дітей у перших колах Аїду: «infantumque animae flentes in limine primo». Модель проміжного простору без активного покарання." },
+  { from:"d_02", to:"gen_passim", type:"ALLUSION",
+    dF:"Вергілій розповідає, що «un possente» — могутній — зійшов до Лімбу і забрав тінь Адама, Авеля, Ноя, Мойсея, Авраама, Давида, Ізраїля з дітьми та Рахіль.",
+    dT:"Адам (Gen. 1\u20135), Авель (Gen. 4), Ной (Gen. 6\u20139), Мойсей (Ex.), Авраам (Gen. 12\u201325), Давид (1\u20132 Reg.), Яків-Ізраїль з синами (Gen. 25\u201350), Рахіль (Gen. 29) — центральні постаті Старого Завіту." },
+  { from:"d_03", to:"aen_vi_637", type:"STRUCTURE",
+    dF:"У глибині Лімбу стоїть «nobile castello» — шляхетний замок, оточений сімома стінами і зеленим лугом. Тут мешкають доброчесні язичники в стані гідності без блаженства.",
+    dT:"В Aeneis VI Елісейські поля — місце для блаженних: зелені луги, приємне повітря, власне сонце. Данте трансформує вергіліанський Елісій у nobile castello — місце честі, але не щастя." },
+  { from:"d_04", to:"aen_vi_660", type:"STRUCTURE",
+    dF:"Чотири великих поети — Гомер, Горацій, Овідій, Лукан — зустрічають Вергілія і приймають Данте шостим у свій гурт — «bella scola». Канонізація поетичної традиції.",
+    dT:"В Aeneis VI Еней бачить в Елісії Мусея та інших поетів серед благородних тіней. Вергілій моделює простір зустрічі поетичних авторитетів у потойбіччі." },
+  { from:"d_04", to:"homer_ch", type:"ONOMASTIC",
+    dF:"Данте називає Гомера «poeta sovrano» — верховним поетом, який тримає в руці меч. Данте не читав Гомера грецькою, але визнає його першість за традицією.",
+    dT:"Гомер — автор Іліади та Одіссеї, визнаний першим поетом європейської традиції. Його текст Данте знав лише через латинські переказі й адаптації." },
+  { from:"homer_ch", to:"homer_src", type:"ONOMASTIC",
+    dF:"Вергілій та Ilias Latina — основні посередники, через яких Данте знав Гомера.",
+    dT:"Гомер — первісне джерело, відоме Данте виключно через латинських посередників (Ilias Latina, Вергілій, Стацій, Овідій)." },
+  { from:"d_05", to:"hor_sat", type:"ONOMASTIC",
+    dF:"Данте називає Горація «satiro» — сатириком. Горацій для Данте є передусім автором Satirae та Ars Poetica.",
+    dT:"Горацій — автор Satirae (Sermones), Epistulae та Carmina. Данте знав його безпосередньо латиною." },
+  { from:"d_06", to:"met_i", type:"ONOMASTIC",
+    dF:"Данте називає Овідія третім у bella scola. Овідій — невід'ємна частина його поетичного канону.",
+    dT:"Овідій — автор Metamorphoses, головного джерела міфологічних алюзій у Commedia. Данте читав його безпосередньо." },
+  { from:"d_07", to:"phars_i", type:"ONOMASTIC",
+    dF:"Лукан — п'ятий поет у bella scola, автор Pharsalia, єдиного великого латинського епосу про історичну подію — громадянську війну Цезаря і Помпея.",
+    dT:"Лукан відкриває Pharsalia словами «Bella per Emathios plus quam civilia campos». Данте використовує Лукана як джерело римської історії та образності." },
+  { from:"d_08", to:"aen_vi_756", type:"STRUCTURE",
+    dF:"Данте перелічує героїв Лімбу: Електру, Гектора, Енея, Цезаря, Камілу, Пентесілею, Латіна, Лавінію, Брута. Каталог героїв перегукується з вергіліанським парадом душ.",
+    dT:"В Aeneis VI Анхіз показує Енею парад майбутніх римських героїв. Модель каталогу благородних тіней у просторі потойбічної честі." },
+  { from:"d_09", to:"aen_viii_134", type:"ONOMASTIC",
+    dF:"Данте поміщає Електру, матір Дардана — засновника Трої, на чолі каталогу героїв Лімбу.",
+    dT:"В Aeneis VIII Еванд пояснює Енею: «Dardanus, Iliacae primus pater urbis et auctor, / Electra, ut Grai perhibent, Atlantide cretus» — Дардан, народжений від Електри." },
+  { from:"d_10", to:"aen_xi_498", type:"ONOMASTIC",
+    dF:"Данте поміщає Камілу і Пентесілею поруч серед благородних тіней Лімбу. Жінки-воїтельки як уособлення virtus.",
+    dT:"Камілла — діва-воїтелька вольсків, героїчно гине в битві (Aen. XI). Вергілій змальовує її як зразок мужності та відданості." },
+  { from:"d_11", to:"rr_1191", type:"ONOMASTIC",
+    dF:"Данте поміщає Саладіна окремо від інших — «solo, in parte». Мусульманський султан як приклад лицарської шляхетності.",
+    dT:"В Roman de la Rose Саладін згадується як приклад щедрості (largesse). Образ Саладіна як благородного мусульманського правителя був поширений у середньовічній літературі." },
+  { from:"d_12", to:"arist_ch", type:"ONOMASTIC",
+    dF:"Данте називає Аристотеля «maestro di color che sanno» — учителем тих, хто знає. Він сидить серед філософської сім'ї, і всі його шанують.",
+    dT:"Аристотель — автор корпусу творів, що стали основою середньовічної університетської освіти. Данте знав його через латинські переклади." },
+  { from:"arist_ch", to:"arist_src", type:"ONOMASTIC",
+    dF:"Вільям з Мербеке переклав Аристотеля латиною, і саме через ці переклади Данте знав його тексти.",
+    dT:"Грецький оригінал Аристотеля — первісне джерело, яке Данте знав виключно через латинських посередників." },
+  { from:"d_13", to:"met_x_1", type:"ONOMASTIC",
+    dF:"Данте поміщає Орфея серед благородних тіней Лімбу. Орфей — поет і музикант, який спускався до підземного царства заради Еврідіки.",
+    dT:"В Metamorphoses X Овідій детально описує сходження Орфея до Аїду, його спів перед Плутоном і Прозерпіною та трагічну втрату Еврідіки." },
+  { from:"d_14", to:"ecl_iv_55", type:"ONOMASTIC",
+    dF:"Данте називає Ліна серед поетів Лімбу — поруч із Цицероном. Лін — легендарний пра-поет грецької традиції.",
+    dT:"В Eclogae IV Вергілій згадує Ліна як легендарного давнього поета: «non me carminibus vincat nec Thracius Orpheus / nec Linus»." },
+  { from:"d_15", to:"epist_mor", type:"ONOMASTIC",
+    dF:"Данте називає Сенеку «morale» — моральним. Це вказує на Epistulae Morales ad Lucilium.",
+    dT:"Сенека — автор Epistulae Morales, трагедій та філософських трактатів. Середньовіччя сприймало його передусім як моральний авторитет." },
+];
+
+const NODES_RAW = {
+  d_01:    { label:"IV, 25\u201342",  sub:"Лімб — sospiri",        author:"Данте",    col:0 },
+  d_02:    { label:"IV, 53\u201363",  sub:"un possente",            author:"Данте",    col:0 },
+  d_03:    { label:"IV, 68\u201372",  sub:"nobile castello",        author:"Данте",    col:0 },
+  d_04:    { label:"IV, 86\u201390",  sub:"bella scola",            author:"Данте",    col:0 },
+  d_05:    { label:"IV, 88",          sub:"Orazio satiro",          author:"Данте",    col:0 },
+  d_06:    { label:"IV, 90",          sub:"Ovidio",                 author:"Данте",    col:0 },
+  d_07:    { label:"IV, 90",          sub:"Lucano",                 author:"Данте",    col:0 },
+  d_08:    { label:"IV, 121\u2013135",sub:"каталог героїв",         author:"Данте",    col:0 },
+  d_09:    { label:"IV, 121",         sub:"Електра",                author:"Данте",    col:0 },
+  d_10:    { label:"IV, 122",         sub:"Камілла, Пентесілея",    author:"Данте",    col:0 },
+  d_11:    { label:"IV, 129",         sub:"Saladino solo",          author:"Данте",    col:0 },
+  d_12:    { label:"IV, 131",         sub:"maestro di color che sanno",author:"Данте", col:0 },
+  d_13:    { label:"IV, 140",         sub:"Orfeo",                  author:"Данте",    col:0 },
+  d_14:    { label:"IV, 141",         sub:"Lino",                   author:"Данте",    col:0 },
+  d_15:    { label:"IV, 142",         sub:"Seneca morale",          author:"Данте",    col:0 },
+  aen_vi_426:  { label:"Aen. VI, 426\u2013439", sub:"insontesque pueri",    author:"Вергілій", col:1 },
+  aen_vi_637:  { label:"Aen. VI, 637\u2013678", sub:"Елісейські поля",      author:"Вергілій", col:1 },
+  aen_vi_660:  { label:"Aen. VI, 660\u2013665", sub:"поети в Елісії",       author:"Вергілій", col:1 },
+  aen_vi_756:  { label:"Aen. VI, 756\u2013853", sub:"парад героїв",         author:"Вергілій", col:1 },
+  aen_viii_134:{ label:"Aen. VIII, 134\u2013137",sub:"Електра і Дардан",     author:"Вергілій", col:1 },
+  aen_xi_498:  { label:"Aen. XI, 498\u2013835", sub:"Камілла",              author:"Вергілій", col:1 },
+  ecl_iv_55:   { label:"Ecl. IV, 55\u201357",   sub:"Linus",                author:"Вергілій", col:1 },
+  gen_passim:  { label:"Gen.; Ex.; Reg.",        sub:"патріархи",            author:"Біблія",   col:1 },
+  hor_sat:     { label:"Sat. I, 1\u201312",      sub:"Горацій-сатирик",      author:"Горацій",  col:1 },
+  met_i:       { label:"Met. I, 1\u20134",       sub:"prooemium",            author:"Овідій",   col:1 },
+  met_x_1:     { label:"Met. X, 1\u201385",      sub:"Орфей і Еврідіка",     author:"Овідій",   col:1 },
+  phars_i:     { label:"Phars. I, 1\u20137",     sub:"prooemium",            author:"Лукан",    col:1 },
+  rr_1191:     { label:"RR 1191\u20131192",      sub:"Саладін і largesse",   author:"Жан де Мен",col:1 },
+  epist_mor:   { label:"Epist. Morales",         sub:"Сенека-мораліст",      author:"Сенека",   col:1 },
+  homer_ch:    { label:"Ilias Latina / Aen.",    sub:"Гомер через лат.",     author:"Вергілій", col:1 },
+  homer_src:   { label:"Il. I; Od. I",           sub:"Гомер — оригінал",     author:"Гомер",    col:2 },
+  arist_ch:    { label:"Вільям з Мербеке",       sub:"лат. переклад",        author:"Вільям з Мербеке",col:1 },
+  arist_src:   { label:"Opera (passim)",         sub:"Аристотель — оригінал",author:"Аристотель",col:2 },
+};
+
+const AUTHOR_STYLES = {
+  "Данте":    {f:"#281a08",s:"#d4a853"},
+  "Вергілій": {f:"#1a0e28",s:"#a06ece"},
+  "Овідій":   {f:"#280e1a",s:"#ce5a8a"},
+  "Лукан":    {f:"#0e2028",s:"#5abecc"},
+  "Стацій":   {f:"#0e1428",s:"#5a78ce"},
+  "Гомер":    {f:"#28140e",s:"#ce7a5a"},
+  "Біблія":   {f:"#280e0e",s:"#ce5a5a"},
+  "Горацій":  {f:"#1a2808",s:"#8ece5a"},
+  "Сенека":   {f:"#28200e",s:"#ceaa5a"},
+  "Жан де Мен":{f:"#0e2820",s:"#5aceb8"},
+  "Вільям з Мербеке":{f:"#1a1a28",s:"#9a9ace"},
+  "Аристотель":{f:"#281a1a",s:"#ce8a8a"}
+};
+
+const nodeW=164,nodeH=46,gapY=8,gapX=140,padLeft=70,padTop=20;
+const nodes=Object.entries(NODES_RAW).map(([id,n])=>({id,...n,x:0,y:0}));
+const nodeMap={};nodes.forEach(n=>nodeMap[n.id]=n);
+const byCols=[nodes.filter(n=>n.col===0),nodes.filter(n=>n.col===1),nodes.filter(n=>n.col===2)];
+byCols[0].forEach((n,i)=>{n.y=i*(nodeH+gapY)+nodeH/2});
+byCols[1].forEach(n=>{const p=LINKS_DATA.filter(l=>l.to===n.id&&nodeMap[l.from]?.col===0).map(l=>nodeMap[l.from]);if(p.length)n.y=p.reduce((s,x)=>s+x.y,0)/p.length;else n.y=byCols[0][Math.floor(byCols[0].length/2)].y});
+rOY(byCols[1]);
+if(byCols[2]&&byCols[2].length){byCols[2].forEach(n=>{const p=LINKS_DATA.filter(l=>l.to===n.id&&nodeMap[l.from]).map(l=>nodeMap[l.from]);if(p.length)n.y=p.reduce((s,x)=>s+x.y,0)/p.length;else if(byCols[1].length)n.y=byCols[1][Math.floor(byCols[1].length/2)].y;else n.y=200});rOY(byCols[2])}
+function rOY(a){a.sort((a,b)=>a.y-b.y);const m=nodeH+gapY;for(let p=0;p<40;p++){let o=true;for(let i=1;i<a.length;i++){const d=a[i].y-a[i-1].y;if(d<m){const s=(m-d)/2+.5;a[i-1].y-=s;a[i].y+=s;o=false}}if(o)break}}
+const maxC=Math.max(...nodes.map(n=>n.col)),colX=[];for(let c=0;c<=maxC;c++)colX.push(padLeft+c*(nodeW+gapX)+nodeW/2);
+nodes.forEach(n=>{n.x=colX[n.col]});
+const minY=Math.min(...nodes.map(n=>n.y))-nodeH/2;nodes.forEach(n=>n.y-=minY-padTop);
+const svgW=padLeft+(maxC+1)*nodeW+maxC*gapX+padLeft,svgH=Math.max(...nodes.map(n=>n.y+nodeH/2))+20;
+const TC={ALLUSION:"#d4a853",STRUCTURE:"#7ea88e",THEMATIC:"#8a7eb8",INVERSION:"#c45c5c",ONOMASTIC:"#5c8ab8"};
+const AS=AUTHOR_STYLES;const st=getComputedStyle(document.documentElement);
+const svg=d3.select("#chart-container").append("svg").attr("width",svgW).attr("height",svgH);
+const defs=svg.append("defs");
+Object.entries(TC).forEach(([t,c])=>{defs.append("marker").attr("id","a-"+t).attr("viewBox","0 0 10 6").attr("refX",10).attr("refY",3).attr("markerWidth",7).attr("markerHeight",5).attr("orient","auto").append("path").attr("d","M0,0.5 L9,3 L0,5.5Z").attr("fill",c)});
+const nCols=colX.length;const cw=svgW/nCols;
+colX.forEach((cx,i)=>{svg.append("rect").attr("x",i*cw).attr("y",0).attr("width",cw).attr("height",svgH).attr("fill",i%2===0?st.getPropertyValue("--col-dark").trim():st.getPropertyValue("--col-light").trim())});
+
+function hC(s,t){const sx=s.x+nodeW/2+2,tx=t.x-nodeW/2-2,dx=tx-sx;return"M"+sx+","+s.y+" C"+(sx+dx*.45)+","+s.y+" "+(tx-dx*.45)+","+t.y+" "+tx+","+t.y}
+const linkG=svg.append("g");
+const linkEls=linkG.selectAll("path").data(LINKS_DATA).enter().append("path")
+  .attr("d",d=>hC(nodeMap[d.from],nodeMap[d.to]))
+  .attr("fill","none")
+  .attr("stroke",d=>TC[d.type])
+  .attr("stroke-width",d=>d.type==="STRUCTURE"?3:1.6)
+  .attr("stroke-dasharray",d=>d.type==="THEMATIC"?"6,4":d.type==="ONOMASTIC"?"2,4":"none")
+  .attr("opacity",.5)
+  .attr("marker-end",d=>"url(#a-"+d.type+")");
+
+const tooltip=d3.select("#tooltip");const nodeG=svg.append("g");
+const ne=nodeG.selectAll("g").data(nodes).enter().append("g")
+  .attr("transform",d=>"translate("+(d.x-nodeW/2)+","+(d.y-nodeH/2)+")")
+  .style("cursor","pointer");
+ne.append("rect").attr("width",nodeW).attr("height",nodeH).attr("rx",5)
+  .attr("fill",d=>AS[d.author]?.f||"#1a1a1a")
+  .attr("stroke",d=>AS[d.author]?.s||"#333")
+  .attr("stroke-width",d=>d.author==="Данте"?1.8:1);
+ne.append("text").attr("x",nodeW/2).attr("y",17).attr("text-anchor","middle")
+  .attr("fill",st.getPropertyValue('--text').trim())
+  .attr("font-size","10px").attr("font-family","'JetBrains Mono',monospace").attr("font-weight",500)
+  .text(d=>d.label);
+ne.append("text").attr("x",nodeW/2).attr("y",32).attr("text-anchor","middle")
+  .attr("fill",st.getPropertyValue('--text-muted').trim())
+  .attr("font-size","10.5px").attr("font-family","'Cormorant Garamond',serif").attr("font-style","italic")
+  .text(d=>d.sub);
+ne.filter(d=>d.col>0).append("text")
+  .attr("x",nodeW/2).attr("y",nodeH-2).attr("text-anchor","middle")
+  .attr("fill",d=>AS[d.author]?.s||"#555")
+  .attr("font-size","7px").attr("font-family","'JetBrains Mono',monospace").attr("opacity",.7)
+  .text(d=>d.author);
+
+ne.on("mouseover",function(ev,d){
+  const ids=new Set([d.id]);
+  LINKS_DATA.forEach(l=>{if(l.from===d.id||l.to===d.id){ids.add(l.from);ids.add(l.to)}});
+  linkEls.attr("opacity",l=>(l.from===d.id||l.to===d.id)?1:.04)
+    .attr("stroke-width",l=>{const on=l.from===d.id||l.to===d.id;return on?(l.type==="STRUCTURE"?4.5:3):(l.type==="STRUCTURE"?3:1.6)});
+  nodeG.selectAll("g").select("rect")
+    .attr("opacity",function(){return ids.has(d3.select(this.parentNode).datum().id)?1:.1});
+  var parts=LINKS_DATA.filter(l=>l.from===d.id||l.to===d.id).map(l=>{
+    var c=TC[l.type],isF=l.from===d.id,other=isF?nodeMap[l.to]:nodeMap[l.from],desc=isF?l.dF:l.dT,arr=isF?"\u2192":"\u2190";
+    var s='<span class="tt-type" style="background:'+c+'22;color:'+c+';border:1px solid '+c+'44">'+TYPE_UA[l.type]+'</span> '+arr+' <strong>'+other.label+'</strong><br><span class="tt-desc">'+desc+'</span>';
+    return s;
+  });
+  var h=parts.join("<br><br>");
+  if(h)tooltip.html('<strong>'+d.label+'</strong> <em style="color:var(--text-muted)">\u00b7 '+d.author+'</em><br><br>'+h)
+    .style("opacity",1)
+    .style("left",Math.min(ev.clientX+14,innerWidth-440)+"px")
+    .style("top",Math.min(ev.clientY+14,innerHeight-300)+"px");
+}).on("mousemove",function(ev){
+  tooltip.style("left",Math.min(ev.clientX+14,innerWidth-440)+"px")
+    .style("top",Math.min(ev.clientY+14,innerHeight-300)+"px");
+}).on("mouseout",function(){
+  linkEls.attr("opacity",.5).attr("stroke-width",d=>d.type==="STRUCTURE"?3:1.6);
+  nodeG.selectAll("g").select("rect").attr("opacity",1);
+  tooltip.style("opacity",0);
+});
+
+function togglePanel(){
+  document.getElementById('sidePanel').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('open');
+}
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){
+    document.getElementById('sidePanel').classList.remove('open');
+    document.getElementById('overlay').classList.remove('open');
+  }
+});
+
+(function buildNav(){
+  var roman=function(n){var v=[1000,900,500,400,100,90,50,40,10,9,5,4,1],s=['M','CM','D','CD','C','XC','L','XL','X','IX','V','IV','I'],r='';for(var i=0;i<v.length;i++)while(n>=v[i]){r+=s[i];n-=v[i]}return r};
+  var pad2=function(n){return String(n).padStart(2,'0')};
+  var ct=[{t:'Inferno',a:'Inf.',x:'inf',c:34},{t:'Purgatorio',a:'Purg.',x:'purg',c:33},{t:'Paradiso',a:'Par.',x:'par',c:33}];
+  var cur='inf_04';
+  var container=document.getElementById('panelContent');
+  ct.forEach(function(c){
+    var sec=document.createElement('div');
+    sec.className='side-panel-section';
+    var h3=document.createElement('h3');
+    h3.textContent=c.t;
+    sec.appendChild(h3);
+    for(var i=1;i<=c.c;i++){
+      var f=c.x+'_'+pad2(i);
+      var a=document.createElement('a');
+      a.href=f+'.html';
+      a.textContent=c.a+' '+roman(i);
+      if(f===cur)a.className='current';
+      sec.appendChild(a);
+    }
+    container.appendChild(sec);
+  });
+})();
+</script>
+</body>
+</html>

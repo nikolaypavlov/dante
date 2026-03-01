@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inf. XV — Інтертекстуальне дерево</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<link rel="stylesheet" href="../dante-theme.css">
+</head>
+<body>
+<div class="side-panel-overlay" id="overlay" onclick="togglePanel()"></div>
+<div class="side-panel" id="sidePanel"><div class="side-panel-header"><h2>Навігація</h2><button class="side-panel-close" onclick="togglePanel()">✕</button></div><div id="panelContent"></div></div>
+
+<header>
+  <button class="nav-btn" onclick="togglePanel()" title="Навігація">☰</button>
+  <div class="header-center">
+    <a class="nav-arrow" href="inf_14.html">← Inf. XIV</a>
+    <div class="title-block"><h1>Inferno XV</h1><p>Інтертекстуальне дерево джерел</p></div>
+    <a class="nav-arrow" href="inf_16.html">Inf. XVI →</a>
+  </div>
+</header>
+
+<div class="legend">
+  <div class="legend-item"><div class="legend-swatch" style="background:#d4a853"></div>Алюзія</div>
+  <div class="legend-item"><div class="legend-swatch thick" style="background:#7ea88e"></div>Структура</div>
+  <div class="legend-item"><div class="legend-swatch dashed" style="border-color:#8a7eb8"></div>Тематика</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:#c45c5c"></div>Інверсія</div>
+  <div class="legend-item"><div class="legend-swatch dotted" style="border-color:#5c8ab8"></div>Ономастика</div>
+</div>
+<div id="chart-container"></div>
+<div class="tooltip" id="tooltip"></div>
+
+<script>
+const TYPE_UA = { ALLUSION:"Алюзія", STRUCTURE:"Структура", THEMATIC:"Тематика", INVERSION:"Інверсія", ONOMASTIC:"Ономастика" };
+
+const LINKS_DATA = [
+  { from:"d_01", to:"georg_i_237", type:"THEMATIC",
+    dF:"Данте порівнює кам'яні береги потічка, яким вони йдуть, із дамбами Фландрії та Бренти. Технічне порівняння потойбічного простору з реальною інженерією — прийом, що заземлює фантастику.",
+    dT:"В Georgica I Вергілій описує землеробські й меліоративні роботи — дренаж полів, зрошення. Мотив людської праці, що приборкує стихію, перегукується з Дантовим порівнянням пекельних берегів із дамбами." },
+  { from:"d_02", to:"aen_vi_679", type:"STRUCTURE",
+    dF:"Данте зустрічає свого вчителя Брунетто Латіні серед содомітів. Зустріч сповнена поваги й ніжності: «Siete voi qui, ser Brunetto?» Учень зустрічає учителя в потойбіччі — модель Aeneis VI.",
+    dT:"В Aeneis VI Еней зустрічає батька Анхіза в Елісеї зі сльозами і спробою обійняти тінь. Модель емоційної зустрічі з рідною людиною/наставником у потойбіччі стає каркасом для зустрічі з Брунетто." },
+  { from:"d_03", to:"aen_vi_340", type:"ALLUSION",
+    dF:"Данте не відразу впізнає Брунетто — його обличчя обпалене («cotto aspetto»). Він дивиться вниз і впізнає за рисами — сцена утрудненого впізнання в потойбіччі.",
+    dT:"В Aeneis VI Еней упізнає Палінура серед тіней — «vix adgnoscendo» — ледве впізнаючи його спотворену появу. Мотив утрудненого впізнання покараної або зміненої тіні як прийом поетичного потрясіння." },
+  { from:"d_04", to:"aen_vi_697", type:"ALLUSION",
+    dF:"Данте нахиляє обличчя до Брунетто — «e chinando la mano a la sua faccia». Жест ніжності до покараного вчителя, що не може піднятися з рівня піску.",
+    dT:"В Aeneis VI Еней тричі намагається обійняти тінь Анхіза, але руки проходять наскрізь — «ter conatus ibi collo dare bracchia circum, ter frustra comprensa manus effugit imago». Жест любові до недосяжної тіні." },
+  { from:"d_05", to:"aen_vi_679b", type:"ALLUSION",
+    dF:"Данте називає Брунетто «дорогим і добрим батьківським образом» — «la cara e buona imagine paterna». Брунетто вчив його «come l'uom s'etterna» — як людина стає безсмертною через слово.",
+    dT:"В Aeneis VI Анхіз — батько, що чекає на сина в потойбіччі й передає йому знання про майбутнє. Модель батька-наставника, що навчає безсмертю." },
+  { from:"d_06", to:"aen_vi_83", type:"STRUCTURE",
+    dF:"Брунетто пророкує Данте славу й вигнання: «Se tu segui tua stella, / non puoi fallire a glorioso porto». Мертвий учитель як пророк долі учня — структурна модель пророчого діалогу.",
+    dT:"В Aeneis VI Сивілла пророкує Енею війни і випробування в Лаціумі. Анхіз показує майбутню славу нащадків. Потойбічне пророцтво як нагорода за catabasis — структурна модель." },
+  { from:"d_07", to:"aen_ii_692", type:"THEMATIC",
+    dF:"Брунетто каже: «якщо ти йтимеш за своєю зіркою, не зможеш не дістатися до славного порту». Зірка як знак долі — мотив, що сягає вергіліанської традиції.",
+    dT:"В Aeneis II зірка, що спалахує над головою малого Юла (Асканія), стає знаком від богів, що підтверджує долю троянського роду. Зірка як символ призначення і вищого покровительства." },
+  { from:"d_08", to:"phars_i_1", type:"THEMATIC",
+    dF:"Брунетто називає флорентійців «народом злим і невдячним», нащадками Фьєзоле — «bestie fiesolane». Мотив неблагодарності рідного міста до великого громадянина.",
+    dT:"Лукан відкриває Pharsalia темою Рима, що знищує себе громадянською війною — «bella... plus quam civilia». Мотив великого міста, що пожирає власних найкращих синів." },
+  { from:"d_09", to:"aen_vi_756", type:"STRUCTURE",
+    dF:"Данте відповідає Брунетто, що готовий прийняти волю долі — «la Fortuna, come vuol, son presto». Він записує пророцтво для подальшого тлумачення.",
+    dT:"В Aeneis VI Анхіз показує Енею низку майбутніх римлян, але не все можна зрозуміти відразу — деякі фігури потребують пояснення. Модель пророцтва, що потребує подальшого тлумачення." },
+  { from:"d_10", to:"tesoretto", type:"ONOMASTIC",
+    dF:"Данте зустрічає свого вчителя Брунетто Латіні й називає його «ser Brunetto» — шанобливим звертанням. Брунетто — автор Tesoretto, дидактичної алегоричної поеми.",
+    dT:"В Tesoretto Брунетто Латіні описує власну алегоричну подорож: він заблукав у лісі й зустрів Природу, яка навчає його. Ця дидактична рамка перегукується зі структурою Комедії." },
+  { from:"d_11", to:"tresor", type:"ALLUSION",
+    dF:"Брунетто просить Данте пам'ятати його «Tesoro» — «Sieti raccomandato il mio Tesoro, / nel quale io vivo ancora». Книга як спосіб жити після смерті.",
+    dT:"Li Livres dou Tresor — енциклопедичний трактат Брунетто, написаний французькою. У пролозі він заявляє, що книга зберігає знання як скарб для нащадків." },
+  { from:"d_12", to:"aen_vi_660", type:"INVERSION",
+    dF:"Брунетто називає інших покараних інтелектуалів: Прісціана, Франческо д'Аккорсо. Каталог учених-грішників — інверсія вергіліанського каталогу блаженних мислителів.",
+    dT:"В Aeneis VI Анхіз показує Енею видатних поетів, мислителів і героїв в Елісейських полях. У Данте інтелектуали перебувають не в Елісії, а під вогняним дощем — інверсія вергіліанської моделі." },
+  { from:"d_13", to:"aen_vi_660b", type:"INVERSION",
+    dF:"Брунетто зазначає, що серед покараних — «clerci e litterati grandi e di gran fama». Інтелектуальна еліта серед содомітів — жорстка інверсія вергіліанського Елісію.",
+    dT:"В Aeneis VI Мусей та інші поети перебувають в Елісейських полях, оточені лаврами й музикою. Елісій як нагорода за інтелектуальну й поетичну велич. Данте розміщує таких самих людей у пеклі." },
+];
+
+const NODES_RAW = {
+  d_01:    { label:"XV, 4\u20139",    sub:"дамби Фландрії",          author:"Данте",    col:0 },
+  d_02:    { label:"XV, 22\u201330",  sub:"зустріч із Брунетто",     author:"Данте",    col:0 },
+  d_03:    { label:"XV, 22\u201330",  sub:"cotto aspetto",            author:"Данте",    col:0 },
+  d_04:    { label:"XV, 31\u201333",  sub:"Данте нахиляється",        author:"Данте",    col:0 },
+  d_05:    { label:"XV, 55\u201360",  sub:"imagine paterna",          author:"Данте",    col:0 },
+  d_06:    { label:"XV, 61\u201378",  sub:"пророцтво Брунетто",       author:"Данте",    col:0 },
+  d_07:    { label:"XV, 61\u201364",  sub:"segui tua stella",         author:"Данте",    col:0 },
+  d_08:    { label:"XV, 73\u201378",  sub:"gente ingrata",            author:"Данте",    col:0 },
+  d_09:    { label:"XV, 82\u201387",  sub:"Данте приймає долю",       author:"Данте",    col:0 },
+  d_10:    { label:"XV, 30",         sub:"ser Brunetto",              author:"Данте",    col:0 },
+  d_11:    { label:"XV, 119\u2013120",sub:"il mio Tesoro",            author:"Данте",    col:0 },
+  d_12:    { label:"XV, 121\u2013124",sub:"Прісціан, д'Аккорсо",      author:"Данте",    col:0 },
+  d_13:    { label:"XV, 121\u2013124",sub:"clerci e litterati",       author:"Данте",    col:0 },
+  georg_i_237: { label:"Georg. I, 237\u2013239",sub:"гідравліка",        author:"Вергілій",col:1 },
+  aen_vi_679:  { label:"Aen. VI, 679\u2013702",sub:"Анхіз і Еней",      author:"Вергілій",col:1 },
+  aen_vi_340:  { label:"Aen. VI, 340\u2013346",sub:"впізнання Палінура", author:"Вергілій",col:1 },
+  aen_vi_697:  { label:"Aen. VI, 697\u2013700",sub:"обійняти тінь",      author:"Вергілій",col:1 },
+  aen_vi_679b: { label:"Aen. VI, 679\u2013683",sub:"батько-наставник",    author:"Вергілій",col:1 },
+  aen_vi_83:   { label:"Aen. VI, 83\u201397",  sub:"Сивілла пророкує",   author:"Вергілій",col:1 },
+  aen_ii_692:  { label:"Aen. II, 692\u2013704",sub:"зірка Юла",          author:"Вергілій",col:1 },
+  aen_vi_756:  { label:"Aen. VI, 756\u2013886",sub:"процесія римлян",    author:"Вергілій",col:1 },
+  aen_vi_660:  { label:"Aen. VI, 660\u2013665",sub:"поети в Елісеї",     author:"Вергілій",col:1 },
+  aen_vi_660b: { label:"Aen. VI, 660\u2013665",sub:"Мусей і лаври",      author:"Вергілій",col:1 },
+  phars_i_1:   { label:"Phars. I, 1\u20137",   sub:"Рим проти себе",     author:"Лукан",   col:1 },
+  tesoretto:   { label:"Tesoretto, 1\u201330", sub:"алегорична подорож",  author:"Брунетто Латіні",col:1 },
+  tresor:      { label:"Tresor, I, 1\u20133",  sub:"книга-скарб",         author:"Брунетто Латіні",col:1 },
+};
+
+const AUTHOR_STYLES = {
+  "Данте":    {f:"#281a08",s:"#d4a853"},
+  "Вергілій": {f:"#1a0e28",s:"#a06ece"},
+  "Овідій":   {f:"#280e1a",s:"#ce5a8a"},
+  "Лукан":    {f:"#0e2028",s:"#5abecc"},
+  "Стацій":   {f:"#0e1428",s:"#5a78ce"},
+  "Гомер":    {f:"#28140e",s:"#ce7a5a"},
+  "Біблія":   {f:"#280e0e",s:"#ce5a5a"},
+  "Брунетто Латіні": {f:"#1a1a0e",s:"#b8a848"}
+};
+
+const nodeW=164,nodeH=46,gapY=8,gapX=140,padLeft=70,padTop=20;
+const nodes=Object.entries(NODES_RAW).map(([id,n])=>({id,...n,x:0,y:0}));
+const nodeMap={};nodes.forEach(n=>nodeMap[n.id]=n);
+const byCols=[nodes.filter(n=>n.col===0),nodes.filter(n=>n.col===1),nodes.filter(n=>n.col===2)];
+byCols[0].forEach((n,i)=>{n.y=i*(nodeH+gapY)+nodeH/2});
+byCols[1].forEach(n=>{const p=LINKS_DATA.filter(l=>l.to===n.id&&nodeMap[l.from]?.col===0).map(l=>nodeMap[l.from]);if(p.length)n.y=p.reduce((s,x)=>s+x.y,0)/p.length;else n.y=byCols[0][Math.floor(byCols[0].length/2)].y});
+rOY(byCols[1]);
+if(byCols[2]&&byCols[2].length){byCols[2].forEach(n=>{const p=LINKS_DATA.filter(l=>l.to===n.id&&nodeMap[l.from]).map(l=>nodeMap[l.from]);if(p.length)n.y=p.reduce((s,x)=>s+x.y,0)/p.length;else if(byCols[1].length)n.y=byCols[1][Math.floor(byCols[1].length/2)].y;else n.y=200});rOY(byCols[2])}
+function rOY(a){a.sort((a,b)=>a.y-b.y);const m=nodeH+gapY;for(let p=0;p<40;p++){let o=true;for(let i=1;i<a.length;i++){const d=a[i].y-a[i-1].y;if(d<m){const s=(m-d)/2+.5;a[i-1].y-=s;a[i].y+=s;o=false}}if(o)break}}
+const maxC=Math.max(...nodes.map(n=>n.col)),colX=[];for(let c=0;c<=maxC;c++)colX.push(padLeft+c*(nodeW+gapX)+nodeW/2);
+nodes.forEach(n=>{n.x=colX[n.col]});
+const minY=Math.min(...nodes.map(n=>n.y))-nodeH/2;nodes.forEach(n=>n.y-=minY-padTop);
+const svgW=padLeft+(maxC+1)*nodeW+maxC*gapX+padLeft,svgH=Math.max(...nodes.map(n=>n.y+nodeH/2))+20;
+const TC={ALLUSION:"#d4a853",STRUCTURE:"#7ea88e",THEMATIC:"#8a7eb8",INVERSION:"#c45c5c",ONOMASTIC:"#5c8ab8"};
+const AS=AUTHOR_STYLES;const st=getComputedStyle(document.documentElement);
+const svg=d3.select("#chart-container").append("svg").attr("width",svgW).attr("height",svgH);
+const defs=svg.append("defs");
+Object.entries(TC).forEach(([t,c])=>{defs.append("marker").attr("id","a-"+t).attr("viewBox","0 0 10 6").attr("refX",10).attr("refY",3).attr("markerWidth",7).attr("markerHeight",5).attr("orient","auto").append("path").attr("d","M0,0.5 L9,3 L0,5.5Z").attr("fill",c)});
+const nCols=colX.length;const cw=svgW/nCols;
+colX.forEach((cx,i)=>{svg.append("rect").attr("x",i*cw).attr("y",0).attr("width",cw).attr("height",svgH).attr("fill",i%2===0?st.getPropertyValue("--col-dark").trim():st.getPropertyValue("--col-light").trim())});
+
+function hC(s,t){const sx=s.x+nodeW/2+2,tx=t.x-nodeW/2-2,dx=tx-sx;return"M"+sx+","+s.y+" C"+(sx+dx*.45)+","+s.y+" "+(tx-dx*.45)+","+t.y+" "+tx+","+t.y}
+const linkG=svg.append("g");
+const linkEls=linkG.selectAll("path").data(LINKS_DATA).enter().append("path")
+  .attr("d",d=>hC(nodeMap[d.from],nodeMap[d.to]))
+  .attr("fill","none")
+  .attr("stroke",d=>TC[d.type])
+  .attr("stroke-width",d=>d.type==="STRUCTURE"?3:1.6)
+  .attr("stroke-dasharray",d=>d.type==="THEMATIC"?"6,4":d.type==="ONOMASTIC"?"2,4":"none")
+  .attr("opacity",.5)
+  .attr("marker-end",d=>"url(#a-"+d.type+")");
+
+const tooltip=d3.select("#tooltip");const nodeG=svg.append("g");
+const ne=nodeG.selectAll("g").data(nodes).enter().append("g")
+  .attr("transform",d=>"translate("+(d.x-nodeW/2)+","+(d.y-nodeH/2)+")")
+  .style("cursor","pointer");
+ne.append("rect").attr("width",nodeW).attr("height",nodeH).attr("rx",5)
+  .attr("fill",d=>AS[d.author]?.f||"#1a1a1a")
+  .attr("stroke",d=>AS[d.author]?.s||"#333")
+  .attr("stroke-width",d=>d.author==="Данте"?1.8:1);
+ne.append("text").attr("x",nodeW/2).attr("y",17).attr("text-anchor","middle")
+  .attr("fill",st.getPropertyValue('--text').trim())
+  .attr("font-size","10px").attr("font-family","'JetBrains Mono',monospace").attr("font-weight",500)
+  .text(d=>d.label);
+ne.append("text").attr("x",nodeW/2).attr("y",32).attr("text-anchor","middle")
+  .attr("fill",st.getPropertyValue('--text-muted').trim())
+  .attr("font-size","10.5px").attr("font-family","'Cormorant Garamond',serif").attr("font-style","italic")
+  .text(d=>d.sub);
+ne.filter(d=>d.col>0).append("text")
+  .attr("x",nodeW/2).attr("y",nodeH-2).attr("text-anchor","middle")
+  .attr("fill",d=>AS[d.author]?.s||"#555")
+  .attr("font-size","7px").attr("font-family","'JetBrains Mono',monospace").attr("opacity",.7)
+  .text(d=>d.author);
+
+ne.on("mouseover",function(ev,d){
+  const ids=new Set([d.id]);
+  LINKS_DATA.forEach(l=>{if(l.from===d.id||l.to===d.id){ids.add(l.from);ids.add(l.to)}});
+  linkEls.attr("opacity",l=>(l.from===d.id||l.to===d.id)?1:.04)
+    .attr("stroke-width",l=>{const on=l.from===d.id||l.to===d.id;return on?(l.type==="STRUCTURE"?4.5:3):(l.type==="STRUCTURE"?3:1.6)});
+  nodeG.selectAll("g").select("rect")
+    .attr("opacity",function(){return ids.has(d3.select(this.parentNode).datum().id)?1:.1});
+  var parts=LINKS_DATA.filter(l=>l.from===d.id||l.to===d.id).map(l=>{
+    var c=TC[l.type],isF=l.from===d.id,other=isF?nodeMap[l.to]:nodeMap[l.from],desc=isF?l.dF:l.dT,arr=isF?"\u2192":"\u2190";
+    var s='<span class="tt-type" style="background:'+c+'22;color:'+c+';border:1px solid '+c+'44">'+TYPE_UA[l.type]+'</span> '+arr+' <strong>'+other.label+'</strong><br><span class="tt-desc">'+desc+'</span>';
+    return s;
+  });
+  var h=parts.join("<br><br>");
+  if(h)tooltip.html('<strong>'+d.label+'</strong> <em style="color:var(--text-muted)">\u00b7 '+d.author+'</em><br><br>'+h)
+    .style("opacity",1)
+    .style("left",Math.min(ev.clientX+14,innerWidth-440)+"px")
+    .style("top",Math.min(ev.clientY+14,innerHeight-300)+"px");
+}).on("mousemove",function(ev){
+  tooltip.style("left",Math.min(ev.clientX+14,innerWidth-440)+"px")
+    .style("top",Math.min(ev.clientY+14,innerHeight-300)+"px");
+}).on("mouseout",function(){
+  linkEls.attr("opacity",.5).attr("stroke-width",d=>d.type==="STRUCTURE"?3:1.6);
+  nodeG.selectAll("g").select("rect").attr("opacity",1);
+  tooltip.style("opacity",0);
+});
+
+function togglePanel(){
+  document.getElementById('sidePanel').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('open');
+}
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){
+    document.getElementById('sidePanel').classList.remove('open');
+    document.getElementById('overlay').classList.remove('open');
+  }
+});
+
+(function buildNav(){
+  var roman=function(n){var v=[1000,900,500,400,100,90,50,40,10,9,5,4,1],s=['M','CM','D','CD','C','XC','L','XL','X','IX','V','IV','I'],r='';for(var i=0;i<v.length;i++)while(n>=v[i]){r+=s[i];n-=v[i]}return r};
+  var pad2=function(n){return String(n).padStart(2,'0')};
+  var ct=[{t:'Inferno',a:'Inf.',x:'inf',c:34},{t:'Purgatorio',a:'Purg.',x:'purg',c:33},{t:'Paradiso',a:'Par.',x:'par',c:33}];
+  var cur='inf_15';
+  var container=document.getElementById('panelContent');
+  ct.forEach(function(c){
+    var sec=document.createElement('div');
+    sec.className='side-panel-section';
+    var h3=document.createElement('h3');
+    h3.textContent=c.t;
+    sec.appendChild(h3);
+    for(var i=1;i<=c.c;i++){
+      var f=c.x+'_'+pad2(i);
+      var a=document.createElement('a');
+      a.href=f+'.html';
+      a.textContent=c.a+' '+roman(i);
+      if(f===cur)a.className='current';
+      sec.appendChild(a);
+    }
+    container.appendChild(sec);
+  });
+})();
+</script>
+</body>
+</html>

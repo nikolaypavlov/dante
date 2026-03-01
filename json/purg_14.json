@@ -1,0 +1,86 @@
+{
+  "canto": "Purg. XIV",
+  "cantica": "Purgatorio",
+  "canto_num": 14,
+  "verified": true,
+  "connections": [
+    {
+      "id": "purg_xiv_01",
+      "dante_ref": "XIV, 31–36",
+      "dante_sub": "річка Арно як звіриний шлях",
+      "source_ref": "Met. I, 568–587",
+      "source_sub": "перетворення людей на звірів",
+      "source_author": "Овідій",
+      "type": "THEMATIC",
+      "confidence": "MEDIUM",
+      "desc_dante": "Ґвідо дель Дука описує мешканців долини Арно як звірів: свині (Казентіно), собаки (Ареццо), вовки (Флоренція), лисиці (Піза). Метаморфоза людей на тварин через порок.",
+      "desc_source": "В Metamorphoses I Овідій описує перетворення Лікаона на вовка за жорстокість і нечестивість. Мотив метаморфози людини на тварину як покарання за моральне падіння — наскрізний для Овідія.",
+      "chain": null
+    },
+    {
+      "id": "purg_xiv_02",
+      "dante_ref": "XIV, 43–45",
+      "dante_sub": "Арно — ім'я, що приховується",
+      "source_ref": "Aen. III, 694–696",
+      "source_sub": "заборона називати ім'я",
+      "source_author": "Вергілій",
+      "type": "STRUCTURE",
+      "confidence": "MEDIUM",
+      "desc_dante": "Данте відмовляється називати річку Арно на ім'я, а Ґвідо схвалює це, кажучи, що ім'я цієї річки заслуговує забуття. Табу на ім'я як літературний прийом.",
+      "desc_source": "В Aeneis Вергілій використовує прийом табу на називання місця або персонажа безпосередньо. Утримання від прямого найменування створює ефект зловісної значущості.",
+      "chain": null
+    },
+    {
+      "id": "purg_xiv_03",
+      "dante_ref": "XIV, 86–87",
+      "dante_sub": "O gente umana, perché poni 'l core",
+      "source_ref": "Eccle. 1:2–3",
+      "source_sub": "vanitas vanitatum",
+      "source_author": "Біблія",
+      "type": "THEMATIC",
+      "confidence": "MEDIUM",
+      "desc_dante": "Ґвідо зітхає: «О рід людський, чого серце кладеш на те, що вимагає виключення співучасника» — заздрість як хвороба суспільства. Тон нагадує біблійні ляменти.",
+      "desc_source": "Еклезіаст проголошує марність людських прагнень: «vanitas vanitatum, omnia vanitas». Мотив гіркого роздуму над тщетою земних благ перегукується з ляментом Ґвідо.",
+      "chain": null
+    },
+    {
+      "id": "purg_xiv_04",
+      "dante_ref": "XIV, 133",
+      "dante_sub": "голос Каїна: chi m'ucciderà",
+      "source_ref": "Gen. 4:13–14",
+      "source_sub": "Каїн: omnis qui invenerit me, occidet me",
+      "source_author": "Біблія",
+      "type": "ALLUSION",
+      "confidence": "HIGH",
+      "desc_dante": "Бичівний голос грому вигукує слова Каїна — «вб'є мене кожен, хто зустріне!» Перший exemplum покараної заздрості, що лунає як небесний грім.",
+      "desc_source": "У Genesis Каїн після вбивства Авеля скаржиться Богу: «omnis igitur qui invenerit me occidet me» — кожен, хто мене зустріне, мене вб'є. Страх Каїна — наслідок злочину заздрості.",
+      "chain": null
+    },
+    {
+      "id": "purg_xiv_05",
+      "dante_ref": "XIV, 139",
+      "dante_sub": "голос Аглаври",
+      "source_ref": "Met. II, 737–832",
+      "source_sub": "Аглавра скам'яніла",
+      "source_author": "Овідій",
+      "type": "ALLUSION",
+      "confidence": "HIGH",
+      "desc_dante": "Другий бичівний голос кричить: «Io sono Aglauro che divenni sasso!» — Аглавра, перетворена на камінь за заздрість до сестри, другий exemplum покарання.",
+      "desc_source": "В Metamorphoses II Аглавра заздрить сестрі Герсі, коханій Меркурія. Мінерва насилає на неї Invidia (Заздрість), і дівчина буквально кам'яніє від отрути заздрощів.",
+      "chain": null
+    },
+    {
+      "id": "purg_xiv_06",
+      "dante_ref": "XIV, 143–144",
+      "dante_sub": "вудило проти спокуси",
+      "source_ref": "Ps. 31:9",
+      "source_sub": "in camo et freno maxillas eorum constringe",
+      "source_author": "Біблія",
+      "type": "ALLUSION",
+      "confidence": "MEDIUM",
+      "desc_dante": "Вергілій коментує, що бичівні голоси мали б бути «вудилом» (camo), що стримує людину від гріха. Метафора вудила для морального приборкання.",
+      "desc_source": "Псалом 31 (32) використовує образ вудила і поводів: «in camo et freno maxillas eorum constringe, qui non approximant ad te» — приборкати тих, хто не наближається до Бога.",
+      "chain": null
+    }
+  ]
+}

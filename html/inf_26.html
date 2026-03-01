@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inf. XXVI — Інтертекстуальне дерево</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<link rel="stylesheet" href="../dante-theme.css">
+</head>
+<body>
+<div class="side-panel-overlay" id="overlay" onclick="togglePanel()"></div>
+<div class="side-panel" id="sidePanel"><div class="side-panel-header"><h2>Навігація</h2><button class="side-panel-close" onclick="togglePanel()">✕</button></div><div id="panelContent"></div></div>
+
+<header>
+  <button class="nav-btn" onclick="togglePanel()" title="Навігація">☰</button>
+  <div class="header-center">
+    <a class="nav-arrow" href="inf_25.html">← Inf. XXV</a>
+    <div class="title-block"><h1>Inferno XXVI</h1><p>Інтертекстуальне дерево джерел</p></div>
+    <a class="nav-arrow" href="inf_27.html">Inf. XXVII →</a>
+  </div>
+</header>
+
+<div class="legend">
+  <div class="legend-item"><div class="legend-swatch" style="background:#d4a853"></div>Алюзія</div>
+  <div class="legend-item"><div class="legend-swatch thick" style="background:#7ea88e"></div>Структура</div>
+  <div class="legend-item"><div class="legend-swatch dashed" style="border-color:#8a7eb8"></div>Тематика</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:#c45c5c"></div>Інверсія</div>
+  <div class="legend-item"><div class="legend-swatch dotted" style="border-color:#5c8ab8"></div>Ономастика</div>
+</div>
+<div id="chart-container"></div>
+<div class="tooltip" id="tooltip"></div>
+
+<script>
+const TYPE_UA = { ALLUSION:"Алюзія", STRUCTURE:"Структура", THEMATIC:"Тематика", INVERSION:"Інверсія", ONOMASTIC:"Ономастика" };
+
+const LINKS_DATA = [
+  { from:"d_01", to:"reg_2_11", type:"ALLUSION",
+    dF:"Данте порівнює вогні у рові з колісницею, на якій Ілія вознісся на небо, коли Елісей бачив лише стовп вогню, що здіймався.",
+    dT:"Четверта книга Царств описує вознесіння пророка Ілії: вогняна колісниця з вогняними кіньми розділила Ілію та Елісея, і Ілія вознісся у вихорі на небо." },
+  { from:"d_01", to:"reg_2_23", type:"ALLUSION",
+    dF:"Данте згадує відомство Елісея: «si vengiò con li orsi» — пророк помстився ведмедями за дітей, які глузували з нього.",
+    dT:"Після вознесіння Ілії діти з Вефіля знущалися з Елісея. Пророк прокляв їх, і два ведмеді вийшли з лісу і розтерзали 42 дитини." },
+  { from:"d_02", to:"aen_ii", type:"ALLUSION",
+    dF:"Одіссей і Діомед разом у вогні за три гріхи: хитрість дерев'яного коня, «per cui la porta ond'uscì de' Romani il gentil seme» — брама, звідки вийшло римське насіння.",
+    dT:"В Aeneis II Еней розповідає про дерев'яний кінь: Сінон обдурив троянців, кінь відкрився вночі, греки спалили Трою." },
+  { from:"d_03", to:"achilleis", type:"ALLUSION",
+    dF:"Другий гріх Одіссея — обман Деідамії: Одіссей виманив Ахілла із Скіроса, де той ховався серед жінок, залишивши вагітну Деідамію оплакувати його.",
+    dT:"В Achilleis Стацій описує, як Фетіда сховала Ахілла серед дочок Лікомеда. Одіссей, переодягнений купцем, підклав зброю серед прикрас, і Ахілл розкрив себе." },
+  { from:"d_04", to:"aen_ii_162", type:"ALLUSION",
+    dF:"Третій гріх — «il Palladio» — Одіссей і Діомед викрали з Трої священну статую Палладіуму. Без нього Троя втратила божественний захист.",
+    dT:"В Aeneis II Сінон розповідає, що Діомед і Одіссей вбили вартових і вкрали Палладіум — священну статую Мінерви, що захищала Трою." },
+  { from:"d_04", to:"aen_ii_doloneia", type:"ALLUSION",
+    dF:"Викрадення Палладіуму пов'язане з нічним рейдом Одіссея і Діомеда, відомим за Долонією — десятою книгою Іліади, яку Данте знав через Вергілія.",
+    dT:"В Aeneis II Вергілій згадує нічний рейд Одіссея і Діомеда в контексті падіння Трої. Через Вергілія Данте знав про ці гомерівські епізоди." },
+  { from:"aen_ii_doloneia", to:"il_x", type:"ALLUSION",
+    dF:"Вергілій переповідає гомерівський мотив нічного рейду Одіссея і Діомеда.",
+    dT:"В Іліаді X Одіссей і Діомед здійснюють нічну вилазку: вбивають троянського розвідника Долона і фракійського царя Реса, забирають його білих коней." },
+  { from:"d_05", to:"aen_ii", type:"INVERSION",
+    dF:"Дантів Одіссей відмовляється від повернення додому й вирушає за Геркулесові стовпи: «fatti non foste a viver come bruti, ma per seguir virtute e canoscenza». Він перевертає гомерівський nostos.",
+    dT:"Вергілій зображує Одіссея і Діомеда як руйнівників Трої. Данте розширює образ: Одіссей стає шукачем знання, але його подорож веде до загибелі — не до слави." },
+  { from:"d_05", to:"aen_nostos", type:"INVERSION",
+    dF:"Дантів Одіссей відмовляється від nostos і вирушає у відкрите море. Гомерів Одіссей прагне повернення; Дантів — прагне пізнання за межами людського.",
+    dT:"Вергілій і латинська традиція передали Данте образ Одіссея-мандрівника. Мотив nostos — повернення додому — ключова тема Одіссеї, відома Данте через посередників." },
+  { from:"aen_nostos", to:"od_xi", type:"INVERSION",
+    dF:"Латинська традиція передала мотив пророцтва Тіресія про повернення Одіссея.",
+    dT:"В Odyssea Тіресій пророкує Одіссею довгий, але неминучий nostos — повернення на Ітаку. Данте інвертує це: його Одіссей обирає продовження подорожі замість повернення." },
+  { from:"d_06", to:"aen_vi_795", type:"ALLUSION",
+    dF:"Одіссей каже, що дістався до Геркулесових стовпів — «dov'Ercule segnò li suoi riguardi» — де Геркулес поставив знаки, щоб людина далі не пливла.",
+    dT:"В Aeneis VI Анхіз пророкує, що Август поширить владу за межі Геркулесових стовпів. Стовпи як кордон відомого світу — усталений топос." },
+  { from:"d_07", to:"aen_i_198", type:"STRUCTURE",
+    dF:"Одіссей звертається до товаришів із короткою натхненною промовою — orazion picciola — що спонукає їх продовжити плавання. Жанр adhortatio — промова командира.",
+    dT:"В Aeneis I Еней підбадьорює команду: «O socii... revocate animos». Структура adhortatio: нагадування про минулі труднощі, заклик до мужності." },
+  { from:"d_08", to:"aen_i_81", type:"STRUCTURE",
+    dF:"Подорож Одіссея завершується катастрофою: з невідомої землі здіймається вихор, що тричі обертає корабель і затягує його в море — «com'altrui piacque».",
+    dT:"В Aeneis I Юнона насилає на Енея страшну бурю: вітри розкидають кораблі. Мотив раптової морської катастрофи за волею божества." },
+  { from:"d_05", to:"met_i_76", type:"THEMATIC",
+    dF:"Кульмінація промови Одіссея: «Ви створені не для того, щоб жити як тварини, а щоб прагнути доброчесності і знання». Мотив людської винятковості.",
+    dT:"У Met. I Овідій описує створення людини: «os homini sublime dedit caelumque videre iussit» — людина отримала прямоходіння і здатність дивитися на зорі." },
+];
+
+const NODES_RAW = {
+  d_01:    { label:"XXVI, 34\u201342",  sub:"вогняні колісниці",       author:"Данте",    col:0 },
+  d_02:    { label:"XXVI, 52\u201354",  sub:"дерев'яний кінь",         author:"Данте",    col:0 },
+  d_03:    { label:"XXVI, 55\u201357",  sub:"Деідамія і Ахілл",        author:"Данте",    col:0 },
+  d_04:    { label:"XXVI, 58\u201363",  sub:"Палладіум",               author:"Данте",    col:0 },
+  d_05:    { label:"XXVI, 90\u2013142", sub:"остання подорож",          author:"Данте",    col:0 },
+  d_06:    { label:"XXVI, 107\u2013109",sub:"Геркулесові стовпи",      author:"Данте",    col:0 },
+  d_07:    { label:"XXVI, 112\u2013120",sub:"orazion picciola",         author:"Данте",    col:0 },
+  d_08:    { label:"XXVI, 136\u2013142",sub:"вихор і загибель",         author:"Данте",    col:0 },
+  reg_2_11:    { label:"4 Reg. 2:11\u201312",  sub:"вознесіння Ілії",       author:"Біблія",   col:1 },
+  reg_2_23:    { label:"4 Reg. 2:23\u201324",  sub:"ведмеді Елісея",        author:"Біблія",   col:1 },
+  aen_ii:      { label:"Aen. II, 5\u2013198",  sub:"падіння Трої",          author:"Вергілій", col:1 },
+  achilleis:   { label:"Achilleis I, 560\u2013674",sub:"Ахілл на Скіросі",  author:"Стацій",   col:1 },
+  aen_ii_162:  { label:"Aen. II, 162\u2013175", sub:"Палладіум вкрадено",   author:"Вергілій", col:1 },
+  aen_ii_doloneia:{ label:"Aen. II (Долонія)",  sub:"нічний рейд",          author:"Вергілій", col:1 },
+  aen_nostos:  { label:"Aen. (nostos)",          sub:"мотив повернення",     author:"Вергілій", col:1 },
+  il_x:        { label:"Il. X, 220\u2013579",   sub:"Долонія",              author:"Гомер",    col:2 },
+  od_xi:       { label:"Od. XI, 100\u2013137",  sub:"пророцтво Тіресія",    author:"Гомер",    col:2 },
+  aen_vi_795:  { label:"Aen. VI, 795\u2013800", sub:"Геркулесові стовпи",   author:"Вергілій", col:1 },
+  aen_i_198:   { label:"Aen. I, 198\u2013207",  sub:"adhortatio Енея",      author:"Вергілій", col:1 },
+  aen_i_81:    { label:"Aen. I, 81\u2013123",   sub:"буря Юнони",           author:"Вергілій", col:1 },
+  met_i_76:    { label:"Met. I, 76\u201388",    sub:"os homini sublime",    author:"Овідій",   col:1 },
+};
+
+const AUTHOR_STYLES = {
+  "Данте":    {f:"#281a08",s:"#d4a853"},
+  "Вергілій": {f:"#1a0e28",s:"#a06ece"},
+  "Овідій":   {f:"#280e1a",s:"#ce5a8a"},
+  "Лукан":    {f:"#0e2028",s:"#5abecc"},
+  "Стацій":   {f:"#0e1428",s:"#5a78ce"},
+  "Гомер":    {f:"#28140e",s:"#ce7a5a"},
+  "Біблія":   {f:"#280e0e",s:"#ce5a5a"}
+};
+
+const nodeW=164,nodeH=46,gapY=8,gapX=140,padLeft=70,padTop=20;
+const nodes=Object.entries(NODES_RAW).map(([id,n])=>({id,...n,x:0,y:0}));
+const nodeMap={};nodes.forEach(n=>nodeMap[n.id]=n);
+const byCols=[nodes.filter(n=>n.col===0),nodes.filter(n=>n.col===1),nodes.filter(n=>n.col===2)];
+byCols[0].forEach((n,i)=>{n.y=i*(nodeH+gapY)+nodeH/2});
+byCols[1].forEach(n=>{const p=LINKS_DATA.filter(l=>l.to===n.id&&nodeMap[l.from]?.col===0).map(l=>nodeMap[l.from]);if(p.length)n.y=p.reduce((s,x)=>s+x.y,0)/p.length;else n.y=byCols[0][Math.floor(byCols[0].length/2)].y});
+rOY(byCols[1]);
+if(byCols[2]&&byCols[2].length){byCols[2].forEach(n=>{const p=LINKS_DATA.filter(l=>l.to===n.id&&nodeMap[l.from]).map(l=>nodeMap[l.from]);if(p.length)n.y=p.reduce((s,x)=>s+x.y,0)/p.length;else if(byCols[1].length)n.y=byCols[1][Math.floor(byCols[1].length/2)].y;else n.y=200});rOY(byCols[2])}
+function rOY(a){a.sort((a,b)=>a.y-b.y);const m=nodeH+gapY;for(let p=0;p<40;p++){let o=true;for(let i=1;i<a.length;i++){const d=a[i].y-a[i-1].y;if(d<m){const s=(m-d)/2+.5;a[i-1].y-=s;a[i].y+=s;o=false}}if(o)break}}
+const maxC=Math.max(...nodes.map(n=>n.col)),colX=[];for(let c=0;c<=maxC;c++)colX.push(padLeft+c*(nodeW+gapX)+nodeW/2);
+nodes.forEach(n=>{n.x=colX[n.col]});
+const minY=Math.min(...nodes.map(n=>n.y))-nodeH/2;nodes.forEach(n=>n.y-=minY-padTop);
+const svgW=padLeft+(maxC+1)*nodeW+maxC*gapX+padLeft,svgH=Math.max(...nodes.map(n=>n.y+nodeH/2))+20;
+const TC={ALLUSION:"#d4a853",STRUCTURE:"#7ea88e",THEMATIC:"#8a7eb8",INVERSION:"#c45c5c",ONOMASTIC:"#5c8ab8"};
+const AS=AUTHOR_STYLES;const st=getComputedStyle(document.documentElement);
+const svg=d3.select("#chart-container").append("svg").attr("width",svgW).attr("height",svgH);
+const defs=svg.append("defs");
+Object.entries(TC).forEach(([t,c])=>{defs.append("marker").attr("id","a-"+t).attr("viewBox","0 0 10 6").attr("refX",10).attr("refY",3).attr("markerWidth",7).attr("markerHeight",5).attr("orient","auto").append("path").attr("d","M0,0.5 L9,3 L0,5.5Z").attr("fill",c)});
+const nCols=colX.length;const cw=svgW/nCols;
+colX.forEach((cx,i)=>{svg.append("rect").attr("x",i*cw).attr("y",0).attr("width",cw).attr("height",svgH).attr("fill",i%2===0?st.getPropertyValue("--col-dark").trim():st.getPropertyValue("--col-light").trim())});
+
+function hC(s,t){const sx=s.x+nodeW/2+2,tx=t.x-nodeW/2-2,dx=tx-sx;return"M"+sx+","+s.y+" C"+(sx+dx*.45)+","+s.y+" "+(tx-dx*.45)+","+t.y+" "+tx+","+t.y}
+const linkG=svg.append("g");
+const linkEls=linkG.selectAll("path").data(LINKS_DATA).enter().append("path")
+  .attr("d",d=>hC(nodeMap[d.from],nodeMap[d.to]))
+  .attr("fill","none")
+  .attr("stroke",d=>TC[d.type])
+  .attr("stroke-width",d=>d.type==="STRUCTURE"?3:1.6)
+  .attr("stroke-dasharray",d=>d.type==="THEMATIC"?"6,4":d.type==="ONOMASTIC"?"2,4":"none")
+  .attr("opacity",.5)
+  .attr("marker-end",d=>"url(#a-"+d.type+")");
+
+const tooltip=d3.select("#tooltip");const nodeG=svg.append("g");
+const ne=nodeG.selectAll("g").data(nodes).enter().append("g")
+  .attr("transform",d=>"translate("+(d.x-nodeW/2)+","+(d.y-nodeH/2)+")")
+  .style("cursor","pointer");
+ne.append("rect").attr("width",nodeW).attr("height",nodeH).attr("rx",5)
+  .attr("fill",d=>AS[d.author]?.f||"#1a1a1a")
+  .attr("stroke",d=>AS[d.author]?.s||"#333")
+  .attr("stroke-width",d=>d.author==="Данте"?1.8:1);
+ne.append("text").attr("x",nodeW/2).attr("y",17).attr("text-anchor","middle")
+  .attr("fill",st.getPropertyValue('--text').trim())
+  .attr("font-size","10px").attr("font-family","'JetBrains Mono',monospace").attr("font-weight",500)
+  .text(d=>d.label);
+ne.append("text").attr("x",nodeW/2).attr("y",32).attr("text-anchor","middle")
+  .attr("fill",st.getPropertyValue('--text-muted').trim())
+  .attr("font-size","10.5px").attr("font-family","'Cormorant Garamond',serif").attr("font-style","italic")
+  .text(d=>d.sub);
+ne.filter(d=>d.col>0).append("text")
+  .attr("x",nodeW/2).attr("y",nodeH-2).attr("text-anchor","middle")
+  .attr("fill",d=>AS[d.author]?.s||"#555")
+  .attr("font-size","7px").attr("font-family","'JetBrains Mono',monospace").attr("opacity",.7)
+  .text(d=>d.author);
+
+ne.on("mouseover",function(ev,d){
+  const ids=new Set([d.id]);
+  LINKS_DATA.forEach(l=>{if(l.from===d.id||l.to===d.id){ids.add(l.from);ids.add(l.to)}});
+  linkEls.attr("opacity",l=>(l.from===d.id||l.to===d.id)?1:.04)
+    .attr("stroke-width",l=>{const on=l.from===d.id||l.to===d.id;return on?(l.type==="STRUCTURE"?4.5:3):(l.type==="STRUCTURE"?3:1.6)});
+  nodeG.selectAll("g").select("rect")
+    .attr("opacity",function(){return ids.has(d3.select(this.parentNode).datum().id)?1:.1});
+  var parts=LINKS_DATA.filter(l=>l.from===d.id||l.to===d.id).map(l=>{
+    var c=TC[l.type],isF=l.from===d.id,other=isF?nodeMap[l.to]:nodeMap[l.from],desc=isF?l.dF:l.dT,arr=isF?"\u2192":"\u2190";
+    var s='<span class="tt-type" style="background:'+c+'22;color:'+c+';border:1px solid '+c+'44">'+TYPE_UA[l.type]+'</span> '+arr+' <strong>'+other.label+'</strong><br><span class="tt-desc">'+desc+'</span>';
+    return s;
+  });
+  var h=parts.join("<br><br>");
+  if(h)tooltip.html('<strong>'+d.label+'</strong> <em style="color:var(--text-muted)">\u00b7 '+d.author+'</em><br><br>'+h)
+    .style("opacity",1)
+    .style("left",Math.min(ev.clientX+14,innerWidth-440)+"px")
+    .style("top",Math.min(ev.clientY+14,innerHeight-300)+"px");
+}).on("mousemove",function(ev){
+  tooltip.style("left",Math.min(ev.clientX+14,innerWidth-440)+"px")
+    .style("top",Math.min(ev.clientY+14,innerHeight-300)+"px");
+}).on("mouseout",function(){
+  linkEls.attr("opacity",.5).attr("stroke-width",d=>d.type==="STRUCTURE"?3:1.6);
+  nodeG.selectAll("g").select("rect").attr("opacity",1);
+  tooltip.style("opacity",0);
+});
+
+function togglePanel(){
+  document.getElementById('sidePanel').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('open');
+}
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){
+    document.getElementById('sidePanel').classList.remove('open');
+    document.getElementById('overlay').classList.remove('open');
+  }
+});
+
+(function buildNav(){
+  var roman=function(n){var v=[1000,900,500,400,100,90,50,40,10,9,5,4,1],s=['M','CM','D','CD','C','XC','L','XL','X','IX','V','IV','I'],r='';for(var i=0;i<v.length;i++)while(n>=v[i]){r+=s[i];n-=v[i]}return r};
+  var pad2=function(n){return String(n).padStart(2,'0')};
+  var ct=[{t:'Inferno',a:'Inf.',x:'inf',c:34},{t:'Purgatorio',a:'Purg.',x:'purg',c:33},{t:'Paradiso',a:'Par.',x:'par',c:33}];
+  var cur='inf_26';
+  var container=document.getElementById('panelContent');
+  ct.forEach(function(c){
+    var sec=document.createElement('div');
+    sec.className='side-panel-section';
+    var h3=document.createElement('h3');
+    h3.textContent=c.t;
+    sec.appendChild(h3);
+    for(var i=1;i<=c.c;i++){
+      var f=c.x+'_'+pad2(i);
+      var a=document.createElement('a');
+      a.href=f+'.html';
+      a.textContent=c.a+' '+roman(i);
+      if(f===cur)a.className='current';
+      sec.appendChild(a);
+    }
+    container.appendChild(sec);
+  });
+})();
+</script>
+</body>
+</html>

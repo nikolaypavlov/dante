@@ -1,0 +1,99 @@
+{
+  "canto": "Purg. VI",
+  "cantica": "Purgatorio",
+  "canto_num": 6,
+  "verified": true,
+  "connections": [
+    {
+      "id": "purg_vi_01",
+      "dante_ref": "VI, 1–12",
+      "dante_sub": "порівняння з гравцем у зари",
+      "source_ref": "Ars P. 412–414",
+      "source_sub": "натовп навколо поета",
+      "source_author": "Горацій",
+      "type": "THEMATIC",
+      "confidence": "MEDIUM",
+      "desc_dante": "Данте описує, як душі облягають його, ніби переможця в грі в зари, якого оточює натовп прохачів. Побутове порівняння для потойбічної ситуації.",
+      "desc_source": "В Ars Poetica Горацій описує поета, оточеного натовпом, що домагається уваги. Мотив популярної фігури, облепленої прохачами.",
+      "chain": null
+    },
+    {
+      "id": "purg_vi_02",
+      "dante_ref": "VI, 58–75",
+      "dante_sub": "зустріч Сорделло і Вергілія — обійми",
+      "source_ref": "Aen. VI, 684–688",
+      "source_sub": "обійми Енея і Анхіза",
+      "source_author": "Вергілій",
+      "type": "STRUCTURE",
+      "confidence": "HIGH",
+      "desc_dante": "Сорделло і Вергілій обіймаються, впізнавши один одного як мантуанців — «Mantoano, io son Sordello de la tua terra!» Зустріч земляків у потойбіччі.",
+      "desc_source": "В Aeneis VI Еней зустрічає батька Анхіза в Елісіумі і вони обіймаються. Модель емоційної зустрічі двох близьких людей у потойбічному світі.",
+      "chain": null
+    },
+    {
+      "id": "purg_vi_03",
+      "dante_ref": "VI, 76–151",
+      "dante_sub": "інвектива проти Італії — «Ahi serva Italia»",
+      "source_ref": "Aen. VI, 847–853",
+      "source_sub": "tu regere imperio populos, Romane",
+      "source_author": "Вергілій",
+      "type": "INVERSION",
+      "confidence": "HIGH",
+      "desc_dante": "Данте вибухає палкою інвективою проти Італії — «Ahi serva Italia, di dolore ostello, nave sanza nocchiere in gran tempesta» — країни-рабині без керманича.",
+      "desc_source": "В Aeneis VI Анхіз пророкує римлянам їхню місію — «tu regere imperio populos» — правити народами. Данте інвертує: замість імперії, що править світом, — Італія-рабиня, позбавлена правління.",
+      "chain": null
+    },
+    {
+      "id": "purg_vi_04",
+      "dante_ref": "VI, 76–78",
+      "dante_sub": "nave sanza nocchiere — корабель без керманича",
+      "source_ref": "Aen. V, 867–871",
+      "source_sub": "загибель Палінура",
+      "source_author": "Вергілій",
+      "type": "ALLUSION",
+      "confidence": "HIGH",
+      "desc_dante": "Данте називає Італію кораблем без керманича в бурі — «nave sanza nocchiere in gran tempesta». Метафора держави як корабля без капітана.",
+      "desc_source": "В Aeneis V Палінур, керманич Енея, засинає і падає в море — корабель на мить залишається без керівництва. Загибель Палінура стає символом небезпеки безвладдя.",
+      "chain": null
+    },
+    {
+      "id": "purg_vi_05",
+      "dante_ref": "VI, 88–90",
+      "dante_sub": "Giustiniano — конь без вершника",
+      "source_ref": "Georg. III, 75–88",
+      "source_sub": "приборкання коня",
+      "source_author": "Вергілій",
+      "type": "THEMATIC",
+      "confidence": "MEDIUM",
+      "desc_dante": "Данте описує Італію як коня, що його мав би приборкати імператор, але він залишений без вершника і став некерованим.",
+      "desc_source": "У Georgica III Вергілій описує мистецтво приборкання коня — тварина потребує твердої руки і тренування. Метафора держави як коня, що потребує керівника.",
+      "chain": null
+    },
+    {
+      "id": "purg_vi_06",
+      "dante_ref": "VI, 112–114",
+      "dante_sub": "Атени та Лакедемон",
+      "source_ref": "Ars P. 268–269",
+      "source_sub": "Athenae — зразок законодавства",
+      "source_author": "Горацій",
+      "type": "ALLUSION",
+      "confidence": "MEDIUM",
+      "desc_dante": "Данте порівнює стан Флоренції з Атенами та Лакедемоном — давніми зразками законодавства, які, однак, лише бліді тіні порівняно з тонкістю флорентійських законів.",
+      "desc_source": "Горацій у Ars Poetica згадує Атени як зразок культурної та правової досконалості. Мотив ідеалізованого давнього міста-держави.",
+      "chain": null
+    },
+    {
+      "id": "purg_vi_07",
+      "dante_ref": "VI, 118–123",
+      "dante_sub": "Флоренція як хвора жінка",
+      "source_ref": "Aen. IV, 68–73",
+      "source_sub": "Дідона, уражена любов'ю",
+      "source_author": "Вергілій",
+      "type": "THEMATIC",
+      "confidence": "MEDIUM",
+      "desc_dante": "Данте порівнює Флоренцію з хворою жінкою, що не може знайти спокою і перевертається в ліжку — постійна зміна законів і політичних курсів.",
+      "desc_source": "В Aeneis IV Дідона, уражена пристрастю, не може знайти спокою — вона метається, як поранена лань. Мотив нездатності знайти спокій як ознака глибокої хвороби.",
+      "chain": null
+    }
+  ]
+}

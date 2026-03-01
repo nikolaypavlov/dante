@@ -1,0 +1,86 @@
+{
+  "canto": "Purg. XXI",
+  "cantica": "Purgatorio",
+  "canto_num": 21,
+  "verified": true,
+  "connections": [
+    {
+      "id": "purg_xxi_01",
+      "dante_ref": "XXI, 1–6",
+      "dante_sub": "спрага після зустрічі — самаритянка",
+      "source_ref": "Io. 4:5–15",
+      "source_sub": "Ісус і самаритянка біля колодязя",
+      "source_author": "Біблія",
+      "type": "ALLUSION",
+      "confidence": "HIGH",
+      "desc_dante": "Canto відкривається образом природної спраги після знання — «la sete natural che mai non sazia» — перегукуючись із розмовою Ісуса із самаритянкою про воду, що дарує вічне життя.",
+      "desc_source": "В Євангелії від Івана Ісус біля колодязя каже самаритянці: «qui biberit ex aqua quam ego dabo ei non sitiet in aeternum» — хто п'є воду, яку я дам, ніколи більше не спрагне.",
+      "chain": null
+    },
+    {
+      "id": "purg_xxi_02",
+      "dante_ref": "XXI, 7–13",
+      "dante_sub": "зустріч на шляху — Еммаус",
+      "source_ref": "Lc. 24:13–16",
+      "source_sub": "учні йдуть до Еммауса",
+      "source_author": "Біблія",
+      "type": "STRUCTURE",
+      "confidence": "HIGH",
+      "desc_dante": "Тінь підходить до Данте і Вергілія ззаду на шляху, як Ісус наблизився до двох учнів, що йшли до Еммауса, і ті його не впізнали.",
+      "desc_source": "В Євангелії від Луки воскреслий Ісус підходить до двох учнів на шляху до Еммауса: «ipse Iesus adpropinquans ibat cum illis, oculi autem illorum tenebantur ne eum agnoscerent» — вони не впізнали його.",
+      "chain": null
+    },
+    {
+      "id": "purg_xxi_03",
+      "dante_ref": "XXI, 82–102",
+      "dante_sub": "Стацій про землетрус",
+      "source_ref": "Mt. 27:51–53",
+      "source_sub": "землетрус при Розп'ятті",
+      "source_author": "Біблія",
+      "type": "THEMATIC",
+      "confidence": "HIGH",
+      "desc_dante": "Стацій пояснює: гора тремтить, коли душа відчуває себе вільною підніматися. Землетрус — знак завершення покути, а Gloria — радісна відповідь усіх душ.",
+      "desc_source": "Землетрус при смерті Христа (Mt. 27:51) як знак визволення людства від гріха. Данте перетворює космічну подію на індивідуальний знак духовного визволення кожної душі.",
+      "chain": null
+    },
+    {
+      "id": "purg_xxi_04",
+      "dante_ref": "XXI, 88–90",
+      "dante_sub": "Стацій — автор Thebais",
+      "source_ref": "Theb. I, 1–17",
+      "source_sub": "prooemium Фіванського циклу",
+      "source_author": "Стацій",
+      "type": "ALLUSION",
+      "confidence": "HIGH",
+      "desc_dante": "Стацій називає себе: «Стацій мене звали люди... Я оспівав Фіви, потім великого Ахілла.» Він ідентифікується через свої два головні твори.",
+      "desc_source": "Thebais відкривається prooemium: Стацій оголошує свій предмет — Фіванську війну братів Етеокла й Полініка. Разом із незавершеною Achilleis це визначає його літературну ідентичність.",
+      "chain": null
+    },
+    {
+      "id": "purg_xxi_05",
+      "dante_ref": "XXI, 94–99",
+      "dante_sub": "Aeneis як джерело натхнення Стація",
+      "source_ref": "Aen. VI, 264–267",
+      "source_sub": "катабасис як модель",
+      "source_author": "Вергілій",
+      "type": "STRUCTURE",
+      "confidence": "HIGH",
+      "desc_dante": "Стацій зізнається: «Aeneis мені була мамкою-годувальницею і мамою в поезії; без неї я не зважив би й на драхму.» Визнання вергіліанського впливу як ключової моделі для Thebais.",
+      "desc_source": "Шоста книга Aeneis із катабасисом Енея стала структурною моделлю для Стацієвої Thebais. Сам Стацій у Theb. XII, 816–817 зізнається: «nec tu divinam Aeneida tempta / sed longe sequere» — не змагайся з божественною Aeneis, а лише слідуй здалеку.",
+      "chain": null
+    },
+    {
+      "id": "purg_xxi_06",
+      "dante_ref": "XXI, 130–136",
+      "dante_sub": "Вергілій усміхається — впізнання",
+      "source_ref": "Aen. I, 405–410",
+      "source_sub": "Еней впізнає матір Венеру",
+      "source_author": "Вергілій",
+      "type": "INVERSION",
+      "confidence": "MEDIUM",
+      "desc_dante": "Стацій не знає, що перед ним сам Вергілій. Данте усміхається, Стацій помічає й питає. Ситуація інвертує вергіліанський мотив: замість бога, що ховається від героя — поет, що ховається від шанувальника.",
+      "desc_source": "В Aeneis I Еней впізнає Венеру лише коли вона йде: «et vera incessu patuit dea» — і по ходу стало видно справжню богиню. Момент пізнього впізнання — наскрізний мотив у Вергілія.",
+      "chain": null
+    }
+  ]
+}

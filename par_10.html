@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="uk" class="theme-paradiso">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Par. X — Інтертекстуальне дерево</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<link rel="stylesheet" href="dante-theme.css">
+</head>
+<body>
+<div class="side-panel-overlay" id="overlay" onclick="togglePanel()"></div>
+<div class="side-panel" id="sidePanel"><div class="side-panel-header"><h2>Навігація</h2><button class="side-panel-close" onclick="togglePanel()">✕</button></div><div id="panelContent"></div></div>
+
+<header>
+  <button class="nav-btn" onclick="togglePanel()" title="Навігація">☰</button>
+  <div class="header-center">
+    <a class="nav-arrow" href="par_09.html">← Par. IX</a>
+    <div class="title-block"><h1>Paradiso X</h1><p>Інтертекстуальне дерево джерел — небо Сонця, вінок мудреців</p></div>
+    <a class="nav-arrow" href="par_11.html">Par. XI →</a>
+  </div>
+</header>
+
+<div class="legend">
+  <div class="legend-item"><div class="legend-swatch" style="background:#d4a853"></div>Алюзія</div>
+  <div class="legend-item"><div class="legend-swatch thick" style="background:#7ea88e"></div>Структура</div>
+  <div class="legend-item"><div class="legend-swatch dashed" style="border-color:#8a7eb8"></div>Тематика</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:#c45c5c"></div>Інверсія</div>
+  <div class="legend-item"><div class="legend-swatch dotted" style="border-color:#5c8ab8"></div>Ономастика</div>
+</div>
+<div id="chart-container"></div>
+<div class="tooltip" id="tooltip"></div>
+
+<script>
+const TYPE_UA = { ALLUSION:"Алюзія", STRUCTURE:"Структура", THEMATIC:"Тематика", INVERSION:"Інверсія", ONOMASTIC:"Ономастика" };
+
+const LINKS_DATA = [
+  { from:"p_1", to:"gen_1", type:"ALLUSION",
+    dF:"Данте відкриває пісню поглядом на Трійцю через Творіння: Батько, Син і Дух пронизують усесвіт. Образ світла як першого акту творення.",
+    dT:"Перша глава Genesis описує створення світла як першого акту Бога. Данте використовує цю біблійну космогонію як вхід до неба Сонця." },
+  { from:"p_7", to:"sap_11", type:"THEMATIC",
+    dF:"Данте описує космічний порядок як мистецтво Творця — «l'arte di quel maestro». Мудрість Божа як архітектор усесвіту.",
+    dT:"Книга Премудрості описує Бога як того, хто впорядкував усе мірою, числом і вагою. Мотив божественного мистецтва космічного ладу перегукується з Дантовим захопленням." },
+  { from:"p_28", to:"cons_iii", type:"STRUCTURE",
+    dF:"Данте описує піднесення до сфери Сонця через наростання світла — модель сходження до вищої мудрості.",
+    dT:"У третій книзі Consolatio Philosophiae Боецій описує піднесення розуму до божественного світла через філософію. Данте переосмислює цю модель у космологічному вимірі." },
+  { from:"p_64", to:"ecl_iii", type:"ALLUSION",
+    dF:"Дванадцять вогнів утворюють вінок навколо Данте і Беатріче — образ, що перегукується із хороводом та вінком пасторальної традиції.",
+    dT:"У третій еклозі Вергілій описує хороводи та вінки — символи святкування й гармонії. Данте трансформує пасторальний вінок у небесну корону мудреців." },
+  { from:"p_82", to:"cons_i", type:"ONOMASTIC",
+    dF:"Серед мудреців вінка названо Боеція — автора Consolatio, книги, що «розрадила» Данте після смерті Беатріче.",
+    dT:"Боецій у першій книзі Consolatio описує свої страждання у в'язниці та появу Філософії. Данте знає і цінує цей текст як ключовий для свого інтелектуального розвитку." },
+  { from:"p_76", to:"met_i_sol", type:"THEMATIC",
+    dF:"Сфера Сонця як обитель мудрості перегукується з античним ототожненням Сонця-Аполлона з інтелектуальним світлом.",
+    dT:"У першій книзі Metamorphoses Овідій описує палац Сонця як центр космічного порядку. Аполлон-Сонце як джерело світла і знання — топос, який Данте християнізує." },
+  { from:"p_136", to:"cons_iii_m9", type:"ALLUSION",
+    dF:"Пісня завершується образом небесного годинника — хор душ рухається в такт божественній гармонії. Музика сфер як богословська реальність.",
+    dT:"У знаменитому гімні O qui perpetua Боецій описує божественний розум, що підтримує рух небесних сфер у гармонії. Данте втілює цю філософську ідею в конкретний візуальний образ." },
+  { from:"p_115", to:"rr_4000", type:"THEMATIC",
+    dF:"Вінок мудреців як хоровод перегукується з алегоричними процесіями та хороводами середньовічної традиції.",
+    dT:"У Roman de la Rose описано алегоричний танець персоніфікованих чеснот у саду. Данте переносить цю модель з алегоричного саду в небесну сферу." },
+  // Chains
+  { from:"cons_iii", to:"plat_tim", type:"THEMATIC",
+    dF:"Боецій у Consolatio спирається на платонівський Тімей — діалог про космічний порядок і Деміурга.",
+    dT:"Тімей описує створення космосу Деміургом за математичними пропорціями. Боецій адаптує цю космологію для римської християнської традиції." },
+];
+
+const NODES_RAW = {
+  p_1:        { label:"X, 1–6",       sub:"Трійця і Творіння", author:"Данте",   col:0 },
+  p_7:        { label:"X, 7–27",      sub:"мистецтво Творця",  author:"Данте",   col:0 },
+  p_28:       { label:"X, 28–48",     sub:"піднесення до Сонця",author:"Данте",  col:0 },
+  p_64:       { label:"X, 64–81",     sub:"вінок мудреців",    author:"Данте",   col:0 },
+  p_76:       { label:"X, 76–78",     sub:"Сонце і мудрість",  author:"Данте",   col:0 },
+  p_82:       { label:"X, 124–129",   sub:"Боецій у вінку",    author:"Данте",   col:0 },
+  p_115:      { label:"X, 64–148",    sub:"хоровод душ",       author:"Данте",   col:0 },
+  p_136:      { label:"X, 139–148",   sub:"небесний годинник", author:"Данте",   col:0 },
+  cons_iii:   { label:"Cons. III, pr. 9–12", sub:"піднесення розуму", author:"Боецій",  col:1 },
+  cons_i:     { label:"Cons. I, pr. 1–4",    sub:"Боецій у в'язниці", author:"Боецій",  col:1 },
+  cons_iii_m9:{ label:"Cons. III, m. 9",      sub:"O qui perpetua",    author:"Боецій",  col:1 },
+  gen_1:      { label:"Gen. 1:3–4",           sub:"Fiat lux",          author:"Біблія",  col:1 },
+  sap_11:     { label:"Sap. 11:21",           sub:"міра, число, вага", author:"Біблія",  col:1 },
+  met_i_sol:  { label:"Met. II, 1–30",        sub:"палац Сонця",       author:"Овідій",  col:1 },
+  ecl_iii:    { label:"Ecl. III, 55–63",      sub:"хороводи / вінки",  author:"Вергілій",col:1 },
+  rr_4000:    { label:"RR, 3910–4060",        sub:"танець чеснот",     author:"Жан де Мен",col:1 },
+  plat_tim:   { label:"Timaeus, 29a–47e",     sub:"космос Деміурга",   author:"Платон",  col:2 },
+};
+
+const AUTHOR_STYLES = {
+  "Данте":      {f:"#f0e8d8",s:"#b08630"},  // gold
+  "Вергілій":   {f:"#e8e0f0",s:"#7a50a0"},  // purple
+  "Овідій":     {f:"#f0e0e8",s:"#a04a6a"},  // magenta
+  "Боецій":     {f:"#e0e8f0",s:"#4a6aa0"},  // blue
+  "Біблія":     {f:"#f0e0e0",s:"#a04a4a"},  // red
+  "Жан де Мен": {f:"#e0f0e8",s:"#4aa06a"},  // green
+  "Платон":     {f:"#f0ece0",s:"#a08a40"}   // amber
+};
+
+const nodeW=164,nodeH=46,gapY=8,gapX=140,padLeft=70,padTop=20;
+const nodes=Object.entries(NODES_RAW).map(([id,n])=>({id,...n,x:0,y:0}));const nodeMap={};nodes.forEach(n=>nodeMap[n.id]=n);
+const byCols=[nodes.filter(n=>n.col===0),nodes.filter(n=>n.col===1),nodes.filter(n=>n.col===2)];
+byCols[0].forEach((n,i)=>{n.y=i*(nodeH+gapY)+nodeH/2});
+byCols[1].forEach(n=>{const p=LINKS_DATA.filter(l=>l.to===n.id&&nodeMap[l.from]?.col===0).map(l=>nodeMap[l.from]);if(p.length)n.y=p.reduce((s,x)=>s+x.y,0)/p.length;else n.y=byCols[0][Math.floor(byCols[0].length/2)].y});
+rOY(byCols[1]);byCols[2].forEach(n=>{const p=LINKS_DATA.filter(l=>l.to===n.id&&nodeMap[l.from]).map(l=>nodeMap[l.from]);if(p.length)n.y=p.reduce((s,x)=>s+x.y,0)/p.length;else if(byCols[1].length)n.y=byCols[1][Math.floor(byCols[1].length/2)].y;else n.y=200});rOY(byCols[2]);
+function rOY(a){a.sort((a,b)=>a.y-b.y);const m=nodeH+gapY;for(let p=0;p<40;p++){let o=true;for(let i=1;i<a.length;i++){const d=a[i].y-a[i-1].y;if(d<m){const s=(m-d)/2+.5;a[i-1].y-=s;a[i].y+=s;o=false}}if(o)break}}
+const maxC=Math.max(...nodes.map(n=>n.col)),colX=[];for(let c=0;c<=maxC;c++)colX.push(padLeft+c*(nodeW+gapX)+nodeW/2);nodes.forEach(n=>{n.x=colX[n.col]});const minY=Math.min(...nodes.map(n=>n.y))-nodeH/2;nodes.forEach(n=>n.y-=minY-padTop);
+const svgW=padLeft+(maxC+1)*nodeW+maxC*gapX+padLeft,svgH=Math.max(...nodes.map(n=>n.y+nodeH/2))+20;
+const TC={ALLUSION:"#d4a853",STRUCTURE:"#7ea88e",THEMATIC:"#8a7eb8",INVERSION:"#c45c5c",ONOMASTIC:"#5c8ab8"};const AS=AUTHOR_STYLES;const st=getComputedStyle(document.documentElement);
+const svg=d3.select("#chart-container").append("svg").attr("width",svgW).attr("height",svgH);const defs=svg.append("defs");Object.entries(TC).forEach(([t,c])=>{defs.append("marker").attr("id",`a-${t}`).attr("viewBox","0 0 10 6").attr("refX",10).attr("refY",3).attr("markerWidth",7).attr("markerHeight",5).attr("orient","auto").append("path").attr("d","M0,0.5 L9,3 L0,5.5Z").attr("fill",c)});const nCols=colX.length;const cw=svgW/nCols;colX.forEach((cx,i)=>{svg.append("rect").attr("x",i*cw).attr("y",0).attr("width",cw).attr("height",svgH).attr("fill",i%2===0?st.getPropertyValue("--col-dark").trim():st.getPropertyValue("--col-light").trim())});
+
+function hC(s,t){const sx=s.x+nodeW/2+2,tx=t.x-nodeW/2-2,dx=tx-sx;return`M${sx},${s.y} C${sx+dx*.45},${s.y} ${tx-dx*.45},${t.y} ${tx},${t.y}`}
+const linkG=svg.append("g");const linkEls=linkG.selectAll("path").data(LINKS_DATA).enter().append("path").attr("d",d=>hC(nodeMap[d.from],nodeMap[d.to])).attr("fill","none").attr("stroke",d=>TC[d.type]).attr("stroke-width",d=>d.type==="STRUCTURE"?3:1.6).attr("stroke-dasharray",d=>d.type==="THEMATIC"?"6,4":d.type==="ONOMASTIC"?"2,4":"none").attr("opacity",.5).attr("marker-end",d=>`url(#a-${d.type})`);
+const tooltip=d3.select("#tooltip");const nodeG=svg.append("g");
+const ne=nodeG.selectAll("g").data(nodes).enter().append("g").attr("transform",d=>`translate(${d.x-nodeW/2},${d.y-nodeH/2})`).style("cursor","pointer");
+ne.append("rect").attr("width",nodeW).attr("height",nodeH).attr("rx",5).attr("fill",d=>AS[d.author]?.f||"#f0f0f0").attr("stroke",d=>AS[d.author]?.s||"#aaa").attr("stroke-width",d=>d.author==="Данте"?1.8:1);
+ne.append("text").attr("x",nodeW/2).attr("y",17).attr("text-anchor","middle").attr("fill",st.getPropertyValue('--text').trim()).attr("font-size","10px").attr("font-family","'JetBrains Mono',monospace").attr("font-weight",500).text(d=>d.label);
+ne.append("text").attr("x",nodeW/2).attr("y",32).attr("text-anchor","middle").attr("fill",st.getPropertyValue('--text-muted').trim()).attr("font-size","10.5px").attr("font-family","'Cormorant Garamond',serif").attr("font-style","italic").text(d=>d.sub);
+ne.filter(d=>d.col>0).append("text").attr("x",nodeW/2).attr("y",nodeH-2).attr("text-anchor","middle").attr("fill",d=>AS[d.author]?.s||"#888").attr("font-size","7px").attr("font-family","'JetBrains Mono',monospace").attr("opacity",.7).text(d=>d.author);
+ne.on("mouseover",function(ev,d){const ids=new Set([d.id]);LINKS_DATA.forEach(l=>{if(l.from===d.id||l.to===d.id){ids.add(l.from);ids.add(l.to)}});linkEls.attr("opacity",l=>(l.from===d.id||l.to===d.id)?1:.04).attr("stroke-width",l=>{const on=l.from===d.id||l.to===d.id;return on?(l.type==="STRUCTURE"?4.5:3):(l.type==="STRUCTURE"?3:1.6)});nodeG.selectAll("g").select("rect").attr("opacity",function(){return ids.has(d3.select(this.parentNode).datum().id)?1:.1});
+const html=LINKS_DATA.filter(l=>l.from===d.id||l.to===d.id).map(l=>{const c=TC[l.type],isF=l.from===d.id,other=isF?nodeMap[l.to]:nodeMap[l.from],desc=isF?l.dF:l.dT,arr=isF?"→":"←";return`<span class="tt-type" style="background:${c}22;color:${c};border:1px solid ${c}44">${TYPE_UA[l.type]}</span> ${arr} <strong>${other.label}</strong><br><span class="tt-desc">${desc}</span>`}).join("<br><br>");
+if(html)tooltip.html(`<strong>${d.label}</strong> <em style="color:var(--text-muted)">· ${d.author}</em><br><br>${html}`).style("opacity",1).style("left",Math.min(ev.clientX+14,innerWidth-440)+"px").style("top",Math.min(ev.clientY+14,innerHeight-300)+"px")
+}).on("mousemove",function(ev){tooltip.style("left",Math.min(ev.clientX+14,innerWidth-440)+"px").style("top",Math.min(ev.clientY+14,innerHeight-300)+"px")}).on("mouseout",function(){linkEls.attr("opacity",.5).attr("stroke-width",d=>d.type==="STRUCTURE"?3:1.6);nodeG.selectAll("g").select("rect").attr("opacity",1);tooltip.style("opacity",0)});
+function togglePanel(){document.getElementById('sidePanel').classList.toggle('open');document.getElementById('overlay').classList.toggle('open')}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){document.getElementById('sidePanel').classList.remove('open');document.getElementById('overlay').classList.remove('open')}});
+(function(){const r=n=>{const v=[1000,900,500,400,100,90,50,40,10,9,5,4,1],s=['M','CM','D','CD','C','XC','L','XL','X','IX','V','IV','I'];let o='';for(let i=0;i<v.length;i++)while(n>=v[i]){o+=s[i];n-=v[i]}return o};const p=n=>String(n).padStart(2,'0');const ct=[{t:'Inferno',a:'Inf.',x:'inf',c:34},{t:'Purgatorio',a:'Purg.',x:'purg',c:33},{t:'Paradiso',a:'Par.',x:'par',c:33}];const cur='par_10';let h='';ct.forEach(c=>{h+=`<div class="side-panel-section"><h3>${c.t}</h3>`;for(let i=1;i<=c.c;i++){const f=`${c.x}_${p(i)}`;h+=`<a href="${f}.html"${f===cur?' class="current"':''}>${c.a} ${r(i)}</a>`}h+='</div>'});document.getElementById('panelContent').innerHTML=h})();
+</script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+{
+  "canto": "Purg. XXX",
+  "cantica": "Purgatorio",
+  "canto_num": 30,
+  "verified": true,
+  "connections": [
+    {
+      "id": "purg_xxx_01",
+      "dante_ref": "XXX, 11–12",
+      "dante_sub": "Veni, sponsa, de Libano",
+      "source_ref": "Cant. 4:8",
+      "source_sub": "veni de Libano, sponsa mea",
+      "source_author": "Біблія",
+      "type": "ALLUSION",
+      "confidence": "HIGH",
+      "desc_dante": "Один зі старців процесії тричі вигукує «Veni, sponsa, de Libano» — літургійний заклик, що вітає появу Беатріче як містичну наречену. Цитата точно відтворює біблійний текст.",
+      "desc_source": "Пісня Пісень 4:8: наречений кличе наречену з Лівану — «veni de Libano, sponsa mea, veni de Libano, veni». В екзегетичній традиції — заклик Христа до Церкви або до душі, що сходить до єднання.",
+      "chain": null
+    },
+    {
+      "id": "purg_xxx_02",
+      "dante_ref": "XXX, 19–21",
+      "dante_sub": "Manibus o date lilia plenis",
+      "source_ref": "Aen. VI, 883",
+      "source_sub": "manibus date lilia plenis",
+      "source_author": "Вергілій",
+      "type": "ALLUSION",
+      "confidence": "HIGH",
+      "desc_dante": "Янголи кидають квіти і цитують Вергілія: «Manibus, oh, date lilia plenis» — пряме латинське запозичення з Aeneis в устах небесних істот. Вергіліанська поезія освячується через включення в літургійний контекст.",
+      "desc_source": "В Aeneis VI Анхіз оплакує передчасну смерть Марцелла і просить кидати лілії повними жменями — «manibus date lilia plenis» (Aen. VI, 883). Жалобний контекст: квіти на могилу юнака, який не встигнув здійснити свою долю.",
+      "chain": null
+    },
+    {
+      "id": "purg_xxx_03",
+      "dante_ref": "XXX, 19",
+      "dante_sub": "Benedictus qui venis",
+      "source_ref": "Mt. 21:9",
+      "source_sub": "Benedictus qui venit in nomine Domini",
+      "source_author": "Біблія",
+      "type": "ALLUSION",
+      "confidence": "HIGH",
+      "desc_dante": "Янголи вітають Беатріче словами «Benedictus qui venis» — євангельський гімн входу до Єрусалима, але з чоловічою формою «qui venis» замість «quae venis». Граматична аномалія натякає на христологічний статус Беатріче.",
+      "desc_source": "Євангеліє від Матвія 21:9: натовп зустрічає Ісуса при в'їзді до Єрусалима криками «Benedictus qui venit in nomine Domini; Hosanna in excelsis». Літургійний гімн, що увійшов до тексту Меси.",
+      "chain": null
+    },
+    {
+      "id": "purg_xxx_04",
+      "dante_ref": "XXX, 46–48",
+      "dante_sub": "зникнення Вергілія — Орфей і Евридіка",
+      "source_ref": "Georg. IV, 490–498",
+      "source_sub": "Orpheus respexit — Eurydice зникає",
+      "source_author": "Вергілій",
+      "type": "INVERSION",
+      "confidence": "HIGH",
+      "desc_dante": "Данте обертається — і Вергілія вже немає. Інверсія орфічного мотиву: Орфей озирається і через це втрачає Евридіку; Данте озирається і виявляє, що Вергілій вже зник — втрата відбулася незалежно від погляду.",
+      "desc_source": "В Georgica IV Орфей порушує заборону і озирається на Евридіку — «respexit» (Georg. IV, 491). Евридіка зникає назад у підземний світ. Акт погляду спричиняє втрату. Данте інвертує каузальність: погляд лише фіксує вже здійснену втрату.",
+      "chain": null
+    },
+    {
+      "id": "purg_xxx_05",
+      "dante_ref": "XXX, 49–51",
+      "dante_sub": "Virgilio — потрійне повторення імені",
+      "source_ref": "Georg. IV, 525–527",
+      "source_sub": "Eurydice — потрійне повторення імені",
+      "source_author": "Вергілій",
+      "type": "ALLUSION",
+      "confidence": "HIGH",
+      "desc_dante": "Данте тричі повторює ім'я «Virgilio» в плачі за зниклим провідником — «ma Virgilio n'avea lasciati scemi / di sé, Virgilio dolcissimo patre, / Virgilio». Потрійна анафора імені як ритуал прощання.",
+      "desc_source": "В Georgica IV голова Орфея, відірвана від тіла, продовжує повторювати ім'я Евридіки: «Eurydicen vox ipsa et frigida lingua, / a miseram Eurydicen! anima fugiente vocabat: / Eurydicen toto referebant flumine ripae» (Georg. IV, 525–527). Потрійне ім'я як вираз невтоленної туги.",
+      "chain": null
+    },
+    {
+      "id": "purg_xxx_06",
+      "dante_ref": "XXX, 76–78",
+      "dante_sub": "Беатріче — суворий адмірал",
+      "source_ref": "Aen. I, 148–153",
+      "source_sub": "Нептун вгамовує хвилі",
+      "source_author": "Вергілій",
+      "type": "STRUCTURE",
+      "confidence": "MEDIUM",
+      "desc_dante": "Беатріче стоїть на колісниці з суворістю адмірала, що оглядає кораблі — «regalmente ne l'atto ancor proterva». Порівняння з командувачем флоту в момент владного контролю.",
+      "desc_source": "В Aeneis I Нептун помічає бурю, яку здійняв Еол, і владно вгамовує хвилі — «quos ego!» (Aen. I, 135). Вергіліанське порівняння Нептуна з оратором, що вгамовує натовп (Aen. I, 148–153), задає модель владної постаті, що відновлює порядок.",
+      "chain": null
+    },
+    {
+      "id": "purg_xxx_07",
+      "dante_ref": "XXX, 83–84",
+      "dante_sub": "In te, Domine, speravi",
+      "source_ref": "Ps. 30:2",
+      "source_sub": "In te, Domine, speravi; non confundar in aeternum",
+      "source_author": "Біблія",
+      "type": "ALLUSION",
+      "confidence": "HIGH",
+      "desc_dante": "Янголи співають «In te, Domine, speravi» — псалом надії посеред докору Беатріче, ніби заступаючись за Данте. Літургійний спів як протидія суворості суду.",
+      "desc_source": "Псалом 30 (31): «In te, Domine, speravi; non confundar in aeternum» — «На Тебе, Господи, уповаю; нехай повіки не буду посоромлений». Псалом довіри в момент випробування.",
+      "chain": null
+    }
+  ]
+}

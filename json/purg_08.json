@@ -1,0 +1,112 @@
+{
+  "canto": "Purg. VIII",
+  "cantica": "Purgatorio",
+  "canto_num": 8,
+  "verified": true,
+  "connections": [
+    {
+      "id": "purg_viii_01",
+      "dante_ref": "VIII, 1–6",
+      "dante_sub": "Era già l'ora — вечірній дзвін",
+      "source_ref": "Aen. VIII, 26–30",
+      "source_sub": "nox erat — нічний опис",
+      "source_author": "Вергілій",
+      "type": "THEMATIC",
+      "confidence": "MEDIUM",
+      "desc_dante": "Данте описує вечірню годину, коли мандрівників пронизує ностальгія за домом — «l'ora che volge il disio ai navicanti». Класичний елегійний хронограф.",
+      "desc_source": "В Aeneis VIII Вергілій описує нічну годину на Тибрі, коли Еней засинає. Формула епічного вечора / ночі, що передує надприродній події.",
+      "chain": null
+    },
+    {
+      "id": "purg_viii_02",
+      "dante_ref": "VIII, 13–18",
+      "dante_sub": "Te lucis ante — вечірній гімн",
+      "source_ref": "Ps. 90:5–6",
+      "source_sub": "non timebis a timore nocturno",
+      "source_author": "Біблія",
+      "type": "THEMATIC",
+      "confidence": "MEDIUM",
+      "desc_dante": "Душі співають гімн «Te lucis ante terminum» — молитву про захист від нічних небезпек. Спів готує до появи змія-спокусника.",
+      "desc_source": "Псалом 90 (91) обіцяє захист від нічного жаху: «non timebis a timore nocturno, a sagitta volante in die». Мотив божественного захисту від нічних загроз.",
+      "chain": null
+    },
+    {
+      "id": "purg_viii_03",
+      "dante_ref": "VIII, 25–39",
+      "dante_sub": "два ангели з полум'яними мечами",
+      "source_ref": "Gen. 3:24",
+      "source_sub": "Херувим із полум'яним мечем",
+      "source_author": "Біблія",
+      "type": "ALLUSION",
+      "confidence": "HIGH",
+      "desc_dante": "Два зелених ангели спускаються з неба з полум'яними мечами, щоб охороняти долину від змія. Їхні мечі притуплені — символ милосердя.",
+      "desc_source": "У Genesis Бог ставить Херувима з полум'яним мечем біля входу до Едемського саду після вигнання Адама і Єви. Данте адаптує образ: ангели з мечами охороняють не від людей, а від змія.",
+      "chain": null
+    },
+    {
+      "id": "purg_viii_04",
+      "dante_ref": "VIII, 37–39",
+      "dante_sub": "мечі без вістря — символ милосердя",
+      "source_ref": "Gen. 3:24",
+      "source_sub": "flammeum gladium atque versatilem",
+      "source_author": "Біблія",
+      "type": "INVERSION",
+      "confidence": "HIGH",
+      "desc_dante": "Мечі ангелів «tronchi e privati de le punte sue» — обламані, без вістрів. У Чистилищі меч не карає, а лише відлякує зло.",
+      "desc_source": "Полум'яний меч Херувима в Genesis — загрозливий і обертовий, призначений карати. Данте інвертує: у просторі очищення меч притуплений, бо милосердя перемагає суворість.",
+      "chain": null
+    },
+    {
+      "id": "purg_viii_05",
+      "dante_ref": "VIII, 97–108",
+      "dante_sub": "змій — biscia",
+      "source_ref": "Gen. 3:1–5",
+      "source_sub": "змій у Едемі",
+      "source_author": "Біблія",
+      "type": "ALLUSION",
+      "confidence": "HIGH",
+      "desc_dante": "Змій вповзає в долину — «forse qual diede ad Eva il cibo amaro» — можливо, той самий, що дав Єві гірку їжу. Ангели відганяють його.",
+      "desc_source": "У Genesis змій-спокусник спонукає Єву з'їсти заборонений плід: «eritis sicut dii». Данте прямо посилається на цей епізод, ідентифікуючи змія долини з едемським.",
+      "chain": null
+    },
+    {
+      "id": "purg_viii_06",
+      "dante_ref": "VIII, 97–108",
+      "dante_sub": "щовечірній змій — ритуальне вигнання",
+      "source_ref": "Aen. V, 84–93",
+      "source_sub": "змій на могилі Анхіза",
+      "source_author": "Вергілій",
+      "type": "THEMATIC",
+      "confidence": "MEDIUM",
+      "desc_dante": "Змій щовечора вповзає і щовечора вигнаний — ритуальне повторення спокуси без перемоги зла. Циклічна структура випробування.",
+      "desc_source": "В Aeneis V змій виповзає з могили Анхіза під час жертвоприношення — його не вбивають, він зникає. Мотив змія, що з'являється і зникає в ритуальному контексті.",
+      "chain": null
+    },
+    {
+      "id": "purg_viii_07",
+      "dante_ref": "VIII, 46–57",
+      "dante_sub": "Ніно Вісконті — зустріч із другом",
+      "source_ref": "Aen. VI, 455–466",
+      "source_sub": "Еней зустрічає Дідону",
+      "source_author": "Вергілій",
+      "type": "STRUCTURE",
+      "confidence": "MEDIUM",
+      "desc_dante": "Данте зустрічає суддю Ніно Вісконті і радісно вітається з ним — зустріч живого з мертвим другом у потойбіччі.",
+      "desc_source": "В Aeneis VI Еней зустрічає Дідону серед тіней — емоційна зустріч із знайомою людиною в потойбіччі, де стосунки переосмислюються.",
+      "chain": null
+    },
+    {
+      "id": "purg_viii_08",
+      "dante_ref": "VIII, 85–93",
+      "dante_sub": "Коррадо Маласпіна — пророцтво",
+      "source_ref": "Aen. VI, 756–787",
+      "source_sub": "пророцтво Анхіза",
+      "source_author": "Вергілій",
+      "type": "STRUCTURE",
+      "confidence": "MEDIUM",
+      "desc_dante": "Коррадо Маласпіна пророкує Данте, що той на власному досвіді дізнається про щедрість роду Маласпіна — пророцтво про майбутнє вигнання.",
+      "desc_source": "В Aeneis VI Анхіз пророкує Енеєві майбутню долю Риму. Структура потойбічного пророцтва, звернутого до героя, про його земне майбутнє.",
+      "chain": null
+    }
+  ]
+}

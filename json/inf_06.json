@@ -1,0 +1,112 @@
+{
+  "canto": "Inf. VI",
+  "cantica": "Inferno",
+  "canto_num": 6,
+  "verified": true,
+  "connections": [
+    {
+      "id": "inf_vi_01",
+      "dante_ref": "VI, 13–18",
+      "dante_sub": "Cerbero — тричленний пес",
+      "source_ref": "Aen. VI, 417–423",
+      "source_sub": "Cerberus haec ingens",
+      "source_author": "Вергілій",
+      "type": "ALLUSION",
+      "confidence": "HIGH",
+      "desc_dante": "Данте зображує Кербера як велетенського потворного пса з трьома пащами, що дере, здирає шкіру і четвертує проковтнутих грішників. Демонізований вартівник третього кола.",
+      "desc_source": "В Aeneis VI Кербер — «Cerberus haec ingens latratu regna trifauci / personat» — величезний трипащний пес, що гарчить на вході до Аїду. Сивілла вгамовує його медовим пирогом (offam).",
+      "chain": null
+    },
+    {
+      "id": "inf_vi_02",
+      "dante_ref": "VI, 22–27",
+      "dante_sub": "piova eterna — вічний дощ",
+      "source_ref": "Aen. VI, 548–558",
+      "source_sub": "покарання в Тартарі — repetitio",
+      "source_author": "Вергілій",
+      "type": "STRUCTURE",
+      "confidence": "MEDIUM",
+      "desc_dante": "Покарання черевоугодників — вічний холодний дощ із градом і брудним снігом, у якому душі лежать розпластані в болоті. Contrapasso: надмір їжі → надмір мокроти.",
+      "desc_source": "В Aeneis VI покарання Тартару побудовані за принципом нескінченного повторення: Іксіон на колесі, Тітій, Сізіф. Структурна модель вічного покарання через повторення одного стану.",
+      "chain": null
+    },
+    {
+      "id": "inf_vi_03",
+      "dante_ref": "VI, 25–27",
+      "dante_sub": "Кербер дряпає і четвертує",
+      "source_ref": "Met. IV, 449–451",
+      "source_sub": "Cerberus ore trifauci — Овідій",
+      "source_author": "Овідій",
+      "type": "ALLUSION",
+      "confidence": "MEDIUM",
+      "desc_dante": "Кербер своїми кігтями «graffia li spirti ed iscoia ed isquatra» — дряпає, здирає шкіру і четвертує грішників. Він не лише вартівник, а й катувальник.",
+      "desc_source": "Овідій у Metamorphoses описує Кербера з потрійною пащою — «Cerberus ore trifauci / latratum» — при сходженні Юнони до Аїду. Додає деталі його хижого характеру.",
+      "chain": null
+    },
+    {
+      "id": "inf_vi_04",
+      "dante_ref": "VI, 26–33",
+      "dante_sub": "Вергілій кидає землю Керберу",
+      "source_ref": "Aen. VI, 419–423",
+      "source_sub": "Сивілла кидає offam Керберу",
+      "source_author": "Вергілій",
+      "type": "INVERSION",
+      "confidence": "HIGH",
+      "desc_dante": "Вергілій бере жмені землі і кидає їх у три пащі Кербера, щоб вгамувати його. Прийом приборкання потвори через годування.",
+      "desc_source": "В Aeneis VI Сивілла кидає Керберу «offam melle soporatam et medicatis frugibus» — медовий пиріг зі снодійними зіллями. Данте інвертує деталь: замість солодкої offam — брудна земля, але структура та ефект ті самі.",
+      "chain": null
+    },
+    {
+      "id": "inf_vi_05",
+      "dante_ref": "VI, 34–57",
+      "dante_sub": "Ciacco — флорентійський черевоугодник",
+      "source_ref": "Sat. II, 8, 1–95",
+      "source_sub": "cena Nasidieni — бенкет",
+      "source_author": "Горацій",
+      "type": "THEMATIC",
+      "confidence": "MEDIUM",
+      "desc_dante": "Чакко — єдиний грішник, який заговорює з Данте у третьому колі. Його ім'я пов'язане з їжею (ciacco = свиня). Він пророкує долю Флоренції серед черевоугодників.",
+      "desc_source": "Горацій у Satirae II, 8 описує бенкет Насідієна — сатиричний портрет надмірного споживання. Тема черевоугодності як соціального пороку з'єднує латинську сатиру з Дантовим третім колом.",
+      "chain": null
+    },
+    {
+      "id": "inf_vi_06",
+      "dante_ref": "VI, 73–75",
+      "dante_sub": "Чакко пророкує: Флоренція розколеться",
+      "source_ref": "Phars. I, 1–7",
+      "source_sub": "bella... plus quam civilia",
+      "source_author": "Лукан",
+      "type": "THEMATIC",
+      "confidence": "MEDIUM",
+      "desc_dante": "Чакко пророкує громадянську ворожнечу Флоренції: Чорні і Білі ґвельфи знищать одне одного. Тема міжусобної війни як руйнації civitas.",
+      "desc_source": "Лукан відкриває Pharsalia темою громадянської війни — «bella plus quam civilia» — війни гірші за громадянські. Братовбивча війна як загроза державі — наскрізний мотив, що резонує з Дантовою Флоренцією.",
+      "chain": null
+    },
+    {
+      "id": "inf_vi_07",
+      "dante_ref": "VI, 85–87",
+      "dante_sub": "Farinata, Tegghiaio, Rusticucci — де вони?",
+      "source_ref": "Aen. VI, 756–853",
+      "source_sub": "Еней запитує Анхіза про долю душ",
+      "source_author": "Вергілій",
+      "type": "STRUCTURE",
+      "confidence": "MEDIUM",
+      "desc_dante": "Данте запитує Чакко про долю відомих флорентійців — Фарінати, Теґ'яйо, Якопо Рустікуччі та інших. Модель: подорожник у потойбіччі запитує про знайомих.",
+      "desc_source": "В Aeneis VI Еней запитує Анхіза про долю душ — хто вони, куди прямують. Модель діалогу-розпитування у просторі мертвих, де подорожник дізнається про відомих людей.",
+      "chain": null
+    },
+    {
+      "id": "inf_vi_08",
+      "dante_ref": "VI, 94–99",
+      "dante_sub": "Чакко падає — повернення до безсвідомості",
+      "source_ref": "Aen. VI, 472–476",
+      "source_sub": "Дідона відвертається від Енея",
+      "source_author": "Вергілій",
+      "type": "THEMATIC",
+      "confidence": "MEDIUM",
+      "desc_dante": "Після розмови Чакко падає серед інших грішників — «e più non disse, e più non parlommi» — більше нічого не сказав і не промовив. Повернення до стану покарання.",
+      "desc_source": "В Aeneis VI після зустрічі з Енеєм Дідона відвертається мовчки — «illa solo fixos oculos aversa tenebat». Модель: душа, що перериває контакт і повертається до свого потойбічного стану.",
+      "chain": null
+    }
+  ]
+}

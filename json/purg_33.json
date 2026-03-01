@@ -1,0 +1,112 @@
+{
+  "canto": "Purg. XXXIII",
+  "cantica": "Purgatorio",
+  "canto_num": 33,
+  "verified": true,
+  "connections": [
+    {
+      "id": "purg_xxxiii_01",
+      "dante_ref": "XXXIII, 1–3",
+      "dante_sub": "Deus, venerunt gentes",
+      "source_ref": "Ps. 78:1 (79 Vulg.)",
+      "source_sub": "Deus, venerunt gentes in hereditatem tuam",
+      "source_author": "Біблія",
+      "type": "ALLUSION",
+      "confidence": "HIGH",
+      "desc_dante": "Беатріче і сім жінок-чеснот починають плач словами псалма: «Deus, venerunt gentes» — оплакуючи спаплюження Церкви-колісниці, яке Данте щойно бачив.",
+      "desc_source": "Псалом 78 (79 за Вульгатою): «Deus, venerunt gentes in hereditatem tuam, polluerunt templum sanctum tuum» — «Боже, народи прийшли в спадщину Твою, осквернили святий храм Твій». Плач над зруйнованим Єрусалимом.",
+      "chain": null
+    },
+    {
+      "id": "purg_xxxiii_02",
+      "dante_ref": "XXXIII, 4–6",
+      "dante_sub": "Беатріче зітхає, як Марія біля Хреста",
+      "source_ref": "Jn. 19:25",
+      "source_sub": "stabat iuxta crucem Iesu mater eius",
+      "source_author": "Біблія",
+      "type": "THEMATIC",
+      "confidence": "MEDIUM",
+      "desc_dante": "Беатріче слухає плач, «pietosa e bella», зітхаючи і змінившись в обличчі — «tanto nella sembianza si mutata». Її біль перегукується з образом Матері, що стоїть біля Хреста.",
+      "desc_source": "В Євангелії від Іоанна: «stabat iuxta crucem Iesu mater eius» — Марія стоїть біля Хреста у мовчазному горі. Мотив співстраждання перед руйнуванням святині — Церкви (у Данте) і тіла Христа (у Євангелії).",
+      "chain": null
+    },
+    {
+      "id": "purg_xxxiii_03",
+      "dante_ref": "XXXIII, 10–12",
+      "dante_sub": "Modicum, et non videbitis me",
+      "source_ref": "Jn. 16:16",
+      "source_sub": "modicum et iam non videbitis me",
+      "source_author": "Біблія",
+      "type": "ALLUSION",
+      "confidence": "HIGH",
+      "desc_dante": "Беатріче промовляє загадкове пророцтво, починаючи з латинської цитати: «Modicum, et non videbitis me; / et iterum modicum, et vos videbitis me» — обіцянка тимчасового зникнення і повернення.",
+      "desc_source": "Слова Ісуса учням перед Страстями (Jn. 16:16): «modicum et iam non videbitis me et iterum modicum et videbitis me» — «ще трохи, і не побачите Мене, і знову трохи, і побачите Мене». Пророцтво про смерть і воскресіння.",
+      "chain": null
+    },
+    {
+      "id": "purg_xxxiii_04",
+      "dante_ref": "XXXIII, 34–36",
+      "dante_sub": "пророцтво DXV — божественний месник",
+      "source_ref": "Aen. VI, 72–76",
+      "source_sub": "Сивілла пророкує",
+      "source_author": "Вергілій",
+      "type": "STRUCTURE",
+      "confidence": "MEDIUM",
+      "desc_dante": "Беатріче пророкує прихід «cinquecento diece e cinque» (DXV) — посланця Божого, що покарає блудницю і велетня. Зашифроване пророцтво, як у Сивіллиних книгах.",
+      "desc_source": "В Aeneis VI Кумська Сивілла пророкує Енею в екстатичному стані: «horrendas canit ambages antroque remugit, / obscuris vera involvens» — сповіщає грізні загадки, огортаючи істину темрявою. Модель зашифрованого пророцтва.",
+      "chain": null
+    },
+    {
+      "id": "purg_xxxiii_05",
+      "dante_ref": "XXXIII, 37–45",
+      "dante_sub": "Сфінкс і Наяди — загадка",
+      "source_ref": "Theb. I, 66–68",
+      "source_sub": "Sphinx caecis verba ligabat modis",
+      "source_author": "Стацій",
+      "type": "ALLUSION",
+      "confidence": "MEDIUM",
+      "desc_dante": "Беатріче попереджає, що незабаром факти самі розв'яжуть загадку — «senza danno di pecore o di biade» — без Наяд, що загубили стада. Данте цитує «Наяд» замість «Лая» — можлива помилка в рукописі Овідія.",
+      "desc_source": "У Фіваїді Стацій згадує Сфінкса, що «in'яжила слова темними вузлами» — загадка, яку розв'язав Едіп. Данте поєднує образ Стацієвого Сфінкса з помилковим читанням Овідія (Met. VII, 759), де «Laiades» став «Naiades» в деяких рукописах.",
+      "chain": null
+    },
+    {
+      "id": "purg_xxxiii_06",
+      "dante_ref": "XXXIII, 46–51",
+      "dante_sub": "Ельса і Пірам — води, що затверджують і плямують",
+      "source_ref": "Met. IV, 121–127",
+      "source_sub": "кров Пірама фарбує шовковицю",
+      "source_author": "Овідій",
+      "type": "ALLUSION",
+      "confidence": "HIGH",
+      "desc_dante": "Беатріче каже, що марні думки зробили розум Данте скам'янілим, як води Ельси, і заплямили його, як кров Пірама заплямила шовковицю — «Elsa ed il Piramo alla gelsa».",
+      "desc_source": "В Метаморфозах Овідій оповідає про Пірама і Фісбу: кров Пірама бризкає на білі плоди шовковиці, навіки фарбуючи їх у пурпур — «arboreis fetus aspergine caedis» (Met. IV, 125–127). Образ незворотного плямування.",
+      "chain": null
+    },
+    {
+      "id": "purg_xxxiii_07",
+      "dante_ref": "XXXIII, 112–114",
+      "dante_sub": "Евное — оновлення пам'яті про добро",
+      "source_ref": "Aen. VI, 713–715",
+      "source_sub": "Летейські води забуття",
+      "source_author": "Вергілій",
+      "type": "STRUCTURE",
+      "confidence": "MEDIUM",
+      "desc_dante": "Данте п'є з Евное — ріки, що відновлює пам'ять про добрі вчинки. Лету він уже випив (забуття гріхів). Дантова дуальна система: Лета стирає зло, Евное повертає добро.",
+      "desc_source": "В Aeneis VI душі п'ють воду Лети перед реінкарнацією: «securos latices et longa oblivia potant» — п'ють безтурботні води й довге забуття. Данте трансформує одну ріку Вергілія у подвійну систему очищення.",
+      "chain": null
+    },
+    {
+      "id": "purg_xxxiii_08",
+      "dante_ref": "XXXIII, 142–145",
+      "dante_sub": "puro e disposto a salire a le stelle",
+      "source_ref": "Aen. VI, 679–680",
+      "source_sub": "підйом з підземного царства",
+      "source_author": "Вергілій",
+      "type": "THEMATIC",
+      "confidence": "MEDIUM",
+      "desc_dante": "Останній рядок Purgatorio: «puro e disposto a salire a le stelle» — чистий і готовий піднятися до зірок. Кожна кантика завершується словом «stelle» — структурний зв'язок усієї Комедії.",
+      "desc_source": "В Aeneis VI Еней і Сивілла виходять з підземного царства через ворота зі слонової кістки. Мотив сходження від низу до зірок — «sub auras» — від пітьми Аїду до неба. Данте перетворює цей підйом на духовне очищення.",
+      "chain": null
+    }
+  ]
+}

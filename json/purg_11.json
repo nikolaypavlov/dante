@@ -1,0 +1,99 @@
+{
+  "canto": "Purg. XI",
+  "cantica": "Purgatorio",
+  "canto_num": 11,
+  "verified": true,
+  "connections": [
+    {
+      "id": "purg_xi_01",
+      "dante_ref": "XI, 1–24",
+      "dante_sub": "парафраза «Отче наш»",
+      "source_ref": "Mt. 6:9–13",
+      "source_sub": "Pater noster",
+      "source_author": "Біблія",
+      "type": "ALLUSION",
+      "confidence": "HIGH",
+      "desc_dante": "Пісня відкривається повною парафразою молитви «Отче наш», де кожен рядок оригіналу розширено у терцину. Душі гордих моляться під вагою каменів.",
+      "desc_source": "У Євангелії від Матвія Христос навчає учнів молитви «Pater noster, qui es in caelis». Данте перетворює кожне звернення молитви у розлогу медитацію.",
+      "chain": null
+    },
+    {
+      "id": "purg_xi_02",
+      "dante_ref": "XI, 37–42",
+      "dante_sub": "Умберто Альдобрандескі — гордість роду",
+      "source_ref": "Aen. VI, 843–846",
+      "source_sub": "tu regere imperio populos — гордість влади",
+      "source_author": "Вергілій",
+      "type": "THEMATIC",
+      "confidence": "MEDIUM",
+      "desc_dante": "Умберто Альдобрандескі визнає, що його згубила родова гордість: «l'antico sangue e l'opere leggiadre de' miei maggior». Гріх аристократичної пихи.",
+      "desc_source": "В Aeneis VI Анхіз закликає римлян правити народами — «tu regere imperio populos, Romane, memento». Мотив благородного походження як джерела гордині.",
+      "chain": null
+    },
+    {
+      "id": "purg_xi_03",
+      "dante_ref": "XI, 73–108",
+      "dante_sub": "Одерізі — марність слави",
+      "source_ref": "Ars P. 60–72",
+      "source_sub": "зміна поколінь у мистецтві",
+      "source_author": "Горацій",
+      "type": "THEMATIC",
+      "confidence": "MEDIUM",
+      "desc_dante": "Одерізі да Губбіо розмірковує про марність мистецької слави: Чімабуе вважав себе першим, а тепер його затьмарив Джотто. Так само в поезії один Гвідо витіснив іншого.",
+      "desc_source": "В Ars Poetica Горацій описує, як нові слова і стилі витісняють старі — «multa renascentur quae iam cecidere». Мотив зміни поколінь і плинності слави.",
+      "chain": null
+    },
+    {
+      "id": "purg_xi_04",
+      "dante_ref": "XI, 91–93",
+      "dante_sub": "«Non è il mondan romore altro ch'un fiato di vento»",
+      "source_ref": "Met. XV, 234–236",
+      "source_sub": "omnia mutantur — все змінюється",
+      "source_author": "Овідій",
+      "type": "THEMATIC",
+      "confidence": "MEDIUM",
+      "desc_dante": "Одерізі порівнює земну славу з подихом вітру, що змінює напрямок: «Non è il mondan romore altro ch'un fiato di vento». Тлінність людської слави.",
+      "desc_source": "В Met. XV Піфагор проголошує «omnia mutantur, nihil interit» — все змінюється, ніщо не зникає. Мотив всесвітньої плинності та мінливості.",
+      "chain": null
+    },
+    {
+      "id": "purg_xi_05",
+      "dante_ref": "XI, 100–108",
+      "dante_sub": "«mille anni — più corto spazio è un muover di ciglia»",
+      "source_ref": "Ps. 89:4",
+      "source_sub": "mille anni tamquam dies hesterna",
+      "source_author": "Біблія",
+      "type": "ALLUSION",
+      "confidence": "HIGH",
+      "desc_dante": "Одерізі каже, що тисяча років для вічності — коротший проміжок, ніж мить для зоряного неба. Людська слава мізерна перед вічністю.",
+      "desc_source": "У Псалмі 89 (90) сказано: «mille anni ante oculos tuos tamquam dies hesterna» — тисяча років перед Твоїми очима як день вчорашній. Мотив нікчемності часу перед Богом.",
+      "chain": null
+    },
+    {
+      "id": "purg_xi_06",
+      "dante_ref": "XI, 109–117",
+      "dante_sub": "Провенцан Сальвані — гордість і приниження",
+      "source_ref": "Phars. II, 506–525",
+      "source_sub": "Катон як зразок суворої чесноти",
+      "source_author": "Лукан",
+      "type": "THEMATIC",
+      "confidence": "MEDIUM",
+      "desc_dante": "Провенцан Сальвані, колись пан Сієни, мусив принизитися, жебраючи на Кампо для викупу друга. Добровільне приниження скоротило його очікування.",
+      "desc_source": "В Pharsalia Лукан описує Катона, чия суворість і самозречення контрастують із пишнотою Помпея та Цезаря. Мотив добровільного приниження заради вищої справи.",
+      "chain": null
+    },
+    {
+      "id": "purg_xi_07",
+      "dante_ref": "XI, 58–72",
+      "dante_sub": "Одерізі да Губбіо — вітання в потойбіччі",
+      "source_ref": "Aen. VI, 684–688",
+      "source_sub": "Еней зустрічає Анхіза",
+      "source_author": "Вергілій",
+      "type": "STRUCTURE",
+      "confidence": "MEDIUM",
+      "desc_dante": "Данте впізнає Одерізі серед зігнутих під каменями душ і звертається до нього. Зустріч із знайомим митцем у потойбіччі.",
+      "desc_source": "В Aeneis VI Еней зустрічає батька Анхіза серед душ. Модель емоційної зустрічі із знайомою людиною у потойбічному просторі.",
+      "chain": null
+    }
+  ]
+}

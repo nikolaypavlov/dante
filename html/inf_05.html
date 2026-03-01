@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inf. V — Інтертекстуальне дерево</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<link rel="stylesheet" href="../dante-theme.css">
+</head>
+<body>
+<div class="side-panel-overlay" id="overlay" onclick="togglePanel()"></div>
+<div class="side-panel" id="sidePanel"><div class="side-panel-header"><h2>Навігація</h2><button class="side-panel-close" onclick="togglePanel()">✕</button></div><div id="panelContent"></div></div>
+
+<header>
+  <button class="nav-btn" onclick="togglePanel()" title="Навігація">☰</button>
+  <div class="header-center">
+    <a class="nav-arrow" href="inf_04.html">← Inf. IV</a>
+    <div class="title-block"><h1>Inferno V</h1><p>Інтертекстуальне дерево джерел</p></div>
+    <a class="nav-arrow" href="inf_06.html">Inf. VI →</a>
+  </div>
+</header>
+
+<div class="legend">
+  <div class="legend-item"><div class="legend-swatch" style="background:#d4a853"></div>Алюзія</div>
+  <div class="legend-item"><div class="legend-swatch thick" style="background:#7ea88e"></div>Структура</div>
+  <div class="legend-item"><div class="legend-swatch dashed" style="border-color:#8a7eb8"></div>Тематика</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:#c45c5c"></div>Інверсія</div>
+  <div class="legend-item"><div class="legend-swatch dotted" style="border-color:#5c8ab8"></div>Ономастика</div>
+</div>
+<div id="chart-container"></div>
+<div class="tooltip" id="tooltip"></div>
+
+<script>
+const TYPE_UA = { ALLUSION:"Алюзія", STRUCTURE:"Структура", THEMATIC:"Тематика", INVERSION:"Інверсія", ONOMASTIC:"Ономастика" };
+
+const LINKS_DATA = [
+  { from:"d_01", to:"aen_vi_432", type:"ALLUSION",
+    dF:"Данте зображує Мінoса як демонічного суддю пекла, що обвиває хвостом грішників стільки разів, на скільки кіл вони мають спуститися.",
+    dT:"В Aeneis VI Мінос є суддею мертвих: «quaesitor Minos urnam movet» — Мінос ворушить урну і збирає раду мовчазних. Суддівська функція збережена, але форма змінена." },
+  { from:"d_01", to:"met_viii", type:"ONOMASTIC",
+    dF:"Данте використовує ім'я критського царя Мінoса для свого пекельного судді.",
+    dT:"Овідій у Metamorphoses VIII описує Мінoса як царя Крита. Подвійна репутація Мінoса — справедливість і жорстокість." },
+  { from:"d_02", to:"aen_vi_440", type:"STRUCTURE",
+    dF:"Другий круг пекла — хтивці, яких вічний вихор носить у темряві: «la bufera infernal, che mai non resta». Contrapasso: пристрасть = некерований вітер.",
+    dT:"В Aeneis VI закохані, що загинули від пристрасті, перебувають у Lugentes campi — полях скорботних. Вергілій моделює простір для тих, кого знищила любов." },
+  { from:"d_03", to:"aen_vi_310", type:"ALLUSION",
+    dF:"Данте порівнює душі хтивців із шпаками (stornei) і журавлями (gru), що летять довгою вервечкою.",
+    dT:"В Aeneis VI Вергілій порівнює мертвих із перелітними птахами: «quam multae glomerantur aves». Пташині порівняння для натовпу душ." },
+  { from:"d_04", to:"aen_vi_445", type:"STRUCTURE",
+    dF:"Данте перелічує знаменитих закоханих: Семіраміду, Дідону, Клеопатру, Елену, Ахілла, Паріса, Трістана. Каталог жертв пристрасті.",
+    dT:"В Aeneis VI Вергілій перелічує нещасливих закоханих у Lugentes campi: Федру, Прокріду, Еріфілу, Евадну, Пасіфаю, Лаодамію, Ценея і Дідону." },
+  { from:"d_05", to:"aen_iv_642", type:"ALLUSION",
+    dF:"Данте вказує на Дідону — ту, «che s'ancise amorosa, / e ruppe fede al cener di Sicheo» — яка вбила себе від кохання.",
+    dT:"В Aeneis IV Дідона, покинута Енеєм, кидається на меч. Її самогубство — кульмінація четвертої книги." },
+  { from:"d_06", to:"il_iii_ch", type:"ONOMASTIC",
+    dF:"Данте називає Елену серед грішників-хтивців — причину довгої і згубної війни.",
+    dT:"Вергілій у Aeneis II згадує Елену при падінні Трої. Данте знав цей образ через латинських посередників." },
+  { from:"il_iii_ch", to:"il_iii_src", type:"ONOMASTIC",
+    dF:"Вергілій передає гомерівський образ Елени у контексті падіння Трої.",
+    dT:"В Ilias III Елена з'являється на стінах Трої. Її краса — причина десятилітньої війни." },
+  { from:"d_07", to:"achilleis", type:"ONOMASTIC",
+    dF:"Данте поміщає Ахілла серед хтивців — «che con amore al fine combatteo». За середньовічною версією, Ахілл загинув через любов до Поліксени.",
+    dT:"Стацій в Achilleis описує юність Ахілла. Середньовічна традіція змалювала Ахілла як жертву кохання до Поліксени." },
+  { from:"d_08", to:"prose_tristan", type:"ONOMASTIC",
+    dF:"Данте завершує каталог хтивців іменем Трістана — рицаря-коханця, який загинув через заборонене кохання до Ізольди.",
+    dT:"Prose Tristan (XIII ст.) — найвідоміша середньовічна версія історії Трістана та Ізольди. Кохання через чарівний напій як парадигма фатальної пристрасті." },
+  { from:"d_09", to:"aen_vi_190", type:"ALLUSION",
+    dF:"Данте порівнює Паоло і Франческу з голубами, що летять до гнізда: «quali colombe dal disio chiamate». Голуби Венери як образ кохання.",
+    dT:"В Aeneis VI голуби Венери (maternis columbae) ведуть Енея до золотої гілки. Голуби — священні птахи Венери, символ любові." },
+  { from:"d_10", to:"guinizelli", type:"ALLUSION",
+    dF:"Франческа тричі починає строфу словом «Amor». Перший: «Amor, ch'al cor gentil ratto s'apprende» — пряма цитата доктрини Ґвініцеллі.",
+    dT:"Ґвідо Ґвініцеллі у канцоні «Al cor gentil rempaira sempre amore» формулює ключову тезу Dolce Stil Novo: кохання і благородне серце — одне." },
+  { from:"d_11", to:"de_amore", type:"THEMATIC",
+    dF:"Другий закон Франчески: «Amor, ch'a nullo amato amar perdona» — Кохання не прощає коханому не кохати у відповідь.",
+    dT:"Андрій Капелан у De Amore визначає кохання як непереборну пристрасть (passio), що вимагає взаємності." },
+  { from:"d_12", to:"prose_lancelot", type:"ALLUSION",
+    dF:"Франческа розповідає, що вони з Паоло читали про Ланселота: «Noi leggiavamo un giorno per diletto / di Lancialotto». Книга стала зводником — «Galeotto fu 'l libro».",
+    dT:"Prose Lancelot описує сцену першого поцілунку між Ланселотом і Ґіневрою, де посередником (Galehaut/Galeotto) виступає рицар." },
+  { from:"d_13", to:"aen_ii_3", type:"ALLUSION",
+    dF:"Франческа каже: «Nessun maggior dolore / che ricordarsi del tempo felice / ne la miseria» — немає більшого болю, ніж згадувати щасливий час у нещасті.",
+    dT:"В Aeneis II Еней починає розповідь: «Infandum, regina, iubes renovare dolorem» — ти наказуєш відновити невимовний біль. Розповідь про минуле щастя посилює теперішнє страждання." },
+];
+
+const NODES_RAW = {
+  d_01:    { label:"V, 4\u201312",    sub:"Minos — суддя",         author:"Данте",    col:0 },
+  d_02:    { label:"V, 28\u201336",   sub:"la bufera infernal",    author:"Данте",    col:0 },
+  d_03:    { label:"V, 40\u201344",   sub:"stornei, gru",          author:"Данте",    col:0 },
+  d_04:    { label:"V, 52\u201360",   sub:"каталог закоханих",     author:"Данте",    col:0 },
+  d_05:    { label:"V, 61\u201362",   sub:"Дідона",                author:"Данте",    col:0 },
+  d_06:    { label:"V, 58",           sub:"Елена",                 author:"Данте",    col:0 },
+  d_07:    { label:"V, 65",           sub:"Achille",               author:"Данте",    col:0 },
+  d_08:    { label:"V, 67",           sub:"Tristan",               author:"Данте",    col:0 },
+  d_09:    { label:"V, 82\u201387",   sub:"colombi",               author:"Данте",    col:0 },
+  d_10:    { label:"V, 103",          sub:"Amor, ch'al cor gentil",author:"Данте",    col:0 },
+  d_11:    { label:"V, 106",          sub:"Amor, ch'a nullo amato",author:"Данте",    col:0 },
+  d_12:    { label:"V, 127\u2013138", sub:"Lancelotto — Galeotto", author:"Данте",    col:0 },
+  d_13:    { label:"V, 121\u2013123", sub:"Nessun maggior dolore", author:"Данте",    col:0 },
+  aen_vi_432:  { label:"Aen. VI, 432\u2013433", sub:"quaesitor Minos",      author:"Вергілій", col:1 },
+  aen_vi_440:  { label:"Aen. VI, 440\u2013449", sub:"Lugentes campi",       author:"Вергілій", col:1 },
+  aen_vi_310:  { label:"Aen. VI, 310\u2013312", sub:"aves — птахи",         author:"Вергілій", col:1 },
+  aen_vi_445:  { label:"Aen. VI, 445\u2013449", sub:"каталог закоханих",    author:"Вергілій", col:1 },
+  aen_iv_642:  { label:"Aen. IV, 642\u2013665", sub:"смерть Дідони",        author:"Вергілій", col:1 },
+  aen_vi_190:  { label:"Aen. VI, 190\u2013193", sub:"columbae Veneris",     author:"Вергілій", col:1 },
+  aen_ii_3:    { label:"Aen. II, 3\u201313",    sub:"infandum dolorem",     author:"Вергілій", col:1 },
+  met_viii:    { label:"Met. VIII, 6\u2013151",  sub:"Мінос — цар Крита",   author:"Овідій",   col:1 },
+  achilleis:   { label:"Achilleis I, 1\u201319", sub:"юність Ахілла",       author:"Стацій",   col:1 },
+  prose_tristan:{ label:"Prose Tristan",         sub:"Трістан та Ізольда",  author:"Прозовий Трістан",col:1 },
+  prose_lancelot:{ label:"Prose Lancelot",       sub:"поцілунок Л. і Ґ.",   author:"Прозовий Ланселот",col:1 },
+  guinizelli:  { label:"Al cor gentil, 1\u201310",sub:"cor gentil",         author:"Ґвініцеллі",col:1 },
+  de_amore:    { label:"De Amore I, 1",          sub:"amor est passio",    author:"Андрій Капелан",col:1 },
+  il_iii_ch:   { label:"Aen. II, 567\u2013588",  sub:"Елена (через Верг.)",author:"Вергілій", col:1 },
+  il_iii_src:  { label:"Il. III, 121\u2013180",   sub:"Елена на стінах",    author:"Гомер",    col:2 },
+};
+
+const AUTHOR_STYLES = {
+  "Данте":    {f:"#281a08",s:"#d4a853"},
+  "Вергілій": {f:"#1a0e28",s:"#a06ece"},
+  "Овідій":   {f:"#280e1a",s:"#ce5a8a"},
+  "Лукан":    {f:"#0e2028",s:"#5abecc"},
+  "Стацій":   {f:"#0e1428",s:"#5a78ce"},
+  "Гомер":    {f:"#28140e",s:"#ce7a5a"},
+  "Біблія":   {f:"#280e0e",s:"#ce5a5a"},
+  "Ґвініцеллі":{f:"#1a2808",s:"#8ece5a"},
+  "Андрій Капелан":{f:"#28200e",s:"#ceaa5a"},
+  "Прозовий Трістан":{f:"#0e2820",s:"#5aceb8"},
+  "Прозовий Ланселот":{f:"#1a2820",s:"#6abea0"}
+};
+
+const nodeW=164,nodeH=46,gapY=8,gapX=140,padLeft=70,padTop=20;
+const nodes=Object.entries(NODES_RAW).map(([id,n])=>({id,...n,x:0,y:0}));
+const nodeMap={};nodes.forEach(n=>nodeMap[n.id]=n);
+const byCols=[nodes.filter(n=>n.col===0),nodes.filter(n=>n.col===1),nodes.filter(n=>n.col===2)];
+byCols[0].forEach((n,i)=>{n.y=i*(nodeH+gapY)+nodeH/2});
+byCols[1].forEach(n=>{const p=LINKS_DATA.filter(l=>l.to===n.id&&nodeMap[l.from]?.col===0).map(l=>nodeMap[l.from]);if(p.length)n.y=p.reduce((s,x)=>s+x.y,0)/p.length;else n.y=byCols[0][Math.floor(byCols[0].length/2)].y});
+rOY(byCols[1]);
+if(byCols[2]&&byCols[2].length){byCols[2].forEach(n=>{const p=LINKS_DATA.filter(l=>l.to===n.id&&nodeMap[l.from]).map(l=>nodeMap[l.from]);if(p.length)n.y=p.reduce((s,x)=>s+x.y,0)/p.length;else if(byCols[1].length)n.y=byCols[1][Math.floor(byCols[1].length/2)].y;else n.y=200});rOY(byCols[2])}
+function rOY(a){a.sort((a,b)=>a.y-b.y);const m=nodeH+gapY;for(let p=0;p<40;p++){let o=true;for(let i=1;i<a.length;i++){const d=a[i].y-a[i-1].y;if(d<m){const s=(m-d)/2+.5;a[i-1].y-=s;a[i].y+=s;o=false}}if(o)break}}
+const maxC=Math.max(...nodes.map(n=>n.col)),colX=[];for(let c=0;c<=maxC;c++)colX.push(padLeft+c*(nodeW+gapX)+nodeW/2);
+nodes.forEach(n=>{n.x=colX[n.col]});
+const minY=Math.min(...nodes.map(n=>n.y))-nodeH/2;nodes.forEach(n=>n.y-=minY-padTop);
+const svgW=padLeft+(maxC+1)*nodeW+maxC*gapX+padLeft,svgH=Math.max(...nodes.map(n=>n.y+nodeH/2))+20;
+const TC={ALLUSION:"#d4a853",STRUCTURE:"#7ea88e",THEMATIC:"#8a7eb8",INVERSION:"#c45c5c",ONOMASTIC:"#5c8ab8"};
+const AS=AUTHOR_STYLES;const st=getComputedStyle(document.documentElement);
+const svg=d3.select("#chart-container").append("svg").attr("width",svgW).attr("height",svgH);
+const defs=svg.append("defs");
+Object.entries(TC).forEach(([t,c])=>{defs.append("marker").attr("id","a-"+t).attr("viewBox","0 0 10 6").attr("refX",10).attr("refY",3).attr("markerWidth",7).attr("markerHeight",5).attr("orient","auto").append("path").attr("d","M0,0.5 L9,3 L0,5.5Z").attr("fill",c)});
+const nCols=colX.length;const cw=svgW/nCols;
+colX.forEach((cx,i)=>{svg.append("rect").attr("x",i*cw).attr("y",0).attr("width",cw).attr("height",svgH).attr("fill",i%2===0?st.getPropertyValue("--col-dark").trim():st.getPropertyValue("--col-light").trim())});
+
+function hC(s,t){const sx=s.x+nodeW/2+2,tx=t.x-nodeW/2-2,dx=tx-sx;return"M"+sx+","+s.y+" C"+(sx+dx*.45)+","+s.y+" "+(tx-dx*.45)+","+t.y+" "+tx+","+t.y}
+const linkG=svg.append("g");
+const linkEls=linkG.selectAll("path").data(LINKS_DATA).enter().append("path")
+  .attr("d",d=>hC(nodeMap[d.from],nodeMap[d.to]))
+  .attr("fill","none")
+  .attr("stroke",d=>TC[d.type])
+  .attr("stroke-width",d=>d.type==="STRUCTURE"?3:1.6)
+  .attr("stroke-dasharray",d=>d.type==="THEMATIC"?"6,4":d.type==="ONOMASTIC"?"2,4":"none")
+  .attr("opacity",.5)
+  .attr("marker-end",d=>"url(#a-"+d.type+")");
+
+const tooltip=d3.select("#tooltip");const nodeG=svg.append("g");
+const ne=nodeG.selectAll("g").data(nodes).enter().append("g")
+  .attr("transform",d=>"translate("+(d.x-nodeW/2)+","+(d.y-nodeH/2)+")")
+  .style("cursor","pointer");
+ne.append("rect").attr("width",nodeW).attr("height",nodeH).attr("rx",5)
+  .attr("fill",d=>AS[d.author]?.f||"#1a1a1a")
+  .attr("stroke",d=>AS[d.author]?.s||"#333")
+  .attr("stroke-width",d=>d.author==="Данте"?1.8:1);
+ne.append("text").attr("x",nodeW/2).attr("y",17).attr("text-anchor","middle")
+  .attr("fill",st.getPropertyValue('--text').trim())
+  .attr("font-size","10px").attr("font-family","'JetBrains Mono',monospace").attr("font-weight",500)
+  .text(d=>d.label);
+ne.append("text").attr("x",nodeW/2).attr("y",32).attr("text-anchor","middle")
+  .attr("fill",st.getPropertyValue('--text-muted').trim())
+  .attr("font-size","10.5px").attr("font-family","'Cormorant Garamond',serif").attr("font-style","italic")
+  .text(d=>d.sub);
+ne.filter(d=>d.col>0).append("text")
+  .attr("x",nodeW/2).attr("y",nodeH-2).attr("text-anchor","middle")
+  .attr("fill",d=>AS[d.author]?.s||"#555")
+  .attr("font-size","7px").attr("font-family","'JetBrains Mono',monospace").attr("opacity",.7)
+  .text(d=>d.author);
+
+ne.on("mouseover",function(ev,d){
+  const ids=new Set([d.id]);
+  LINKS_DATA.forEach(l=>{if(l.from===d.id||l.to===d.id){ids.add(l.from);ids.add(l.to)}});
+  linkEls.attr("opacity",l=>(l.from===d.id||l.to===d.id)?1:.04)
+    .attr("stroke-width",l=>{const on=l.from===d.id||l.to===d.id;return on?(l.type==="STRUCTURE"?4.5:3):(l.type==="STRUCTURE"?3:1.6)});
+  nodeG.selectAll("g").select("rect")
+    .attr("opacity",function(){return ids.has(d3.select(this.parentNode).datum().id)?1:.1});
+  var parts=LINKS_DATA.filter(l=>l.from===d.id||l.to===d.id).map(l=>{
+    var c=TC[l.type],isF=l.from===d.id,other=isF?nodeMap[l.to]:nodeMap[l.from],desc=isF?l.dF:l.dT,arr=isF?"\u2192":"\u2190";
+    var s='<span class="tt-type" style="background:'+c+'22;color:'+c+';border:1px solid '+c+'44">'+TYPE_UA[l.type]+'</span> '+arr+' <strong>'+other.label+'</strong><br><span class="tt-desc">'+desc+'</span>';
+    return s;
+  });
+  var h=parts.join("<br><br>");
+  if(h)tooltip.html('<strong>'+d.label+'</strong> <em style="color:var(--text-muted)">\u00b7 '+d.author+'</em><br><br>'+h)
+    .style("opacity",1)
+    .style("left",Math.min(ev.clientX+14,innerWidth-440)+"px")
+    .style("top",Math.min(ev.clientY+14,innerHeight-300)+"px");
+}).on("mousemove",function(ev){
+  tooltip.style("left",Math.min(ev.clientX+14,innerWidth-440)+"px")
+    .style("top",Math.min(ev.clientY+14,innerHeight-300)+"px");
+}).on("mouseout",function(){
+  linkEls.attr("opacity",.5).attr("stroke-width",d=>d.type==="STRUCTURE"?3:1.6);
+  nodeG.selectAll("g").select("rect").attr("opacity",1);
+  tooltip.style("opacity",0);
+});
+
+function togglePanel(){
+  document.getElementById('sidePanel').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('open');
+}
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){
+    document.getElementById('sidePanel').classList.remove('open');
+    document.getElementById('overlay').classList.remove('open');
+  }
+});
+
+(function buildNav(){
+  var roman=function(n){var v=[1000,900,500,400,100,90,50,40,10,9,5,4,1],s=['M','CM','D','CD','C','XC','L','XL','X','IX','V','IV','I'],r='';for(var i=0;i<v.length;i++)while(n>=v[i]){r+=s[i];n-=v[i]}return r};
+  var pad2=function(n){return String(n).padStart(2,'0')};
+  var ct=[{t:'Inferno',a:'Inf.',x:'inf',c:34},{t:'Purgatorio',a:'Purg.',x:'purg',c:33},{t:'Paradiso',a:'Par.',x:'par',c:33}];
+  var cur='inf_05';
+  var container=document.getElementById('panelContent');
+  ct.forEach(function(c){
+    var sec=document.createElement('div');
+    sec.className='side-panel-section';
+    var h3=document.createElement('h3');
+    h3.textContent=c.t;
+    sec.appendChild(h3);
+    for(var i=1;i<=c.c;i++){
+      var f=c.x+'_'+pad2(i);
+      var a=document.createElement('a');
+      a.href=f+'.html';
+      a.textContent=c.a+' '+roman(i);
+      if(f===cur)a.className='current';
+      sec.appendChild(a);
+    }
+    container.appendChild(sec);
+  });
+})();
+</script>
+</body>
+</html>

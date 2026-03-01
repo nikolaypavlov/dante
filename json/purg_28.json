@@ -1,0 +1,112 @@
+{
+  "canto": "Purg. XXVIII",
+  "cantica": "Purgatorio",
+  "canto_num": 28,
+  "verified": true,
+  "connections": [
+    {
+      "id": "purg_xxviii_01",
+      "dante_ref": "XXVIII, 1–12",
+      "dante_sub": "divina foresta — божественний ліс",
+      "source_ref": "Gen. 2:8–9",
+      "source_sub": "Едемський сад",
+      "source_author": "Біблія",
+      "type": "ALLUSION",
+      "confidence": "HIGH",
+      "desc_dante": "Данте входить у густий і живий ліс Земного Раю — «la divina foresta spessa e viva». Простір досконалої природи, що передує Гріхопадінню.",
+      "desc_source": "У книзі Буття Бог насаджує Едемський сад з усіма деревами, приємними на вигляд і добрими на їжу. Земний Рай Данте — поетична реалізація біблійного Едему.",
+      "chain": null
+    },
+    {
+      "id": "purg_xxviii_02",
+      "dante_ref": "XXVIII, 7–12",
+      "dante_sub": "птахи співають у лісі зорі",
+      "source_ref": "Georg. II, 328–335",
+      "source_sub": "весна і спів птахів",
+      "source_author": "Вергілій",
+      "type": "THEMATIC",
+      "confidence": "MEDIUM",
+      "desc_dante": "Птахи в Земному Раю вітають зорю співом серед листя, що шумить на вітрі. Ідилічний пейзаж досконалої природи.",
+      "desc_source": "У Georgica II Вергілій описує весняну природу: птахи співають у лісах, земля відповідає весняній теплоті. Модель ідилічного пейзажу як знаку вічної весни.",
+      "chain": null
+    },
+    {
+      "id": "purg_xxviii_03",
+      "dante_ref": "XXVIII, 40–42",
+      "dante_sub": "Мательда за струмком",
+      "source_ref": "Met. V, 385–395",
+      "source_sub": "Прозерпіна збирає квіти",
+      "source_author": "Овідій",
+      "type": "ALLUSION",
+      "confidence": "HIGH",
+      "desc_dante": "Данте бачить жінку, що збирає квіти по той бік струмка — Мательду, хранительку Земного Раю. Образ прямо пов'язаний із Прозерпіною.",
+      "desc_source": "В п'ятій книзі Metamorphoses Овідій описує Прозерпіну, що збирає квіти на луці біля Енни перед викраденням Плутоном. Данте сам називає це порівняння у ст. 49–51.",
+      "chain": null
+    },
+    {
+      "id": "purg_xxviii_04",
+      "dante_ref": "XXVIII, 49–51",
+      "dante_sub": "Прозерпіна — пряме порівняння",
+      "source_ref": "Met. V, 391–395",
+      "source_sub": "квіти Прозерпіни",
+      "source_author": "Овідій",
+      "type": "ALLUSION",
+      "confidence": "HIGH",
+      "desc_dante": "Данте прямо порівнює Мательду з Прозерпіною: «Tu mi fai rimembrar dove e qual era / Proserpina nel tempo che perdette / la madre lei, ed ella primavera».",
+      "desc_source": "В Metamorphoses V Прозерпіна збирає квіти, коли Плутон викрадає її: мати (Церера) втрачає дочку, а дочка — вічну весну. Данте цитує точний момент — мить перед втратою.",
+      "chain": null
+    },
+    {
+      "id": "purg_xxviii_05",
+      "dante_ref": "XXVIII, 65–66",
+      "dante_sub": "Леандр і Геллеспонт",
+      "source_ref": "Her. XVIII–XIX",
+      "source_sub": "Леандр і Геро",
+      "source_author": "Овідій",
+      "type": "ALLUSION",
+      "confidence": "HIGH",
+      "desc_dante": "Данте порівнює струмок, що розділяє його від Мательди, з Геллеспонтом, який Леандр переплив заради Геро. Ненависть до водної перепони, що розділяє закоханих.",
+      "desc_source": "В Heroides XVIII-XIX Овідій описує листування Леандра і Геро: Леандр щоночі перепливає Геллеспонт до коханої, поки не гине в бурі. Данте запозичує мотив водної перепони.",
+      "chain": null
+    },
+    {
+      "id": "purg_xxviii_06",
+      "dante_ref": "XXVIII, 71–75",
+      "dante_sub": "Венера на Ідалії",
+      "source_ref": "Aen. I, 314–320",
+      "source_sub": "Венера як мисливиця",
+      "source_author": "Вергілій",
+      "type": "THEMATIC",
+      "confidence": "MEDIUM",
+      "desc_dante": "Мательда порівнюється з Венерою, що рухається легко і грайливо. Образ божественної жіночності у пейзажі досконалої краси.",
+      "desc_source": "В Aeneis I Венера з'являється Енею як молода мисливиця на лісовій галявині — образ божественної жінки серед природи. Данте переносить цю грацію на Мательду.",
+      "chain": null
+    },
+    {
+      "id": "purg_xxviii_07",
+      "dante_ref": "XXVIII, 139–144",
+      "dante_sub": "Золотий вік поетів",
+      "source_ref": "Met. I, 89–112",
+      "source_sub": "Золотий вік",
+      "source_author": "Овідій",
+      "type": "ALLUSION",
+      "confidence": "HIGH",
+      "desc_dante": "Мательда пояснює, що античні поети, оспівуючи Золотий вік, можливо, передбачили Земний Рай. «Quelli ch'anticamente poetaro / l'età de l'oro e suo stato felice».",
+      "desc_source": "У першій книзі Metamorphoses Овідій описує Золотий вік: вічна весна, земля родить без обробки, ріки течуть молоком і нектаром. Мательда ототожнює цю мрію з Земним Раєм.",
+      "chain": null
+    },
+    {
+      "id": "purg_xxviii_08",
+      "dante_ref": "XXVIII, 130–133",
+      "dante_sub": "Лета і Евное — два потоки",
+      "source_ref": "Aen. VI, 713–715",
+      "source_sub": "Лета — ріка забуття",
+      "source_author": "Вергілій",
+      "type": "ALLUSION",
+      "confidence": "HIGH",
+      "desc_dante": "Мательда називає два потоки Земного Раю: Лета (забуття гріхів) і Евное (пам'ять добрих справ). Лета — пряме запозичення з Вергілія.",
+      "desc_source": "В Aeneis VI Анхіз пояснює, що душі п'ють із Лети, щоб забути минуле життя перед новим втіленням. Данте переосмислює Лету як ріку забуття гріхів.",
+      "chain": null
+    }
+  ]
+}

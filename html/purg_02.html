@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="uk" class="theme-purgatorio">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Purg. II — Інтертекстуальне дерево</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<link rel="stylesheet" href="../dante-theme.css">
+</head>
+<body>
+<div class="side-panel-overlay" id="overlay" onclick="togglePanel()"></div>
+<div class="side-panel" id="sidePanel"><div class="side-panel-header"><h2>Навігація</h2><button class="side-panel-close" onclick="togglePanel()">✕</button></div><div id="panelContent"></div></div>
+
+<header>
+  <button class="nav-btn" onclick="togglePanel()" title="Навігація">☰</button>
+  <div class="header-center">
+    <a class="nav-arrow" href="purg_01.html">← Purg. I</a>
+    <div class="title-block"><h1>Purgatorio II</h1><p>Інтертекстуальне дерево джерел</p></div>
+    <a class="nav-arrow" href="purg_03.html">Purg. III →</a>
+  </div>
+</header>
+
+<div class="legend">
+  <div class="legend-item"><div class="legend-swatch" style="background:#d4a853"></div>Алюзія</div>
+  <div class="legend-item"><div class="legend-swatch thick" style="background:#7ea88e"></div>Структура</div>
+  <div class="legend-item"><div class="legend-swatch dashed" style="border-color:#8a7eb8"></div>Тематика</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:#c45c5c"></div>Інверсія</div>
+  <div class="legend-item"><div class="legend-swatch dotted" style="border-color:#5c8ab8"></div>Ономастика</div>
+</div>
+<div id="chart-container"></div>
+<div class="tooltip" id="tooltip"></div>
+
+<script>
+const TYPE_UA = { ALLUSION:"Алюзія", STRUCTURE:"Структура", THEMATIC:"Тематика", INVERSION:"Інверсія", ONOMASTIC:"Ономастика" };
+
+const LINKS_DATA = [
+  { from:"d_01", to:"aen_iv_584_585", type:"ALLUSION",
+    dF:"Данте описує схід сонця через перифраз: сонце вже на горизонті, його меридіанне коло найвищою точкою стоїть над Єрусалимом. Класичний епічний хронограф.",
+    dT:"В Aeneis IV Вергілій описує зорю через образ Аврори, що залишає ложе Тітона — «Et iam prima novo spargebat lumine terras Tithoni croceum linquens Aurora cubile». Формула епічного світанку." },
+  { from:"d_02", to:"met_iii_150_151", type:"ALLUSION",
+    dF:"Данте описує Аврору, чиї ланіти спершу білі, потім червоніють — персоніфікація зорі як жінки, що рум\'яниться.",
+    dT:"Овідій у Metamorphoses неодноразово описує Аврору з пурпуровим обличчям. Персоніфікація зорі через тілесний колір — усталений овідіанський прийом." },
+  { from:"d_03", to:"aen_i_143_156", type:"THEMATIC",
+    dF:"Данте і Вергілій стоять на березі моря, як мандрівники, що серцем уже в дорозі, а тілом ще на місці. Над морем з\'являється світло.",
+    dT:"В Aeneis I після бурі Нептун заспокоює море і Еней бачить берег. Мотив очікування на березі моря перед новим етапом плавання — спільна наративна ситуація." },
+  { from:"d_04", to:"aen_vi_295_316", type:"INVERSION",
+    dF:"Ангел-кормчий на блискучому човні переправляє душі до Чистилища, керуючи лише крилами замість весел. Його вигляд нестерпно яскравий.",
+    dT:"В Aeneis VI Харон — похмурий старий перевізник, що переправляє мертвих через Стікс на похмурому човні. Данте інвертує кожну деталь: замість Харона — ангел, замість темряви — сяйво, замість Стіксу — відкрите море." },
+  { from:"d_05", to:"ps_113_1", type:"ALLUSION",
+    dF:"Душі на човні ангела співають псалом 113 «In exitu Israel de Aegypto» — гімн виходу Ізраїлю з Єгипту, що символізує звільнення душі від гріха.",
+    dT:"Псалом 113 (114) оспівує вихід Ізраїлю з Єгипту: «In exitu Israel de Aegypto, domus Iacob de populo barbaro». Центральний текст алегорії духовного визволення." },
+  { from:"d_06", to:"aen_vi_684_688", type:"STRUCTURE",
+    dF:"Данте тричі намагається обійняти тінь Казелли, і тричі руки проходять крізь неї — сцена зустрічі з безтілесною душею близької людини.",
+    dT:"В Aeneis VI Еней тричі намагається обійняти тінь батька Анхіза в Елісіумі — «ter conatus ibi collo dare bracchia circum, ter frustra comprensa manus effugit imago». Данте відтворює цю сцену майже дослівно." },
+  { from:"d_07", to:"aen_vi_700_702", type:"STRUCTURE",
+    dF:"Тричі Данте намагається обійняти Казеллу — сцена, що бере початок у Гомера й передається через Вергілія.",
+    dT:"В Одіссеї XI Одіссей тричі намагається обійняти тінь матері Антіклеї в Аїді, і тричі вона вислизає з його рук. Первинне джерело мотиву «безтілесних обіймів»." },
+  { from:"aen_vi_700_702", to:"od_xi_204_208", type:"STRUCTURE",
+    dF:"Вергілій транслює мотив Гомер.",
+    dT:"В Одіссеї XI Одіссей тричі намагається обійняти тінь матері Антіклеї в Аїді, і тричі вона вислизає з його рук. Первинне джерело мотиву «безтілесних обіймів»." },
+  { from:"d_08", to:"aen_vi_645_647", type:"THEMATIC",
+    dF:"Душі й самі пілігрими завмирають, зачаровані співом Казелли, ніби більше нічого не має значення. Музика як сила, що зупиняє рух.",
+    dT:"В Aeneis VI Орфей грає на лірі в Елісіумі серед блаженних душ. Мотив співця, чия музика зачаровує мертвих і зупиняє час — вергіліанський топос." },
+  { from:"d_09", to:"met_x_86_105", type:"THEMATIC",
+    dF:"Казеллин спів тримає всіх нерухомими, забувши про мету подорожі — музика як небезпечне зачарування, що відволікає від обов\'язку.",
+    dT:"В Met. X Орфей співає і навіть дерева рухаються до нього, створюючи тінь. Сила поетичного співу зупиняти природу і полонити слухачів — центральний овідіанський мотив." },
+  { from:"d_10", to:"aen_v_604_699", type:"THEMATIC",
+    dF:"Душі зупиняються, забувши про очищення, — момент духовної лінощів, що вимагає втручання авторитету (Катон).",
+    dT:"В Aeneis V троянські жінки, втомлені подорожжю, палять кораблі, щоб зупинити плавання. Мотив зупинки на шляху через спокусу відпочинку потребує зовнішнього поштовху для продовження." },
+  { from:"d_11", to:"phars_ix_379_406", type:"ALLUSION",
+    dF:"Катон з\'являється і суворо докоряє душам: «Що це за зволікання?» Він розганяє натовп, як голуб\'ячу зграю, і наказує поспішати до гори очищення.",
+    dT:"У Pharsalia IX Катон жене свою армію через лівійську пустелю, не даючи їм зупинитися, навіть коли вони знемагають від спраги. Суворий командир, що не дозволяє зупинку на шляху обов\'язку." },
+];
+
+const NODES_RAW = {
+  "d_01": { label:"II, 1–9", sub:"сонце на горизонті — астрономічний ", author:"Данте", col:0 },
+  "aen_iv_584_585": { label:"Aen. IV, 584–585", sub:"Aurora / Tithonus", author:"Вергілій", col:1 },
+  "d_02": { label:"II, 10–12", sub:"Аврора — білі й червоні ланіти", author:"Данте", col:0 },
+  "met_iii_150_151": { label:"Met. III, 150–151", sub:"Aurora purpurea", author:"Овідій", col:1 },
+  "d_03": { label:"II, 13–18", sub:"lume — світло над морем", author:"Данте", col:0 },
+  "aen_i_143_156": { label:"Aen. I, 143–156", sub:"Нептун заспокоює море", author:"Вергілій", col:1 },
+  "d_04": { label:"II, 19–45", sub:"ангел-кормчий із білими крилами", author:"Данте", col:0 },
+  "aen_vi_295_316": { label:"Aen. VI, 295–316", sub:"Харон перевозить душі", author:"Вергілій", col:1 },
+  "d_05": { label:"II, 46–48", sub:"In exitu Israel de Aegypto", author:"Данте", col:0 },
+  "ps_113_1": { label:"Ps. 113:1", sub:"In exitu Israel de Aegypto", author:"Біблія", col:1 },
+  "d_06": { label:"II, 76–78", sub:"Данте впізнає Казеллу", author:"Данте", col:0 },
+  "aen_vi_684_688": { label:"Aen. VI, 684–688", sub:"Еней обіймає Анхіза", author:"Вергілій", col:1 },
+  "d_07": { label:"II, 76–78", sub:"тричі обіймає тінь", author:"Данте", col:0 },
+  "od_xi_204_208": { label:"Od. XI, 204–208", sub:"Одіссей обіймає матір", author:"Гомер", col:2 },
+  "aen_vi_700_702": { label:"Aen. VI, 700–702", sub:"ter frustra comprensa", author:"Вергілій", col:1 },
+  "d_08": { label:"II, 112–123", sub:"душі зупиняються слухати спів", author:"Данте", col:0 },
+  "aen_vi_645_647": { label:"Aen. VI, 645–647", sub:"Орфей в Елісіумі", author:"Вергілій", col:1 },
+  "d_09": { label:"II, 112–123", sub:"зачарування співом", author:"Данте", col:0 },
+  "met_x_86_105": { label:"Met. X, 86–105", sub:"Орфей і дерева", author:"Овідій", col:1 },
+  "d_10": { label:"II, 120–123", sub:"зупинка забуття — акедія", author:"Данте", col:0 },
+  "aen_v_604_699": { label:"Aen. V, 604–699", sub:"жінки палять кораблі", author:"Вергілій", col:1 },
+  "d_11": { label:"II, 124–133", sub:"Катон розганяє душі", author:"Данте", col:0 },
+  "phars_ix_379_406": { label:"Phars. IX, 379–406", sub:"Катон гонить солдатів далі", author:"Лукан", col:1 },
+};
+
+const AUTHOR_STYLES = {
+  "Біблія": {f:"#280e0e",s:"#ce5a5a"},
+  "Вергілій": {f:"#1a0e28",s:"#a06ece"},
+  "Гомер": {f:"#28140e",s:"#ce7a5a"},
+  "Данте": {f:"#281e14",s:"#d4a853"},
+  "Лукан": {f:"#0e2028",s:"#5abecc"},
+  "Овідій": {f:"#280e1a",s:"#ce5a8a"},
+};
+
+const nodeW=164,nodeH=46,gapY=8,gapX=140,padLeft=70,padTop=20;
+const nodes=Object.entries(NODES_RAW).map(([id,n])=>({id,...n,x:0,y:0}));const nodeMap={};nodes.forEach(n=>nodeMap[n.id]=n);
+const byCols=[nodes.filter(n=>n.col===0),nodes.filter(n=>n.col===1),nodes.filter(n=>n.col===2)];
+byCols[0].forEach((n,i)=>{n.y=i*(nodeH+gapY)+nodeH/2});
+byCols[1].forEach(n=>{const p=LINKS_DATA.filter(l=>l.to===n.id&&nodeMap[l.from]?.col===0).map(l=>nodeMap[l.from]);if(p.length)n.y=p.reduce((s,x)=>s+x.y,0)/p.length;else n.y=byCols[0][Math.floor(byCols[0].length/2)].y});
+rOY(byCols[1]);if(byCols[2]&&byCols[2].length){byCols[2].forEach(n=>{const p=LINKS_DATA.filter(l=>l.to===n.id&&nodeMap[l.from]).map(l=>nodeMap[l.from]);if(p.length)n.y=p.reduce((s,x)=>s+x.y,0)/p.length;else if(byCols[1].length)n.y=byCols[1][Math.floor(byCols[1].length/2)].y;else n.y=200});rOY(byCols[2])}
+function rOY(a){a.sort((a,b)=>a.y-b.y);const m=nodeH+gapY;for(let p=0;p<40;p++){let o=true;for(let i=1;i<a.length;i++){const d=a[i].y-a[i-1].y;if(d<m){const s=(m-d)/2+.5;a[i-1].y-=s;a[i].y+=s;o=false}}if(o)break}}
+const maxC=Math.max(...nodes.map(n=>n.col)),colX=[];for(let c=0;c<=maxC;c++)colX.push(padLeft+c*(nodeW+gapX)+nodeW/2);nodes.forEach(n=>{n.x=colX[n.col]});
+const minY=Math.min(...nodes.map(n=>n.y))-nodeH/2;nodes.forEach(n=>n.y-=minY-padTop);
+const svgW=padLeft+(maxC+1)*nodeW+maxC*gapX+padLeft,svgH=Math.max(...nodes.map(n=>n.y+nodeH/2))+20;
+const TC={ALLUSION:"#d4a853",STRUCTURE:"#7ea88e",THEMATIC:"#8a7eb8",INVERSION:"#c45c5c",ONOMASTIC:"#5c8ab8"};const AS=AUTHOR_STYLES;const st=getComputedStyle(document.documentElement);
+const svg=d3.select("#chart-container").append("svg").attr("width",svgW).attr("height",svgH);const defs=svg.append("defs");Object.entries(TC).forEach(([t,c])=>{defs.append("marker").attr("id","a-"+t).attr("viewBox","0 0 10 6").attr("refX",10).attr("refY",3).attr("markerWidth",7).attr("markerHeight",5).attr("orient","auto").append("path").attr("d","M0,0.5 L9,3 L0,5.5Z").attr("fill",c)});const nCols=colX.length;const cw=svgW/nCols;colX.forEach((cx,i)=>{svg.append("rect").attr("x",i*cw).attr("y",0).attr("width",cw).attr("height",svgH).attr("fill",i%2===0?st.getPropertyValue("--col-dark").trim():st.getPropertyValue("--col-light").trim())});
+function hC(s,t){const sx=s.x+nodeW/2+2,tx=t.x-nodeW/2-2,dx=tx-sx;return"M"+sx+","+s.y+" C"+(sx+dx*.45)+","+s.y+" "+(tx-dx*.45)+","+t.y+" "+tx+","+t.y}
+const linkG=svg.append("g");const linkEls=linkG.selectAll("path").data(LINKS_DATA).enter().append("path").attr("d",d=>hC(nodeMap[d.from],nodeMap[d.to])).attr("fill","none").attr("stroke",d=>TC[d.type]).attr("stroke-width",d=>d.type==="STRUCTURE"?3:1.6).attr("stroke-dasharray",d=>d.type==="THEMATIC"?"6,4":d.type==="ONOMASTIC"?"2,4":"none").attr("opacity",.5).attr("marker-end",d=>"url(#a-"+d.type+")");
+const tooltip=d3.select("#tooltip");const nodeG=svg.append("g");
+const ne=nodeG.selectAll("g").data(nodes).enter().append("g").attr("transform",d=>"translate("+(d.x-nodeW/2)+","+(d.y-nodeH/2)+")").style("cursor","pointer");
+ne.append("rect").attr("width",nodeW).attr("height",nodeH).attr("rx",5).attr("fill",d=>AS[d.author]?.f||"#1a1a1a").attr("stroke",d=>AS[d.author]?.s||"#333").attr("stroke-width",d=>d.author==="Данте"?1.8:1);
+ne.append("text").attr("x",nodeW/2).attr("y",17).attr("text-anchor","middle").attr("fill",st.getPropertyValue('--text').trim()).attr("font-size","10px").attr("font-family","'JetBrains Mono',monospace").attr("font-weight",500).text(d=>d.label);
+ne.append("text").attr("x",nodeW/2).attr("y",32).attr("text-anchor","middle").attr("fill",st.getPropertyValue('--text-muted').trim()).attr("font-size","10.5px").attr("font-family","'Cormorant Garamond',serif").attr("font-style","italic").text(d=>d.sub);
+ne.filter(d=>d.col>0).append("text").attr("x",nodeW/2).attr("y",nodeH-2).attr("text-anchor","middle").attr("fill",d=>AS[d.author]?.s||"#555").attr("font-size","7px").attr("font-family","'JetBrains Mono',monospace").attr("opacity",.7).text(d=>d.author);
+ne.on("mouseover",function(ev,d){const ids=new Set([d.id]);LINKS_DATA.forEach(l=>{if(l.from===d.id||l.to===d.id){ids.add(l.from);ids.add(l.to)}});linkEls.attr("opacity",l=>(l.from===d.id||l.to===d.id)?1:.04).attr("stroke-width",l=>{const on=l.from===d.id||l.to===d.id;return on?(l.type==="STRUCTURE"?4.5:3):(l.type==="STRUCTURE"?3:1.6)});nodeG.selectAll("g").select("rect").attr("opacity",function(){return ids.has(d3.select(this.parentNode).datum().id)?1:.1});
+var parts=LINKS_DATA.filter(l=>l.from===d.id||l.to===d.id).map(l=>{var c=TC[l.type],isF=l.from===d.id,other=isF?nodeMap[l.to]:nodeMap[l.from],desc=isF?l.dF:l.dT,arr=isF?"\u2192":"\u2190";return'<span class="tt-type" style="background:'+c+'22;color:'+c+';border:1px solid '+c+'44">'+TYPE_UA[l.type]+'</span> '+arr+' <strong>'+other.label+'</strong><br><span class="tt-desc">'+desc+'</span>'}).join("<br><br>");
+if(parts)tooltip.html('<strong>'+d.label+'</strong> <em style="color:var(--text-muted)">\u00b7 '+d.author+'</em><br><br>'+parts).style("opacity",1).style("left",Math.min(ev.clientX+14,innerWidth-440)+"px").style("top",Math.min(ev.clientY+14,innerHeight-300)+"px")
+}).on("mousemove",function(ev){tooltip.style("left",Math.min(ev.clientX+14,innerWidth-440)+"px").style("top",Math.min(ev.clientY+14,innerHeight-300)+"px")}).on("mouseout",function(){linkEls.attr("opacity",.5).attr("stroke-width",d=>d.type==="STRUCTURE"?3:1.6);nodeG.selectAll("g").select("rect").attr("opacity",1);tooltip.style("opacity",0)});
+function togglePanel(){document.getElementById('sidePanel').classList.toggle('open');document.getElementById('overlay').classList.toggle('open')}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){document.getElementById('sidePanel').classList.remove('open');document.getElementById('overlay').classList.remove('open')}});
+(function buildNav(){var roman=function(n){var v=[1000,900,500,400,100,90,50,40,10,9,5,4,1],s=['M','CM','D','CD','C','XC','L','XL','X','IX','V','IV','I'],r='';for(var i=0;i<v.length;i++)while(n>=v[i]){r+=s[i];n-=v[i]}return r};var pad2=function(n){return String(n).padStart(2,'0')};var ct=[{t:'Inferno',a:'Inf.',x:'inf',c:34},{t:'Purgatorio',a:'Purg.',x:'purg',c:33},{t:'Paradiso',a:'Par.',x:'par',c:33}];var cur='purg_02';var container=document.getElementById('panelContent');ct.forEach(function(c){var sec=document.createElement('div');sec.className='side-panel-section';var h3=document.createElement('h3');h3.textContent=c.t;sec.appendChild(h3);for(var i=1;i<=c.c;i++){var f=c.x+'_'+pad2(i);var a=document.createElement('a');a.href=f+'.html';a.textContent=c.a+' '+roman(i);if(f===cur)a.className='current';sec.appendChild(a)}container.appendChild(sec)})})(  );
+</script>
+</body>
+</html>

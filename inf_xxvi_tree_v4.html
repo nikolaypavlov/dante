@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inf. XXVI — Інтертекстуальне дерево</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<link rel="stylesheet" href="dante-theme.css">
+</head>
+<body>
+
+<div class="side-panel-overlay" id="overlay" onclick="togglePanel()"></div>
+<div class="side-panel" id="sidePanel">
+  <div class="side-panel-header">
+    <h2>Навігація</h2>
+    <button class="side-panel-close" onclick="togglePanel()">✕</button>
+  </div>
+  <div id="panelContent"></div>
+</div>
+
+<header>
+  <button class="nav-btn" onclick="togglePanel()" title="Навігація">☰</button>
+  <div class="header-center">
+    <a class="nav-arrow" href="inf_25.html">← Inf. XXV</a>
+    <div class="title-block">
+      <h1>Inferno XXVI</h1>
+      <p>Інтертекстуальне дерево джерел — пісня Одіссея</p>
+    </div>
+    <a class="nav-arrow" href="inf_27.html">Inf. XXVII →</a>
+  </div>
+</header>
+
+<div class="legend">
+  <div class="legend-item"><div class="legend-swatch" style="background:#d4a853"></div>Алюзія</div>
+  <div class="legend-item"><div class="legend-swatch thick" style="background:#7ea88e"></div>Структура</div>
+  <div class="legend-item"><div class="legend-swatch dashed" style="border-color:#8a7eb8"></div>Тематика</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:#c45c5c"></div>Інверсія</div>
+  <div class="legend-item"><div class="legend-swatch dotted" style="border-color:#5c8ab8"></div>Ономастика</div>
+</div>
+
+<div id="chart-container"></div>
+<div class="tooltip" id="tooltip"></div>
+
+<script>
+const TYPE_UA = {
+  ALLUSION: "Алюзія", STRUCTURE: "Структура", THEMATIC: "Тематика",
+  INVERSION: "Інверсія", ONOMASTIC: "Ономастика"
+};
+
+const LINKS_DATA = [
+  // Dante → Intermediaries
+  { from: "inf_25", to: "reg_2", type: "ALLUSION",
+    dF: "Данте порівнює вогні у рові з колісницею, на якій Ілія вознісся на небо. Тут же згадано ведмедів, що покарали дітей за глузування над Елісеєм.",
+    dT: "Четверта книга Царств описує вознесіння Ілії на вогняній колісниці та помсту ведмедів за Елісея. Данте запозичує цей образ для порівняння з вогнями восьмого кола." },
+  { from: "inf_34", to: "aen_vi", type: "THEMATIC",
+    dF: "Панорама вогнів у восьмому колі нагадує вид Тартару: пілігрим оглядає поле покараних згори.",
+    dT: "У шостій книзі Aeneis Еней бачить палаючі стіни Тартару з висоти. Вергілій створює панорамний вид покарань, що стає візуальною моделлю для Данте." },
+  { from: "inf_52", to: "aen_ii_5", type: "ALLUSION",
+    dF: "Данте поміщає Одіссея і Діомеда в один подвійний вогонь як нерозлучних спільників — це парування запозичене у Вергілія.",
+    dT: "На початку другої книги Aeneis Еней називає Одіссея і Діомеда разом як головних руйнівників Трої. Це парування стає підставою для Дантового подвійного вогню." },
+  { from: "inf_55", to: "aen_ii_13", type: "ALLUSION",
+    dF: "Серед гріхів Одіссея Данте називає хитрощі з дерев'яним конем — за Вергілієвою версією.",
+    dT: "Друга книга Aeneis містить розповідь Енея про падіння Трої: підступ з дерев'яним конем описано через зраду Сінона. Це головне латинське джерело мотиву." },
+  { from: "inf_56", to: "aen_ii_162", type: "ALLUSION",
+    dF: "Данте згадує викрадення Палладію — священної статуї Афіни, що захищала Трою.",
+    dT: "У розповіді Сінона в другій книзі Aeneis описано, як Одіссей і Діомед проникли до Трої й викрали Палладій — статую, від якої залежала доля міста." },
+  { from: "inf_58", to: "ach_i", type: "ALLUSION",
+    dF: "Данте пише, що Деїдамія й досі оплакує Ахілла — через те, що Одіссей хитрістю забрав його на війну.",
+    dT: "У першій книзі Achilleis Стацій описує, як юного Ахілла ховали серед дівчат на Скіросі, і як Одіссей хитрістю його викрив. Деїдамія, вагітна від Ахілла, залишається покинутою." },
+  { from: "inf_onom", to: "il_passim", type: "ONOMASTIC",
+    dF: "Одіссей, Діомед, Ахілл, Деїдамія — ці імена та ролі Данте знає через латинських посередників, а не з Гомера безпосередньо.",
+    dT: "Іліада — першоджерело троянського циклу: саме тут Одіссей, Діомед, Ахілл вперше діють як літературні персонажі. Їхні імена транслюються через античну традицію до Данте." },
+  { from: "inf_73", to: "aen_ii_5", type: "STRUCTURE",
+    dF: "Данте-автор делегує розмову Вергілію-персонажу, бо саме він «alti versi» написав про Одіссея — метанаративний хід.",
+    dT: "Aeneis надає Вергілію-персонажу авторитет звертатися до грецьких героїв. Данте перетворює літературну репутацію автора на сюжетний механізм." },
+  { from: "inf_85", to: "met_xiv", type: "ALLUSION",
+    dF: "Одіссей починає розповідь від розлуки з Цирцеєю біля Ґаети — деталі цього епізоду Данте бере з Овідія.",
+    dT: "У чотирнадцятій книзі Metamorphoses Овідій детально описує перебування Одіссея у Цирцеї та перетворення його супутників на тварин — латинське джерело, багатше на деталі за Вергілія." },
+  { from: "inf_91", to: "aen_vii", type: "ALLUSION",
+    dF: "Данте прямо вказує, що Ґаету назвав Еней: «prima che sì Enëa la nomasse».",
+    dT: "Перші рядки сьомої книги Aeneis розповідають, як Еней поховав годувальницю Каєту і назвав на її честь мис — теперішню Ґаету. Данте цитує цей момент майже дослівно." },
+  { from: "inf_90", to: "od_xi", type: "INVERSION",
+    dF: "Центральна інверсія пісні: Дантів Одіссей свідомо відмовляється від nostos і пливе у невідоме, стаючи шукачем знання замість батьківщини.",
+    dT: "В одинадцятій книзі Odyssea Тіресій пророкує Одіссеєві повернення додому — nostos є рушійною силою всієї поеми. Данте перевертає цей мотив: його Одіссей обирає протилежне." },
+  { from: "inf_106", to: "od_ix", type: "STRUCTURE",
+    dF: "Одіссей стисло перераховує побачені береги — Сардинію, Іспанію, Марокко — за моделлю гомерівського «каталогу островів».",
+    dT: "Книги IX–XII Odyssea містять розгорнутий каталог островів і земель, які відвідав Одіссей. Данте стискає цю модель до чотирьох рядків, зберігаючи наративну структуру." },
+  { from: "inf_112", to: "aen_i_198", type: "STRUCTURE",
+    dF: "«Orazion picciola» Одіссея побудована за моделлю промови Енея: лідер звертається до зневіреної команди. Але Еней ободрює, а Одіссей спокушає.",
+    dT: "У першій книзі Aeneis Еней ободрює супутників після бурі, нагадуючи про призначення. Ця модель «промови лідера» стає каркасом для промови Дантового Одіссея." },
+  { from: "inf_117", to: "medea", type: "THEMATIC",
+    dF: "Одіссей пливе «di retro al sol, del mondo sanza gente» — за межі відомого світу.",
+    dT: "Хор у Medea Сенеки пророкує, що прийде час, коли океан відкриє нові землі і Туле перестане бути краєм світу. Мотив плавання за межі ойкумени перегукується з подорожжю Одіссея." },
+  { from: "inf_125", to: "met_viii", type: "THEMATIC",
+    dF: "«De' remi facemmo ali al folle volo» — весла стають крилами шаленого польоту, що перегукується з Ікаром.",
+    dT: "У восьмій книзі Metamorphoses Овідій описує, як Дедал виготовляє крила і як Ікар, порушивши заборону батька, злітає занадто високо й гине. Мотив дерзкості об'єднує обох героїв." },
+  { from: "inf_133", to: "aen_i_81", type: "INVERSION",
+    dF: "Корабель Одіссея гине від вихру біля гори Чистилища. Результат інвертовано: Еней виживає, Одіссей — ні.",
+    dT: "У першій книзі Aeneis Юнона піднімає бурю, що розбиває флот Енея. Але Еней рятується і виконує призначення — на відміну від Дантового Одіссея, який гине." },
+  // Intermediaries → Ancient (chains)
+  { from: "aen_ii_5", to: "il_x", type: "ALLUSION",
+    dF: "Вергілій запозичує парування Одіссея з Діомедом із Долонії — їхньої спільної нічної вилазки.",
+    dT: "Десята книга Іліади (Долонія) — єдиний великий епізод, де Одіссей і Діомед діють разом: нічна вилазка в троянський табір. Це парування переходить до Вергілія і далі до Данте." },
+  { from: "aen_ii_13", to: "od_viii", type: "ALLUSION",
+    dF: "Вергілієва розповідь про троянського коня переказує мотив, відомий із пісні Демодока.",
+    dT: "У восьмій книзі Odyssea аед Демодок оспівує хитрощі з дерев'яним конем на бенкеті у Алкіноя — найдавніша літературна версія цього мотиву." },
+  { from: "ach_i", to: "il_xix", type: "ALLUSION",
+    dF: "Стацій розгорнув епізод перебування Ахілла на Скіросі в окрему поему, спираючись на натяки з Іліади.",
+    dT: "У дев'ятнадцятій книзі Іліади Ахілл згадує сина, залишеного на Скіросі з Деїдамією — короткий натяк, з якого Стацій побудує цілу поему." },
+  { from: "met_xiv", to: "od_x", type: "ALLUSION",
+    dF: "Овідій деталізує метаморфози супутників Одіссея у Цирцеї, додаючи подробиці перетворення.",
+    dT: "Десята книга Odyssea описує прибуття Одіссея на острів Цирцеї та чаклунство над його людьми. Овідій бере цей сюжет і переосмислює через тему метаморфози." },
+];
+
+const NODES_RAW = {
+  // Column 0 = Dante (LEFT)
+  inf_25:     { label: "XXVI, 25–30",     sub: "вогняні колісниці", author: "Данте",    col: 0 },
+  inf_34:     { label: "XXVI, 34–42",     sub: "панорама вогнів",   author: "Данте",    col: 0 },
+  inf_52:     { label: "XXVI, 52–54",     sub: "подвійний вогонь",  author: "Данте",    col: 0 },
+  inf_55:     { label: "XXVI, 55–57",     sub: "троянський кінь",   author: "Данте",    col: 0 },
+  inf_56:     { label: "XXVI, 56",        sub: "Палладій",          author: "Данте",    col: 0 },
+  inf_58:     { label: "XXVI, 58–63",     sub: "Деїдамія",          author: "Данте",    col: 0 },
+  inf_onom:   { label: "XXVI, 56–63",     sub: "імена героїв",      author: "Данте",    col: 0 },
+  inf_73:     { label: "XXVI, 73–75",     sub: "Вергілій говорить", author: "Данте",    col: 0 },
+  inf_85:     { label: "XXVI, 85–90",     sub: "Цирцея",            author: "Данте",    col: 0 },
+  inf_91:     { label: "XXVI, 91–93",     sub: "Ґаета",             author: "Данте",    col: 0 },
+  inf_90:     { label: "XXVI, 90–142",    sub: "відмова від nostos",author: "Данте",    col: 0 },
+  inf_106:    { label: "XXVI, 106–109",   sub: "каталог берегів",   author: "Данте",    col: 0 },
+  inf_112:    { label: "XXVI, 112–120",   sub: "промова",           author: "Данте",    col: 0 },
+  inf_117:    { label: "XXVI, 117",       sub: "за межі світу",     author: "Данте",    col: 0 },
+  inf_125:    { label: "XXVI, 125–126",   sub: "folle volo",        author: "Данте",    col: 0 },
+  inf_133:    { label: "XXVI, 133–142",   sub: "загибель",          author: "Данте",    col: 0 },
+  // Column 1 = Intermediaries (MIDDLE)
+  aen_i_81:   { label: "Aen. I, 81–123",  sub: "буря",              author: "Вергілій", col: 1 },
+  aen_i_198:  { label: "Aen. I, 198–207", sub: "промова Енея",      author: "Вергілій", col: 1 },
+  aen_ii_5:   { label: "Aen. II, 5–13",   sub: "Одіссей + Діомед",  author: "Вергілій", col: 1 },
+  aen_ii_13:  { label: "Aen. II, 13–56",  sub: "троянський кінь",   author: "Вергілій", col: 1 },
+  aen_ii_162: { label: "Aen. II, 162–175",sub: "Палладій",          author: "Вергілій", col: 1 },
+  aen_vi:     { label: "Aen. VI, 550–558",sub: "Тартар",            author: "Вергілій", col: 1 },
+  aen_vii:    { label: "Aen. VII, 1–4",   sub: "Каєта",             author: "Вергілій", col: 1 },
+  met_viii:   { label: "Met. VIII, 183–235",sub:"Дедал і Ікар",      author: "Овідій",   col: 1 },
+  met_xiv:    { label: "Met. XIV, 223–319",sub:"Цирцея",            author: "Овідій",   col: 1 },
+  ach_i:      { label: "Achilleis I",      sub: "Ахілл на Скіросі",  author: "Стацій",   col: 1 },
+  medea:      { label: "Medea, 375–379",   sub: "нові землі",        author: "Сенека",   col: 1 },
+  reg_2:      { label: "4 Reg. 2:11–24",  sub: "Ілія та Елісей",    author: "Біблія",   col: 1 },
+  // Column 2 = Ancient sources (RIGHT)
+  il_x:       { label: "Il. X, 220–579",  sub: "Долонія",           author: "Гомер",    col: 2 },
+  od_viii:    { label: "Od. VIII, 487–520",sub: "пісня Демодока",    author: "Гомер",    col: 2 },
+  od_ix:      { label: "Od. IX–XII",       sub: "подорожі",          author: "Гомер",    col: 2 },
+  od_x:       { label: "Od. X, 133–574",  sub: "Цирцея",            author: "Гомер",    col: 2 },
+  od_xi:      { label: "Od. XI, 100–137", sub: "nostos / Тіресій",  author: "Гомер",    col: 2 },
+  il_xix:     { label: "Il. XIX, 326–337",sub: "Скірос",            author: "Гомер",    col: 2 },
+  il_passim:  { label: "Il. passim",       sub: "троянські герої",   author: "Гомер",    col: 2 },
+};
+
+// ─── Layout (horizontal) ────────────────────────────────
+const nodeW = 164, nodeH = 46, gapY = 8, gapX = 140;
+const colLabelW = 0; // we put labels differently
+const padLeft = 70, padTop = 20;
+
+const nodes = Object.entries(NODES_RAW).map(([id, n]) => ({ id, ...n, x: 0, y: 0 }));
+const nodeMap = {};
+nodes.forEach(n => nodeMap[n.id] = n);
+
+const byCols = [
+  nodes.filter(n => n.col === 0), // Dante
+  nodes.filter(n => n.col === 1), // Intermediaries
+  nodes.filter(n => n.col === 2), // Ancient
+];
+
+// Step 1: Dante column — fixed top-to-bottom
+byCols[0].forEach((n, i) => { n.y = i * (nodeH + gapY) + nodeH / 2; });
+
+// Step 2: Intermediaries — avg Y of their Dante parents
+byCols[1].forEach(n => {
+  const parents = LINKS_DATA.filter(l => l.to === n.id && nodeMap[l.from]?.col === 0)
+    .map(l => nodeMap[l.from]);
+  if (parents.length) n.y = parents.reduce((s, p) => s + p.y, 0) / parents.length;
+  else n.y = byCols[0][Math.floor(byCols[0].length / 2)].y;
+});
+resolveOverlapsY(byCols[1]);
+
+// Step 3: Ancient — avg Y of their intermediary parents
+byCols[2].forEach(n => {
+  const parents = LINKS_DATA.filter(l => l.to === n.id && nodeMap[l.from])
+    .map(l => nodeMap[l.from]);
+  if (parents.length) n.y = parents.reduce((s, p) => s + p.y, 0) / parents.length;
+  else n.y = byCols[1][Math.floor(byCols[1].length / 2)].y;
+});
+resolveOverlapsY(byCols[2]);
+
+function resolveOverlapsY(arr) {
+  arr.sort((a, b) => a.y - b.y);
+  const min = nodeH + gapY;
+  for (let p = 0; p < 40; p++) {
+    let ok = true;
+    for (let i = 1; i < arr.length; i++) {
+      const d = arr[i].y - arr[i-1].y;
+      if (d < min) {
+        const s = (min - d) / 2 + 0.5;
+        arr[i-1].y -= s; arr[i].y += s;
+        ok = false;
+      }
+    }
+    if (ok) break;
+  }
+}
+
+// X positions per column
+const colX = [
+  padLeft + nodeW / 2,
+  padLeft + nodeW + gapX + nodeW / 2,
+  padLeft + 2 * (nodeW + gapX) + nodeW / 2,
+];
+nodes.forEach(n => { n.x = colX[n.col]; });
+
+// Normalize Y so min is at padTop
+const minY = Math.min(...nodes.map(n => n.y)) - nodeH / 2;
+nodes.forEach(n => n.y -= minY - padTop);
+
+const svgW = padLeft + 3 * nodeW + 2 * gapX + padLeft;
+const svgH = Math.max(...nodes.map(n => n.y + nodeH / 2)) + 20;
+
+// ─── Colors ─────────────────────────────────────────────
+const TC = {
+  ALLUSION: "#d4a853", STRUCTURE: "#7ea88e", THEMATIC: "#8a7eb8",
+  INVERSION: "#c45c5c", ONOMASTIC: "#5c8ab8"
+};
+const AS = {
+  "Данте":    { f: "#281a08", s: "#d4a853" },
+  "Вергілій": { f: "#1a0e28", s: "#a06ece" },
+  "Овідій":   { f: "#280e1a", s: "#ce5a8a" },
+  "Стацій":   { f: "#0e1428", s: "#5a78ce" },
+  "Сенека":   { f: "#0e2028", s: "#5abecc" },
+  "Гомер":    { f: "#28140e", s: "#ce7a5a" },
+  "Біблія":   { f: "#280e0e", s: "#ce5a5a" }
+};
+
+// ─── SVG ────────────────────────────────────────────────
+const svg = d3.select("#chart-container").append("svg")
+  .attr("width", svgW).attr("height", svgH);
+
+const defs = svg.append("defs");
+Object.entries(TC).forEach(([t, c]) => {
+  defs.append("marker").attr("id", `a-${t}`)
+    .attr("viewBox", "0 0 10 6").attr("refX", 10).attr("refY", 3)
+    .attr("markerWidth", 7).attr("markerHeight", 5).attr("orient", "auto")
+    .append("path").attr("d", "M0,0.5 L9,3 L0,5.5Z").attr("fill", c);
+});
+
+// Alternating column backgrounds — equal width strips
+const style = getComputedStyle(document.documentElement);
+const nCols = colX.length;
+const cw = svgW / nCols;
+colX.forEach((cx, i) => {
+  svg.append("rect")
+    .attr("x", i * cw).attr("y", 0)
+    .attr("width", cw).attr("height", svgH)
+    .attr("fill", i % 2 === 0
+      ? style.getPropertyValue('--col-dark').trim()
+      : style.getPropertyValue('--col-light').trim());
+});
+
+// ─── Links (horizontal curves) ──────────────────────────
+function hCurve(s, t) {
+  const sx = s.x + nodeW / 2 + 2;
+  const tx = t.x - nodeW / 2 - 2;
+  const dx = tx - sx;
+  return `M${sx},${s.y} C${sx + dx * 0.45},${s.y} ${tx - dx * 0.45},${t.y} ${tx},${t.y}`;
+}
+
+const linkG = svg.append("g");
+const linkEls = linkG.selectAll("path").data(LINKS_DATA).enter().append("path")
+  .attr("d", d => hCurve(nodeMap[d.from], nodeMap[d.to]))
+  .attr("fill", "none")
+  .attr("stroke", d => TC[d.type])
+  .attr("stroke-width", d => d.type === "STRUCTURE" ? 3 : 1.6)
+  .attr("stroke-dasharray", d => d.type === "THEMATIC" ? "6,4" : d.type === "ONOMASTIC" ? "2,4" : "none")
+  .attr("opacity", 0.5)
+  .attr("marker-end", d => `url(#a-${d.type})`);
+
+// ─── Nodes ──────────────────────────────────────────────
+const tooltip = d3.select("#tooltip");
+const nodeG = svg.append("g");
+
+const ne = nodeG.selectAll("g").data(nodes).enter().append("g")
+  .attr("transform", d => `translate(${d.x - nodeW/2},${d.y - nodeH/2})`)
+  .style("cursor", "pointer");
+
+ne.append("rect").attr("width", nodeW).attr("height", nodeH).attr("rx", 5)
+  .attr("fill", d => AS[d.author]?.f || "#1a1a1a")
+  .attr("stroke", d => AS[d.author]?.s || "#333")
+  .attr("stroke-width", d => d.author === "Данте" ? 1.8 : 1);
+
+ne.append("text").attr("x", nodeW/2).attr("y", 17).attr("text-anchor", "middle")
+  .attr("fill", style.getPropertyValue('--text').trim()).attr("font-size", "10px")
+  .attr("font-family", "'JetBrains Mono', monospace").attr("font-weight", 500)
+  .text(d => d.label);
+
+ne.append("text").attr("x", nodeW/2).attr("y", 32).attr("text-anchor", "middle")
+  .attr("fill", style.getPropertyValue('--text-muted').trim()).attr("font-size", "10.5px")
+  .attr("font-family", "'Cormorant Garamond', serif").attr("font-style", "italic")
+  .text(d => d.sub);
+
+// Author tag on intermediary & ancient nodes
+ne.filter(d => d.col > 0).append("text")
+  .attr("x", nodeW / 2).attr("y", nodeH - 2).attr("text-anchor", "middle")
+  .attr("fill", d => AS[d.author]?.s || "#555")
+  .attr("font-size", "7px").attr("font-family", "'JetBrains Mono', monospace")
+  .attr("opacity", 0.7).text(d => d.author);
+
+// ─── Hover ──────────────────────────────────────────────
+ne.on("mouseover", function(ev, d) {
+  const ids = new Set([d.id]);
+  LINKS_DATA.forEach(l => {
+    if (l.from === d.id || l.to === d.id) { ids.add(l.from); ids.add(l.to); }
+  });
+
+  linkEls.attr("opacity", l => (l.from === d.id || l.to === d.id) ? 1 : 0.04)
+    .attr("stroke-width", l => {
+      const on = l.from === d.id || l.to === d.id;
+      return on ? (l.type === "STRUCTURE" ? 4.5 : 3) : (l.type === "STRUCTURE" ? 3 : 1.6);
+    });
+
+  nodeG.selectAll("g").select("rect")
+    .attr("opacity", function() { return ids.has(d3.select(this.parentNode).datum().id) ? 1 : 0.1; });
+
+  const html = LINKS_DATA
+    .filter(l => l.from === d.id || l.to === d.id)
+    .map(l => {
+      const c = TC[l.type];
+      const isFrom = l.from === d.id;
+      const other = isFrom ? nodeMap[l.to] : nodeMap[l.from];
+      const desc = isFrom ? l.dF : l.dT;
+      const arrow = isFrom ? "→" : "←";
+      return `<span class="tt-type" style="background:${c}22;color:${c};border:1px solid ${c}44">${TYPE_UA[l.type]}</span> ${arrow} <strong>${other.label}</strong><br><span class="tt-desc">${desc}</span>`;
+    }).join("<br><br>");
+
+  if (html) tooltip
+    .html(`<strong>${d.label}</strong> <em style="color:#8a7e6e">· ${d.author}</em><br><br>${html}`)
+    .style("opacity", 1)
+    .style("left", Math.min(ev.clientX + 14, innerWidth - 440) + "px")
+    .style("top", Math.min(ev.clientY + 14, innerHeight - 300) + "px");
+})
+.on("mousemove", function(ev) {
+  tooltip.style("left", Math.min(ev.clientX+14,innerWidth-440)+"px")
+    .style("top", Math.min(ev.clientY+14,innerHeight-300)+"px");
+})
+.on("mouseout", function() {
+  linkEls.attr("opacity", 0.5)
+    .attr("stroke-width", d => d.type === "STRUCTURE" ? 3 : 1.6);
+  nodeG.selectAll("g").select("rect").attr("opacity", 1);
+  tooltip.style("opacity", 0);
+});
+
+// ─── Side Panel Navigation ─────────────────────────────
+function togglePanel() {
+  document.getElementById('sidePanel').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('open');
+}
+
+// Close on Escape
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    document.getElementById('sidePanel').classList.remove('open');
+    document.getElementById('overlay').classList.remove('open');
+  }
+});
+
+// Generate canto list
+(function buildNav() {
+  const roman = (n) => {
+    const vals = [1000,900,500,400,100,90,50,40,10,9,5,4,1];
+    const syms = ['M','CM','D','CD','C','XC','L','XL','X','IX','V','IV','I'];
+    let r = '';
+    for (let i = 0; i < vals.length; i++) {
+      while (n >= vals[i]) { r += syms[i]; n -= vals[i]; }
+    }
+    return r;
+  };
+
+  const pad2 = n => String(n).padStart(2, '0');
+
+  const canticae = [
+    { title: 'Inferno',    abbr: 'Inf.', prefix: 'inf', count: 34 },
+    { title: 'Purgatorio', abbr: 'Purg.', prefix: 'purg', count: 33 },
+    { title: 'Paradiso',   abbr: 'Par.', prefix: 'par', count: 33 },
+  ];
+
+  const currentFile = 'inf_26'; // would be dynamic in production
+
+  const container = document.getElementById('panelContent');
+  let html = '';
+
+  canticae.forEach(c => {
+    html += `<div class="side-panel-section"><h3>${c.title}</h3>`;
+    for (let i = 1; i <= c.count; i++) {
+      const file = `${c.prefix}_${pad2(i)}`;
+      const isCurrent = file === currentFile;
+      const cls = isCurrent ? ' class="current"' : '';
+      html += `<a href="${file}.html"${cls}>${c.abbr} ${roman(i)}</a>`;
+    }
+    html += '</div>';
+  });
+
+  container.innerHTML = html;
+})();
+</script>
+</body>
+</html>

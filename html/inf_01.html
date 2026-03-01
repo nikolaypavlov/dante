@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inf. I — Інтертекстуальне дерево</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<link rel="stylesheet" href="../dante-theme.css">
+</head>
+<body>
+<div class="side-panel-overlay" id="overlay" onclick="togglePanel()"></div>
+<div class="side-panel" id="sidePanel"><div class="side-panel-header"><h2>Навігація</h2><button class="side-panel-close" onclick="togglePanel()">✕</button></div><div id="panelContent"></div></div>
+
+<header>
+  <button class="nav-btn" onclick="togglePanel()" title="Навігація">☰</button>
+  <div class="header-center">
+    <div class="title-block"><h1>Inferno I</h1><p>Інтертекстуальне дерево джерел</p></div>
+    <a class="nav-arrow" href="inf_02.html">Inf. II →</a>
+  </div>
+</header>
+
+<div class="legend">
+  <div class="legend-item"><div class="legend-swatch" style="background:#d4a853"></div>Алюзія</div>
+  <div class="legend-item"><div class="legend-swatch thick" style="background:#7ea88e"></div>Структура</div>
+  <div class="legend-item"><div class="legend-swatch dashed" style="border-color:#8a7eb8"></div>Тематика</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:#c45c5c"></div>Інверсія</div>
+  <div class="legend-item"><div class="legend-swatch dotted" style="border-color:#5c8ab8"></div>Ономастика</div>
+</div>
+<div id="chart-container"></div>
+<div class="tooltip" id="tooltip"></div>
+
+<script>
+const TYPE_UA = { ALLUSION:"Алюзія", STRUCTURE:"Структура", THEMATIC:"Тематика", INVERSION:"Інверсія", ONOMASTIC:"Ономастика" };
+
+const LINKS_DATA = [
+  { from:"d_01", to:"is_38", type:"ALLUSION",
+    dF:"Данте відкриває поему словами про середину життєвого шляху — йому 35, половина біблійних 70 років (Ps. 89:10). Образ входу в темний простір «на середині днів» перегукується з брамами пекла.",
+    dT:"Пророк Єзекія молиться: «in dimidio dierum meorum vadam ad portas inferi» — «на середині днів моїх піду до брам пекла» (Is. 38:10 Vulg.). Структурний збіг: середина життя як поріг потойбіччя." },
+  { from:"d_02", to:"aen_vi_268", type:"THEMATIC",
+    dF:"Данте починає поему в «темному лісі» — місці заблудження й духовної кризи, де втрачено «dritta via». Простір темряви як вхід до потойбічної подорожі.",
+    dT:"На початку сходження в Аїд Вергілій описує Енея і Сивіллу, що йдуть «у темряві, під самотньою ніччю, серед тіней» — «ibant obscuri sola sub nocte per umbram». Темрява як простір переходу між світами." },
+  { from:"d_03", to:"aen_vi_268", type:"THEMATIC",
+    dF:"Данте виходить до підніжжя пагорба, освітленого сонцем, але не може піднятися через звірів. Пагорб як видимий, але недосяжний орієнтир — поріг переходу.",
+    dT:"В Aeneis VI Сивілла вказує Енею, що шлях до Аїду потребує золотої гілки: ворота видні, але вхід потребує особливого дозволу. Мотив видимої, але недоступної мети передує відкриттю альтернативного шляху." },
+  { from:"d_04", to:"aen_i_1", type:"THEMATIC",
+    dF:"Данте порівнює свій вихід із «selva oscura» з порятунком після аварії на морі: той, хто ледь вибрався з води, озирається на небезпечний простір. Метафора pelago = небезпечний шлях.",
+    dT:"Aeneis відкривається мотивом довгих блукань Енея морем (multum ille et terris iactatus et alto). Морська метафора подорожі і небезпеки — один із наскрізних топосів вергіліанської поетики, який Данте перетворює на порівняння." },
+  { from:"d_05", to:"jer_5", type:"ALLUSION",
+    dF:"Перший звір, що перегороджує Данте шлях до пагорба — lonza, легка і швидка, вкрита цяткастою шкірою. Вона відповідає одній з трьох тварин, що карають грішників у Єремії.",
+    dT:"Єремія пророкує: «percussit eos leo de silva, lupus ad vesperam vastavit eos, pardus vigilans super civitates eorum» — лев з лісу, вовк вечірній і пильний леопард караватимуть грішників за відступництво." },
+  { from:"d_06", to:"jer_5", type:"ALLUSION",
+    dF:"Другий звір — лев, що йде з піднятою головою й скаженим голодом, так що повітря здається тремтячим. Він відповідає левові з лісу у пророцтві Єремії.",
+    dT:"У Єремії лев з лісу (leo de silva) — перший із трьох хижаків, що покарають непокірних. Образ лева як уособлення насильства та гордині усталений в біблійній традиції." },
+  { from:"d_07", to:"jer_5", type:"ALLUSION",
+    dF:"Третій і найстрашніший звір — вовчиця, сповнена всіх жадань («di tutte brame sembiava carca»), що зганяє Данте назад у темряву. Вона символізує жадібність.",
+    dT:"Вовк вечірній (lupus ad vesperam) у Єремії — третій хижак, що нищить грішників. Тріада лев–леопард–вовк стає алегоричним шаблоном, який Данте переосмислює як три категорії гріха." },
+  { from:"d_07", to:"aen_viii", type:"INVERSION",
+    dF:"Дантова вовчиця — хижа, невситима, сповнена жадібності. Вона зганяє пілігрима назад у темряву. Образ перевертає позитивний римський символ вовчиці-годувальниці.",
+    dT:"На щиті Енея Вулкан зображує вовчицю, що годує близнят Ромула і Рема — lupa як позитивний символ заснування Рима. Данте інвертує цей образ: його lupa — уособлення жадібності, що руйнує те, що годувальниця заснувала." },
+  { from:"d_08", to:"ps_50", type:"ALLUSION",
+    dF:"Перші слова Данте в поемі — «miserere di me» — латинсько-італійська цитата з покаянного псалма, звернена до невідомої постаті в пустельному просторі.",
+    dT:"Псалом 50 (51) — покаянний псалом Давида: «Miserere mei, Deus, secundum magnam misericordiam tuam». Найвідоміший покаянний текст літургійної традиції, який Данте вкладає в уста пілігрима." },
+  { from:"d_09", to:"aen_i_326", type:"ALLUSION",
+    dF:"Данте бачить фігуру й не розуміє, тінь це чи людина — «ombra od omo certo». Він звертається до неї з благанням, як Еней до незнайомки в пустелі.",
+    dT:"В Aeneis I Еней зустрічає свою матір Венеру, замасковану під мисливицю, і звертається: «o quam te memorem, virgo?» — не впізнаючи божество. Сцена зустрічі з рятівником у момент відчаю." },
+  { from:"d_10", to:"ps_95", type:"ALLUSION",
+    dF:"Данте вкладає в уста Вергілію характеристику язичницьких богів як «хибних і брехливих» — формулу, що відображає християнську переоцінку античної релігії.",
+    dT:"Псалом 95 (96) стверджує: «omnes dii gentium daemonia» — «всі боги народів — ідоли/демони». Ця біблійна формула лежить в основі середньовічного ототожнення язичницьких богів із демонами." },
+  { from:"d_11", to:"aen_ii", type:"ALLUSION",
+    dF:"Вергілій ідентифікує себе як автора, що оспівав «праведного сина Анхіза» після того, як «гордий Іліон було спалено». Пряме посилання на зміст Aeneis.",
+    dT:"Друга книга Aeneis відкривається розповіддю Енея про падіння Трої через хитрість дерев'яного коня, зраду Сінона та нічну різанину — центральний епізод, на який Данте посилається." },
+  { from:"d_12", to:"aen_passim", type:"STRUCTURE",
+    dF:"Данте визнає Вергілія джерелом свого поетичного стилю — «tu se' lo mio maestro e 'l mio autore». Він називає Aeneis своєю книгою («volume»), яку довго і ретельно студіював.",
+    dT:"Aeneis є каноном високого стилю латинської епічної поезії. Її наративна структура, метрика та образність стали моделлю для всієї середньовічної літературної традиції і для Дантового «bello stilo»." },
+  { from:"d_13", to:"ecl_iv", type:"THEMATIC",
+    dF:"Вергілій пророкує прихід Вельтро — рятівника, що проженить вовчицю і відновить справедливість. Месіанський тон і структура пророцтва перегукуються з четвертою еклогою.",
+    dT:"У четвертій Еклозі Вергілій пророкує повернення Золотого віку (iam redit et Virgo, redeunt Saturnia regna) через народження божественної дитини. Середньовіччя читало цей текст як месіанське пророцтво." },
+  { from:"d_13", to:"apoc_19", type:"THEMATIC",
+    dF:"Пророцтво про Вельтро, що проженить вовчицю і врятує Італію, побудоване за апокаліптичним шаблоном: божественний месія з'являється, щоб знищити зло.",
+    dT:"В Apocalypsis вершник на білому коні — Logos, що приходить судити і воювати. Есхатологічний мотив божественного воїна-рятівника, що знищує звіра, перегукується зі структурою пророцтва про Вельтро." },
+  { from:"d_14", to:"aen_ix", type:"ALLUSION",
+    dF:"У пророцтві про Вельтро Вергілій-персонаж називає чотирьох героїв, що загинули «per cui mori la vergine Cammilla, / Eurialo e Turno e Niso» — двоє троянців і двоє латинян.",
+    dT:"Ніс і Евріал — молоді троянці, що гинуть у нічній вилазці (Aen. IX). Камілла — воїтелька вольсків (Aen. XI). Турн — антагоніст Енея (Aen. XII). Усі четверо гинуть у війні за Лаціум." },
+  { from:"d_15", to:"aen_vi_1", type:"STRUCTURE",
+    dF:"Вергілій пропонує Данте альтернативний шлях — через пекло і чистилище. Живий смертний із надприродним провідником спускається в підземний світ — базова наративна модель Комедії.",
+    dT:"У шостій книзі Aeneis Кумська Сивілла веде Енея до підземного царства: герой потребує провідника, щоб увійти в потойбіччя, побачити долі мертвих і повернутися зміненим. Модель catabasis стає каркасом для подорожі Данте." },
+  { from:"d_16", to:"aen_vi_548", type:"STRUCTURE",
+    dF:"Вергілій описує Данте, що він побачить тих, хто у вогні, і тих, хто «contenti nel foco» — структура потойбічних покарань і очищення запозичена з вергіліанської топографії.",
+    dT:"В Aeneis VI Вергілій описує Тартар: за стінами із пломені звучать крики покараних, Радамант чинить суд. Розмежування місць кари та блаженства в Аїді стає моделлю Дантової загробної географії." },
+  { from:"d_17", to:"aen_vi_637", type:"STRUCTURE",
+    dF:"Вергілій передає пілігрима «душі, гіднішій за нього» — Беатріче, яка поведе далі. Функціональна заміна провідника на порозі блаженства відображає перехід від Аїду до Елісію.",
+    dT:"В Aeneis VI після Тартару Еней потрапляє до Елісейських полів, де зустрічає Анхіза. Перехід від провідника-Сивілли до батька-Анхіза як джерела вищого знання паралельний заміні Вергілія на Беатріче." },
+];
+
+const NODES_RAW = {
+  d_01:    { label:"I, 1",          sub:"nel mezzo del cammin",   author:"Данте",    col:0 },
+  d_02:    { label:"I, 1\u20133",   sub:"selva oscura",           author:"Данте",    col:0 },
+  d_03:    { label:"I, 13\u201318", sub:"piaggia deserta",        author:"Данте",    col:0 },
+  d_04:    { label:"I, 22\u201327", sub:"pelago",                 author:"Данте",    col:0 },
+  d_05:    { label:"I, 32\u201336", sub:"lonza",                  author:"Данте",    col:0 },
+  d_06:    { label:"I, 44\u201348", sub:"leone",                  author:"Данте",    col:0 },
+  d_07:    { label:"I, 49\u201354", sub:"lupa",                   author:"Данте",    col:0 },
+  d_08:    { label:"I, 65",         sub:"miserere di me",         author:"Данте",    col:0 },
+  d_09:    { label:"I, 62\u201367", sub:"ombra od omo certo",     author:"Данте",    col:0 },
+  d_10:    { label:"I, 72",         sub:"d\u00e8i falsi e bugiardi",author:"Данте",  col:0 },
+  d_11:    { label:"I, 73\u201375", sub:"figliuol d'Anchise",     author:"Данте",    col:0 },
+  d_12:    { label:"I, 79\u201387", sub:"lo bello stilo",         author:"Данте",    col:0 },
+  d_13:    { label:"I, 100\u2013105",sub:"Veltro",                author:"Данте",    col:0 },
+  d_14:    { label:"I, 106\u2013108",sub:"Камілла, Ніс, Турн",    author:"Данте",    col:0 },
+  d_15:    { label:"I, 112\u2013136",sub:"подорож з провідником",  author:"Данте",    col:0 },
+  d_16:    { label:"I, 113\u2013117",sub:"вічні страждання",       author:"Данте",    col:0 },
+  d_17:    { label:"I, 117\u2013120",sub:"anima degna",            author:"Данте",    col:0 },
+  is_38:       { label:"Is. 38:10",          sub:"portas inferi",          author:"Біблія",   col:1 },
+  jer_5:       { label:"Jer. 5:6",           sub:"лев, вовк, леопард",    author:"Біблія",   col:1 },
+  ps_50:       { label:"Ps. 50:3",           sub:"Miserere mei",          author:"Біблія",   col:1 },
+  ps_95:       { label:"Ps. 95:5",           sub:"dii gentium",           author:"Біблія",   col:1 },
+  apoc_19:     { label:"Apoc. 19:11\u201316",sub:"вершник на білому коні", author:"Біблія",   col:1 },
+  aen_i_1:     { label:"Aen. I, 1\u20137",   sub:"iactatus",              author:"Вергілій", col:1 },
+  aen_i_326:   { label:"Aen. I, 326\u2013330",sub:"Еней і Венера",        author:"Вергілій", col:1 },
+  aen_ii:      { label:"Aen. II, 1\u201356", sub:"падіння Трої",          author:"Вергілій", col:1 },
+  aen_vi_268:  { label:"Aen. VI, 268\u2013272",sub:"ibant obscuri",       author:"Вергілій", col:1 },
+  aen_vi_1:    { label:"Aen. VI, 1\u2013263",sub:"catabasis",             author:"Вергілій", col:1 },
+  aen_vi_548:  { label:"Aen. VI, 548\u2013627",sub:"Тартар",              author:"Вергілій", col:1 },
+  aen_vi_637:  { label:"Aen. VI, 637\u2013678",sub:"Елісейські поля",     author:"Вергілій", col:1 },
+  aen_viii:    { label:"Aen. VIII, 630\u2013634",sub:"lupa Romuli",        author:"Вергілій", col:1 },
+  aen_ix:      { label:"Aen. IX; XI; XII",   sub:"загиблі за Лаціум",     author:"Вергілій", col:1 },
+  aen_passim:  { label:"Aeneis (passim)",    sub:"високий стиль",         author:"Вергілій", col:1 },
+  ecl_iv:      { label:"Ecl. IV, 4\u201310", sub:"Золотий вік",           author:"Вергілій", col:1 },
+};
+
+const AUTHOR_STYLES = {
+  "Данте":    {f:"#281a08",s:"#d4a853"},
+  "Вергілій": {f:"#1a0e28",s:"#a06ece"},
+  "Овідій":   {f:"#280e1a",s:"#ce5a8a"},
+  "Лукан":    {f:"#0e2028",s:"#5abecc"},
+  "Стацій":   {f:"#0e1428",s:"#5a78ce"},
+  "Гомер":    {f:"#28140e",s:"#ce7a5a"},
+  "Біблія":   {f:"#280e0e",s:"#ce5a5a"}
+};
+
+const nodeW=164,nodeH=46,gapY=8,gapX=140,padLeft=70,padTop=20;
+const nodes=Object.entries(NODES_RAW).map(([id,n])=>({id,...n,x:0,y:0}));
+const nodeMap={};nodes.forEach(n=>nodeMap[n.id]=n);
+const byCols=[nodes.filter(n=>n.col===0),nodes.filter(n=>n.col===1),nodes.filter(n=>n.col===2)];
+byCols[0].forEach((n,i)=>{n.y=i*(nodeH+gapY)+nodeH/2});
+byCols[1].forEach(n=>{const p=LINKS_DATA.filter(l=>l.to===n.id&&nodeMap[l.from]?.col===0).map(l=>nodeMap[l.from]);if(p.length)n.y=p.reduce((s,x)=>s+x.y,0)/p.length;else n.y=byCols[0][Math.floor(byCols[0].length/2)].y});
+rOY(byCols[1]);
+if(byCols[2]&&byCols[2].length){byCols[2].forEach(n=>{const p=LINKS_DATA.filter(l=>l.to===n.id&&nodeMap[l.from]).map(l=>nodeMap[l.from]);if(p.length)n.y=p.reduce((s,x)=>s+x.y,0)/p.length;else if(byCols[1].length)n.y=byCols[1][Math.floor(byCols[1].length/2)].y;else n.y=200});rOY(byCols[2])}
+function rOY(a){a.sort((a,b)=>a.y-b.y);const m=nodeH+gapY;for(let p=0;p<40;p++){let o=true;for(let i=1;i<a.length;i++){const d=a[i].y-a[i-1].y;if(d<m){const s=(m-d)/2+.5;a[i-1].y-=s;a[i].y+=s;o=false}}if(o)break}}
+const maxC=Math.max(...nodes.map(n=>n.col)),colX=[];for(let c=0;c<=maxC;c++)colX.push(padLeft+c*(nodeW+gapX)+nodeW/2);
+nodes.forEach(n=>{n.x=colX[n.col]});
+const minY=Math.min(...nodes.map(n=>n.y))-nodeH/2;nodes.forEach(n=>n.y-=minY-padTop);
+const svgW=padLeft+(maxC+1)*nodeW+maxC*gapX+padLeft,svgH=Math.max(...nodes.map(n=>n.y+nodeH/2))+20;
+const TC={ALLUSION:"#d4a853",STRUCTURE:"#7ea88e",THEMATIC:"#8a7eb8",INVERSION:"#c45c5c",ONOMASTIC:"#5c8ab8"};
+const AS=AUTHOR_STYLES;const st=getComputedStyle(document.documentElement);
+const svg=d3.select("#chart-container").append("svg").attr("width",svgW).attr("height",svgH);
+const defs=svg.append("defs");
+Object.entries(TC).forEach(([t,c])=>{defs.append("marker").attr("id","a-"+t).attr("viewBox","0 0 10 6").attr("refX",10).attr("refY",3).attr("markerWidth",7).attr("markerHeight",5).attr("orient","auto").append("path").attr("d","M0,0.5 L9,3 L0,5.5Z").attr("fill",c)});
+const nCols=colX.length;const cw=svgW/nCols;
+colX.forEach((cx,i)=>{svg.append("rect").attr("x",i*cw).attr("y",0).attr("width",cw).attr("height",svgH).attr("fill",i%2===0?st.getPropertyValue("--col-dark").trim():st.getPropertyValue("--col-light").trim())});
+
+function hC(s,t){const sx=s.x+nodeW/2+2,tx=t.x-nodeW/2-2,dx=tx-sx;return"M"+sx+","+s.y+" C"+(sx+dx*.45)+","+s.y+" "+(tx-dx*.45)+","+t.y+" "+tx+","+t.y}
+const linkG=svg.append("g");
+const linkEls=linkG.selectAll("path").data(LINKS_DATA).enter().append("path")
+  .attr("d",d=>hC(nodeMap[d.from],nodeMap[d.to]))
+  .attr("fill","none")
+  .attr("stroke",d=>TC[d.type])
+  .attr("stroke-width",d=>d.type==="STRUCTURE"?3:1.6)
+  .attr("stroke-dasharray",d=>d.type==="THEMATIC"?"6,4":d.type==="ONOMASTIC"?"2,4":"none")
+  .attr("opacity",.5)
+  .attr("marker-end",d=>"url(#a-"+d.type+")");
+
+const tooltip=d3.select("#tooltip");const nodeG=svg.append("g");
+const ne=nodeG.selectAll("g").data(nodes).enter().append("g")
+  .attr("transform",d=>"translate("+(d.x-nodeW/2)+","+(d.y-nodeH/2)+")")
+  .style("cursor","pointer");
+ne.append("rect").attr("width",nodeW).attr("height",nodeH).attr("rx",5)
+  .attr("fill",d=>AS[d.author]?.f||"#1a1a1a")
+  .attr("stroke",d=>AS[d.author]?.s||"#333")
+  .attr("stroke-width",d=>d.author==="Данте"?1.8:1);
+ne.append("text").attr("x",nodeW/2).attr("y",17).attr("text-anchor","middle")
+  .attr("fill",st.getPropertyValue('--text').trim())
+  .attr("font-size","10px").attr("font-family","'JetBrains Mono',monospace").attr("font-weight",500)
+  .text(d=>d.label);
+ne.append("text").attr("x",nodeW/2).attr("y",32).attr("text-anchor","middle")
+  .attr("fill",st.getPropertyValue('--text-muted').trim())
+  .attr("font-size","10.5px").attr("font-family","'Cormorant Garamond',serif").attr("font-style","italic")
+  .text(d=>d.sub);
+ne.filter(d=>d.col>0).append("text")
+  .attr("x",nodeW/2).attr("y",nodeH-2).attr("text-anchor","middle")
+  .attr("fill",d=>AS[d.author]?.s||"#555")
+  .attr("font-size","7px").attr("font-family","'JetBrains Mono',monospace").attr("opacity",.7)
+  .text(d=>d.author);
+
+ne.on("mouseover",function(ev,d){
+  const ids=new Set([d.id]);
+  LINKS_DATA.forEach(l=>{if(l.from===d.id||l.to===d.id){ids.add(l.from);ids.add(l.to)}});
+  linkEls.attr("opacity",l=>(l.from===d.id||l.to===d.id)?1:.04)
+    .attr("stroke-width",l=>{const on=l.from===d.id||l.to===d.id;return on?(l.type==="STRUCTURE"?4.5:3):(l.type==="STRUCTURE"?3:1.6)});
+  nodeG.selectAll("g").select("rect")
+    .attr("opacity",function(){return ids.has(d3.select(this.parentNode).datum().id)?1:.1});
+  var parts=LINKS_DATA.filter(l=>l.from===d.id||l.to===d.id).map(l=>{
+    var c=TC[l.type],isF=l.from===d.id,other=isF?nodeMap[l.to]:nodeMap[l.from],desc=isF?l.dF:l.dT,arr=isF?"\u2192":"\u2190";
+    var s='<span class="tt-type" style="background:'+c+'22;color:'+c+';border:1px solid '+c+'44">'+TYPE_UA[l.type]+'</span> '+arr+' <strong>'+other.label+'</strong><br><span class="tt-desc">'+desc+'</span>';
+    return s;
+  });
+  var h=parts.join("<br><br>");
+  if(h)tooltip.html('<strong>'+d.label+'</strong> <em style="color:var(--text-muted)">\u00b7 '+d.author+'</em><br><br>'+h)
+    .style("opacity",1)
+    .style("left",Math.min(ev.clientX+14,innerWidth-440)+"px")
+    .style("top",Math.min(ev.clientY+14,innerHeight-300)+"px");
+}).on("mousemove",function(ev){
+  tooltip.style("left",Math.min(ev.clientX+14,innerWidth-440)+"px")
+    .style("top",Math.min(ev.clientY+14,innerHeight-300)+"px");
+}).on("mouseout",function(){
+  linkEls.attr("opacity",.5).attr("stroke-width",d=>d.type==="STRUCTURE"?3:1.6);
+  nodeG.selectAll("g").select("rect").attr("opacity",1);
+  tooltip.style("opacity",0);
+});
+
+function togglePanel(){
+  document.getElementById('sidePanel').classList.toggle('open');
+  document.getElementById('overlay').classList.toggle('open');
+}
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){
+    document.getElementById('sidePanel').classList.remove('open');
+    document.getElementById('overlay').classList.remove('open');
+  }
+});
+
+(function buildNav(){
+  var roman=function(n){var v=[1000,900,500,400,100,90,50,40,10,9,5,4,1],s=['M','CM','D','CD','C','XC','L','XL','X','IX','V','IV','I'],r='';for(var i=0;i<v.length;i++)while(n>=v[i]){r+=s[i];n-=v[i]}return r};
+  var pad2=function(n){return String(n).padStart(2,'0')};
+  var ct=[{t:'Inferno',a:'Inf.',x:'inf',c:34},{t:'Purgatorio',a:'Purg.',x:'purg',c:33},{t:'Paradiso',a:'Par.',x:'par',c:33}];
+  var cur='inf_01';
+  var container=document.getElementById('panelContent');
+  ct.forEach(function(c){
+    var sec=document.createElement('div');
+    sec.className='side-panel-section';
+    var h3=document.createElement('h3');
+    h3.textContent=c.t;
+    sec.appendChild(h3);
+    for(var i=1;i<=c.c;i++){
+      var f=c.x+'_'+pad2(i);
+      var a=document.createElement('a');
+      a.href=f+'.html';
+      a.textContent=c.a+' '+roman(i);
+      if(f===cur)a.className='current';
+      sec.appendChild(a);
+    }
+    container.appendChild(sec);
+  });
+})();
+</script>
+</body>
+</html>

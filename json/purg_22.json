@@ -1,0 +1,112 @@
+{
+  "canto": "Purg. XXII",
+  "cantica": "Purgatorio",
+  "canto_num": 22,
+  "verified": true,
+  "connections": [
+    {
+      "id": "purg_xxii_02",
+      "dante_ref": "XXII, 40–42",
+      "dante_sub": "четверта еклога як пророцтво",
+      "source_ref": "Ecl. IV, 5–7",
+      "source_sub": "iam redit et Virgo, redeunt Saturnia regna",
+      "source_author": "Вергілій",
+      "type": "ALLUSION",
+      "confidence": "HIGH",
+      "desc_dante": "Стацій цитує четверту еклогу: «Secol si rinova; torna giustizia e primo tempo umano» — слова, які його навернули до християнства.",
+      "desc_source": "У четвертій Еклозі Вергілій пророкує повернення Золотого віку: «iam redit et Virgo, redeunt Saturnia regna; iam nova progenies caelo demittitur alto». Середньовіччя читало це як пророцтво про Христа.",
+      "chain": null
+    },
+    {
+      "id": "purg_xxii_03",
+      "dante_ref": "XXII, 55–57",
+      "dante_sub": "Стацій — таємний християнин",
+      "source_ref": "Act. 18:1–3 (пор.)",
+      "source_sub": "ранні християни в Римі",
+      "source_author": "Біблія",
+      "type": "THEMATIC",
+      "confidence": "MEDIUM",
+      "desc_dante": "Стацій зізнається, що був таємним християнином за часів Доміціана і через страх переслідувань ховав свою віру. Ця потайність стала причиною його accidia — духовної лінощі.",
+      "desc_source": "Діяння Апостолів описують ранніх християн у Римській імперії, які часто ховали свою віру від переслідувань. Мотив прихованої віри та її наслідків для духовного життя.",
+      "chain": null
+    },
+    {
+      "id": "purg_xxii_04",
+      "dante_ref": "XXII, 67–69",
+      "dante_sub": "quid non mortalia pectora cogis — золота спрага",
+      "source_ref": "Aen. III, 56–57",
+      "source_sub": "auri sacra fames",
+      "source_author": "Вергілій",
+      "type": "ALLUSION",
+      "confidence": "HIGH",
+      "desc_dante": "Стацій пояснює, що рядок Вергілія «Perche non reggi tu, o sacra fame / de l'oro, l'appetito de' mortali?» (інтерпретований як «Чому не стримуєш, о святий голоде?») його врятував від марнотратства.",
+      "desc_source": "В Aeneis III Вергілій вигукує: «quid non mortalia pectora cogis, / auri sacra fames!» — о прокляте золото, на що не штовхаєш серця смертних! Данте інтерпретує «sacra» як «свята» (стримуюча), а не «проклята».",
+      "chain": null
+    },
+    {
+      "id": "purg_xxii_05",
+      "dante_ref": "XXII, 97–99",
+      "dante_sub": "Данте і Стацій — класичні поети в Лімбі",
+      "source_ref": "Theb. I, 1–17",
+      "source_sub": "Стацій серед латинських поетів",
+      "source_author": "Стацій",
+      "type": "ONOMASTIC",
+      "confidence": "HIGH",
+      "desc_dante": "Стацій питає про долю античних поетів, і Вергілій перераховує тих, хто перебуває в Лімбі: Теренцій, Цецилій, Плавт, Варрон — класичні латинські автори.",
+      "desc_source": "Стацій як автор Thebais належить до кола латинських епіків. Перерахування поетів Лімбу (Теренцій, Плавт та ін.) створює каталог римської літературної традиції.",
+      "chain": null
+    },
+    {
+      "id": "purg_xxii_06",
+      "dante_ref": "XXII, 106–114",
+      "dante_sub": "Антігона, Деіфіла, Аргія, Ісмена",
+      "source_ref": "Theb. II, 265–305; XII, 456–463",
+      "source_sub": "героїні Фіванського циклу",
+      "source_author": "Стацій",
+      "type": "ONOMASTIC",
+      "confidence": "HIGH",
+      "desc_dante": "Вергілій перераховує у Лімбі героїнь Фіванського циклу: Антігону, Деіфілу, Аргію, Ісмену — персонажів, яких Данте знав із Thebais Стація.",
+      "desc_source": "У Thebais Стацій зображує Антігону й Ісмену (дочок Едіпа), Деіфілу й Аргію (дружин Тідея й Полініка). Ці героїні є ключовими жіночими постатями Фіванського циклу.",
+      "chain": null
+    },
+    {
+      "id": "purg_xxii_07",
+      "dante_ref": "XXII, 130–138",
+      "dante_sub": "дерево з плодами і водою",
+      "source_ref": "Gen. 2:9; 3:6",
+      "source_sub": "дерево пізнання добра і зла",
+      "source_author": "Біблія",
+      "type": "INVERSION",
+      "confidence": "HIGH",
+      "desc_dante": "На терасі ненажерливості Данте бачить дерево з плодами й водою, що тече зверху. Голос забороняє їсти. Інверсія: замість дерева спокуси — дерево стримування.",
+      "desc_source": "У Genesis дерево пізнання добра і зла стоїть у центрі саду Едему, і Бог забороняє їсти з нього. Єва порушує заборону. Данте інвертує: тут заборона вчить стримувати апетит, а не провокує порушення.",
+      "chain": null
+    },
+    {
+      "id": "purg_xxii_08",
+      "dante_ref": "XXII, 142–144",
+      "dante_sub": "exemplum: Марія на весіллі",
+      "source_ref": "Io. 2:1–5",
+      "source_sub": "весілля в Кані",
+      "source_author": "Біблія",
+      "type": "ALLUSION",
+      "confidence": "HIGH",
+      "desc_dante": "Голос з дерева вигукує перший exemplum стримування: Марія на весіллі в Кані думала про честь весілля, а не про власну їжу та пиття.",
+      "desc_source": "На весіллі в Кані Галілейській (Io. 2) Марія турбується про нестачу вина для гостей, а не про власні потреби. Данте інтерпретує це як exemplum стримування в їжі.",
+      "chain": null
+    },
+    {
+      "id": "purg_xxii_09",
+      "dante_ref": "XXII, 145–147",
+      "dante_sub": "exemplum: римлянки пили воду",
+      "source_ref": "Georg. II, 458–474",
+      "source_sub": "O fortunatos nimium — сільська помірність",
+      "source_author": "Вергілій",
+      "type": "THEMATIC",
+      "confidence": "MEDIUM",
+      "desc_dante": "Другий exemplum: давньоримські жінки задовольнялись водою як напоєм. Образ помірності давніх часів як протиотрути до сучасного обжерства.",
+      "desc_source": "У Georgica II Вергілій прославляє давній сільський побут: «O fortunatos nimium, sua si bona norint, / agricolas!» Опис простого життя без розкошів, де їжа й напій скромні, — модель prisca virtus, яку Данте адаптує як exemplum стримування.",
+      "chain": null
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "canto": "Purg. XIX",
+  "cantica": "Purgatorio",
+  "canto_num": 19,
+  "verified": true,
+  "connections": [
+    {
+      "id": "purg_xix_01",
+      "dante_ref": "XIX, 7–33",
+      "dante_sub": "сон: femmina balba — сирена",
+      "source_ref": "Od. XII, 39–54; 165–200",
+      "source_sub": "сирени Одіссея",
+      "source_author": "Гомер",
+      "type": "ALLUSION",
+      "confidence": "HIGH",
+      "desc_dante": "Данте бачить у сні потворну жінку, що перетворюється на красуню-сирену і співає: «Io volsi Ulisse del suo cammin vago» — я звабила Одіссея з його шляху. Образ сирени як символу оманливих земних спокус.",
+      "desc_source": "В Odyssea XII Кірка попереджає Одіссея про сирен, що зваблюють мореплавців своїм співом. Одіссей, прив'язаний до щогли, чує їх, але не піддається. Данте інвертує: його сирена «перемогла» Одіссея.",
+      "chain": [
+        { "ref": "Aen. V, 864–868", "author": "Вергілій", "sub": "Партенопе — сирена" }
+      ]
+    },
+    {
+      "id": "purg_xix_02",
+      "dante_ref": "XIX, 22–24",
+      "dante_sub": "donna santa розриває сирену",
+      "source_ref": "Aen. VI, 893–898",
+      "source_sub": "вихід через ворота зі слонової кістки",
+      "source_author": "Вергілій",
+      "type": "STRUCTURE",
+      "confidence": "MEDIUM",
+      "desc_dante": "У сні з'являється свята жінка, що кличе Вергілія. Він розриває одяг сирени, оголюючи смердюче тіло. Втручання вищої сили розсіює ілюзію.",
+      "desc_source": "В Aeneis VI розрізняються двоє воріт снів: з рогу (правдиві) і зі слонової кістки (хибні). Мотив розвіювання ілюзії сну як переходу до нового стану пильності.",
+      "chain": null
+    },
+    {
+      "id": "purg_xix_03",
+      "dante_ref": "XIX, 73–75",
+      "dante_sub": "Адріан V — скупість папи",
+      "source_ref": "Ps. 118:25",
+      "source_sub": "adhaesit pavimento anima mea",
+      "source_author": "Біблія",
+      "type": "ALLUSION",
+      "confidence": "HIGH",
+      "desc_dante": "На терасі скупості душі лежать обличчям додолу і плачуть. Вони повторюють: «Adhaesit pavimento anima mea» — моя душа прилипла до землі. Покарання відповідає гріху прив'язаності до земного.",
+      "desc_source": "Псалом 118 (119) містить зітхання: «Adhaesit pavimento anima mea, vivifica me secundum verbum tuum» — душа прилипла до підлоги, оживи мене за словом Твоїм. Данте буквалізує метафору.",
+      "chain": null
+    },
+    {
+      "id": "purg_xix_04",
+      "dante_ref": "XIX, 94–96",
+      "dante_sub": "scias quod ego fui successor Petri",
+      "source_ref": "Mt. 16:18–19",
+      "source_sub": "Tu es Petrus",
+      "source_author": "Біблія",
+      "type": "ALLUSION",
+      "confidence": "HIGH",
+      "desc_dante": "Адріан V ідентифікує себе як наступника Петра, який пізно усвідомив марність земних благ. Лише ставши папою, він зрозумів, що життя — брехня.",
+      "desc_source": "В Євангелії від Матвія Ісус каже Петру: «Tu es Petrus, et super hanc petram aedificabo Ecclesiam meam» — ти камінь, на цьому камені збудую Церкву. Петрова спадкоємність — основа папства.",
+      "chain": null
+    },
+    {
+      "id": "purg_xix_05",
+      "dante_ref": "XIX, 142–145",
+      "dante_sub": "neque nubent — ні жінок, ні чоловіків",
+      "source_ref": "Mt. 22:30",
+      "source_sub": "in resurrectione neque nubent",
+      "source_author": "Біблія",
+      "type": "ALLUSION",
+      "confidence": "HIGH",
+      "desc_dante": "Адріан просить Данте не вклонятися: у потойбіччі не існує земних ієрархій. Він цитує Євангеліє: «neque nubent neque nubentur» — по воскресінні не одружуються.",
+      "desc_source": "Ісус відповідає садукеям: по воскресінні не одружуються і не виходять заміж, а будуть як ангели на небі (Mt. 22:30). Скасування земних стосунків у потойбіччі.",
+      "chain": null
+    }
+  ]
+}

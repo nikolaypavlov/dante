@@ -1,0 +1,99 @@
+{
+  "canto": "Purg. XXXI",
+  "cantica": "Purgatorio",
+  "canto_num": 31,
+  "verified": true,
+  "connections": [
+    {
+      "id": "purg_xxxi_01",
+      "dante_ref": "XXXI, 1–6",
+      "dante_sub": "Беатріче вимагає зізнання",
+      "source_ref": "Aen. VI, 566–569",
+      "source_sub": "Радамант судить грішників",
+      "source_author": "Вергілій",
+      "type": "STRUCTURE",
+      "confidence": "MEDIUM",
+      "desc_dante": "Беатріче звертає свій докір прямо до Данте, вимагаючи відповіді — «di', di' se questo è vero». Судовий тон і вимога зізнання будують модель потойбічного суду.",
+      "desc_source": "В Aeneis VI Радамант чинить суд у Тартарі: він змушує грішників зізнатися у злочинах — «castigatque auditque dolos subigitque fateri» (Aen. VI, 567). Суддя, що примушує до зізнання, — структурна паралель до ролі Беатріче.",
+      "chain": null
+    },
+    {
+      "id": "purg_xxxi_02",
+      "dante_ref": "XXXI, 43–48",
+      "dante_sub": "Данте плаче у зізнанні",
+      "source_ref": "Ps. 50:3–4",
+      "source_sub": "Miserere mei — покаянний плач",
+      "source_author": "Біблія",
+      "type": "THEMATIC",
+      "confidence": "MEDIUM",
+      "desc_dante": "Данте ридає, визнаючи свою провину — «piangendo dissi». Сльози як форма покаяння, тілесний вираз каяття перед суддею.",
+      "desc_source": "Псалом 50 (51): покаянний псалом Давида після гріха з Вірсавією — «Miserere mei, Deus... Amplius lava me ab iniquitate mea, et a peccato meo munda me». Модель покаяння через сльози і зізнання.",
+      "chain": null
+    },
+    {
+      "id": "purg_xxxi_03",
+      "dante_ref": "XXXI, 64–67",
+      "dante_sub": "sirene — хибна сирена",
+      "source_ref": "Od. XII, 39–54",
+      "source_sub": "Сирени ваблять Одіссея",
+      "source_author": "Гомер",
+      "type": "THEMATIC",
+      "confidence": "MEDIUM",
+      "desc_dante": "Беатріче нагадує Данте про «sirene» — хибні спокуси, що відвернули його від істинного шляху після смерті Беатріче. Образ сирен перегукується зі сном Данте в Purg. XIX.",
+      "desc_source": "В Одіссеї XII Кірка попереджає Одіссея про Сирен, чий спів зваблює моряків на загибель. Одіссей привʼязує себе до щогли, щоб почути, але не піддатися. Мотив хибної привабливості, що веде до загибелі.",
+      "chain": [{"ref":"Aen. V, 864","author":"Вергілій","sub":"Сирени"}]
+    },
+    {
+      "id": "purg_xxxi_04",
+      "dante_ref": "XXXI, 94–99",
+      "dante_sub": "Мательда занурює Данте в Лету",
+      "source_ref": "Aen. VI, 713–715",
+      "source_sub": "душі п'ють з Лети",
+      "source_author": "Вергілій",
+      "type": "ALLUSION",
+      "confidence": "HIGH",
+      "desc_dante": "Мательда занурює Данте у воду Лети, даючи йому випити — ритуал забуття гріхів. Фізичне занурення як сакраментальний акт очищення пам'яті від зла.",
+      "desc_source": "В Aeneis VI Анхіз пояснює Енею, що душі перед новим втіленням п'ють з ріки Лети — «securos latices et longa oblivia potant» (Aen. VI, 715). Лета стирає пам'ять про попереднє існування. Данте переосмислює: Лета стирає пам'ять про гріх, а не про все життя.",
+      "chain": null
+    },
+    {
+      "id": "purg_xxxi_05",
+      "dante_ref": "XXXI, 98",
+      "dante_sub": "Asperges me",
+      "source_ref": "Ps. 50:9",
+      "source_sub": "Asperges me hyssopo et mundabor",
+      "source_author": "Біблія",
+      "type": "ALLUSION",
+      "confidence": "HIGH",
+      "desc_dante": "Після занурення в Лету звучить «Asperges me» — літургійний антифон очищення. Псалом як коментар до щойно здійсненого ритуалу: кроплення ісопом і обмивання.",
+      "desc_source": "Псалом 50 (51): «Asperges me hyssopo et mundabor; lavabis me et super nivem dealbabor» — «Покропиш мене ісопом, і буду чистий; обмиєш мене, і стану біліший за сніг». Центральний текст літургії очищення.",
+      "chain": null
+    },
+    {
+      "id": "purg_xxxi_06",
+      "dante_ref": "XXXI, 118–123",
+      "dante_sub": "чотири німфи — кардинальні чесноти",
+      "source_ref": "Cant. 4:9",
+      "source_sub": "vulnerasti cor meum",
+      "source_author": "Біблія",
+      "type": "THEMATIC",
+      "confidence": "MEDIUM",
+      "desc_dante": "Чотири німфи (кардинальні чесноти) ведуть Данте до очей Беатріче — «Noi siam qui ninfe e nel ciel siamo stelle». Очі Беатріче як місце одкровення, куди чесноти ведуть пілігрима.",
+      "desc_source": "Пісня Пісень 4:9: «Vulnerasti cor meum, soror mea, sponsa, in uno oculorum tuorum» — «Вразила ти серце моє одним поглядом очей твоїх». Очі нареченої як місце духовного ураження та перетворення.",
+      "chain": null
+    },
+    {
+      "id": "purg_xxxi_07",
+      "dante_ref": "XXXI, 121–126",
+      "dante_sub": "грифон у дзеркалі очей Беатріче",
+      "source_ref": "2 Cor. 3:18",
+      "source_sub": "speculantes gloriam Domini transformamur",
+      "source_author": "Біблія",
+      "type": "ALLUSION",
+      "confidence": "MEDIUM",
+      "desc_dante": "Данте бачить грифона відбитим в очах Беатріче — і той змінює природу, то повністю божественну, то повністю людську. Очі як дзеркало, в якому двоїста природа Христа являє себе.",
+      "desc_source": "Друге Послання до Коринтян 3:18: «nos vero omnes revelata facie gloriam Domini speculantes in eandem imaginem transformamur» — «ми ж усі, відкритим обличчям споглядаючи славу Господню, як у дзеркалі, перетворюємося в той самий образ». Споглядання через дзеркало як шлях перетворення.",
+      "chain": null
+    }
+  ]
+}

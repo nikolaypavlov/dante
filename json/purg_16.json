@@ -1,0 +1,73 @@
+{
+  "canto": "Purg. XVI",
+  "cantica": "Purgatorio",
+  "canto_num": 16,
+  "verified": true,
+  "connections": [
+    {
+      "id": "purg_xvi_01",
+      "dante_ref": "XVI, 1–6",
+      "dante_sub": "дим як пекельна темрява",
+      "source_ref": "Aen. VI, 268–272",
+      "source_sub": "ibant obscuri sola sub nocte",
+      "source_author": "Вергілій",
+      "type": "ALLUSION",
+      "confidence": "HIGH",
+      "desc_dante": "Данте порівнює густий дим третьої тераси з темрявою пекла і ніччю, позбавленою зірок. Прямо цитує Вергілія: ніч без будь-якого сяйва.",
+      "desc_source": "На початку сходження в Аїд Вергілій описує Енея і Сивіллу, що йдуть «у темряві, під самотньою ніччю, серед тіней» — ibant obscuri sola sub nocte per umbram.",
+      "chain": null
+    },
+    {
+      "id": "purg_xvi_02",
+      "dante_ref": "XVI, 19–21",
+      "dante_sub": "Agnus Dei — молитва гнівних",
+      "source_ref": "Io. 1:29",
+      "source_sub": "Ecce Agnus Dei",
+      "source_author": "Біблія",
+      "type": "ALLUSION",
+      "confidence": "HIGH",
+      "desc_dante": "Гнівні душі співають «Agnus Dei» — молитву, що просить милосердя. Агнець Божий, що забирає гріхи світу, є антитезою до гніву.",
+      "desc_source": "Іван Хреститель вказує на Ісуса: «Ecce Agnus Dei, ecce qui tollit peccatum mundi» (Io. 1:29). Образ Агнця — покори та жертовності — став основою літургійної молитви.",
+      "chain": null
+    },
+    {
+      "id": "purg_xvi_03",
+      "dante_ref": "XVI, 67–69",
+      "dante_sub": "Марко Ломбардо — discorso на свободу волі",
+      "source_ref": "Aen. VI, 724–751",
+      "source_sub": "промова Анхіза про душі",
+      "source_author": "Вергілій",
+      "type": "STRUCTURE",
+      "confidence": "MEDIUM",
+      "desc_dante": "Марко Ломбардо виголошує довгу промову про вільну волю та відповідальність людини, яка не залежить від зірок. Структурно — discorso мудреця, зустрінутого в потойбіччі.",
+      "desc_source": "В Aeneis VI Анхіз виголошує промову Енею про природу душ і устрій світу. Модель discorso мудреця в потойбіччі — ключова для Данте.",
+      "chain": null
+    },
+    {
+      "id": "purg_xvi_04",
+      "dante_ref": "XVI, 85–96",
+      "dante_sub": "душа, що від Бога радісно виходить",
+      "source_ref": "Gen. 2:7",
+      "source_sub": "insufflavit in faciem eius spiraculum vitae",
+      "source_author": "Біблія",
+      "type": "THEMATIC",
+      "confidence": "HIGH",
+      "desc_dante": "Марко описує, як душа виходить від рук Бога, радісна і проста, не знаючи нічого, окрім тяжіння до свого Творця. Момент створення душі як відправна точка свободи волі.",
+      "desc_source": "В Genesis Бог вдихає в обличчя людини дух життя: «insufflavit in faciem eius spiraculum vitae». Момент творення душі — базовий біблійний образ, на який спирається Дантова антропологія.",
+      "chain": null
+    },
+    {
+      "id": "purg_xvi_05",
+      "dante_ref": "XVI, 106–114",
+      "dante_sub": "два сонця Рима",
+      "source_ref": "Phars. I, 92–97",
+      "source_sub": "Caesar et Pompeius — два вожді",
+      "source_author": "Лукан",
+      "type": "THEMATIC",
+      "confidence": "MEDIUM",
+      "desc_dante": "Марко стверджує, що Рим мав два сонця — для духовного і для світського шляху, але одне згасило інше. Метафора двох влад, що мали б існувати паралельно.",
+      "desc_source": "В Pharsalia I Лукан описує конфлікт двох великих — Цезаря і Помпея — як катастрофу, коли два центри влади зіштовхнулися замість того, щоб співіснувати. Мотив двох полюсів влади.",
+      "chain": null
+    }
+  ]
+}

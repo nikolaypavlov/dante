@@ -1,0 +1,73 @@
+{
+  "canto": "Purg. XX",
+  "cantica": "Purgatorio",
+  "canto_num": 20,
+  "verified": true,
+  "connections": [
+    {
+      "id": "purg_xx_01",
+      "dante_ref": "XX, 19–24",
+      "dante_sub": "Марія в стайні — exemplum бідності",
+      "source_ref": "Lc. 2:7",
+      "source_sub": "posuit eum in praesepio",
+      "source_author": "Біблія",
+      "type": "ALLUSION",
+      "confidence": "HIGH",
+      "desc_dante": "Перший приклад щедрості (проти скупості): голос вигукує образ Марії, що народила в бідності, поклавши сина в ясла. Exemplum добровільної бідності.",
+      "desc_source": "Євангеліст Лука описує народження Ісуса: Марія «posuit eum in praesepio, quia non erat eis locus in diversorio» — поклала в ясла, бо не було місця в заїзді. Образ святої бідності.",
+      "chain": null
+    },
+    {
+      "id": "purg_xx_02",
+      "dante_ref": "XX, 25–27",
+      "dante_sub": "Фабрицій — exemplum римської чесноти",
+      "source_ref": "Aen. VI, 843–846",
+      "source_sub": "Фабрицій серед праведних душ",
+      "source_author": "Вергілій",
+      "type": "ONOMASTIC",
+      "confidence": "HIGH",
+      "desc_dante": "Другий exemplum щедрості: Фабрицій, що обрав бідність із чеснотою, а не багатство з пороком. Класичний римський exemplum непідкупності.",
+      "desc_source": "В Aeneis VI Анхіз показує Енею майбутніх героїв Рима, серед яких Фабрицій — «pauperem... potentem». Вергілій канонізує його як приклад республіканської чесноти в бідності.",
+      "chain": null
+    },
+    {
+      "id": "purg_xx_04",
+      "dante_ref": "XX, 103–117",
+      "dante_sub": "Пілат — exemplum скупості як насильства",
+      "source_ref": "Mt. 27:1–2; Act. 5:1–5",
+      "source_sub": "Ананія і Сапфіра / Понтій Пілат",
+      "source_author": "Біблія",
+      "type": "ALLUSION",
+      "confidence": "MEDIUM",
+      "desc_dante": "Голоси вигукують приклади покараної жадібності: Ананію і Сапфіру, Пілата, що продав правосуддя за гроші, і Мідаса, чий дотик перетворював усе на золото.",
+      "desc_source": "В Діяннях Апостолів Ананія і Сапфіра гинуть за спробу обманути громаду щодо ціни проданого маєтку — exemplum жадібності в первісній Церкві.",
+      "chain": null
+    },
+    {
+      "id": "purg_xx_05",
+      "dante_ref": "XX, 106–108",
+      "dante_sub": "Мідас — жадібний дотик",
+      "source_ref": "Met. XI, 85–145",
+      "source_sub": "Мідас і золотий дотик",
+      "source_author": "Овідій",
+      "type": "ALLUSION",
+      "confidence": "HIGH",
+      "desc_dante": "Бичівний голос вигукує: «O Mida!» — згадка про Мідаса, чий жадібний дотик перетворював все на золото, поки він не мало не загинув від голоду.",
+      "desc_source": "В Metamorphoses XI Овідій описує, як Мідас просить у Діоніса дар перетворення всього на золото, але ледь не гине, коли навіть їжа стає металом. Exemplum жадібності, що знищує саму себе.",
+      "chain": null
+    },
+    {
+      "id": "purg_xx_06",
+      "dante_ref": "XX, 127–141",
+      "dante_sub": "землетрус на горі",
+      "source_ref": "Mt. 27:51–53",
+      "source_sub": "землетрус при Розп'ятті",
+      "source_author": "Біблія",
+      "type": "THEMATIC",
+      "confidence": "HIGH",
+      "desc_dante": "Гора Чистилища тремтить, і всі душі вигукують «Gloria in excelsis Deo». Землетрус означає визволення душі, що завершила очищення.",
+      "desc_source": "В Євангелії від Матвія земля тремтить при Розп'ятті Христа: «terra mota est et petrae scissae sunt» — земля здригнулась і каміння розсілось. Космічний знак духовного визволення.",
+      "chain": null
+    }
+  ]
+}
