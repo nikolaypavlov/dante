@@ -125,13 +125,13 @@
       "id": "inf_i_10",
       "dante_ref": "I, 79–87",
       "dante_sub": "lo bello stilo che m'ha fatto onore",
-      "source_ref": "Aeneis (passim)",
-      "source_sub": "високий епічний стиль",
+      "source_ref": "Aen. I, 1–11",
+      "source_sub": "prooemium Aeneis — високий стиль",
       "source_author": "Вергілій",
       "type": "STRUCTURE",
       "confidence": "HIGH",
       "desc_dante": "Данте визнає Вергілія джерелом свого поетичного стилю — «tu se' lo mio maestro e 'l mio autore». Він називає Aeneis своєю книгою («volume»), яку довго і ретельно студіював.",
-      "desc_source": "Aeneis є каноном високого стилю латинської епічної поезії. Її наративна структура, метрика та образність стали моделлю для всієї середньовічної літературної традиції і для Дантового «bello stilo».",
+      "desc_source": "Prooemium Aeneis — «Arma virumque cano» — є каноном високого епічного стилю. Інвокація до Музи, дактилічний гексаметр, епічна дикція та наративна архітектура визначили «bello stilo», який Данте визнає як свою модель.",
       "chain": null
     },
     {
