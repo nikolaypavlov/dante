@@ -69,6 +69,15 @@ Canto text → Pass 1 (JSON) → Pass 2 (verified JSON) → Pass 3 (HTML)
 
 Each connection object contains: `id`, `dante_ref`, `dante_sub`, `source_ref`, `source_sub`, `source_author`, `type`, `confidence` (HIGH/MEDIUM only, never LOW), `desc_dante`, `desc_source`, `chain` (array or null). See `json/inf_01.json` for a live example and spec §4.1 for the full schema.
 
+Formal schema: `json/canto.schema.json` (JSON Schema Draft-07). Validation:
+
+```
+uv run scripts/validate_json.py              # all json/*.json
+uv run scripts/validate_json.py inf_26.json  # single file
+```
+
+JSON must pass validation before proceeding to Pass 3 (HTML rendering).
+
 ## HTML Visualization Structure
 
 Three equal-width columns: **Dante (col 0, dark)** → **Intermediaries (col 1, light)** → **Primary Sources (col 2, dark)**. Node positioning uses Y-averaging from parent connections. Tooltip shows `desc_dante` when hovering Dante nodes, `desc_source` when hovering source nodes. Navigation: hamburger side panel (100 cantos) + ← → arrows.

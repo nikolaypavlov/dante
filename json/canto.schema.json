@@ -1,0 +1,130 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "canto.schema.json",
+  "title": "Dante Intertextual Canto",
+  "description": "Schema for a single canto's intertextual connections in the Dante Intertextual Analysis project.",
+  "type": "object",
+  "required": ["canto", "cantica", "canto_num", "verified", "connections"],
+  "additionalProperties": false,
+  "properties": {
+    "canto": {
+      "type": "string",
+      "description": "Human-readable canto label, e.g. 'Inf. I', 'Purg. XXXIII', 'Par. X'.",
+      "pattern": "^(Inf|Purg|Par)\\. [IVXLC]+$"
+    },
+    "cantica": {
+      "type": "string",
+      "enum": ["Inferno", "Purgatorio", "Paradiso"]
+    },
+    "canto_num": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 34
+    },
+    "verified": {
+      "type": "boolean"
+    },
+    "connections": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/connection" }
+    }
+  },
+  "definitions": {
+    "connection": {
+      "type": "object",
+      "required": [
+        "id", "dante_ref", "dante_sub", "source_ref", "source_sub",
+        "source_author", "type", "confidence", "desc_dante", "desc_source", "chain"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique connection ID, e.g. 'inf_i_01', 'purg_xxvi_03', 'par_x_12'.",
+          "pattern": "^(inf|purg|par)_[ivxlc]+_\\d+$"
+        },
+        "dante_ref": {
+          "type": "string",
+          "description": "Canto and line reference, e.g. 'I, 1', 'XXVI, 85–142'.",
+          "minLength": 1
+        },
+        "dante_sub": {
+          "type": "string",
+          "description": "Italian quote or Ukrainian paraphrase of the Dante passage.",
+          "minLength": 1
+        },
+        "source_ref": {
+          "type": "string",
+          "description": "Source work reference, e.g. 'Aen. VI, 268–272', 'Is. 38:10'.",
+          "minLength": 1
+        },
+        "source_sub": {
+          "type": "string",
+          "description": "Latin quote or Ukrainian paraphrase of the source passage.",
+          "minLength": 1
+        },
+        "source_author": {
+          "type": "string",
+          "description": "Author name in Ukrainian, e.g. 'Вергілій', 'Овідій', 'Біблія'.",
+          "minLength": 1
+        },
+        "type": {
+          "type": "string",
+          "enum": ["ALLUSION", "STRUCTURE", "THEMATIC", "INVERSION", "ONOMASTIC"]
+        },
+        "confidence": {
+          "type": "string",
+          "enum": ["HIGH", "MEDIUM"]
+        },
+        "desc_dante": {
+          "type": "string",
+          "description": "Ukrainian description of the Dante passage and its significance.",
+          "minLength": 1
+        },
+        "desc_source": {
+          "type": "string",
+          "description": "Ukrainian description of the source passage and its significance.",
+          "minLength": 1
+        },
+        "chain": {
+          "description": "Transmission chain for indirect sources, or null for direct access.",
+          "oneOf": [
+            { "type": "null" },
+            {
+              "type": "array",
+              "minItems": 1,
+              "items": { "$ref": "#/definitions/chainItem" }
+            }
+          ]
+        }
+      }
+    },
+    "chainItem": {
+      "type": "object",
+      "required": ["ref", "author", "sub", "desc"],
+      "additionalProperties": false,
+      "properties": {
+        "ref": {
+          "type": "string",
+          "description": "Reference to the intermediary work.",
+          "minLength": 1
+        },
+        "author": {
+          "type": "string",
+          "description": "Intermediary author name in Ukrainian.",
+          "minLength": 1
+        },
+        "sub": {
+          "type": "string",
+          "description": "Brief content label for the intermediary passage.",
+          "minLength": 1
+        },
+        "desc": {
+          "type": "string",
+          "description": "Ukrainian description of the intermediary's role in the transmission chain.",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}
