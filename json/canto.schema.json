@@ -41,7 +41,7 @@
         "id": {
           "type": "string",
           "description": "Unique connection ID, e.g. 'inf_i_01', 'purg_xxvi_03', 'par_x_12'.",
-          "pattern": "^(inf|purg|par)_[ivxlc]+_\\d+$"
+          "pattern": "^(inf|purg|par)_[ivxlc]+_\\d+[a-z]?$"
         },
         "dante_ref": {
           "type": "string",

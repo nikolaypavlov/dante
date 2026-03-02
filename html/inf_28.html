@@ -61,9 +61,12 @@ const LINKS_DATA = [
   { from:"d_05", to:"bertran", type:"ALLUSION",
     dF:"Бертран каже: «Perch'io parti' così giunte persone, partito porto il mio cerebro» — бо я роз'єднав з'єднані особи, ношу розділений мозок. Він — поет-підбурювач.",
     dT:"Бертран де Борн — провансальський трубадур, відомий сирвентами, що прославляли війну. «Be·m platz lo gais temps de pascor» оспівує радість бою." },
-  { from:"d_05", to:"reg_15", type:"ALLUSION",
-    dF:"Бертран порівнює себе з Ахітофелом: «io feci il padre e 'l figlio in sé ribelli; Achitofèl non fé più d'Absalone e di Davìd» — я зробив більше, ніж Ахітофел.",
-    dT:"Друга книга Царств описує Ахітофела, порадника Давида, що перейшов на бік бунтівного Авесалома і порадив стратегію проти батька." },
+  { from:"d_05", to:"reg2_15_12", type:"ALLUSION",
+    dF:"Бертран порівнює себе з Ахітофелом: «io feci il padre e \'l figlio in sé ribelli; / Achitofèl non fé più d\'Absalone e di Davìd» — я зробив більше, ніж Ахітофел для Авесалома проти Давида.",
+    dT:"У 2 Reg. 15:12 Ахітофел, найближчий порадник царя Давида, зраджує його і переходить на бік бунтівного сина Авесалома. Сам акт зради — перехід довіреної особи на ворожий бік." },
+  { from:"d_05", to:"reg2_16_20_17_3", type:"ALLUSION",
+    dF:"Бертран порівнює себе з Ахітофелом: «io feci il padre e \'l figlio in sé ribelli; / Achitofèl non fé più d\'Absalone e di Davìd» — я зробив більше, ніж Ахітофел для Авесалома проти Давида.",
+    dT:"У 2 Reg. 16:20\u201317:3 Ахітофел радить Авесалому негайно переслідувати Давида з військом. Його порада — стратегічний план знищення батька. Класичний біблійний злий порадник." },
 ];
 
 const NODES_RAW = {
@@ -80,7 +83,8 @@ const NODES_RAW = {
   aen_iii_359:  { label:"Aen. III, 359\u2013373", sub:"пророцтво Гелена",    author:"Вергілій", col:1 },
   phars_i_269:  { label:"Phars. I, 269\u2013281", sub:"Куріон і Рубікон",    author:"Лукан",    col:1 },
   bertran:      { label:"Be\u00b7m platz",        sub:"радість від війни",    author:"Бертран де Борн", col:1 },
-  reg_15:       { label:"2 Reg. 15\u201317",      sub:"Ахітофел",            author:"Біблія",   col:1 },
+  reg2_15_12:       { label:"2 Reg. 15:12",      sub:"Ахітофел переходить до Авесалома", author:"Біблія",   col:1 },
+  reg2_16_20_17_3:  { label:"2 Reg. 16:20\u201317:3", sub:"порада Ахітофела Авесалому", author:"Біблія",   col:1 },
 };
 
 const AUTHOR_STYLES = {

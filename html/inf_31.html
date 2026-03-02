@@ -35,8 +35,11 @@ const TYPE_UA = { ALLUSION:"Алюзія", STRUCTURE:"Структура", THEMA
 
 const LINKS_DATA = [
   { from:"d_01", to:"met_xii_112", type:"ALLUSION",
-    dF:"Данте порівнює докір Вергілія (що ранить, а потім зціляє) зі списом Ахілла і його батька Пелея: «Cos\u00ec od'io che solea far la lancia / d'Achille e del suo padre» — спис, що ранив і сам же зціляв.",
-    dT:"В Metamorphoses Овідій згадує спис Пелея (Pelias hasta), який мав магічну властивість: рана від нього могла бути зціленою лише повторним дотиком того самого списа. Телеф, поранений Ахіллом, міг зцілитися лише іржею з його списа." },
+    dF:"Данте порівнює докір Вергілія (що ранить, а потім зціляє) зі списом Ахілла і його батька Пелея: «Cos\u00ec od\'io che solea far la lancia / d\'Achille e del suo padre» — спис, що ранив і сам же зціляв.",
+    dT:"В Met. XII Овідій згадує спис Пелея (Pelias hasta), ясеневий спис з гори Пеліон, який міг тримати лише Ахілл. Магічна зброя — рана від нього зцілювалася лише повторним дотиком." },
+  { from:"d_01", to:"met_xiii_171_172", type:"ALLUSION",
+    dF:"Данте порівнює докір Вергілія (що ранить, а потім зціляє) зі списом Ахілла і його батька Пелея: «Cos\u00ec od\'io che solea far la lancia / d\'Achille e del suo padre» — спис, що ранив і сам же зціляв.",
+    dT:"В Met. XIII Аякс у промові згадує, що Телеф, поранений списом Ахілла, міг зцілитися лише іржею з того самого списа. Мотив зброї, що і ранить, і зціляє — прямий прототип Дантової метафори." },
   { from:"d_02", to:"roland_176", type:"ALLUSION",
     dF:"Данте чує страшний звук рогу, що переважає навіть грім. Він порівнює його з рогом Роланда: «Dopo la dolorosa rotta, quando / Carlo Magno perd\u00e9 la santa gesta, / non son\u00f2 s\u00ec terribilmente Orlando».",
     dT:"В Chanson de Roland Роланд тричі сурмить в Olifant під час битви в Ронсевальській ущелині, кличучи Карла Великого на допомогу, доки не лопається скроня від напруження. Наймогутніший звук рогу в середньовічній літературі." },
@@ -77,7 +80,8 @@ const NODES_RAW = {
   d_08:    { label:"XXXI, 115\u2013129",sub:"Антей — Геркулес",        author:"Данте",    col:0 },
   d_09:    { label:"XXXI, 119\u2013121",sub:"Антей — Зама",            author:"Данте",    col:0 },
   d_10:    { label:"XXXI, 136\u2013141",sub:"Гарізенда",               author:"Данте",    col:0 },
-  met_xii_112:  { label:"Met. XII\u2013XIII",    sub:"Pelias hasta",          author:"Овідій",   col:1 },
+  met_xii_112:  { label:"Met. XII, 112",    sub:"Pelias hasta",          author:"Овідій",   col:1 },
+  met_xiii_171_172: { label:"Met. XIII, 171\u2013172", sub:"Телеф зцілений списом", author:"Овідій",   col:1 },
   roland_176:   { label:"Roland, laisse 176",    sub:"Olifant",               author:"Chanson de Roland", col:1 },
   aen_vi_549:   { label:"Aen. VI, 549\u2013554", sub:"стіни Тартару",         author:"Вергілій", col:1 },
   aen_vi_580:   { label:"Aen. VI, 580\u2013584", sub:"Тітії та гіганти",      author:"Вергілій", col:1 },

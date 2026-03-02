@@ -6,15 +6,28 @@
   "connections": [
     {
       "id": "inf_xxxi_01",
-      "dante_ref": "XXXI, 4-6",
-      "dante_sub": "la lancia d'Achille — рана і зцілення",
-      "source_ref": "Met. XII, 112; XIII, 171-172",
-      "source_sub": "Pelias hasta — спис Ахілла",
+      "dante_ref": "XXXI, 4–6",
+      "dante_sub": "la lancia d'Achille — спис Пелея",
+      "source_ref": "Met. XII, 112",
+      "source_sub": "Pelias hasta",
       "source_author": "Овідій",
       "type": "ALLUSION",
       "confidence": "HIGH",
       "desc_dante": "Данте порівнює докір Вергілія (що ранить, а потім зціляє) зі списом Ахілла і його батька Пелея: «Così od'io che solea far la lancia / d'Achille e del suo padre» — спис, що ранив і сам же зціляв.",
-      "desc_source": "В Metamorphoses Овідій згадує спис Пелея (Pelias hasta), який мав магічну властивість: рана від нього могла бути зціленою лише повторним дотиком того самого списа. Телеф, поранений Ахіллом, міг зцілитися лише іржею з його списа.",
+      "desc_source": "В Met. XII Овідій згадує спис Пелея (Pelias hasta), ясеневий спис з гори Пеліон, який міг тримати лише Ахілл. Магічна зброя — рана від нього зцілювалася лише повторним дотиком.",
+      "chain": null
+    },
+    {
+      "id": "inf_xxxi_01b",
+      "dante_ref": "XXXI, 4–6",
+      "dante_sub": "la lancia d'Achille — зцілення Телефа",
+      "source_ref": "Met. XIII, 171–172",
+      "source_sub": "Телеф зцілений списом",
+      "source_author": "Овідій",
+      "type": "ALLUSION",
+      "confidence": "HIGH",
+      "desc_dante": "Данте порівнює докір Вергілія (що ранить, а потім зціляє) зі списом Ахілла і його батька Пелея: «Così od'io che solea far la lancia / d'Achille e del suo padre» — спис, що ранив і сам же зціляв.",
+      "desc_source": "В Met. XIII Аякс у промові згадує, що Телеф, поранений списом Ахілла, міг зцілитися лише іржею з того самого списа. Мотив зброї, що і ранить, і зціляє — прямий прототип Дантової метафори.",
       "chain": null
     },
     {
