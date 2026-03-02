@@ -84,6 +84,10 @@ Three equal-width columns: **Dante (col 0, dark)** → **Intermediaries (col 1, 
 
 Key d3 constants: `nodeW=164, nodeH=46, gapY=8, gapX=140, padLeft=70, padTop=20`.
 
+## JSON / HTML Sync
+
+JSON and HTML are not auto-generated from each other. When editing connections, always update both `json/{canto}.json` and `html/{canto}.html` (NODES_RAW + LINKS_DATA). Run `uv run scripts/validate_json.py` after JSON changes.
+
 ## Critical Constraints
 
 - **No LOW confidence** connections in output
