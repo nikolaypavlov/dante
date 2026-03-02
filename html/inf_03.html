@@ -34,216 +34,127 @@
 const TYPE_UA = { ALLUSION:"Алюзія", STRUCTURE:"Структура", THEMATIC:"Тематика", INVERSION:"Інверсія", ONOMASTIC:"Ономастика" };
 
 const LINKS_DATA = [
-  { from:"d_01", to:"aen_vi_126", type:"STRUCTURE",
+  { from:"d_01", to:"aen_vi_126_129", type:"STRUCTURE",
     dF:"Данте читає напис на брамі пекла: «Per me si va ne la città dolente» — тричленна анафора, що оголошує вічність і безнадію. Брама як поріг потойбіччя з написом-попередженням.",
     dT:"В Aeneis VI Сивілла попереджає Енея: «facilis descensus Averno; / noctes atque dies patet atri ianua Ditis» — спуск до Аверну легкий, ворота Діта відкриті день і ніч. Модель воріт потойбіччя з прологовим попередженням." },
-  { from:"d_02", to:"aen_vi_126", type:"ALLUSION",
-    dF:"Останній рядок напису — «Lasciate ogne speranza, voi ch'intrate» — залишіть будь-яку надію, ви, що входите. Формула абсолютної безповоротності.",
+  { from:"d_02", to:"aen_vi_126_129", type:"ALLUSION",
+    dF:"Останній рядок напису — «Lasciate ogne speranza, voi ch\'intrate» — залишіть будь-яку надію, ви, що входите. Формула абсолютної безповоротності.",
     dT:"В Aeneis VI Сивілла каже: «sed revocare gradum superasque evadere ad auras, / hoc opus, hic labor est» — повернутися до верхнього світу — ось справжній труд. Мотив безповоротності входу до Аїду." },
-  { from:"d_03", to:"aen_vi_557", type:"ALLUSION",
+  { from:"d_03", to:"aen_vi_557_558", type:"ALLUSION",
     dF:"За брамою Данте чує зітхання, плач і голосні крики — «diverse lingue, orribili favelle». Какофонія страждань як перший сенсорний досвід пекла.",
     dT:"В Aeneis VI Еней чує за стінами Тартару стогони і звук ударів: «gemitus et saeva sonare verbera, tum stridor ferri». Звуковий пейзаж потойбічних мук." },
-  { from:"d_04", to:"aen_vi_426", type:"STRUCTURE",
+  { from:"d_04", to:"aen_vi_426_439", type:"STRUCTURE",
     dF:"Данте поміщає у вестибюлі пекла тих, хто «жив без слави і без ганьби» — ignavi, яких не приймають ні небо, ні глибини пекла. Проміжна зона для тих, хто не зробив вибору.",
     dT:"В Aeneis VI Еней зустрічає на березі Ахерону непоховані душі — insepulti, які не можуть переправитися через ріку. Модель проміжної зони між світами для душ у невизначеному стані." },
-  { from:"d_05", to:"aen_vi_434", type:"THEMATIC",
+  { from:"d_05", to:"aen_vi_434_437", type:"THEMATIC",
     dF:"Серед ignavi Данте впізнає тінь того, «хто зробив з малодушності великий відмову». Малодушне зречення відповідальності як гріх гірший за активне зло.",
-    dT:"В Aeneis VI серед тих, хто чекає при Ахероні, є ті, хто наклав на себе руки — «quam vellent aethere in alto / nunc et pauperiem et duros perferre labores!» Мотив відмови від життя і відповідальності." },
-  { from:"d_06", to:"aen_vi_580", type:"THEMATIC",
+    dT:"В Aeneis VI серед тих, хто чекає при Ахероні, є ті, хто наклав на себе руки — «quam vellent aethere in alto / nunc et pauperiem et duros perferre labores!» Жалкують, але запізно. Мотив відмови від життя і відповідальності." },
+  { from:"d_06", to:"aen_vi_580_581", type:"THEMATIC",
     dF:"Ignavi біжать за прапором, який обертається з такою швидкістю, що здається негідним будь-якої зупинки. Безкінечний біг — contrapasso для тих, хто за життя не рушив до жодної мети.",
     dT:"В Тартарі Вергілій описує безкінечні покарання: Сізіф котить камінь. Модель вічного повторення як покарання — contrapasso, де дія безцільно повторюється навіки." },
-  { from:"d_07", to:"aen_vi_295", type:"ALLUSION",
+  { from:"d_07", to:"aen_vi_295_316", type:"ALLUSION",
     dF:"Данте приходить до берега великої ріки, де зібралися душі для переправи. Ахерон як перша ріка потойбіччя і кордон між вестибюлем і справжнім пеклом.",
     dT:"В Aeneis VI Еней приходить до Ахерону: «Cocyti stagna alta vides Stygiamque paludem» — бачить глибокі води Коциту і Стігійське болото. Ріка як кордон підземного царства." },
-  { from:"d_07", to:"met_v_538", type:"ONOMASTIC",
-    dF:"Данте поміщає Ахерон як першу ріку свого пекла — традиційне ім'я зі спільного античного корпусу підземної топографії.",
+  { from:"d_08", to:"met_v_538_541", type:"ONOMASTIC",
+    dF:"Данте поміщає Ахерон як першу ріку свого пекла — традиційне ім\'я зі спільного античного корпусу підземної топографії.",
     dT:"Овідій у Metamorphoses описує Ахерон як одну з рік підземного царства в контексті викрадення Прозерпіни. Назва «Ахерон» є спільним топонімом потойбічної географії античності." },
-  { from:"d_08", to:"aen_vi_298", type:"ALLUSION",
-    dF:"Данте зображує Харона як старця з білим від старості волоссям, з вогненними очима, що кричить на душі і б'є веслом тих, хто зволікає. Демонізований образ античного перевізника.",
+  { from:"d_09", to:"aen_vi_298_304", type:"ALLUSION",
+    dF:"Данте зображує Харона як старця з білим від старості волоссям, з вогненними очима, що кричить на душі і б\'є веслом тих, хто зволікає. Демонізований образ античного перевізника.",
     dT:"В Aeneis VI Вергілій описує Харона: «portitor has horrendus aquas et flumina servat / terribili squalore Charon» — жахливий перевізник охороняє ці води. Він старий, але міцний, з палаючими очима." },
-  { from:"d_09", to:"aen_vi_309", type:"ALLUSION",
-    dF:"Данте порівнює душі, що падають у човен Харона, з осіннім листям: «come d'autunno si levan le foglie». Класичне порівняння множинності мертвих із листопадом.",
-    dT:"В Aeneis VI Вергілій порівнює натовп мертвих із листям, що опадає в лісах восени: «quam multa in silvis autumni frigore primo / lapsa cadunt folia». Це порівняння сягає Гомера." },
-  { from:"d_09", to:"il_vi_146_ch", type:"THEMATIC",
-    dF:"Порівняння душ із листям, яке Данте запозичує у Вергілія, має гомерівське коріння. Ланцюжок передачі: Гомер \u2192 Вергілій \u2192 Данте.",
+  { from:"d_10", to:"aen_vi_309_312", type:"ALLUSION",
+    dF:"Данте порівнює душі, що падають у човен Харона, з осіннім листям: «come d\'autunno si levan le foglie». Класичне порівняння множинності мертвих із листопадом.",
+    dT:"В Aeneis VI Вергілій порівнює натовп мертвих із листям, що опадає в лісах восени: «quam multa in silvis autumni frigore primo / lapsa cadunt folia». Це порівняння сягає Гомера через посередництво Вергілія." },
+  { from:"d_11", to:"aen_vi_309_312", type:"THEMATIC",
+    dF:"Порівняння душ із листям, яке Данте запозичує у Вергілія, має гомерівське коріння. Ланцюжок передачі: Гомер → Вергілій → Данте.",
+    dT:"В Aeneis VI Вергілій переносить гомерівське порівняння до підземного світу: мертві душі злітаються до берега Стіксу «quam multa in silvis autumni frigore primo / lapsa cadunt folia» — як листя, що опадає від першого осіннього холоду." },
+  { from:"aen_vi_309_312", to:"il_vi_146_149", type:"THEMATIC",
+    dF:"В Ilias VI Главк порівнює покоління людей із листям: «як листя, що вітер розносить по землі, а ліс навесні нове народжує». Це перше вживання топосу «люди як листя» в європейській літературі.",
     dT:"В Ilias VI Главк порівнює покоління людей із листям: «як листя, що вітер розносить по землі, а ліс навесні нове народжує». Це перше вживання топосу «люди як листя» в європейській літературі." },
-  { from:"il_vi_146_ch", to:"il_vi_146", type:"THEMATIC",
-    dF:"Вергілій адаптує гомерівське порівняння покоління/листя для сцени натовпу мертвих при Ахероні.",
-    dT:"Гомерівський топос «люди як листя» (Il. VI, 146\u2013149) — первісне джерело порівняння, яке Данте знав через Вергілія." },
-  { from:"d_10", to:"aen_vi_313", type:"INVERSION",
+  { from:"d_12", to:"aen_vi_313_316", type:"INVERSION",
     dF:"У Данте душі самі прагнуть переправи: «la divina giustizia li sprona / sì che la tema si volve in disio» — страх перетворюється на бажання. Божественна справедливість робить покарання бажаним.",
-    dT:"В Aeneis VI мертві простягають руки до протилежного берега — «tendebantque manus ripae ulterioris amore» — з любові до іншого берега. У Вергілія це туга, у Данте — перетворення страху на бажання через справедливість." },
-  { from:"d_11", to:"aen_vi_388", type:"ALLUSION",
+    dT:"В Aeneis VI мертві простягають руки до протилежного берега — «tendebantque manus ripae ulterioris amore» — з любові до іншого берега. У Вергілія це туга, у Данте — перетворення страху на бажання через справедливість. Інверсія мотивації." },
+  { from:"d_13", to:"aen_vi_388_397", type:"ALLUSION",
     dF:"Харон кричить Данте: «per altra via, per altri porti / verrai a piaggia» — ти переправишся іншим шляхом. Перевізник впізнає живого серед мертвих і відмовляє.",
-    dT:"В Aeneis VI Харон відмовляє Енею у переправі: «quisquis es, armatus qui nostra ad flumina tendis, / fare age, quid venias» — хто б ти не був, озброєний, скажи, навіщо прийшов." },
-  { from:"d_12", to:"aen_vi_403", type:"STRUCTURE",
+    dT:"В Aeneis VI Харон відмовляє Енею у переправі: «quisquis es, armatus qui nostra ad flumina tendis, / fare age, quid venias» — хто б ти не був, озброєний, скажи, навіщо прийшов. Лише золота гілка переконує його." },
+  { from:"d_14", to:"aen_vi_403_410", type:"STRUCTURE",
     dF:"Вергілій приборкує Харона формулою «vuolsi così colà dove si puote / ciò che si vuole» — так бажано там, де можна те, чого бажають. Божественна воля як пропуск.",
     dT:"В Aeneis VI Сивілла показує Хароні золоту гілку — ramus aureus — і він одразу підкоряється. Модель: надприродний мандат як пропуск через поріг потойбіччя." },
-  { from:"d_13", to:"aen_vi_416", type:"ALLUSION",
+  { from:"d_15", to:"aen_vi_416_425", type:"ALLUSION",
     dF:"Після переправи Данте ступає на «terra lagrimosa» — сльозисту землю. Протилежний берег Ахерону як місце скорботи і темряви.",
-    dT:"В Aeneis VI після переправи Еней потрапляє до болотистого берега: «informi limo glaucaque exponit in ulva» — Харон висаджує їх у безформному мулі." },
-  { from:"d_14", to:"aen_vi_255", type:"ALLUSION",
+    dT:"В Aeneis VI після переправи Еней потрапляє до болотистого берега: «informi limo glaucaque exponit in ulva» — Харон висаджує їх у безформному мулі. Пейзаж протилежного берега." },
+  { from:"d_16", to:"aen_vi_255_263", type:"ALLUSION",
     dF:"Пісня завершується землетрусом і спалахом червоного світла — «la terra lagrimosa diede vento» — від чого Данте втрачає свідомість. Надприродне потрясіння як маркер переходу.",
-    dT:"В Aeneis VI перед входом до Аїду земля тремтить: «sub pedibus mugire solum et iuga coepta moveri / silvarum» — ґрунт гуде під ногами, хребти лісів починають рухатися." },
+    dT:"В Aeneis VI перед входом до Аїду земля тремтить: «sub pedibus mugire solum et iuga coepta moveri / silvarum» — ґрунт гуде під ногами, хребти лісів починають рухатися. Землетрус як знак переходу до потойбіччя." },
 ];
 
 const NODES_RAW = {
-  d_01:    { label:"III, 1\u20139",    sub:"Per me si va",          author:"Данте",    col:0 },
-  d_02:    { label:"III, 9",           sub:"Lasciate ogne speranza",author:"Данте",    col:0 },
-  d_03:    { label:"III, 22\u201330",  sub:"sospiri, pianti",       author:"Данте",    col:0 },
-  d_04:    { label:"III, 34\u201342",  sub:"gl'ignavi",             author:"Данте",    col:0 },
-  d_05:    { label:"III, 59\u201360",  sub:"il gran rifiuto",       author:"Данте",    col:0 },
-  d_06:    { label:"III, 70\u201378",  sub:"insegna che gira",      author:"Данте",    col:0 },
-  d_07:    { label:"III, 82\u201387",  sub:"gran fiume — Ахерон",   author:"Данте",    col:0 },
-  d_08:    { label:"III, 83\u201399",  sub:"Харон",                 author:"Данте",    col:0 },
-  d_09:    { label:"III, 109\u2013111",sub:"foglie — листя",        author:"Данте",    col:0 },
-  d_10:    { label:"III, 112\u2013117",sub:"giustizia li sprona",   author:"Данте",    col:0 },
-  d_11:    { label:"III, 121\u2013126",sub:"per altra via",         author:"Данте",    col:0 },
-  d_12:    { label:"III, 127\u2013129",sub:"vuolsi così",           author:"Данте",    col:0 },
-  d_13:    { label:"III, 130\u2013136",sub:"terra lagrimosa",       author:"Данте",    col:0 },
-  d_14:    { label:"III, 136",         sub:"землетрус",             author:"Данте",    col:0 },
-  aen_vi_126:  { label:"Aen. VI, 126\u2013129", sub:"facilis descensus",    author:"Вергілій", col:1 },
-  aen_vi_557:  { label:"Aen. VI, 557\u2013558", sub:"gemitus",              author:"Вергілій", col:1 },
-  aen_vi_426:  { label:"Aen. VI, 426\u2013439", sub:"insepulti",            author:"Вергілій", col:1 },
-  aen_vi_434:  { label:"Aen. VI, 434\u2013437", sub:"manu sibi mortem",     author:"Вергілій", col:1 },
-  aen_vi_580:  { label:"Aen. VI, 580\u2013581", sub:"Сізіф",                author:"Вергілій", col:1 },
-  aen_vi_295:  { label:"Aen. VI, 295\u2013316", sub:"берег Ахерону",        author:"Вергілій", col:1 },
-  aen_vi_298:  { label:"Aen. VI, 298\u2013304", sub:"portitor Charon",      author:"Вергілій", col:1 },
-  aen_vi_309:  { label:"Aen. VI, 309\u2013312", sub:"folia lapsa cadunt",   author:"Вергілій", col:1 },
-  aen_vi_313:  { label:"Aen. VI, 313\u2013316", sub:"tendebant manus",      author:"Вергілій", col:1 },
-  aen_vi_388:  { label:"Aen. VI, 388\u2013397", sub:"Харон і Еней",         author:"Вергілій", col:1 },
-  aen_vi_403:  { label:"Aen. VI, 403\u2013410", sub:"ramus aureus",         author:"Вергілій", col:1 },
-  aen_vi_416:  { label:"Aen. VI, 416\u2013425", sub:"informi limo",         author:"Вергілій", col:1 },
-  aen_vi_255:  { label:"Aen. VI, 255\u2013263", sub:"земля тремтить",       author:"Вергілій", col:1 },
-  met_v_538:   { label:"Met. V, 538\u2013541",  sub:"Acherontis aquas",     author:"Овідій",   col:1 },
-  il_vi_146_ch:{ label:"Aen. VI, 309\u2013312", sub:"листя (через Вергілія)",author:"Вергілій",col:1 },
-  il_vi_146:   { label:"Il. VI, 146\u2013149",  sub:"phyll\u00e0 — листя",  author:"Гомер",    col:2 },
+  "d_01": { label:"III, 1–9", sub:"Per me si va — напис на брамі", author:"Данте", col:0 },
+  "aen_vi_126_129": { label:"Aen. VI, 126–129", sub:"facilis descensus Averno", author:"Вергілій", col:1 },
+  "d_02": { label:"III, 9", sub:"Lasciate ogne speranza", author:"Данте", col:0 },
+  "d_03": { label:"III, 22–30", sub:"sospiri, pianti e alti guai", author:"Данте", col:0 },
+  "aen_vi_557_558": { label:"Aen. VI, 557–558", sub:"gemitus et saeva sonare verbera", author:"Вергілій", col:1 },
+  "d_04": { label:"III, 34–42", sub:"gl\'ignavi — тіні, що жили без слави", author:"Данте", col:0 },
+  "aen_vi_426_439": { label:"Aen. VI, 426–439", sub:"insepulti — непоховані душі", author:"Вергілій", col:1 },
+  "d_05": { label:"III, 59–60", sub:"che fece per viltade il gran rifiut", author:"Данте", col:0 },
+  "aen_vi_434_437": { label:"Aen. VI, 434–437", sub:"manu sibi mortem — самогубці біля А", author:"Вергілій", col:1 },
+  "d_06": { label:"III, 70–78", sub:"insegna — прапор, що кружляє", author:"Данте", col:0 },
+  "aen_vi_580_581": { label:"Aen. VI, 580–581", sub:"saxum ingens volvunt alii — Сізіф", author:"Вергілій", col:1 },
+  "d_07": { label:"III, 82–87", sub:"gran fiume — Ахерон", author:"Данте", col:0 },
+  "aen_vi_295_316": { label:"Aen. VI, 295–316", sub:"Acheron і берег мертвих", author:"Вергілій", col:1 },
+  "d_08": { label:"III, 82–87", sub:"Ахерон — назва ріки", author:"Данте", col:0 },
+  "met_v_538_541": { label:"Met. V, 538–541", sub:"Acherontis aquas", author:"Овідій", col:1 },
+  "d_09": { label:"III, 83–99", sub:"vecchio bianco per antico pelo — Ха", author:"Данте", col:0 },
+  "aen_vi_298_304": { label:"Aen. VI, 298–304", sub:"portitor Charon — перевізник", author:"Вергілій", col:1 },
+  "d_10": { label:"III, 109–111", sub:"cadono come foglie — порівняння з л", author:"Данте", col:0 },
+  "aen_vi_309_312": { label:"Aen. VI, 309–312", sub:"quam multa in silvis folia lapsa ca", author:"Вергілій", col:1 },
+  "d_11": { label:"III, 109–111", sub:"порівняння з листям — гомерівське п", author:"Данте", col:0 },
+  "il_vi_146_149": { label:"Il. VI, 146–149", sub:"phyllа — покоління як листя", author:"Гомер", col:2 },
+  "d_12": { label:"III, 112–117", sub:"божественна справедливість як пришв", author:"Данте", col:0 },
+  "aen_vi_313_316": { label:"Aen. VI, 313–316", sub:"tendebantque manus ripae ulterioris", author:"Вергілій", col:1 },
+  "d_13": { label:"III, 121–126", sub:"Харон відмовляє живому", author:"Данте", col:0 },
+  "aen_vi_388_397": { label:"Aen. VI, 388–397", sub:"Харон відмовляє Енею", author:"Вергілій", col:1 },
+  "d_14": { label:"III, 127–129", sub:"vuolsi così colà dove si puote", author:"Данте", col:0 },
+  "aen_vi_403_410": { label:"Aen. VI, 403–410", sub:"золота гілка як пропуск", author:"Вергілій", col:1 },
+  "d_15": { label:"III, 130–136", sub:"terra lagrimosa — темний берег", author:"Данте", col:0 },
+  "aen_vi_416_425": { label:"Aen. VI, 416–425", sub:"informi limo — безформний мул", author:"Вергілій", col:1 },
+  "d_16": { label:"III, 136", sub:"землетрус і непритомність", author:"Данте", col:0 },
+  "aen_vi_255_263": { label:"Aen. VI, 255–263", sub:"земля тремтить перед входом до Аїду", author:"Вергілій", col:1 },
 };
 
 const AUTHOR_STYLES = {
-  "Данте":    {f:"#281a08",s:"#d4a853"},
   "Вергілій": {f:"#1a0e28",s:"#a06ece"},
-  "Овідій":   {f:"#280e1a",s:"#ce5a8a"},
-  "Лукан":    {f:"#0e2028",s:"#5abecc"},
-  "Стацій":   {f:"#0e1428",s:"#5a78ce"},
-  "Гомер":    {f:"#28140e",s:"#ce7a5a"},
-  "Біблія":   {f:"#280e0e",s:"#ce5a5a"}
+  "Гомер": {f:"#28140e",s:"#ce7a5a"},
+  "Данте": {f:"#281a08",s:"#d4a853"},
+  "Овідій": {f:"#280e1a",s:"#ce5a8a"},
 };
 
 const nodeW=164,nodeH=46,gapY=8,gapX=140,padLeft=70,padTop=20;
-const nodes=Object.entries(NODES_RAW).map(([id,n])=>({id,...n,x:0,y:0}));
-const nodeMap={};nodes.forEach(n=>nodeMap[n.id]=n);
+const nodes=Object.entries(NODES_RAW).map(([id,n])=>({id,...n,x:0,y:0}));const nodeMap={};nodes.forEach(n=>nodeMap[n.id]=n);
 const byCols=[nodes.filter(n=>n.col===0),nodes.filter(n=>n.col===1),nodes.filter(n=>n.col===2)];
 byCols[0].forEach((n,i)=>{n.y=i*(nodeH+gapY)+nodeH/2});
 byCols[1].forEach(n=>{const p=LINKS_DATA.filter(l=>l.to===n.id&&nodeMap[l.from]?.col===0).map(l=>nodeMap[l.from]);if(p.length)n.y=p.reduce((s,x)=>s+x.y,0)/p.length;else n.y=byCols[0][Math.floor(byCols[0].length/2)].y});
-rOY(byCols[1]);
-if(byCols[2]&&byCols[2].length){byCols[2].forEach(n=>{const p=LINKS_DATA.filter(l=>l.to===n.id&&nodeMap[l.from]).map(l=>nodeMap[l.from]);if(p.length)n.y=p.reduce((s,x)=>s+x.y,0)/p.length;else if(byCols[1].length)n.y=byCols[1][Math.floor(byCols[1].length/2)].y;else n.y=200});rOY(byCols[2])}
+rOY(byCols[1]);if(byCols[2]&&byCols[2].length){byCols[2].forEach(n=>{const p=LINKS_DATA.filter(l=>l.to===n.id&&nodeMap[l.from]).map(l=>nodeMap[l.from]);if(p.length)n.y=p.reduce((s,x)=>s+x.y,0)/p.length;else if(byCols[1].length)n.y=byCols[1][Math.floor(byCols[1].length/2)].y;else n.y=200});rOY(byCols[2])}
 function rOY(a){a.sort((a,b)=>a.y-b.y);const m=nodeH+gapY;for(let p=0;p<40;p++){let o=true;for(let i=1;i<a.length;i++){const d=a[i].y-a[i-1].y;if(d<m){const s=(m-d)/2+.5;a[i-1].y-=s;a[i].y+=s;o=false}}if(o)break}}
-const maxC=Math.max(...nodes.map(n=>n.col)),colX=[];for(let c=0;c<=maxC;c++)colX.push(padLeft+c*(nodeW+gapX)+nodeW/2);
-nodes.forEach(n=>{n.x=colX[n.col]});
+const maxC=Math.max(...nodes.map(n=>n.col)),colX=[];for(let c=0;c<=maxC;c++)colX.push(padLeft+c*(nodeW+gapX)+nodeW/2);nodes.forEach(n=>{n.x=colX[n.col]});
 const minY=Math.min(...nodes.map(n=>n.y))-nodeH/2;nodes.forEach(n=>n.y-=minY-padTop);
 const svgW=padLeft+(maxC+1)*nodeW+maxC*gapX+padLeft,svgH=Math.max(...nodes.map(n=>n.y+nodeH/2))+20;
-const TC={ALLUSION:"#d4a853",STRUCTURE:"#7ea88e",THEMATIC:"#8a7eb8",INVERSION:"#c45c5c",ONOMASTIC:"#5c8ab8"};
-const AS=AUTHOR_STYLES;const st=getComputedStyle(document.documentElement);
-const svg=d3.select("#chart-container").append("svg").attr("width",svgW).attr("height",svgH);
-const defs=svg.append("defs");
-Object.entries(TC).forEach(([t,c])=>{defs.append("marker").attr("id","a-"+t).attr("viewBox","0 0 10 6").attr("refX",10).attr("refY",3).attr("markerWidth",7).attr("markerHeight",5).attr("orient","auto").append("path").attr("d","M0,0.5 L9,3 L0,5.5Z").attr("fill",c)});
-const nCols=colX.length;const cw=svgW/nCols;
-colX.forEach((cx,i)=>{svg.append("rect").attr("x",i*cw).attr("y",0).attr("width",cw).attr("height",svgH).attr("fill",i%2===0?st.getPropertyValue("--col-dark").trim():st.getPropertyValue("--col-light").trim())});
-
+const TC={ALLUSION:"#d4a853",STRUCTURE:"#7ea88e",THEMATIC:"#8a7eb8",INVERSION:"#c45c5c",ONOMASTIC:"#5c8ab8"};const AS=AUTHOR_STYLES;const st=getComputedStyle(document.documentElement);
+const svg=d3.select("#chart-container").append("svg").attr("width",svgW).attr("height",svgH);const defs=svg.append("defs");Object.entries(TC).forEach(([t,c])=>{defs.append("marker").attr("id","a-"+t).attr("viewBox","0 0 10 6").attr("refX",10).attr("refY",3).attr("markerWidth",7).attr("markerHeight",5).attr("orient","auto").append("path").attr("d","M0,0.5 L9,3 L0,5.5Z").attr("fill",c)});const nCols=colX.length;const cw=svgW/nCols;colX.forEach((cx,i)=>{svg.append("rect").attr("x",i*cw).attr("y",0).attr("width",cw).attr("height",svgH).attr("fill",i%2===0?st.getPropertyValue("--col-dark").trim():st.getPropertyValue("--col-light").trim())});
 function hC(s,t){const sx=s.x+nodeW/2+2,tx=t.x-nodeW/2-2,dx=tx-sx;return"M"+sx+","+s.y+" C"+(sx+dx*.45)+","+s.y+" "+(tx-dx*.45)+","+t.y+" "+tx+","+t.y}
-const linkG=svg.append("g");
-const linkEls=linkG.selectAll("path").data(LINKS_DATA).enter().append("path")
-  .attr("d",d=>hC(nodeMap[d.from],nodeMap[d.to]))
-  .attr("fill","none")
-  .attr("stroke",d=>TC[d.type])
-  .attr("stroke-width",d=>d.type==="STRUCTURE"?3:1.6)
-  .attr("stroke-dasharray",d=>d.type==="THEMATIC"?"6,4":d.type==="ONOMASTIC"?"2,4":"none")
-  .attr("opacity",.5)
-  .attr("marker-end",d=>"url(#a-"+d.type+")");
-
+const linkG=svg.append("g");const linkEls=linkG.selectAll("path").data(LINKS_DATA).enter().append("path").attr("d",d=>hC(nodeMap[d.from],nodeMap[d.to])).attr("fill","none").attr("stroke",d=>TC[d.type]).attr("stroke-width",d=>d.type==="STRUCTURE"?3:1.6).attr("stroke-dasharray",d=>d.type==="THEMATIC"?"6,4":d.type==="ONOMASTIC"?"2,4":"none").attr("opacity",.5).attr("marker-end",d=>"url(#a-"+d.type+")");
 const tooltip=d3.select("#tooltip");const nodeG=svg.append("g");
-const ne=nodeG.selectAll("g").data(nodes).enter().append("g")
-  .attr("transform",d=>"translate("+(d.x-nodeW/2)+","+(d.y-nodeH/2)+")")
-  .style("cursor","pointer");
-ne.append("rect").attr("width",nodeW).attr("height",nodeH).attr("rx",5)
-  .attr("fill",d=>AS[d.author]?.f||"#1a1a1a")
-  .attr("stroke",d=>AS[d.author]?.s||"#333")
-  .attr("stroke-width",d=>d.author==="Данте"?1.8:1);
-ne.append("text").attr("x",nodeW/2).attr("y",17).attr("text-anchor","middle")
-  .attr("fill",st.getPropertyValue('--text').trim())
-  .attr("font-size","10px").attr("font-family","'JetBrains Mono',monospace").attr("font-weight",500)
-  .text(d=>d.label);
-ne.append("text").attr("x",nodeW/2).attr("y",32).attr("text-anchor","middle")
-  .attr("fill",st.getPropertyValue('--text-muted').trim())
-  .attr("font-size","10.5px").attr("font-family","'Cormorant Garamond',serif").attr("font-style","italic")
-  .text(d=>d.sub);
-ne.filter(d=>d.col>0).append("text")
-  .attr("x",nodeW/2).attr("y",nodeH-2).attr("text-anchor","middle")
-  .attr("fill",d=>AS[d.author]?.s||"#555")
-  .attr("font-size","7px").attr("font-family","'JetBrains Mono',monospace").attr("opacity",.7)
-  .text(d=>d.author);
-
-ne.on("mouseover",function(ev,d){
-  const ids=new Set([d.id]);
-  LINKS_DATA.forEach(l=>{if(l.from===d.id||l.to===d.id){ids.add(l.from);ids.add(l.to)}});
-  linkEls.attr("opacity",l=>(l.from===d.id||l.to===d.id)?1:.04)
-    .attr("stroke-width",l=>{const on=l.from===d.id||l.to===d.id;return on?(l.type==="STRUCTURE"?4.5:3):(l.type==="STRUCTURE"?3:1.6)});
-  nodeG.selectAll("g").select("rect")
-    .attr("opacity",function(){return ids.has(d3.select(this.parentNode).datum().id)?1:.1});
-  var parts=LINKS_DATA.filter(l=>l.from===d.id||l.to===d.id).map(l=>{
-    var c=TC[l.type],isF=l.from===d.id,other=isF?nodeMap[l.to]:nodeMap[l.from],desc=isF?l.dF:l.dT,arr=isF?"\u2192":"\u2190";
-    var s='<span class="tt-type" style="background:'+c+'22;color:'+c+';border:1px solid '+c+'44">'+TYPE_UA[l.type]+'</span> '+arr+' <strong>'+other.label+'</strong><br><span class="tt-desc">'+desc+'</span>';
-    return s;
-  });
-  var h=parts.join("<br><br>");
-  if(h)tooltip.html('<strong>'+d.label+'</strong> <em style="color:var(--text-muted)">\u00b7 '+d.author+'</em><br><br>'+h)
-    .style("opacity",1)
-    .style("left",Math.min(ev.clientX+14,innerWidth-440)+"px")
-    .style("top",Math.min(ev.clientY+14,innerHeight-300)+"px");
-}).on("mousemove",function(ev){
-  tooltip.style("left",Math.min(ev.clientX+14,innerWidth-440)+"px")
-    .style("top",Math.min(ev.clientY+14,innerHeight-300)+"px");
-}).on("mouseout",function(){
-  linkEls.attr("opacity",.5).attr("stroke-width",d=>d.type==="STRUCTURE"?3:1.6);
-  nodeG.selectAll("g").select("rect").attr("opacity",1);
-  tooltip.style("opacity",0);
-});
-
-function togglePanel(){
-  document.getElementById('sidePanel').classList.toggle('open');
-  document.getElementById('overlay').classList.toggle('open');
-}
-document.addEventListener('keydown',e=>{
-  if(e.key==='Escape'){
-    document.getElementById('sidePanel').classList.remove('open');
-    document.getElementById('overlay').classList.remove('open');
-  }
-});
-
-(function buildNav(){
-  var roman=function(n){var v=[1000,900,500,400,100,90,50,40,10,9,5,4,1],s=['M','CM','D','CD','C','XC','L','XL','X','IX','V','IV','I'],r='';for(var i=0;i<v.length;i++)while(n>=v[i]){r+=s[i];n-=v[i]}return r};
-  var pad2=function(n){return String(n).padStart(2,'0')};
-  var ct=[{t:'Inferno',a:'Inf.',x:'inf',c:34},{t:'Purgatorio',a:'Purg.',x:'purg',c:33},{t:'Paradiso',a:'Par.',x:'par',c:33}];
-  var cur='inf_03';
-  var container=document.getElementById('panelContent');
-  ct.forEach(function(c){
-    var sec=document.createElement('div');
-    sec.className='side-panel-section';
-    var h3=document.createElement('h3');
-    h3.textContent=c.t;
-    sec.appendChild(h3);
-    for(var i=1;i<=c.c;i++){
-      var f=c.x+'_'+pad2(i);
-      var a=document.createElement('a');
-      a.href=f+'.html';
-      a.textContent=c.a+' '+roman(i);
-      if(f===cur)a.className='current';
-      sec.appendChild(a);
-    }
-    container.appendChild(sec);
-  });
-})();
+const ne=nodeG.selectAll("g").data(nodes).enter().append("g").attr("transform",d=>"translate("+(d.x-nodeW/2)+","+(d.y-nodeH/2)+")").style("cursor","pointer");
+ne.append("rect").attr("width",nodeW).attr("height",nodeH).attr("rx",5).attr("fill",d=>AS[d.author]?.f||"#1a1a1a").attr("stroke",d=>AS[d.author]?.s||"#333").attr("stroke-width",d=>d.author==="Данте"?1.8:1);
+ne.append("text").attr("x",nodeW/2).attr("y",17).attr("text-anchor","middle").attr("fill",st.getPropertyValue('--text').trim()).attr("font-size","10px").attr("font-family","'JetBrains Mono',monospace").attr("font-weight",500).text(d=>d.label);
+ne.append("text").attr("x",nodeW/2).attr("y",32).attr("text-anchor","middle").attr("fill",st.getPropertyValue('--text-muted').trim()).attr("font-size","10.5px").attr("font-family","'Cormorant Garamond',serif").attr("font-style","italic").text(d=>d.sub);
+ne.filter(d=>d.col>0).append("text").attr("x",nodeW/2).attr("y",nodeH-2).attr("text-anchor","middle").attr("fill",d=>AS[d.author]?.s||"#555").attr("font-size","7px").attr("font-family","'JetBrains Mono',monospace").attr("opacity",.7).text(d=>d.author);
+ne.on("mouseover",function(ev,d){const ids=new Set([d.id]);LINKS_DATA.forEach(l=>{if(l.from===d.id||l.to===d.id){ids.add(l.from);ids.add(l.to)}});linkEls.attr("opacity",l=>(l.from===d.id||l.to===d.id)?1:.04).attr("stroke-width",l=>{const on=l.from===d.id||l.to===d.id;return on?(l.type==="STRUCTURE"?4.5:3):(l.type==="STRUCTURE"?3:1.6)});nodeG.selectAll("g").select("rect").attr("opacity",function(){return ids.has(d3.select(this.parentNode).datum().id)?1:.1});
+var parts=LINKS_DATA.filter(l=>l.from===d.id||l.to===d.id).map(l=>{var c=TC[l.type],isF=l.from===d.id,other=isF?nodeMap[l.to]:nodeMap[l.from],desc=isF?l.dF:l.dT,arr=isF?"\u2192":"\u2190";return'<span class="tt-type" style="background:'+c+'22;color:'+c+';border:1px solid '+c+'44">'+TYPE_UA[l.type]+'</span> '+arr+' <strong>'+other.label+'</strong><br><span class="tt-desc">'+desc+'</span>'}).join("<br><br>");
+if(parts)tooltip.html('<strong>'+d.label+'</strong> <em style="color:var(--text-muted)">\u00b7 '+d.author+'</em><br><br>'+parts).style("opacity",1).style("left",Math.min(ev.clientX+14,innerWidth-440)+"px").style("top",Math.min(ev.clientY+14,innerHeight-300)+"px")
+}).on("mousemove",function(ev){tooltip.style("left",Math.min(ev.clientX+14,innerWidth-440)+"px").style("top",Math.min(ev.clientY+14,innerHeight-300)+"px")}).on("mouseout",function(){linkEls.attr("opacity",.5).attr("stroke-width",d=>d.type==="STRUCTURE"?3:1.6);nodeG.selectAll("g").select("rect").attr("opacity",1);tooltip.style("opacity",0)});
+function togglePanel(){document.getElementById('sidePanel').classList.toggle('open');document.getElementById('overlay').classList.toggle('open')}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){document.getElementById('sidePanel').classList.remove('open');document.getElementById('overlay').classList.remove('open')}});
+(function buildNav(){var roman=function(n){var v=[1000,900,500,400,100,90,50,40,10,9,5,4,1],s=['M','CM','D','CD','C','XC','L','XL','X','IX','V','IV','I'],r='';for(var i=0;i<v.length;i++)while(n>=v[i]){r+=s[i];n-=v[i]}return r};var pad2=function(n){return String(n).padStart(2,'0')};var ct=[{t:'Inferno',a:'Inf.',x:'inf',c:34},{t:'Purgatorio',a:'Purg.',x:'purg',c:33},{t:'Paradiso',a:'Par.',x:'par',c:33}];var cur='inf_03';var container=document.getElementById('panelContent');ct.forEach(function(c){var sec=document.createElement('div');sec.className='side-panel-section';var h3=document.createElement('h3');h3.textContent=c.t;sec.appendChild(h3);for(var i=1;i<=c.c;i++){var f=c.x+'_'+pad2(i);var a=document.createElement('a');a.href=f+'.html';a.textContent=c.a+' '+roman(i);if(f===cur)a.className='current';sec.appendChild(a)}container.appendChild(sec)})})(  );
 </script>
 </body>
 </html>
