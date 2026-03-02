@@ -34,49 +34,45 @@
 const TYPE_UA = { ALLUSION:"Алюзія", STRUCTURE:"Структура", THEMATIC:"Тематика", INVERSION:"Інверсія", ONOMASTIC:"Ономастика" };
 
 const LINKS_DATA = [
-  { from:"d_01", to:"aen_vi_724", type:"THEMATIC",
-    dF:"Вергілій продовжує discorso: душа від природи схильна до блага, як вогонь тягнеться вгору. Ця природна тяга ще не є ні доброчесною, ні грішною.",
-    dT:"В Aeneis VI Анхіз: \u00abigneus est ollis vigor et caelestis origo seminibus\u00bb — вогняна сила небесного походження рухає всіма душами." },
-  { from:"d_02", to:"georg_iv", type:"THEMATIC",
-    dF:"Вергілій порівнює природну схильність душі з потягом бджоли до меду — інстинктивне тяжіння, яке ще не є моральним вибором.",
-    dT:"У четвертій Georgica Вергілій описує бджіл як модель упорядкованого суспільства, де кожна істота слідує природному потягу." },
-  { from:"d_03", to:"eccli_15", type:"THEMATIC",
-    dF:"Вергілій: в людині є вроджена здатність відсіювати бажання — \u00abla nobile virtu\u00bb вільної волі, яка робить людину відповідальною.",
-    dT:"Книга Сірахова: \u00abDeus ab initio constituit hominem et reliquit illum in manu consilii sui\u00bb — Бог залишив людині волю вибору." },
-  { from:"d_04", to:"ex_14", type:"ALLUSION",
-    dF:"Ліниві біжать, вигукуючи: Ізраїль перейшов Червоне море, але через ліність не дійшов до Землі Обітованої і загинув у пустелі.",
-    dT:"В Exodus Бог розступає море для Ізраїлю, але покоління, що вийшло з Єгипту, через невіру й млявість загинуло в пустелі." },
-  { from:"d_05", to:"aen_v_700", type:"ALLUSION",
-    dF:"Другий exemplum лінощів: троянці, що через втому залишились на Сицилії з Ацестом, не побачивши Лаціуму.",
-    dT:"В Aeneis V Еней дозволяє втомленим троянцям залишитись з Ацестом. Ті, хто не подолав млявість, не дістались до обіцяного Лаціуму." },
-  { from:"d_06", to:"aen_iii_147", type:"STRUCTURE",
-    dF:"Данте, вислухавши discorso, поринає в сон — повторюваний прийом засинання в ключових моментах переходу.",
-    dT:"В Aeneis Еней засинає перед важливими одкровеннями (сон на Криті, Aen. III). Модель сну як порогу між стадіями подорожі." },
+  { from:"d_01", to:"aen_vi_724_734", type:"THEMATIC",
+    dF:"Вергілій продовжує discorso про любов: душа від природи схильна до блага, як вогонь тягнеться вгору. Ця природна тяга ще не є ні доброчесною, ні грішною.",
+    dT:"В Aeneis VI Анхіз пояснює: «igneus est ollis vigor et caelestis origo seminibus» — вогняна сила небесного походження рухає всіма душами. Данте перетворює це на вчення про природний потяг до блага." },
+  { from:"d_02", to:"georg_iv_149_227", type:"THEMATIC",
+    dF:"Вергілій порівнює природну схильність душі з потягом бджоли до меду — інстинктивне тяжіння до солодкого, яке ще не є моральним вибором.",
+    dT:"У четвертій книзі Georgica Вергілій описує бджіл як модель упорядкованого суспільства, де кожна істота слідує природному потягу. Мотив природного інстинкту як базового рушія." },
+  { from:"d_03", to:"eccli_15_14_17", type:"THEMATIC",
+    dF:"Данте вкладає в уста Вергілія вчення про вроджену здатність (ragion) відсіювати бажання — «la nobile virtu» вільної волі, яка робить людину відповідальною за свої дії.",
+    dT:"Книга Сірахова: «Deus ab initio constituit hominem et reliquit illum in manu consilii sui» — Бог від початку поставив людину і залишив їй волю вибору. Біблійна основа свободи волі." },
+  { from:"d_04", to:"ex_14_21_29", type:"ALLUSION",
+    dF:"Ліниві душі, бігаючи, вигукують exempla ретельності. Перший приклад: Ізраїль, що перейшов море і помер у пустелі, бо не дійшов до Землі Обітованої через ліность.",
+    dT:"В Exodus Бог розступає Червоне море для Ізраїлю, але покоління, що вийшло з Єгипту, через невіру й млявість не дійшло до Обітованої Землі і загинуло в пустелі." },
+  { from:"d_05", to:"aen_v_700_778", type:"ALLUSION",
+    dF:"Другий exemplum лінощів, що вигукують бігуни: троянці, які через втому відмовились продовжувати подорож і залишились на Сицилії з Ацестом, не побачивши Лаціуму.",
+    dT:"В Aeneis V після пожежі кораблів Еней дозволяє втомленим і зневіреним троянцям залишитись з Ацестом на Сицилії. Ті, хто не подолав млявість, не дістались до обіцяного Лаціуму." },
+  { from:"d_06", to:"aen_iii_147_151", type:"STRUCTURE",
+    dF:"Данте, вислухавши discorso, поринає в сон — повторюваний прийом засинання в ключових моментах переходу. Місяць освітлює сцену.",
+    dT:"В Aeneis Еней неодноразово засинає перед важливими одкровеннями (сон на Криті, Aen. III; сон при Тибрі, Aen. VIII). Модель сну як порогу між стадіями подорожі." },
 ];
 
 const NODES_RAW = {
-  d_01:    { label:"XVIII, 19\u201333", sub:"природна тяга до блага",author:"Данте",    col:0 },
-  d_02:    { label:"XVIII, 46\u201348", sub:"бджола і мед",         author:"Данте",    col:0 },
-  d_03:    { label:"XVIII, 62\u201366", sub:"вільна воля",          author:"Данте",    col:0 },
-  d_04:    { label:"XVIII, 99\u2013100",sub:"Червоне море",         author:"Данте",    col:0 },
-  d_05:    { label:"XVIII, 100\u2013102",sub:"троянці й Ацест",     author:"Данте",    col:0 },
-  d_06:    { label:"XVIII, 76\u201378", sub:"Данте засинає",        author:"Данте",    col:0 },
-  aen_vi_724:  { label:"Aen. VI, 724\u2013734", sub:"igneus vigor",        author:"Вергілій", col:1 },
-  georg_iv:    { label:"Georg. IV, 149\u2013227",sub:"бджоли",              author:"Вергілій", col:1 },
-  aen_v_700:   { label:"Aen. V, 700\u2013778",  sub:"Ацест",               author:"Вергілій", col:1 },
-  aen_iii_147: { label:"Aen. III, 147\u2013151", sub:"сон Енея",            author:"Вергілій", col:1 },
-  eccli_15:    { label:"Eccli. 15:14\u201317",   sub:"liberum arbitrium",   author:"Біблія",   col:1 },
-  ex_14:       { label:"Ex. 14:21\u201329",      sub:"Червоне море",        author:"Біблія",   col:1 },
+  "d_01": { label:"XVIII, 19–33", sub:"природна схильність душі до блага", author:"Данте", col:0 },
+  "aen_vi_724_734": { label:"Aen. VI, 724–734", sub:"igneus vigor", author:"Вергілій", col:1 },
+  "d_02": { label:"XVIII, 46–48", sub:"бджола і мед — природний потяг", author:"Данте", col:0 },
+  "georg_iv_149_227": { label:"Georg. IV, 149–227", sub:"бджоли як модель суспільства", author:"Вергілій", col:1 },
+  "d_03": { label:"XVIII, 62–66", sub:"вільна воля як суддя бажань", author:"Данте", col:0 },
+  "eccli_15_14_17": { label:"Eccli. 15:14–17", sub:"Бог поставив людину перед вибором", author:"Біблія", col:1 },
+  "d_04": { label:"XVIII, 99–100", sub:"Червоне море розступилося", author:"Данте", col:0 },
+  "ex_14_21_29": { label:"Ex. 14:21–29", sub:"перехід через Червоне море", author:"Біблія", col:1 },
+  "d_05": { label:"XVIII, 100–102", sub:"троянці, що лишились з Ацестом", author:"Данте", col:0 },
+  "aen_v_700_778": { label:"Aen. V, 700–778", sub:"Ацест приймає лінивих троянців", author:"Вергілій", col:1 },
+  "d_06": { label:"XVIII, 76–78", sub:"Данте засинає — місяць", author:"Данте", col:0 },
+  "aen_iii_147_151": { label:"Aen. III, 147–151", sub:"нічний сон Енея", author:"Вергілій", col:1 },
 };
 
 const AUTHOR_STYLES = {
-  "Данте":    {f:"#281e14",s:"#d4a853"},
+  "Біблія": {f:"#280e0e",s:"#ce5a5a"},
   "Вергілій": {f:"#1a0e28",s:"#a06ece"},
-  "Овідій":   {f:"#280e1a",s:"#ce5a8a"},
-  "Лукан":    {f:"#0e2028",s:"#5abecc"},
-  "Стацій":   {f:"#0e1428",s:"#5a78ce"},
-  "Гомер":    {f:"#28140e",s:"#ce7a5a"},
-  "Біблія":   {f:"#280e0e",s:"#ce5a5a"}
+  "Данте": {f:"#281e14",s:"#d4a853"},
 };
 
 const nodeW=164,nodeH=46,gapY=8,gapX=140,padLeft=70,padTop=20;
@@ -105,7 +101,7 @@ if(parts)tooltip.html('<strong>'+d.label+'</strong> <em style="color:var(--text-
 }).on("mousemove",function(ev){tooltip.style("left",Math.min(ev.clientX+14,innerWidth-440)+"px").style("top",Math.min(ev.clientY+14,innerHeight-300)+"px")}).on("mouseout",function(){linkEls.attr("opacity",.5).attr("stroke-width",d=>d.type==="STRUCTURE"?3:1.6);nodeG.selectAll("g").select("rect").attr("opacity",1);tooltip.style("opacity",0)});
 function togglePanel(){document.getElementById('sidePanel').classList.toggle('open');document.getElementById('overlay').classList.toggle('open')}
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){document.getElementById('sidePanel').classList.remove('open');document.getElementById('overlay').classList.remove('open')}});
-(function buildNav(){var roman=function(n){var v=[1000,900,500,400,100,90,50,40,10,9,5,4,1],s=['M','CM','D','CD','C','XC','L','XL','X','IX','V','IV','I'],r='';for(var i=0;i<v.length;i++)while(n>=v[i]){r+=s[i];n-=v[i]}return r};var pad2=function(n){return String(n).padStart(2,'0')};var ct=[{t:'Inferno',a:'Inf.',x:'inf',c:34},{t:'Purgatorio',a:'Purg.',x:'purg',c:33},{t:'Paradiso',a:'Par.',x:'par',c:33}];var cur='purg_18';var container=document.getElementById('panelContent');ct.forEach(function(c){var sec=document.createElement('div');sec.className='side-panel-section';var h3=document.createElement('h3');h3.textContent=c.t;sec.appendChild(h3);for(var i=1;i<=c.c;i++){var f=c.x+'_'+pad2(i);var a=document.createElement('a');a.href=f+'.html';a.textContent=c.a+' '+roman(i);if(f===cur)a.className='current';sec.appendChild(a)}container.appendChild(sec)})})();
+(function buildNav(){var roman=function(n){var v=[1000,900,500,400,100,90,50,40,10,9,5,4,1],s=['M','CM','D','CD','C','XC','L','XL','X','IX','V','IV','I'],r='';for(var i=0;i<v.length;i++)while(n>=v[i]){r+=s[i];n-=v[i]}return r};var pad2=function(n){return String(n).padStart(2,'0')};var ct=[{t:'Inferno',a:'Inf.',x:'inf',c:34},{t:'Purgatorio',a:'Purg.',x:'purg',c:33},{t:'Paradiso',a:'Par.',x:'par',c:33}];var cur='purg_18';var container=document.getElementById('panelContent');ct.forEach(function(c){var sec=document.createElement('div');sec.className='side-panel-section';var h3=document.createElement('h3');h3.textContent=c.t;sec.appendChild(h3);for(var i=1;i<=c.c;i++){var f=c.x+'_'+pad2(i);var a=document.createElement('a');a.href=f+'.html';a.textContent=c.a+' '+roman(i);if(f===cur)a.className='current';sec.appendChild(a)}container.appendChild(sec)})})(  );
 </script>
 </body>
 </html>
