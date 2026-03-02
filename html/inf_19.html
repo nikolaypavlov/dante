@@ -34,174 +34,84 @@
 const TYPE_UA = { ALLUSION:"Алюзія", STRUCTURE:"Структура", THEMATIC:"Тематика", INVERSION:"Інверсія", ONOMASTIC:"Ономастика" };
 
 const LINKS_DATA = [
-  { from:"d_01", to:"act_8", type:"ALLUSION",
+  { from:"d_01", to:"act_8_9_24", type:"ALLUSION",
     dF:"Данте відкриває пісню інвективою проти Симона Мага та його послідовників, що торгують Божими дарами за золото і срібло.",
-    dT:"У Діяннях Апостолів Симон, маг із Самарії, пропонує апостолам гроші за дар Святого Духа. Петро проклинає його. Звідси термін «симонія»." },
-  { from:"d_02", to:"aen_vi_562", type:"STRUCTURE",
-    dF:"Грішники стирчать з отворів у камені догори ногами, палаючими вогнем. Індивідуальне покарання у фіксованій позиції.",
-    dT:"В Aeneis VI покарання у Тартарі включають фіксовані позиції тіней — прикутих, розпростертих, вічно нерухомих. Модель індивідуального покарання." },
-  { from:"d_03", to:"io_3", type:"INVERSION",
+    dT:"У Діяннях Апостолів Симон, маг із Самарії, пропонує апостолам гроші за дар Святого Духа. Петро проклинає його: «Нехай згине срібло твоє з тобою». Звідси термін «симонія»." },
+  { from:"d_02", to:"aen_vi_562_569", type:"STRUCTURE",
+    dF:"Грішники стирчать з отворів у камені догори ногами, палаючими вогнем. Індивідуальне покарання у фіксованій позиції — модель contrapasso.",
+    dT:"В Aeneis VI покарання у Тартарі включають фіксовані позиції тіней — прикутих, розпростертих, вічно нерухомих. Модель індивідуального покарання в обмеженому просторі." },
+  { from:"d_03", to:"io_3_5", type:"INVERSION",
     dF:"Данте порівнює отвори, в яких стирчать симоніаки, з баптистеріями — купелями для хрещення. Священний обряд перетворюється на знаряддя покарання.",
-    dT:"Євангеліст Іоанн: «Хто не народиться з води і Духа, не може увійти в Царство Боже». Хрещення як порятунок; у Данте — інверсія: купель стає в'язницею." },
-  { from:"d_04", to:"aen_vi_155", type:"STRUCTURE",
-    dF:"Данте схиляється над отвором, щоб почути грішника, як сповідник над засудженим убивцею. Жест вислуховування у зворотній ієрархії.",
+    dT:"Євангеліст Іоанн передає слова Ісуса Никодиму: «Хто не народиться з води і Духа, не може увійти в Царство Боже». Хрещення як порятунок; у Данте — інверсія: купель стає в\'язницею." },
+  { from:"d_04", to:"aen_vi_155_159", type:"STRUCTURE",
+    dF:"Данте схиляється над отвором, щоб почути грішника, як сповідник над засудженим убивцею, якого повертають у яму. Жест вислуховування у зворотній ієрархії.",
     dT:"В Aeneis VI Еней схиляється у жесті шанування та горя. Модель живого, що нахиляється до мертвого, щоб почути або вшанувати." },
-  { from:"d_05", to:"mt_16", type:"INVERSION",
-    dF:"Папа Николай III, стирчачи догори ногами, плутає Данте з Боніфацієм VIII. Наступник Петра — перевернутий, перетворений на пародію апостольського авторитету.",
-    dT:"Христос каже Петрові: «Ти — Петро (скала), і на цій скелі збудую Церкву Мою». У Данте наступники Петра — буквально в пеклі, перевернуті." },
-  { from:"d_06", to:"mt_10", type:"ALLUSION",
-    dF:"Данте звертається до Николая: «Скільки скарбів вимагав Ісус від Петра?» Риторичне питання про безоплатність апостольського дару.",
-    dT:"Ісус посилає апостолів із заповіддю: «Даром отримали — даром давайте». Заборона брати плату за духовні дари." },
-  { from:"d_07", to:"apoc_17", type:"ALLUSION",
-    dF:"Данте ототожнює зіпсуту Церкву з Блудницею Вавилонською: «Ту, що сиділа на водах, блудодіяла з царями». Пряма адаптація біблійного образу.",
-    dT:"В Apocalypsis Блудниця Вавилонська сидить на звірі з сімома головами, тримає золоту чашу. Середньовічна екзегеза ідентифікувала її з корумпованою Церквою." },
-  { from:"d_08", to:"aen_viii_714", type:"THEMATIC",
-    dF:"Данте звинувачує Костянтина: «Ahi, Constantin, di quanto mal fu matre la tua ricchezza!» Дарування як джерело зіпсування Церкви.",
-    dT:"В Aeneis VIII щит Енея зображує майбутню славу Рима під Авґустом — апофеоз translatio imperii. Данте інвертує: передача влади Церкві стала руйнацією." },
+  { from:"d_05", to:"mt_16_18_19", type:"INVERSION",
+    dF:"Папа Николай III, стирчачи догори ногами, плутає Данте з Боніфацієм VIII і дивується, що той «уже тут». Наступник Петра — перевернутий, перетворений на пародію апостольського авторитету.",
+    dT:"Христос каже Петрові: «Ти — Петро (скала), і на цій скелі збудую Церкву Мою, і ворота пекла не подолають її». У Данте наступники Петра — буквально в пеклі, перевернуті." },
+  { from:"d_06", to:"mt_10_8_10", type:"ALLUSION",
+    dF:"Данте звертається до Николая: «Скажи ж, скільки скарбів вимагав Ісус від Петра, перш ніж вручити йому ключі?» Риторичне питання, що вказує на безоплатність апостольського дару.",
+    dT:"Ісус посилає апостолів із заповіддю: «Даром отримали — даром давайте». Заборона брати плату за духовні дари — пряма основа для Дантового звинувачення симоніаків." },
+  { from:"d_07", to:"apoc_17_1_6", type:"ALLUSION",
+    dF:"Данте ототожнює зіпсуту Церкву з Блудницею Вавилонською з Апокаліпсису: «Ту, що сиділа на водах, блудодіяла з царями». Пряма цитата-адаптація біблійного образу.",
+    dT:"В Apocalypsis Блудниця Вавилонська сидить на звірі з сімома головами, тримає золоту чашу, сповнену мерзот. Середньовічна екзегеза ідентифікувала її з корумпованою Церквою." },
+  { from:"d_08", to:"aen_viii_714_728", type:"INVERSION",
+    dF:"Данте звинувачує Костянтина: «Ahi, Constantin, di quanto mal fu matre... la tua ricchezza!» Дарування Костянтина як джерело зіпсування Церкви.",
+    dT:"В Aeneis VIII щит Енея зображує майбутню славу Рима під Авґустом — апофеоз translatio imperii. Данте інвертує: передача влади Церкві стала джерелом руйнації." },
 ];
 
 const NODES_RAW = {
-  d_01:    { label:"XIX, 1\u20136",     sub:"O Simon mago",          author:"Данте",    col:0 },
-  d_02:    { label:"XIX, 10\u201312",   sub:"forate",                author:"Данте",    col:0 },
-  d_03:    { label:"XIX, 10\u201312",   sub:"fonti battesimali",     author:"Данте",    col:0 },
-  d_04:    { label:"XIX, 46\u201351",   sub:"Данте-сповідник",       author:"Данте",    col:0 },
-  d_05:    { label:"XIX, 52\u201357",   sub:"Николай III",           author:"Данте",    col:0 },
-  d_06:    { label:"XIX, 82\u201387",   sub:"mal tolte",             author:"Данте",    col:0 },
-  d_07:    { label:"XIX, 106\u2013111", sub:"Блудниця Вавилонська",  author:"Данте",    col:0 },
-  d_08:    { label:"XIX, 112\u2013114", sub:"Constantino",           author:"Данте",    col:0 },
-  act_8:       { label:"Act. 8:9\u201324",       sub:"Симон Маг",         author:"Біблія",   col:1 },
-  aen_vi_562:  { label:"Aen. VI, 562\u2013569",  sub:"покарання Тартару", author:"Вергілій", col:1 },
-  io_3:        { label:"Io. 3:5",                sub:"народження з води", author:"Біблія",   col:1 },
-  aen_vi_155:  { label:"Aen. VI, 155\u2013159",  sub:"Еней схиляється",   author:"Вергілій", col:1 },
-  mt_16:       { label:"Mt. 16:18\u201319",      sub:"Петро — скала",     author:"Біблія",   col:1 },
-  mt_10:       { label:"Mt. 10:8\u201310",       sub:"даром давайте",     author:"Біблія",   col:1 },
-  apoc_17:     { label:"Apoc. 17:1\u20136",      sub:"meretrix magna",    author:"Біблія",   col:1 },
-  aen_viii_714:{ label:"Aen. VIII, 714\u2013728",sub:"щит Енея",          author:"Вергілій", col:1 },
+  "d_01": { label:"XIX, 1–6", sub:"O Simon mago — інвектива", author:"Данте", col:0 },
+  "act_8_9_24": { label:"Act. 8:9–24", sub:"Симон Маг", author:"Біблія", col:1 },
+  "d_02": { label:"XIX, 10–12", sub:"forate — діри в камені", author:"Данте", col:0 },
+  "aen_vi_562_569": { label:"Aen. VI, 562–569", sub:"Тартар — покарання у тісному просто", author:"Вергілій", col:1 },
+  "d_03": { label:"XIX, 10–12", sub:"fonti battesimali — порівняння з ку", author:"Данте", col:0 },
+  "io_3_5": { label:"Io. 3:5", sub:"народження з води і духа", author:"Біблія", col:1 },
+  "d_04": { label:"XIX, 46–51", sub:"Данте схилений над ямою — як сповід", author:"Данте", col:0 },
+  "aen_vi_155_159": { label:"Aen. VI, 155–159", sub:"Еней схилений над тілом Мізена", author:"Вергілій", col:1 },
+  "d_05": { label:"XIX, 52–57", sub:"Николай III — me\' accorgi?", author:"Данте", col:0 },
+  "mt_16_18_19": { label:"Mt. 16:18–19", sub:"Петро — скала Церкви", author:"Біблія", col:1 },
+  "d_06": { label:"XIX, 82–87", sub:"mal tolte — награбоване", author:"Данте", col:0 },
+  "mt_10_8_10": { label:"Mt. 10:8–10", sub:"даром отримали — даром давайте", author:"Біблія", col:1 },
+  "d_07": { label:"XIX, 106–111", sub:"puttaneggiare — Блудниця Вавилонськ", author:"Данте", col:0 },
+  "apoc_17_1_6": { label:"Apoc. 17:1–6", sub:"meretrix magna — велика Блудниця", author:"Біблія", col:1 },
+  "d_08": { label:"XIX, 112–114", sub:"Constantino — Дарування Костянтина", author:"Данте", col:0 },
+  "aen_viii_714_728": { label:"Aen. VIII, 714–728", sub:"translatio imperii", author:"Вергілій", col:1 },
 };
 
 const AUTHOR_STYLES = {
-  "Данте":    {f:"#281a08",s:"#d4a853"},
+  "Біблія": {f:"#280e0e",s:"#ce5a5a"},
   "Вергілій": {f:"#1a0e28",s:"#a06ece"},
-  "Овідій":   {f:"#280e1a",s:"#ce5a8a"},
-  "Лукан":    {f:"#0e2028",s:"#5abecc"},
-  "Стацій":   {f:"#0e1428",s:"#5a78ce"},
-  "Гомер":    {f:"#28140e",s:"#ce7a5a"},
-  "Біблія":   {f:"#280e0e",s:"#ce5a5a"}
+  "Данте": {f:"#281a08",s:"#d4a853"},
 };
 
 const nodeW=164,nodeH=46,gapY=8,gapX=140,padLeft=70,padTop=20;
-const nodes=Object.entries(NODES_RAW).map(([id,n])=>({id,...n,x:0,y:0}));
-const nodeMap={};nodes.forEach(n=>nodeMap[n.id]=n);
+const nodes=Object.entries(NODES_RAW).map(([id,n])=>({id,...n,x:0,y:0}));const nodeMap={};nodes.forEach(n=>nodeMap[n.id]=n);
 const byCols=[nodes.filter(n=>n.col===0),nodes.filter(n=>n.col===1),nodes.filter(n=>n.col===2)];
 byCols[0].forEach((n,i)=>{n.y=i*(nodeH+gapY)+nodeH/2});
 byCols[1].forEach(n=>{const p=LINKS_DATA.filter(l=>l.to===n.id&&nodeMap[l.from]?.col===0).map(l=>nodeMap[l.from]);if(p.length)n.y=p.reduce((s,x)=>s+x.y,0)/p.length;else n.y=byCols[0][Math.floor(byCols[0].length/2)].y});
-rOY(byCols[1]);
-if(byCols[2]&&byCols[2].length){byCols[2].forEach(n=>{const p=LINKS_DATA.filter(l=>l.to===n.id&&nodeMap[l.from]).map(l=>nodeMap[l.from]);if(p.length)n.y=p.reduce((s,x)=>s+x.y,0)/p.length;else if(byCols[1].length)n.y=byCols[1][Math.floor(byCols[1].length/2)].y;else n.y=200});rOY(byCols[2])}
+rOY(byCols[1]);if(byCols[2]&&byCols[2].length){byCols[2].forEach(n=>{const p=LINKS_DATA.filter(l=>l.to===n.id&&nodeMap[l.from]).map(l=>nodeMap[l.from]);if(p.length)n.y=p.reduce((s,x)=>s+x.y,0)/p.length;else if(byCols[1].length)n.y=byCols[1][Math.floor(byCols[1].length/2)].y;else n.y=200});rOY(byCols[2])}
 function rOY(a){a.sort((a,b)=>a.y-b.y);const m=nodeH+gapY;for(let p=0;p<40;p++){let o=true;for(let i=1;i<a.length;i++){const d=a[i].y-a[i-1].y;if(d<m){const s=(m-d)/2+.5;a[i-1].y-=s;a[i].y+=s;o=false}}if(o)break}}
-const maxC=Math.max(...nodes.map(n=>n.col)),colX=[];for(let c=0;c<=maxC;c++)colX.push(padLeft+c*(nodeW+gapX)+nodeW/2);
-nodes.forEach(n=>{n.x=colX[n.col]});
+const maxC=Math.max(...nodes.map(n=>n.col)),colX=[];for(let c=0;c<=maxC;c++)colX.push(padLeft+c*(nodeW+gapX)+nodeW/2);nodes.forEach(n=>{n.x=colX[n.col]});
 const minY=Math.min(...nodes.map(n=>n.y))-nodeH/2;nodes.forEach(n=>n.y-=minY-padTop);
 const svgW=padLeft+(maxC+1)*nodeW+maxC*gapX+padLeft,svgH=Math.max(...nodes.map(n=>n.y+nodeH/2))+20;
-const TC={ALLUSION:"#d4a853",STRUCTURE:"#7ea88e",THEMATIC:"#8a7eb8",INVERSION:"#c45c5c",ONOMASTIC:"#5c8ab8"};
-const AS=AUTHOR_STYLES;const st=getComputedStyle(document.documentElement);
-const svg=d3.select("#chart-container").append("svg").attr("width",svgW).attr("height",svgH);
-const defs=svg.append("defs");
-Object.entries(TC).forEach(([t,c])=>{defs.append("marker").attr("id","a-"+t).attr("viewBox","0 0 10 6").attr("refX",10).attr("refY",3).attr("markerWidth",7).attr("markerHeight",5).attr("orient","auto").append("path").attr("d","M0,0.5 L9,3 L0,5.5Z").attr("fill",c)});
-const nCols=colX.length;const cw=svgW/nCols;
-colX.forEach((cx,i)=>{svg.append("rect").attr("x",i*cw).attr("y",0).attr("width",cw).attr("height",svgH).attr("fill",i%2===0?st.getPropertyValue("--col-dark").trim():st.getPropertyValue("--col-light").trim())});
-
+const TC={ALLUSION:"#d4a853",STRUCTURE:"#7ea88e",THEMATIC:"#8a7eb8",INVERSION:"#c45c5c",ONOMASTIC:"#5c8ab8"};const AS=AUTHOR_STYLES;const st=getComputedStyle(document.documentElement);
+const svg=d3.select("#chart-container").append("svg").attr("width",svgW).attr("height",svgH);const defs=svg.append("defs");Object.entries(TC).forEach(([t,c])=>{defs.append("marker").attr("id","a-"+t).attr("viewBox","0 0 10 6").attr("refX",10).attr("refY",3).attr("markerWidth",7).attr("markerHeight",5).attr("orient","auto").append("path").attr("d","M0,0.5 L9,3 L0,5.5Z").attr("fill",c)});const nCols=colX.length;const cw=svgW/nCols;colX.forEach((cx,i)=>{svg.append("rect").attr("x",i*cw).attr("y",0).attr("width",cw).attr("height",svgH).attr("fill",i%2===0?st.getPropertyValue("--col-dark").trim():st.getPropertyValue("--col-light").trim())});
 function hC(s,t){const sx=s.x+nodeW/2+2,tx=t.x-nodeW/2-2,dx=tx-sx;return"M"+sx+","+s.y+" C"+(sx+dx*.45)+","+s.y+" "+(tx-dx*.45)+","+t.y+" "+tx+","+t.y}
-const linkG=svg.append("g");
-const linkEls=linkG.selectAll("path").data(LINKS_DATA).enter().append("path")
-  .attr("d",d=>hC(nodeMap[d.from],nodeMap[d.to]))
-  .attr("fill","none")
-  .attr("stroke",d=>TC[d.type])
-  .attr("stroke-width",d=>d.type==="STRUCTURE"?3:1.6)
-  .attr("stroke-dasharray",d=>d.type==="THEMATIC"?"6,4":d.type==="ONOMASTIC"?"2,4":"none")
-  .attr("opacity",.5)
-  .attr("marker-end",d=>"url(#a-"+d.type+")");
-
+const linkG=svg.append("g");const linkEls=linkG.selectAll("path").data(LINKS_DATA).enter().append("path").attr("d",d=>hC(nodeMap[d.from],nodeMap[d.to])).attr("fill","none").attr("stroke",d=>TC[d.type]).attr("stroke-width",d=>d.type==="STRUCTURE"?3:1.6).attr("stroke-dasharray",d=>d.type==="THEMATIC"?"6,4":d.type==="ONOMASTIC"?"2,4":"none").attr("opacity",.5).attr("marker-end",d=>"url(#a-"+d.type+")");
 const tooltip=d3.select("#tooltip");const nodeG=svg.append("g");
-const ne=nodeG.selectAll("g").data(nodes).enter().append("g")
-  .attr("transform",d=>"translate("+(d.x-nodeW/2)+","+(d.y-nodeH/2)+")")
-  .style("cursor","pointer");
-ne.append("rect").attr("width",nodeW).attr("height",nodeH).attr("rx",5)
-  .attr("fill",d=>AS[d.author]?.f||"#1a1a1a")
-  .attr("stroke",d=>AS[d.author]?.s||"#333")
-  .attr("stroke-width",d=>d.author==="Данте"?1.8:1);
-ne.append("text").attr("x",nodeW/2).attr("y",17).attr("text-anchor","middle")
-  .attr("fill",st.getPropertyValue('--text').trim())
-  .attr("font-size","10px").attr("font-family","'JetBrains Mono',monospace").attr("font-weight",500)
-  .text(d=>d.label);
-ne.append("text").attr("x",nodeW/2).attr("y",32).attr("text-anchor","middle")
-  .attr("fill",st.getPropertyValue('--text-muted').trim())
-  .attr("font-size","10.5px").attr("font-family","'Cormorant Garamond',serif").attr("font-style","italic")
-  .text(d=>d.sub);
-ne.filter(d=>d.col>0).append("text")
-  .attr("x",nodeW/2).attr("y",nodeH-2).attr("text-anchor","middle")
-  .attr("fill",d=>AS[d.author]?.s||"#555")
-  .attr("font-size","7px").attr("font-family","'JetBrains Mono',monospace").attr("opacity",.7)
-  .text(d=>d.author);
-
-ne.on("mouseover",function(ev,d){
-  const ids=new Set([d.id]);
-  LINKS_DATA.forEach(l=>{if(l.from===d.id||l.to===d.id){ids.add(l.from);ids.add(l.to)}});
-  linkEls.attr("opacity",l=>(l.from===d.id||l.to===d.id)?1:.04)
-    .attr("stroke-width",l=>{const on=l.from===d.id||l.to===d.id;return on?(l.type==="STRUCTURE"?4.5:3):(l.type==="STRUCTURE"?3:1.6)});
-  nodeG.selectAll("g").select("rect")
-    .attr("opacity",function(){return ids.has(d3.select(this.parentNode).datum().id)?1:.1});
-  var parts=LINKS_DATA.filter(l=>l.from===d.id||l.to===d.id).map(l=>{
-    var c=TC[l.type],isF=l.from===d.id,other=isF?nodeMap[l.to]:nodeMap[l.from],desc=isF?l.dF:l.dT,arr=isF?"\u2192":"\u2190";
-    return'<span class="tt-type" style="background:'+c+'22;color:'+c+';border:1px solid '+c+'44">'+TYPE_UA[l.type]+'</span> '+arr+' <strong>'+other.label+'</strong><br><span class="tt-desc">'+desc+'</span>';
-  });
-  var h=parts.join("<br><br>");
-  if(h)tooltip.html('<strong>'+d.label+'</strong> <em style="color:var(--text-muted)">\u00b7 '+d.author+'</em><br><br>'+h)
-    .style("opacity",1)
-    .style("left",Math.min(ev.clientX+14,innerWidth-440)+"px")
-    .style("top",Math.min(ev.clientY+14,innerHeight-300)+"px");
-}).on("mousemove",function(ev){
-  tooltip.style("left",Math.min(ev.clientX+14,innerWidth-440)+"px")
-    .style("top",Math.min(ev.clientY+14,innerHeight-300)+"px");
-}).on("mouseout",function(){
-  linkEls.attr("opacity",.5).attr("stroke-width",d=>d.type==="STRUCTURE"?3:1.6);
-  nodeG.selectAll("g").select("rect").attr("opacity",1);
-  tooltip.style("opacity",0);
-});
-
-function togglePanel(){
-  document.getElementById('sidePanel').classList.toggle('open');
-  document.getElementById('overlay').classList.toggle('open');
-}
-document.addEventListener('keydown',e=>{
-  if(e.key==='Escape'){
-    document.getElementById('sidePanel').classList.remove('open');
-    document.getElementById('overlay').classList.remove('open');
-  }
-});
-
-(function buildNav(){
-  var roman=function(n){var v=[1000,900,500,400,100,90,50,40,10,9,5,4,1],s=['M','CM','D','CD','C','XC','L','XL','X','IX','V','IV','I'],r='';for(var i=0;i<v.length;i++)while(n>=v[i]){r+=s[i];n-=v[i]}return r};
-  var pad2=function(n){return String(n).padStart(2,'0')};
-  var ct=[{t:'Inferno',a:'Inf.',x:'inf',c:34},{t:'Purgatorio',a:'Purg.',x:'purg',c:33},{t:'Paradiso',a:'Par.',x:'par',c:33}];
-  var cur='inf_19';
-  var container=document.getElementById('panelContent');
-  ct.forEach(function(c){
-    var sec=document.createElement('div');
-    sec.className='side-panel-section';
-    var h3=document.createElement('h3');
-    h3.textContent=c.t;
-    sec.appendChild(h3);
-    for(var i=1;i<=c.c;i++){
-      var f=c.x+'_'+pad2(i);
-      var a=document.createElement('a');
-      a.href=f+'.html';
-      a.textContent=c.a+' '+roman(i);
-      if(f===cur)a.className='current';
-      sec.appendChild(a);
-    }
-    container.appendChild(sec);
-  });
-})();
+const ne=nodeG.selectAll("g").data(nodes).enter().append("g").attr("transform",d=>"translate("+(d.x-nodeW/2)+","+(d.y-nodeH/2)+")").style("cursor","pointer");
+ne.append("rect").attr("width",nodeW).attr("height",nodeH).attr("rx",5).attr("fill",d=>AS[d.author]?.f||"#1a1a1a").attr("stroke",d=>AS[d.author]?.s||"#333").attr("stroke-width",d=>d.author==="Данте"?1.8:1);
+ne.append("text").attr("x",nodeW/2).attr("y",17).attr("text-anchor","middle").attr("fill",st.getPropertyValue('--text').trim()).attr("font-size","10px").attr("font-family","'JetBrains Mono',monospace").attr("font-weight",500).text(d=>d.label);
+ne.append("text").attr("x",nodeW/2).attr("y",32).attr("text-anchor","middle").attr("fill",st.getPropertyValue('--text-muted').trim()).attr("font-size","10.5px").attr("font-family","'Cormorant Garamond',serif").attr("font-style","italic").text(d=>d.sub);
+ne.filter(d=>d.col>0).append("text").attr("x",nodeW/2).attr("y",nodeH-2).attr("text-anchor","middle").attr("fill",d=>AS[d.author]?.s||"#555").attr("font-size","7px").attr("font-family","'JetBrains Mono',monospace").attr("opacity",.7).text(d=>d.author);
+ne.on("mouseover",function(ev,d){const ids=new Set([d.id]);LINKS_DATA.forEach(l=>{if(l.from===d.id||l.to===d.id){ids.add(l.from);ids.add(l.to)}});linkEls.attr("opacity",l=>(l.from===d.id||l.to===d.id)?1:.04).attr("stroke-width",l=>{const on=l.from===d.id||l.to===d.id;return on?(l.type==="STRUCTURE"?4.5:3):(l.type==="STRUCTURE"?3:1.6)});nodeG.selectAll("g").select("rect").attr("opacity",function(){return ids.has(d3.select(this.parentNode).datum().id)?1:.1});
+var parts=LINKS_DATA.filter(l=>l.from===d.id||l.to===d.id).map(l=>{var c=TC[l.type],isF=l.from===d.id,other=isF?nodeMap[l.to]:nodeMap[l.from],desc=isF?l.dF:l.dT,arr=isF?"\u2192":"\u2190";return'<span class="tt-type" style="background:'+c+'22;color:'+c+';border:1px solid '+c+'44">'+TYPE_UA[l.type]+'</span> '+arr+' <strong>'+other.label+'</strong><br><span class="tt-desc">'+desc+'</span>'}).join("<br><br>");
+if(parts)tooltip.html('<strong>'+d.label+'</strong> <em style="color:var(--text-muted)">\u00b7 '+d.author+'</em><br><br>'+parts).style("opacity",1).style("left",Math.min(ev.clientX+14,innerWidth-440)+"px").style("top",Math.min(ev.clientY+14,innerHeight-300)+"px")
+}).on("mousemove",function(ev){tooltip.style("left",Math.min(ev.clientX+14,innerWidth-440)+"px").style("top",Math.min(ev.clientY+14,innerHeight-300)+"px")}).on("mouseout",function(){linkEls.attr("opacity",.5).attr("stroke-width",d=>d.type==="STRUCTURE"?3:1.6);nodeG.selectAll("g").select("rect").attr("opacity",1);tooltip.style("opacity",0)});
+function togglePanel(){document.getElementById('sidePanel').classList.toggle('open');document.getElementById('overlay').classList.toggle('open')}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){document.getElementById('sidePanel').classList.remove('open');document.getElementById('overlay').classList.remove('open')}});
+(function buildNav(){var roman=function(n){var v=[1000,900,500,400,100,90,50,40,10,9,5,4,1],s=['M','CM','D','CD','C','XC','L','XL','X','IX','V','IV','I'],r='';for(var i=0;i<v.length;i++)while(n>=v[i]){r+=s[i];n-=v[i]}return r};var pad2=function(n){return String(n).padStart(2,'0')};var ct=[{t:'Inferno',a:'Inf.',x:'inf',c:34},{t:'Purgatorio',a:'Purg.',x:'purg',c:33},{t:'Paradiso',a:'Par.',x:'par',c:33}];var cur='inf_19';var container=document.getElementById('panelContent');ct.forEach(function(c){var sec=document.createElement('div');sec.className='side-panel-section';var h3=document.createElement('h3');h3.textContent=c.t;sec.appendChild(h3);for(var i=1;i<=c.c;i++){var f=c.x+'_'+pad2(i);var a=document.createElement('a');a.href=f+'.html';a.textContent=c.a+' '+roman(i);if(f===cur)a.className='current';sec.appendChild(a)}container.appendChild(sec)})})(  );
 </script>
 </body>
 </html>
