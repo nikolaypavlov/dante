@@ -1,0 +1,24 @@
+# Repo-specific Airut configuration.
+#
+# Loaded from the git mirror (main branch) at the start of each task.
+# Changes take effect after merge to main without server restart.
+
+default_model: opus
+
+# Container resource limits (all optional — omitted fields mean no limit).
+# resource_limits:
+#   timeout: 6000       # Max execution time in seconds (>= 10)
+#   memory: "4g"        # Memory limit, e.g. "2g", "512m"
+#   cpus: 2             # CPU limit (float, e.g. 1.5 for 1.5 cores)
+#   pids_limit: 256     # Process limit (fork bomb protection)
+
+network:
+  sandbox_enabled: true
+
+container_env:
+  # Claude authentication (optional; OAuth token takes precedence if both set).
+  CLAUDE_CODE_OAUTH_TOKEN: !secret? CLAUDE_CODE_OAUTH_TOKEN
+  ANTHROPIC_API_KEY: !secret? ANTHROPIC_API_KEY
+
+  # GitHub token for git operations inside the container.
+  GH_TOKEN: !secret GH_TOKEN

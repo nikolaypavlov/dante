@@ -1,0 +1,76 @@
+# Network allowlist for Claude Code containers.
+#
+# Only hosts listed here are reachable from inside the container.
+# All other traffic is blocked by the mitmproxy-based network proxy.
+#
+# To request access to a new host, add it here and submit a PR.
+# See doc/network-sandbox.md for details.
+
+domains: []
+
+url_prefixes:
+  # Anthropic API — path-restricted
+  - host: api.anthropic.com
+    path: /v1/messages*
+    methods: [POST]
+  - host: api.anthropic.com
+    path: /api/oauth/*
+    methods: [GET]
+  - host: api.anthropic.com
+    path: /api/event_logging/*
+    methods: [POST]
+  - host: api.anthropic.com
+    path: /api/eval/*
+    methods: [POST]
+  - host: api.anthropic.com
+    path: /api/claude_code_*
+    methods: [GET]
+
+  # Claude telemetry and error reporting (POST-only)
+  - host: statsig.anthropic.com
+    path: ""
+    methods: [POST]
+  - host: sentry.io
+    path: ""
+    methods: [POST]
+
+  # Python packages — read-only (uv sync in entrypoint)
+  - host: pypi.org
+    path: ""
+    methods: [GET, HEAD]
+  - host: files.pythonhosted.org
+    path: ""
+    methods: [GET, HEAD]
+
+  # GitHub — restricted to dante repository
+  - host: github.com
+    path: /nikolaypavlov/dante*
+    methods: [GET, HEAD, POST]
+  - host: api.github.com
+    path: /repos/nikolaypavlov/dante*
+  - host: api.github.com
+    path: /graphql
+    methods: [POST]
+  - host: uploads.github.com
+    path: /repos/nikolaypavlov/dante*
+    methods: [POST]
+  - host: raw.githubusercontent.com
+    path: /nikolaypavlov/dante*
+    methods: [GET, HEAD]
+  - host: objects.githubusercontent.com
+    path: /nikolaypavlov/dante*
+    methods: [GET, HEAD]
+  - host: results-receiver.actions.githubusercontent.com
+    path: /rest/runs*
+    methods: [GET, POST]
+
+  # CDN dependencies used by HTML visualizations (read-only)
+  - host: cdn.jsdelivr.net
+    path: /npm/d3*
+    methods: [GET, HEAD]
+  - host: fonts.googleapis.com
+    path: ""
+    methods: [GET, HEAD]
+  - host: fonts.gstatic.com
+    path: ""
+    methods: [GET, HEAD]
