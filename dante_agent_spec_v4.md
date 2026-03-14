@@ -511,7 +511,7 @@ Exit code 0 = валідація пройдена.
 4. **Синхронність з JSON:** кількість зв'язків у LINKS_DATA = кількості connections у JSON (з урахуванням chain-розщеплення)
 5. **Тема:** CSS-клас на `<html>` відповідає cantica (default/purgatorio/paradiso)
 6. **Навігація:** Unicode стрілки ← → (не `&larr;`/`&rarr;`); prev/next посилання правильні; `cur` змінна у buildNav відповідає файлу
-7. **Константи:** `nodeW=164, nodeH=46, gapY=8, gapX=140, padLeft=70, padTop=20`
+7. **Константи:** `nodeW=230, nodeH=60, gapY=11, gapX=130, padLeft=70, padTop=20`
 8. **Данте-вузли:** префікс `d_01`, `d_02`, ... (не `p_` або інші варіації)
 7. Кожен зв'язок має рівно один тип
 8. Кожен зв'язок має два описи: `desc_dante` та `desc_source`
