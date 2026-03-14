@@ -24,18 +24,23 @@ Each canto is processed independently. 100 total cantos: Inferno (34) + Purgator
 - `inf_xxvi_tree_v4.html` — Reference HTML template (fully annotated)
 - `dante-theme.css` — Shared CSS with three theme variants via custom properties
 - `json/` — Generated JSON data files (e.g., `json/inf_01.json`)
-- `html/` — Generated HTML visualizations (e.g., `html/inf_01.html`); CSS path: `../dante-theme.css`
+- `html/` — Generated HTML visualizations (gitignored, built by `render_html.py`)
+- `dist/` — Flat deployment build for Cloudflare (gitignored, built by `render_html.py --dist`)
+- `scripts/render_html.py` — Pass 3 automation: JSON -> HTML via Jinja2 templates
+- `scripts/stats.py` — Aggregate analytics across all canto JSON files
+- `scripts/validate_json.py` — Schema + semantic validation with `--check-sync` flag
+- `templates/canto.html.j2` — Jinja2 template for canto HTML pages
+- `templates/index.html.j2` — Jinja2 template for index/navigation page
+- `Makefile` — Common targets: validate, render, dist, stats, serve, watch
 - Example outputs: `inf_20.html`, `purg_01.html`, `par_10.html` (reference, root level)
 
 ### Data Flow
 
 ```
-Canto text → Pass 1 (JSON) → Pass 2 (verified JSON) → Pass 3 (HTML)
+Canto text → Pass 1 (JSON) → Pass 2 (verified JSON) → Pass 3 (render_html.py)
                                                           ↓
-                                          html/{prefix}_{nn}.html
-                                              (inf_01..inf_34,
-                                               purg_01..purg_33,
-                                               par_01..par_33)
+                                    html/{prefix}_{nn}.html  (local dev)
+                                    dist/{prefix}_{nn}.html  (deployment)
 ```
 
 ## Tech Stack
@@ -43,7 +48,9 @@ Canto text → Pass 1 (JSON) → Pass 2 (verified JSON) → Pass 3 (HTML)
 - **D3.js v7.8.5** — force-directed horizontal tree graphs (CDN-loaded)
 - **CSS Custom Properties** — three visual themes (Inferno default, Purgatorio, Paradiso)
 - **Fonts:** Cormorant Garamond (body), JetBrains Mono (labels) — Google Fonts CDN
-- No backend, no build toolchain — pure static site
+- **Jinja2** — HTML templating for Pass 3 rendering
+- **Deployment:** Cloudflare Workers (auto-deploy from GitHub on push to main)
+- **CI:** GitHub Actions validates JSON and renders HTML on push/PR
 
 ## Five Connection Types
 
@@ -86,7 +93,14 @@ Key d3 constants: `nodeW=164, nodeH=46, gapY=8, gapX=140, padLeft=70, padTop=20`
 
 ## JSON / HTML Sync
 
-JSON and HTML are not auto-generated from each other. When editing connections, always update both `json/{canto}.json` and `html/{canto}.html` (NODES_RAW + LINKS_DATA). Run `uv run scripts/validate_json.py` after JSON changes.
+HTML is auto-generated from JSON via `uv run scripts/render_html.py`. When editing connections, update `json/{canto}.json` and re-render. Run `uv run scripts/validate_json.py` after JSON changes.
+
+Common commands:
+- `make validate` — validate all JSON files
+- `make render` — regenerate html/ from JSON
+- `make dist` — build flat site into dist/ for deployment
+- `make stats` — show aggregate analytics
+- `make serve` — start local HTTP server on port 8000
 
 ## Critical Constraints
 
