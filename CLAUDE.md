@@ -89,7 +89,7 @@ JSON must pass validation before proceeding to Pass 3 (HTML rendering).
 
 Three equal-width columns: **Dante (col 0, dark)** → **Intermediaries (col 1, light)** → **Primary Sources (col 2, dark)**. Node positioning uses Y-averaging from parent connections. Tooltip shows `desc_dante` when hovering Dante nodes, `desc_source` when hovering source nodes. Navigation: hamburger side panel (100 cantos) + ← → arrows.
 
-Key d3 constants: `nodeW=164, nodeH=46, gapY=8, gapX=140, padLeft=70, padTop=20`.
+Key d3 constants: `nodeW=230, nodeH=60, gapY=11, gapX=130, padLeft=70, padTop=20`.
 
 ## JSON / HTML Sync
 
