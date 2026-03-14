@@ -7,9 +7,9 @@
     {
       "id": "purg_xx_01",
       "dante_ref": "XX, 19–24",
-      "dante_sub": "Марія в стайні — exemplum бідності",
+      "dante_sub": "Марія в стайні",
       "source_ref": "Lc. 2:7",
-      "source_sub": "posuit eum in praesepio",
+      "source_sub": "поклала його в ясла",
       "source_author": "Біблія",
       "type": "ALLUSION",
       "confidence": "HIGH",
@@ -20,7 +20,7 @@
     {
       "id": "purg_xx_02",
       "dante_ref": "XX, 25–27",
-      "dante_sub": "Фабрицій — exemplum римської чесноти",
+      "dante_sub": "Фабрицій",
       "source_ref": "Aen. VI, 843–846",
       "source_sub": "Фабрицій серед праведних душ",
       "source_author": "Вергілій",

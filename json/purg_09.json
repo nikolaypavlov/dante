@@ -7,9 +7,9 @@
     {
       "id": "purg_ix_01",
       "dante_ref": "IX, 1–9",
-      "dante_sub": "Аврора — la concubina di Titone antico",
+      "dante_sub": "Аврора",
       "source_ref": "Met. IX, 421–424",
-      "source_sub": "Aurora / Tithonus",
+      "source_sub": "Аврора і Тітон",
       "source_author": "Овідій",
       "type": "ALLUSION",
       "confidence": "HIGH",
@@ -85,7 +85,7 @@
     {
       "id": "purg_ix_07",
       "dante_ref": "IX, 112–114",
-      "dante_sub": "сім P на чолі — septem peccata",
+      "dante_sub": "сім P на чолі",
       "source_ref": "Apoc. 7:3",
       "source_sub": "печать на чолах рабів Божих",
       "source_author": "Біблія",
@@ -113,7 +113,7 @@
       "dante_ref": "IX, 133–138",
       "dante_sub": "брама скрипить — Тарпейська скеля",
       "source_ref": "Phars. III, 153–168",
-      "source_sub": "aerarium на Тарпейській скелі",
+      "source_sub": "скарбниця на Тарпейській скелі",
       "source_author": "Лукан",
       "type": "ALLUSION",
       "confidence": "HIGH",
@@ -124,7 +124,7 @@
     {
       "id": "purg_ix_10",
       "dante_ref": "IX, 139–145",
-      "dante_sub": "Te Deum laudamus — спів за брамою",
+      "dante_sub": "спів за брамою",
       "source_ref": "Aen. VI, 637–644",
       "source_sub": "спів праведних в Елісії",
       "source_author": "Вергілій",

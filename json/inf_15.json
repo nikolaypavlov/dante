@@ -7,7 +7,7 @@
     {
       "id": "inf_xv_01",
       "dante_ref": "XV, 4–9",
-      "dante_sub": "argini — дамби Фландрії та Падуї",
+      "dante_sub": "дамби Фландрії та Падуї",
       "source_ref": "Georg. I, 237–239",
       "source_sub": "гідравлічні роботи",
       "source_author": "Вергілій",
@@ -33,7 +33,7 @@
     {
       "id": "inf_xv_03",
       "dante_ref": "XV, 22–30",
-      "dante_sub": "впізнання обличчя — cotto aspetto",
+      "dante_sub": "впізнання обличчя",
       "source_ref": "Aen. VI, 340–346",
       "source_sub": "Еней впізнає Палінура",
       "source_author": "Вергілій",
@@ -59,7 +59,7 @@
     {
       "id": "inf_xv_05",
       "dante_ref": "XV, 55–60",
-      "dante_sub": "вчитель — la cara e buona imagine paterna",
+      "dante_sub": "вчитель",
       "source_ref": "Aen. VI, 679–683",
       "source_sub": "Анхіз — батьківський образ",
       "source_author": "Вергілій",
@@ -85,7 +85,7 @@
     {
       "id": "inf_xv_07",
       "dante_ref": "XV, 61–64",
-      "dante_sub": "se tu segui tua stella — доля і зірка",
+      "dante_sub": "доля і зірка",
       "source_ref": "Aen. II, 692–704",
       "source_sub": "зірка Юла — знак долі",
       "source_author": "Вергілій",
@@ -98,7 +98,7 @@
     {
       "id": "inf_xv_08",
       "dante_ref": "XV, 73–78",
-      "dante_sub": "gente ingrata — невдячний народ Флоренції",
+      "dante_sub": "невдячний народ Флоренції",
       "source_ref": "Phars. I, 1–7",
       "source_sub": "Рим, що знищує себе",
       "source_author": "Лукан",
@@ -111,7 +111,7 @@
     {
       "id": "inf_xv_09",
       "dante_ref": "XV, 82–87",
-      "dante_sub": "Данте — la fortuna / l'essilio",
+      "dante_sub": "Данте",
       "source_ref": "Aen. VI, 756–886",
       "source_sub": "Анхіз показує долю Рима",
       "source_author": "Вергілій",
@@ -124,9 +124,9 @@
     {
       "id": "inf_xv_10",
       "dante_ref": "XV, 30",
-      "dante_sub": "Брунетто — ser Brunetto",
+      "dante_sub": "Брунетто",
       "source_ref": "Tesoretto, 1–30",
-      "source_sub": "пролог Tesoretto",
+      "source_sub": "пролог Тезоретто",
       "source_author": "Брунетто Латіні",
       "type": "ONOMASTIC",
       "confidence": "HIGH",
@@ -137,9 +137,9 @@
     {
       "id": "inf_xv_11",
       "dante_ref": "XV, 119–120",
-      "dante_sub": "il Tesoro — книга як безсмертя",
+      "dante_sub": "книга як безсмертя",
       "source_ref": "Li Livres dou Tresor, I, 1–3",
-      "source_sub": "пролог Tresor",
+      "source_sub": "пролог Скарбниці",
       "source_author": "Брунетто Латіні",
       "type": "ALLUSION",
       "confidence": "HIGH",
@@ -163,7 +163,7 @@
     {
       "id": "inf_xv_13",
       "dante_ref": "XV, 121–124",
-      "dante_sub": "clerci e litterati — клірики та літератори",
+      "dante_sub": "клірики та літератори",
       "source_ref": "Aen. VI, 660–665",
       "source_sub": "Мусей та поети в Елісеї",
       "source_author": "Вергілій",

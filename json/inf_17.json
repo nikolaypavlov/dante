@@ -7,7 +7,7 @@
     {
       "id": "inf_xvii_01",
       "dante_ref": "XVII, 1–3",
-      "dante_sub": "la fiera con la coda aguzza — Ґеріон",
+      "dante_sub": "Ґеріон",
       "source_ref": "Aen. VI, 285–289",
       "source_sub": "монстри при вході до Аїду",
       "source_author": "Вергілій",
@@ -20,7 +20,7 @@
     {
       "id": "inf_xvii_02",
       "dante_ref": "XVII, 10–15",
-      "dante_sub": "faccia d'uom giusto — обличчя праведника",
+      "dante_sub": "обличчя праведника",
       "source_ref": "Apoc. 9:7–10",
       "source_sub": "сарана з обличчям людини",
       "source_author": "Біблія",
@@ -46,7 +46,7 @@
     {
       "id": "inf_xvii_04",
       "dante_ref": "XVII, 16–18",
-      "dante_sub": "nodi e rotelle — візерунки на шкурі",
+      "dante_sub": "візерунки на шкурі",
       "source_ref": "Met. VI, 127–145",
       "source_sub": "тканина Арахни",
       "source_author": "Овідій",
@@ -72,7 +72,7 @@
     {
       "id": "inf_xvii_06",
       "dante_ref": "XVII, 106–108",
-      "dante_sub": "Fetonte — порівняння зі страхом Фаетона",
+      "dante_sub": "порівняння зі страхом Фаетона",
       "source_ref": "Met. II, 150–324",
       "source_sub": "Фаетон на колісниці Сонця",
       "source_author": "Овідій",
@@ -87,7 +87,7 @@
       "dante_ref": "XVII, 115–126",
       "dante_sub": "спіральне зниження Ґеріона",
       "source_ref": "Aen. VI, 126–131",
-      "source_sub": "facilis descensus Averno",
+      "source_sub": "легкий спуск до Аверну",
       "source_author": "Вергілій",
       "type": "STRUCTURE",
       "confidence": "MEDIUM",
@@ -98,7 +98,7 @@
     {
       "id": "inf_xvii_08",
       "dante_ref": "XVII, 55–57",
-      "dante_sub": "borse — гаманці лихварів",
+      "dante_sub": "гаманці лихварів",
       "source_ref": "Lc. 6:34–35",
       "source_sub": "позичайте, не сподіваючись",
       "source_author": "Біблія",

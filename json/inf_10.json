@@ -7,7 +7,7 @@
     {
       "id": "inf_x_01",
       "dante_ref": "X, 11–15",
-      "dante_sub": "Epicuro e suoi seguaci",
+      "dante_sub": "Епікур та його послідовники",
       "source_ref": "Aen. VI, 735–742",
       "source_sub": "душі, що заперечують потойбіччя",
       "source_author": "Вергілій",
@@ -33,7 +33,7 @@
     {
       "id": "inf_x_03",
       "dante_ref": "X, 32–33",
-      "dante_sub": "com'avesse l'inferno a gran dispitto",
+      "dante_sub": "зневага Фаринати до Пекла",
       "source_ref": "Phars. I, 128–135",
       "source_sub": "Цезар — людина без страху",
       "source_author": "Лукан",
@@ -72,9 +72,9 @@
     {
       "id": "inf_x_06",
       "dante_ref": "X, 58–60",
-      "dante_sub": "forse cui Guido vostro ebbe a disdegno",
+      "dante_sub": "можливо, ваш Ґвідо зневажив",
       "source_ref": "Aen. VI, 851–853",
-      "source_sub": "tu regere imperio populos — визнання чужої вищості",
+      "source_sub": "визнання чужої вищості",
       "source_author": "Вергілій",
       "type": "THEMATIC",
       "confidence": "MEDIUM",

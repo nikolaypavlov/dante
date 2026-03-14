@@ -9,7 +9,7 @@
       "dante_ref": "IV, 25–42",
       "dante_sub": "Лімб — перше коло без покарання",
       "source_ref": "Aen. VI, 426–439",
-      "source_sub": "insontesque pueri — невинні діти",
+      "source_sub": "невинні діти",
       "source_author": "Вергілій",
       "type": "STRUCTURE",
       "confidence": "HIGH",
@@ -59,7 +59,7 @@
     {
       "id": "inf_iv_03",
       "dante_ref": "IV, 68–72",
-      "dante_sub": "nobile castello — шляхетний замок",
+      "dante_sub": "шляхетний замок",
       "source_ref": "Aen. VI, 637–678",
       "source_sub": "Елісейські поля",
       "source_author": "Вергілій",
@@ -72,7 +72,7 @@
     {
       "id": "inf_iv_04",
       "dante_ref": "IV, 86–90",
-      "dante_sub": "bella scola — Гомер, Горацій, Овідій, Лукан",
+      "dante_sub": "Гомер, Горацій, Овідій, Лукан",
       "source_ref": "Aen. VI, 660–665",
       "source_sub": "поети в Елісії",
       "source_author": "Вергілій",
@@ -85,23 +85,33 @@
     {
       "id": "inf_iv_05",
       "dante_ref": "IV, 86",
-      "dante_sub": "Omero, poeta sovrano",
+      "dante_sub": "Гомер — найвищий поет",
       "source_ref": "Il. I, 1–7",
-      "source_sub": "prooemium Іліади",
+      "source_sub": "вступ до Іліади",
       "source_author": "Гомер",
       "type": "ONOMASTIC",
       "confidence": "HIGH",
       "desc_dante": "Данте називає Гомера «poeta sovrano» — верховним поетом, який тримає в руці меч. Данте не читав Гомера грецькою, але визнає його першість за традицією.",
       "desc_source": "Гомер — автор Іліади та Одіссеї, визнаний першим поетом європейської традиції. Його текст Данте знав лише через латинські переказі й адаптації.",
       "chain": [
-        { "ref": "Ilias Latina (I ст.)", "author": "Бебій Італік", "sub": "латинський скорочений переказ", "desc": "Ilias Latina (I ст. н.е.) — скорочений латинський переказ Іліади у 1070 гекзаметрів. Основне джерело, через яке середньовічні читачі знали фабулу гомерівського епосу." },
-        { "ref": "Aen. II, 5–198; III, 588–691", "author": "Вергілій", "sub": "переказ подій Іліади та Одіссеї", "desc": "В Aeneis II–III Вергілій переповідає ключові події Іліади та Одіссеї з троянської перспективи: падіння Трої, хитрість Одіссея, мандри Енея. Для Данте це було основне наративне джерело троянського циклу." }
+        {
+          "ref": "Ilias Latina (I ст.)",
+          "author": "Бебій Італік",
+          "sub": "латинський скорочений переказ",
+          "desc": "Ilias Latina (I ст. н.е.) — скорочений латинський переказ Іліади у 1070 гекзаметрів. Основне джерело, через яке середньовічні читачі знали фабулу гомерівського епосу."
+        },
+        {
+          "ref": "Aen. II, 5–198; III, 588–691",
+          "author": "Вергілій",
+          "sub": "переказ подій Іліади та Одіссеї",
+          "desc": "В Aeneis II–III Вергілій переповідає ключові події Іліади та Одіссеї з троянської перспективи: падіння Трої, хитрість Одіссея, мандри Енея. Для Данте це було основне наративне джерело троянського циклу."
+        }
       ]
     },
     {
       "id": "inf_iv_06",
       "dante_ref": "IV, 88",
-      "dante_sub": "Orazio satiro",
+      "dante_sub": "Горацій-сатирик",
       "source_ref": "Sat. I, 1–12",
       "source_sub": "Горацій-сатирик",
       "source_author": "Горацій",
@@ -114,9 +124,9 @@
     {
       "id": "inf_iv_07",
       "dante_ref": "IV, 90",
-      "dante_sub": "Ovidio è 'l terzo, e l'ultimo Lucano",
+      "dante_sub": "Овідій третій, останній Лукан",
       "source_ref": "Met. I, 1–4",
-      "source_sub": "prooemium Metamorphoses",
+      "source_sub": "вступ до Метаморфоз",
       "source_author": "Овідій",
       "type": "ONOMASTIC",
       "confidence": "HIGH",
@@ -127,9 +137,9 @@
     {
       "id": "inf_iv_08",
       "dante_ref": "IV, 90",
-      "dante_sub": "Lucano — останній у bella scola",
+      "dante_sub": "Лукан — останній у прекрасній школі",
       "source_ref": "Phars. I, 1–7",
-      "source_sub": "prooemium Pharsalia",
+      "source_sub": "вступ до Фарсалії",
       "source_author": "Лукан",
       "type": "ONOMASTIC",
       "confidence": "HIGH",
@@ -142,7 +152,7 @@
       "dante_ref": "IV, 121–135",
       "dante_sub": "Електра, Гектор, Еней, Цезар",
       "source_ref": "Aen. VI, 756–853",
-      "source_sub": "паrad героїв у Елісії",
+      "source_sub": "парад героїв у Елісії",
       "source_author": "Вергілій",
       "type": "STRUCTURE",
       "confidence": "HIGH",
@@ -153,9 +163,9 @@
     {
       "id": "inf_iv_10",
       "dante_ref": "IV, 121",
-      "dante_sub": "Elettra — мати Дардана",
+      "dante_sub": "мати Дардана",
       "source_ref": "Aen. VIII, 134–137",
-      "source_sub": "Dardanus ab Electra — троянське коріння",
+      "source_sub": "троянське коріння",
       "source_author": "Вергілій",
       "type": "ONOMASTIC",
       "confidence": "HIGH",
@@ -179,7 +189,7 @@
     {
       "id": "inf_iv_12",
       "dante_ref": "IV, 127–129",
-      "dante_sub": "Saladino solo, in parte — Саладін",
+      "dante_sub": "Саладін",
       "source_ref": "RR 1191–1192",
       "source_sub": "Саладін серед прикладів щедрості",
       "source_author": "Жан де Мен",
@@ -192,22 +202,27 @@
     {
       "id": "inf_iv_13",
       "dante_ref": "IV, 131",
-      "dante_sub": "il maestro di color che sanno — Аристотель",
+      "dante_sub": "Аристотель",
       "source_ref": "Metaph. I, 6, 987a–b",
-      "source_sub": "Metaphysica — перша філософія",
+      "source_sub": "перша філософія",
       "source_author": "Аристотель",
       "type": "ONOMASTIC",
       "confidence": "HIGH",
       "desc_dante": "Данте називає Аристотеля «maestro di color che sanno» — учителем тих, хто знає. Він сидить серед філософської сім'ї, і всі його шанують.",
       "desc_source": "Аристотель — автор корпусу творів, що стали основою середньовічної університетської освіти. Данте знав його через латинські переклади Вільяма з Мербеке та коментарі Томи Аквінського.",
       "chain": [
-        { "ref": "Translatio Metaphysicae (1260-ті)", "author": "Вільям з Мербеке", "sub": "латинський переклад Metaphysica", "desc": "Вільям з Мербеке переклав Metaphysica Аристотеля з грецької на латину (бл. 1260–1270). Цей переклад — основне джерело, через яке Данте та Тома Аквінський знали Аристотелеву першу філософію." }
+        {
+          "ref": "Translatio Metaphysicae (1260-ті)",
+          "author": "Вільям з Мербеке",
+          "sub": "латинський переклад Метафізики",
+          "desc": "Вільям з Мербеке переклав Metaphysica Аристотеля з грецької на латину (бл. 1260–1270). Цей переклад — основне джерело, через яке Данте та Тома Аквінський знали Аристотелеву першу філософію."
+        }
       ]
     },
     {
       "id": "inf_iv_14",
       "dante_ref": "IV, 140–141",
-      "dante_sub": "Orfeo — поет-музикант",
+      "dante_sub": "поет-музикант",
       "source_ref": "Met. X, 1–85",
       "source_sub": "Орфей спускається до Аїду",
       "source_author": "Овідій",
@@ -220,9 +235,9 @@
     {
       "id": "inf_iv_15",
       "dante_ref": "IV, 141",
-      "dante_sub": "Tullio e Lino",
+      "dante_sub": "Тулій і Лін",
       "source_ref": "Ecl. IV, 55–57",
-      "source_sub": "Linus — легендарний поет",
+      "source_sub": "легендарний поет",
       "source_author": "Вергілій",
       "type": "ONOMASTIC",
       "confidence": "MEDIUM",
@@ -233,7 +248,7 @@
     {
       "id": "inf_iv_16",
       "dante_ref": "IV, 142",
-      "dante_sub": "Seneca morale",
+      "dante_sub": "Сенека-мораліст",
       "source_ref": "Epist. ad Luc. I, 1–5",
       "source_sub": "Сенека — мораліст, лист до Луцілія",
       "source_author": "Сенека",

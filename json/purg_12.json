@@ -7,9 +7,9 @@
     {
       "id": "purg_xii_01",
       "dante_ref": "XII, 25–27",
-      "dante_sub": "Vedeva / рельєф Люцифера",
+      "dante_sub": "бачив — рельєф Люцифера",
       "source_ref": "Is. 14:12–15",
-      "source_sub": "quomodo cecidisti de caelo, Lucifer",
+      "source_sub": "як ти впав з неба, Люцифере",
       "source_author": "Біблія",
       "type": "ALLUSION",
       "confidence": "HIGH",
@@ -20,7 +20,7 @@
     {
       "id": "purg_xii_02",
       "dante_ref": "XII, 28–30",
-      "dante_sub": "Vedeva / Бріарей",
+      "dante_sub": "бачив — Бріарей",
       "source_ref": "Aen. X, 565–568",
       "source_sub": "Бріарей — стрічний гігант",
       "source_author": "Вергілій",
@@ -33,7 +33,7 @@
     {
       "id": "purg_xii_03",
       "dante_ref": "XII, 31–33",
-      "dante_sub": "Vedeva / Тімбрей і Марс",
+      "dante_sub": "бачив — Тімбрей і Марс",
       "source_ref": "Met. I, 151–162",
       "source_sub": "гігантомахія",
       "source_author": "Овідій",
@@ -46,9 +46,9 @@
     {
       "id": "purg_xii_04",
       "dante_ref": "XII, 34–36",
-      "dante_sub": "Vedeva / Німрод і вежа",
+      "dante_sub": "бачив — Німрод і вежа",
       "source_ref": "Gen. 11:1–9",
-      "source_sub": "turris Babel",
+      "source_sub": "Вавилонська вежа",
       "source_author": "Біблія",
       "type": "ALLUSION",
       "confidence": "HIGH",
@@ -59,7 +59,7 @@
     {
       "id": "purg_xii_05",
       "dante_ref": "XII, 37–39",
-      "dante_sub": "Osservava / Ніоба",
+      "dante_sub": "споглядав — Ніоба",
       "source_ref": "Met. VI, 146–312",
       "source_sub": "Ніоба — покарання гордині",
       "source_author": "Овідій",
@@ -72,7 +72,7 @@
     {
       "id": "purg_xii_06",
       "dante_ref": "XII, 40–42",
-      "dante_sub": "Osservava / Саул на Гелвуї",
+      "dante_sub": "споглядав — Саул на Гелвуї",
       "source_ref": "1 Reg. 31:1–6",
       "source_sub": "загибель Саула",
       "source_author": "Біблія",
@@ -85,7 +85,7 @@
     {
       "id": "purg_xii_07",
       "dante_ref": "XII, 43–45",
-      "dante_sub": "Osservava / Арахна",
+      "dante_sub": "споглядав — Арахна",
       "source_ref": "Met. VI, 1–145",
       "source_sub": "Арахна — змагання з Мінервою",
       "source_author": "Овідій",
@@ -98,7 +98,7 @@
     {
       "id": "purg_xii_08",
       "dante_ref": "XII, 46–48",
-      "dante_sub": "Osservava / Ровоам",
+      "dante_sub": "споглядав — Ровоам",
       "source_ref": "3 Reg. 12:1–19",
       "source_sub": "Ровоам і розкол царства",
       "source_author": "Біблія",
@@ -137,7 +137,7 @@
     {
       "id": "purg_xii_10",
       "dante_ref": "XII, 52–54",
-      "dante_sub": "Mostrava / Сеннахірім",
+      "dante_sub": "являв — Сеннахірім",
       "source_ref": "4 Reg. 19:35–37",
       "source_sub": "вбивство Сеннахіріма",
       "source_author": "Біблія",
@@ -150,7 +150,7 @@
     {
       "id": "purg_xii_12",
       "dante_ref": "XII, 58–60",
-      "dante_sub": "Mostrava / падіння Трої",
+      "dante_sub": "являв — падіння Трої",
       "source_ref": "Aen. II, 1–56",
       "source_sub": "падіння Трої",
       "source_author": "Вергілій",
@@ -163,7 +163,7 @@
     {
       "id": "purg_xii_13",
       "dante_ref": "XII, 25–63",
-      "dante_sub": "акростих VOM (Vedeva-Osservava-Mostrava)",
+      "dante_sub": "акростих — бачив, споглядав, являв",
       "source_ref": "Ps. 118",
       "source_sub": "алфавітний акростих",
       "source_author": "Біблія",

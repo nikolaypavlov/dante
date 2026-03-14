@@ -9,7 +9,7 @@
       "dante_ref": "II, 1–9",
       "dante_sub": "сонце на горизонті — астрономічний вступ",
       "source_ref": "Aen. IV, 584–585",
-      "source_sub": "Aurora / Tithonus",
+      "source_sub": "Аврора і Тітон",
       "source_author": "Вергілій",
       "type": "ALLUSION",
       "confidence": "HIGH",
@@ -22,7 +22,7 @@
       "dante_ref": "II, 10–12",
       "dante_sub": "Аврора — білі й червоні ланіти",
       "source_ref": "Met. III, 150–151",
-      "source_sub": "Aurora purpurea",
+      "source_sub": "пурпурова Аврора",
       "source_author": "Овідій",
       "type": "ALLUSION",
       "confidence": "MEDIUM",
@@ -61,7 +61,7 @@
       "dante_ref": "II, 46–48",
       "dante_sub": "псалом виходу з Єгипту",
       "source_ref": "Ps. 113:1",
-      "source_sub": "In exitu Israel de Aegypto",
+      "source_sub": "вихід Ізраїлю з Єгипту",
       "source_author": "Біблія",
       "type": "ALLUSION",
       "confidence": "HIGH",
@@ -97,7 +97,7 @@
         {
           "ref": "Aen. VI, 700–702",
           "author": "Вергілій",
-          "sub": "ter frustra comprensa",
+          "sub": "тричі марно обіймав",
           "desc": "В Aeneis VI Еней тричі намагається обійняти тінь батька Анхіза: «ter frustra comprensa manus effugit imago». Вергілій запозичує мотив безтілесних обіймів у Гомера і передає його Данте."
         }
       ]
