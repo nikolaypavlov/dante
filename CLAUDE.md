@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Dante Intertextual Analysis ("Дантешопедія") — a literary scholarship tool that systematically catalogs intertextual connections between Dante's *Divina Commedia* and pre-Dante literature (antiquity through early XIV century). The output is 100 self-contained HTML files (one per canto) with interactive d3.js force-directed tree visualizations.
 
-**Language:** All text content is in Ukrainian with Latin/English/Italian scholarly terminology.
+**Language:** All text content is in Ukrainian. Node labels (`dante_sub`, `source_sub`) must be Ukrainian paraphrases, never Italian/Latin quotes.
 
 ## Architecture
 
@@ -93,7 +93,12 @@ Key d3 constants: `nodeW=164, nodeH=46, gapY=8, gapX=140, padLeft=70, padTop=20`
 
 ## JSON / HTML Sync
 
-HTML is auto-generated from JSON via `uv run scripts/render_html.py`. When editing connections, update `json/{canto}.json` and re-render. Run `uv run scripts/validate_json.py` after JSON changes.
+HTML is auto-generated from JSON via `uv run scripts/render_html.py`. When editing connections, update `json/{canto}.json`, then validate, then re-render:
+
+```
+uv run scripts/validate_json.py {canto}.json   # must pass before rendering
+uv run scripts/render_html.py {canto}           # regenerate HTML
+```
 
 Common commands:
 - `make validate` — validate all JSON files

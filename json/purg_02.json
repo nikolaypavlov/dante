@@ -33,7 +33,7 @@
     {
       "id": "purg_ii_03",
       "dante_ref": "II, 13–18",
-      "dante_sub": "lume — світло над морем",
+      "dante_sub": "світло над морем",
       "source_ref": "Aen. I, 143–156",
       "source_sub": "Нептун заспокоює море",
       "source_author": "Вергілій",
@@ -59,7 +59,7 @@
     {
       "id": "purg_ii_05",
       "dante_ref": "II, 46–48",
-      "dante_sub": "In exitu Israel de Aegypto",
+      "dante_sub": "псалом виходу з Єгипту",
       "source_ref": "Ps. 113:1",
       "source_sub": "In exitu Israel de Aegypto",
       "source_author": "Біблія",
@@ -94,7 +94,12 @@
       "desc_dante": "Тричі Данте намагається обійняти Казеллу — сцена, що бере початок у Гомера й передається через Вергілія.",
       "desc_source": "В Одіссеї XI Одіссей тричі намагається обійняти тінь матері Антіклеї в Аїді, і тричі вона вислизає з його рук. Первинне джерело мотиву «безтілесних обіймів».",
       "chain": [
-        {"ref": "Aen. VI, 700–702", "author": "Вергілій", "sub": "ter frustra comprensa", "desc": "В Aeneis VI Еней тричі намагається обійняти тінь батька Анхіза: «ter frustra comprensa manus effugit imago». Вергілій запозичує мотив безтілесних обіймів у Гомера і передає його Данте."}
+        {
+          "ref": "Aen. VI, 700–702",
+          "author": "Вергілій",
+          "sub": "ter frustra comprensa",
+          "desc": "В Aeneis VI Еней тричі намагається обійняти тінь батька Анхіза: «ter frustra comprensa manus effugit imago». Вергілій запозичує мотив безтілесних обіймів у Гомера і передає його Данте."
+        }
       ]
     },
     {
