@@ -20,7 +20,7 @@ Each canto is processed independently. 100 total cantos: Inferno (34) + Purgator
 
 ### Key Files
 
-- `dante_agent_spec_v4.md` — Complete specification (primary source of truth for all rules, prompts, and constraints)
+- `dante_agent_spec_v4.md` — Complete specification (primary source of truth); must stay in sync with CLAUDE.md constants and rules
 - `inf_xxvi_tree_v4.html` — Reference HTML template (fully annotated)
 - `dante-theme.css` — Shared CSS with three theme variants via custom properties
 - `json/` — Generated JSON data files (e.g., `json/inf_01.json`)
@@ -85,11 +85,15 @@ uv run scripts/validate_json.py inf_26.json  # single file
 
 JSON must pass validation before proceeding to Pass 3 (HTML rendering).
 
+Validator checks: schema structure, semantic consistency, AND Ukrainian-only text in `dante_sub`, `source_sub`, `chain[].sub` (no Latin-script words).
+
 ## HTML Visualization Structure
 
 Three equal-width columns: **Dante (col 0, dark)** → **Intermediaries (col 1, light)** → **Primary Sources (col 2, dark)**. Node positioning uses Y-averaging from parent connections. Tooltip shows `desc_dante` when hovering Dante nodes, `desc_source` when hovering source nodes. Navigation: hamburger side panel (100 cantos) + ← → arrows.
 
 Key d3 constants: `nodeW=230, nodeH=60, gapY=11, gapX=130, padLeft=70, padTop=20`.
+
+SVG text is auto-truncated with ellipsis at `nodeW-12` px via `trunc()` in the template.
 
 ## JSON / HTML Sync
 
