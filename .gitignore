@@ -2,6 +2,7 @@ dist/
 html/
 .env
 .venv/
+.wrangler/
 __pycache__/
 *.pyc
 .claude/*.local.md
