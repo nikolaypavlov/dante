@@ -390,11 +390,12 @@ def render_index(
 ) -> None:
     """Generate index.html with navigation hub and progress tracking."""
     seq = build_full_sequence()
+    target = out_dir if out_dir else HTML_DIR
     cantos = []
     for prefix, abbrev, cantica, num in seq:
         stem = f"{prefix}_{num:02d}"
         json_exists = (JSON_DIR / f"{stem}.json").exists()
-        html_exists = (HTML_DIR / f"{stem}.html").exists()
+        html_exists = (target / f"{stem}.html").exists()
         conn_count = 0
         if json_exists:
             with open(JSON_DIR / f"{stem}.json") as f:
@@ -417,7 +418,6 @@ def render_index(
         cantica_list=CANTICA_SEQUENCE,
         css_path=css_path,
     )
-    target = out_dir if out_dir else HTML_DIR
     target.mkdir(parents=True, exist_ok=True)
     out_path = target / "index.html"
     out_path.write_text(html)

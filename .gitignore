@@ -1,5 +1,6 @@
 dist/
 html/
+.env
 .venv/
 __pycache__/
 *.pyc
