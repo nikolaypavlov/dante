@@ -7,7 +7,7 @@
     {
       "id": "purg_iii_01",
       "dante_ref": "III, 1–9",
-      "dante_sub": "fuga dei compagni — розбіглися душі",
+      "dante_sub": "розбіглися душі",
       "source_ref": "Aen. IV, 560–583",
       "source_sub": "троянці тікають після знамення",
       "source_author": "Вергілій",
@@ -46,7 +46,7 @@
     {
       "id": "purg_iii_04",
       "dante_ref": "III, 34–45",
-      "dante_sub": "quia — неможливість пізнати все",
+      "dante_sub": "неможливість пізнати все",
       "source_ref": "Aen. VI, 730–751",
       "source_sub": "промова Анхіза про душу світу",
       "source_author": "Вергілій",
@@ -72,7 +72,7 @@
     {
       "id": "purg_iii_06",
       "dante_ref": "III, 58–63",
-      "dante_sub": "schiera d'anime — процесія душ",
+      "dante_sub": "процесія душ",
       "source_ref": "Aen. VI, 305–312",
       "source_sub": "натовп душ біля Стіксу",
       "source_author": "Вергілій",
@@ -85,7 +85,7 @@
     {
       "id": "purg_iii_07",
       "dante_ref": "III, 79–84",
-      "dante_sub": "pecorelle — вівці виходять із загону",
+      "dante_sub": "вівці виходять із загону",
       "source_ref": "Georg. III, 470–477",
       "source_sub": "стадо овець",
       "source_author": "Вергілій",
@@ -98,7 +98,7 @@
     {
       "id": "purg_iii_08",
       "dante_ref": "III, 103–111",
-      "dante_sub": "Манфред — «biondo era e bello»",
+      "dante_sub": "Манфред",
       "source_ref": "Aen. VI, 860–866",
       "source_sub": "молодий Марцелл",
       "source_author": "Вергілій",
@@ -124,7 +124,7 @@
     {
       "id": "purg_iii_10",
       "dante_ref": "III, 118–132",
-      "dante_sub": "рух тіла Манфреда «a lume spento»",
+      "dante_sub": "рух тіла Манфреда при згаслому світлі",
       "source_ref": "Phars. VIII, 698–711",
       "source_sub": "тіло Помпея без поховання",
       "source_author": "Лукан",
@@ -137,9 +137,9 @@
     {
       "id": "purg_iii_11",
       "dante_ref": "III, 133–141",
-      "dante_sub": "per lor maladizion — всупереч прокляттю",
+      "dante_sub": "всупереч прокляттю",
       "source_ref": "Ps. 50:19",
-      "source_sub": "cor contritum et humiliatum",
+      "source_sub": "серце скрушене й смирене",
       "source_author": "Біблія",
       "type": "THEMATIC",
       "confidence": "MEDIUM",

@@ -46,9 +46,9 @@
     {
       "id": "purg_xxi_04",
       "dante_ref": "XXI, 88–90",
-      "dante_sub": "Стацій — автор Thebais",
+      "dante_sub": "Стацій",
       "source_ref": "Theb. I, 1–17",
-      "source_sub": "prooemium Фіванського циклу",
+      "source_sub": "вступ до Фіванського циклу",
       "source_author": "Стацій",
       "type": "ALLUSION",
       "confidence": "HIGH",
@@ -59,7 +59,7 @@
     {
       "id": "purg_xxi_05",
       "dante_ref": "XXI, 94–99",
-      "dante_sub": "Aeneis як джерело натхнення Стація",
+      "dante_sub": "Енеїда як джерело натхнення Стація",
       "source_ref": "Aen. VI, 264–267",
       "source_sub": "катабасис як модель",
       "source_author": "Вергілій",

@@ -34,6 +34,10 @@ CANTO_LABEL_PREFIX = {
 
 FILENAME_RE = re.compile(r"^(inf|purg|par)_(\d{2})\.json$")
 
+# Regex to detect Latin-script words (3+ chars, excluding Roman numerals)
+LATIN_WORD_RE = re.compile(r"[a-zA-Z\u00c0-\u024f]{3,}")
+ROMAN_RE = re.compile(r"^[IVXLCDM]+$")
+
 # Authors who accessed sources indirectly and require transmission chains
 INDIRECT_AUTHORS = {
     "\u0413\u043e\u043c\u0435\u0440",
@@ -143,6 +147,33 @@ def validate_file(path: Path, validator: Draft7Validator) -> list[str]:
                 f"connections[{i}]: source_author '{conn['source_author']}' "
                 f"requires a transmission chain (chain must not be null)"
             )
+
+        # dante_sub and source_sub must be Ukrainian (no Latin-script words)
+        for field in ("dante_sub", "source_sub"):
+            latin_words = [
+                w
+                for w in LATIN_WORD_RE.findall(conn[field])
+                if not ROMAN_RE.match(w)
+            ]
+            if latin_words:
+                errors.append(
+                    f"connections[{i}]: {field} contains Latin-script text: "
+                    f"'{conn[field]}'"
+                )
+
+        # chain[].sub must also be Ukrainian
+        if conn["chain"]:
+            for j, ch in enumerate(conn["chain"]):
+                latin_words = [
+                    w
+                    for w in LATIN_WORD_RE.findall(ch["sub"])
+                    if not ROMAN_RE.match(w)
+                ]
+                if latin_words:
+                    errors.append(
+                        f"connections[{i}].chain[{j}]: sub contains "
+                        f"Latin-script text: '{ch['sub']}'"
+                    )
 
     return errors
 

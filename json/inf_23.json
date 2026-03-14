@@ -16,7 +16,12 @@
       "desc_dante": "Данте порівнює попередній епізод із бісами з байкою Езопа про жабу і мишу: одне слово нагадує інше, як «mo» нагадує «issa». Порівняння підкреслює підступність бісів.",
       "desc_source": "Байка Езопа про жабу, що обманом топить мишу, прив'язавши її до себе, але обох хапає шуліка. Середньовічні збірники (Romulus) широко поширювали цю байку латиною.",
       "chain": [
-        { "ref": "Romulus (збірник)", "author": "Латинський Romulus", "sub": "середньовічна адаптація Езопа", "desc": "Збірник «Romulus» (IV–V ст.) — латинська прозова адаптація байок Езопа, найпоширеніше джерело езопівських байок у середньовічній Європі. Данте знав байку про жабу і мишу саме через такий латинський переказ." }
+        {
+          "ref": "Romulus (збірник)",
+          "author": "Латинський Romulus",
+          "sub": "середньовічна адаптація Езопа",
+          "desc": "Збірник «Romulus» (IV–V ст.) — латинська прозова адаптація байок Езопа, найпоширеніше джерело езопівських байок у середньовічній Європі. Данте знав байку про жабу і мишу саме через такий латинський переказ."
+        }
       ]
     },
     {
@@ -48,9 +53,9 @@
     {
       "id": "inf_xxiii_04",
       "dante_ref": "XXIII, 58–66",
-      "dante_sub": "cappe di Cluny",
+      "dante_sub": "каппи з Клюні",
       "source_ref": "Sat. II, 35",
-      "source_sub": "fronti nulla fides",
+      "source_sub": "не вір обличчю",
       "source_author": "Ювенал",
       "type": "THEMATIC",
       "confidence": "MEDIUM",
@@ -61,7 +66,7 @@
     {
       "id": "inf_xxiii_05",
       "dante_ref": "XXIII, 103–108",
-      "dante_sub": "Frati Gaudenti — Каталано і Лодерінго",
+      "dante_sub": "Каталано і Лодерінго",
       "source_ref": "Aen. VI, 615–620",
       "source_sub": "покарання титанів",
       "source_author": "Вергілій",
@@ -76,7 +81,7 @@
       "dante_ref": "XXIII, 115–120",
       "dante_sub": "розіп'ятий Каяфа",
       "source_ref": "Io. 11:49–50",
-      "source_sub": "expedit unum hominem mori",
+      "source_sub": "краще одному загинути за народ",
       "source_author": "Біблія",
       "type": "ALLUSION",
       "confidence": "HIGH",
@@ -100,7 +105,7 @@
     {
       "id": "inf_xxiii_08",
       "dante_ref": "XXIII, 115–126",
-      "dante_sub": "розп'яття як contrapasso",
+      "dante_sub": "розп'яття як контрапасо",
       "source_ref": "Mt. 27:22–26",
       "source_sub": "розп'яття Христа",
       "source_author": "Біблія",
@@ -115,7 +120,7 @@
       "dante_ref": "XXIII, 142–144",
       "dante_sub": "діабол — батько брехні",
       "source_ref": "Io. 8:44",
-      "source_sub": "pater mendacii",
+      "source_sub": "батько брехні",
       "source_author": "Біблія",
       "type": "ALLUSION",
       "confidence": "HIGH",

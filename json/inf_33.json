@@ -7,7 +7,7 @@
     {
       "id": "inf_xxxiii_01",
       "dante_ref": "XXXIII, 4-6",
-      "dante_sub": "disperato dolor — infandum dolorem",
+      "dante_sub": "розпачливий біль",
       "source_ref": "Aen. II, 3-13",
       "source_sub": "Еней починає розповідь про Трою",
       "source_author": "Вергілій",
@@ -20,7 +20,7 @@
     {
       "id": "inf_xxxiii_02",
       "dante_ref": "XXXIII, 13-18",
-      "dante_sub": "torre della fame",
+      "dante_sub": "вежа голоду",
       "source_ref": "Aen. VI, 552-558",
       "source_sub": "Тартар — вежа-в'язниця",
       "source_author": "Вергілій",
@@ -33,7 +33,7 @@
     {
       "id": "inf_xxxiii_03",
       "dante_ref": "XXXIII, 22-36",
-      "dante_sub": "profeticus somnus — сон Уголіно",
+      "dante_sub": "сон Уголіно",
       "source_ref": "Met. XI, 633-670",
       "source_sub": "печера Сомнуса — пророчі сни",
       "source_author": "Овідій",
@@ -48,7 +48,7 @@
       "dante_ref": "XXXIII, 37-39",
       "dante_sub": "пробудження — діти просять хліба",
       "source_ref": "Thren. 4:4",
-      "source_sub": "parvuli petierunt panem",
+      "source_sub": "малі просили хліба",
       "source_author": "Біблія",
       "type": "ALLUSION",
       "confidence": "HIGH",
@@ -72,7 +72,7 @@
     {
       "id": "inf_xxxiii_06",
       "dante_ref": "XXXIII, 67-69",
-      "dante_sub": "Gaddo — «Padre mio!»",
+      "dante_sub": "Ґаддо — зов до батька",
       "source_ref": "Aen. II, 547-553",
       "source_sub": "Пріам — загибель на очах у сина",
       "source_author": "Вергілій",
@@ -111,7 +111,7 @@
     {
       "id": "inf_xxxiii_09",
       "dante_ref": "XXXIII, 91",
-      "dante_sub": "Tolomea — зрадники гостей",
+      "dante_sub": "зрадники гостей",
       "source_ref": "1 Mcc. 16:15-17",
       "source_sub": "Птолемей вбиває Симона на бенкеті",
       "source_author": "Біблія",

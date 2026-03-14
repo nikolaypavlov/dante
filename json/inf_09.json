@@ -7,7 +7,7 @@
     {
       "id": "inf_ix_01",
       "dante_ref": "IX, 38–42",
-      "dante_sub": "Erictho e la congiurazion",
+      "dante_sub": "Еріхто і заклинання",
       "source_ref": "Phars. VI, 507–830",
       "source_sub": "Еріхто воскрешає мерця",
       "source_author": "Лукан",
@@ -20,7 +20,7 @@
     {
       "id": "inf_ix_02",
       "dante_ref": "IX, 43–44",
-      "dante_sub": "lo cerchio di Giuda — найнижче коло",
+      "dante_sub": "найнижче коло",
       "source_ref": "Aen. VI, 577–579",
       "source_sub": "найглибший Тартар",
       "source_author": "Вергілій",
@@ -33,9 +33,9 @@
     {
       "id": "inf_ix_03",
       "dante_ref": "IX, 45–48",
-      "dante_sub": "il ciel che tutto gira",
+      "dante_sub": "небо, що все обертає",
       "source_ref": "Aen. VI, 126–131",
-      "source_sub": "facilis descensus Averno",
+      "source_sub": "легкий спуск до Аверну",
       "source_author": "Вергілій",
       "type": "THEMATIC",
       "confidence": "MEDIUM",
@@ -59,7 +59,7 @@
     {
       "id": "inf_ix_05",
       "dante_ref": "IX, 46–48",
-      "dante_sub": "le mura — стіни Діта",
+      "dante_sub": "стіни Діта",
       "source_ref": "Aen. VI, 548–554",
       "source_sub": "стіни Тартару",
       "source_author": "Вергілій",
@@ -72,7 +72,7 @@
     {
       "id": "inf_ix_06",
       "dante_ref": "IX, 52–54",
-      "dante_sub": "tre furie infernal — Фурії",
+      "dante_sub": "Фурії",
       "source_ref": "Aen. VI, 555–572",
       "source_sub": "Тисіфона при воротах Тартару",
       "source_author": "Вергілій",
@@ -85,7 +85,7 @@
     {
       "id": "inf_ix_07",
       "dante_ref": "IX, 52–57",
-      "dante_sub": "Erinyes — Мегера, Алекто, Тисіфона",
+      "dante_sub": "Мегера, Алекто, Тисіфона",
       "source_ref": "Theb. I, 88–122",
       "source_sub": "Тисіфона викликає війну",
       "source_author": "Стацій",
@@ -98,7 +98,7 @@
     {
       "id": "inf_ix_08",
       "dante_ref": "IX, 52–57",
-      "dante_sub": "di sangue tinte — Фурії в крові",
+      "dante_sub": "Фурії в крові",
       "source_ref": "Met. IV, 481–511",
       "source_sub": "Тисіфона доводить Ін до божевілля",
       "source_author": "Овідій",
@@ -111,7 +111,7 @@
     {
       "id": "inf_ix_09",
       "dante_ref": "IX, 56",
-      "dante_sub": "con idre verdissime eran cinte",
+      "dante_sub": "зелені гідри оповили Фурій",
       "source_ref": "Aen. VII, 346–353",
       "source_sub": "Алекто з гідрою",
       "source_author": "Вергілій",
@@ -124,7 +124,7 @@
     {
       "id": "inf_ix_10",
       "dante_ref": "IX, 52–54",
-      "dante_sub": "le tre furie — regina dell'etterno pianto",
+      "dante_sub": "три Фурії — цариця вічного плачу",
       "source_ref": "Met. X, 1–49",
       "source_sub": "Орфей в Аїді",
       "source_author": "Овідій",
@@ -150,7 +150,7 @@
     {
       "id": "inf_ix_12",
       "dante_ref": "IX, 52",
-      "dante_sub": "Proserpina — regina dell'etterno pianto",
+      "dante_sub": "Прозерпіна — цариця вічного плачу",
       "source_ref": "Met. V, 385–424",
       "source_sub": "викрадення Прозерпіни",
       "source_author": "Овідій",
@@ -176,7 +176,7 @@
     {
       "id": "inf_ix_14",
       "dante_ref": "IX, 97–99",
-      "dante_sub": "un dal ciel messo — небесний посланець",
+      "dante_sub": "небесний посланець",
       "source_ref": "Aen. X, 1–117",
       "source_sub": "Юпітер утихомирює богів",
       "source_author": "Вергілій",
@@ -189,7 +189,7 @@
     {
       "id": "inf_ix_15",
       "dante_ref": "IX, 98–103",
-      "dante_sub": "посланець з verghetta — паличкою",
+      "dante_sub": "паличкою",
       "source_ref": "Aen. IV, 239–244",
       "source_sub": "Меркурій з кадуцеєм",
       "source_author": "Вергілій",
@@ -215,7 +215,7 @@
     {
       "id": "inf_ix_17",
       "dante_ref": "IX, 61–63",
-      "dante_sub": "l'assalto di Teseo",
+      "dante_sub": "штурм Тесея",
       "source_ref": "Aen. VI, 392–397",
       "source_sub": "Тезей і Піритой в Аїді",
       "source_author": "Вергілій",
@@ -241,7 +241,7 @@
     {
       "id": "inf_ix_19",
       "dante_ref": "IX, 112–117",
-      "dante_sub": "arche — відкриті гробниці єретиків",
+      "dante_sub": "відкриті гробниці єретиків",
       "source_ref": "Aen. VI, 735–751",
       "source_sub": "душі в долині",
       "source_author": "Вергілій",

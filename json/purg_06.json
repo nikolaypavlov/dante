@@ -33,9 +33,9 @@
     {
       "id": "purg_vi_03",
       "dante_ref": "VI, 76–151",
-      "dante_sub": "інвектива проти Італії — «Ahi serva Italia»",
+      "dante_sub": "інвектива проти Італії",
       "source_ref": "Aen. VI, 847–853",
-      "source_sub": "tu regere imperio populos, Romane",
+      "source_sub": "правити народами, римлянине",
       "source_author": "Вергілій",
       "type": "INVERSION",
       "confidence": "HIGH",
@@ -46,7 +46,7 @@
     {
       "id": "purg_vi_04",
       "dante_ref": "VI, 76–78",
-      "dante_sub": "nave sanza nocchiere — корабель без керманича",
+      "dante_sub": "корабель без керманича",
       "source_ref": "Aen. V, 867–871",
       "source_sub": "загибель Палінура",
       "source_author": "Вергілій",
@@ -59,7 +59,7 @@
     {
       "id": "purg_vi_05",
       "dante_ref": "VI, 88–90",
-      "dante_sub": "Giustiniano — конь без вершника",
+      "dante_sub": "конь без вершника",
       "source_ref": "Georg. III, 75–88",
       "source_sub": "приборкання коня",
       "source_author": "Вергілій",
@@ -74,7 +74,7 @@
       "dante_ref": "VI, 112–114",
       "dante_sub": "Атени та Лакедемон",
       "source_ref": "Ars P. 268–269",
-      "source_sub": "Athenae — зразок законодавства",
+      "source_sub": "зразок законодавства",
       "source_author": "Горацій",
       "type": "ALLUSION",
       "confidence": "MEDIUM",

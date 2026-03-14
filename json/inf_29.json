@@ -7,7 +7,7 @@
     {
       "id": "inf_xxix_01",
       "dante_ref": "XXIX, 1-6",
-      "dante_sub": "pianto della bolgia nona",
+      "dante_sub": "плач дев'ятого рову",
       "source_ref": "Aen. VI, 557-569",
       "source_sub": "крики Тартару",
       "source_author": "Вергілій",
@@ -33,7 +33,7 @@
     {
       "id": "inf_xxix_03",
       "dante_ref": "XXIX, 27-30",
-      "dante_sub": "Geri del Bello — невідомщена кров",
+      "dante_sub": "невідомщена кров",
       "source_ref": "Aen. VI, 456-476",
       "source_sub": "Дідона мовчки відвертається від Енея",
       "source_author": "Вергілій",
@@ -46,7 +46,7 @@
     {
       "id": "inf_xxix_04",
       "dante_ref": "XXIX, 46-51",
-      "dante_sub": "qual dolor fora — хвороба фальсифікаторів",
+      "dante_sub": "хвороба фальсифікаторів",
       "source_ref": "Met. VII, 523-581",
       "source_sub": "чума на Егіні",
       "source_author": "Овідій",
@@ -59,9 +59,9 @@
     {
       "id": "inf_xxix_05",
       "dante_ref": "XXIX, 58-64",
-      "dante_sub": "Egina — порівняння з чумою",
+      "dante_sub": "порівняння з чумою",
       "source_ref": "Met. VII, 517-660",
-      "source_sub": "pestilentia Aeginae",
+      "source_sub": "чума на Еґіні",
       "source_author": "Овідій",
       "type": "ALLUSION",
       "confidence": "HIGH",
@@ -72,9 +72,9 @@
     {
       "id": "inf_xxix_06",
       "dante_ref": "XXIX, 58-64",
-      "dante_sub": "Egina — мірмідонці",
+      "dante_sub": "мірмідонці",
       "source_ref": "Met. VII, 614-660",
-      "source_sub": "Myrmidones — народження з мурашок",
+      "source_sub": "народження з мурашок",
       "source_author": "Овідій",
       "type": "INVERSION",
       "confidence": "MEDIUM",
@@ -111,7 +111,7 @@
     {
       "id": "inf_xxix_09",
       "dante_ref": "XXIX, 121-126",
-      "dante_sub": "vanità de' Sanesi",
+      "dante_sub": "марнославство сієнців",
       "source_ref": "Sat. I, 1, 1-4",
       "source_sub": "сатира на марнославство",
       "source_author": "Горацій",
@@ -124,7 +124,7 @@
     {
       "id": "inf_xxix_10",
       "dante_ref": "XXIX, 136-139",
-      "dante_sub": "Капоккіо — «scimia della natura»",
+      "dante_sub": "Капоккіо",
       "source_ref": "Ars Poetica, 1-13",
       "source_sub": "мистецтво як наслідування природи",
       "source_author": "Горацій",

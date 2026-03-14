@@ -7,7 +7,7 @@
     {
       "id": "inf_xii_01",
       "dante_ref": "XII, 1–10",
-      "dante_sub": "ruina — обвал скелі",
+      "dante_sub": "обвал скелі",
       "source_ref": "Met. XV, 262–267",
       "source_sub": "руйнування ландшафту від землетрусів",
       "source_author": "Овідій",
@@ -20,7 +20,7 @@
     {
       "id": "inf_xii_02",
       "dante_ref": "XII, 12–21",
-      "dante_sub": "l'infamia di Creti — Мінотавр",
+      "dante_sub": "Мінотавр",
       "source_ref": "Met. VIII, 152–182",
       "source_sub": "Мінотавр у Лабіринті",
       "source_author": "Овідій",
@@ -61,7 +61,7 @@
       "dante_ref": "XII, 34–39",
       "dante_sub": "обвал від землетрусу при Розп'ятті",
       "source_ref": "Matt. 27:51",
-      "source_sub": "terra mota est — землетрус при Розп'ятті",
+      "source_sub": "землетрус при Розп'ятті",
       "source_author": "Біблія",
       "type": "ALLUSION",
       "confidence": "HIGH",
@@ -72,7 +72,7 @@
     {
       "id": "inf_xii_06",
       "dante_ref": "XII, 56–57",
-      "dante_sub": "Chiron — Хірон, мудрий кентавр",
+      "dante_sub": "Хірон, мудрий кентавр",
       "source_ref": "Met. II, 630–654",
       "source_sub": "Хірон — учитель героїв",
       "source_author": "Овідій",
@@ -85,7 +85,7 @@
     {
       "id": "inf_xii_07",
       "dante_ref": "XII, 65",
-      "dante_sub": "Nesso — Несс, кентавр",
+      "dante_sub": "Несс, кентавр",
       "source_ref": "Met. IX, 101–133",
       "source_sub": "Несс і Деяніра",
       "source_author": "Овідій",
@@ -98,7 +98,7 @@
     {
       "id": "inf_xii_08",
       "dante_ref": "XII, 67–69",
-      "dante_sub": "Folo — Фол, дикий кентавр",
+      "dante_sub": "Фол, дикий кентавр",
       "source_ref": "Met. XII, 306–392",
       "source_sub": "битва кентаврів і лапітів",
       "source_author": "Овідій",
@@ -126,7 +126,7 @@
       "dante_ref": "XII, 47–48",
       "dante_sub": "Флегетон — ріка крові",
       "source_ref": "Aen. VI, 550–551",
-      "source_sub": "Phlegethon — вогняна ріка",
+      "source_sub": "вогняна ріка",
       "source_author": "Вергілій",
       "type": "ALLUSION",
       "confidence": "HIGH",
@@ -150,7 +150,7 @@
     {
       "id": "inf_xii_12",
       "dante_ref": "XII, 107–110",
-      "dante_sub": "Аттіла — flagellum Dei",
+      "dante_sub": "Аттіла",
       "source_ref": "Phars. I, 30–32",
       "source_sub": "тиран як бич",
       "source_author": "Лукан",

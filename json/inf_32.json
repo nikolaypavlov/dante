@@ -7,9 +7,9 @@
     {
       "id": "inf_xxxii_01",
       "dante_ref": "XXXII, 1-9",
-      "dante_sub": "invocatio — rime aspre e chiocce",
+      "dante_sub": "інвокація — грубі рими",
       "source_ref": "Aen. VI, 264-267",
-      "source_sub": "invocatio перед спуском до Аїду",
+      "source_sub": "інвокація перед спуском до Аїду",
       "source_author": "Вергілій",
       "type": "STRUCTURE",
       "confidence": "HIGH",
@@ -20,7 +20,7 @@
     {
       "id": "inf_xxxii_02",
       "dante_ref": "XXXII, 10-12",
-      "dante_sub": "Muse — Amphïon a Thebe",
+      "dante_sub": "Музи — Амфіон і Фіви",
       "source_ref": "Met. VI, 178-179",
       "source_sub": "Амфіон будує стіни Фів лірою",
       "source_author": "Овідій",
@@ -35,7 +35,7 @@
       "dante_ref": "XXXII, 22-24",
       "dante_sub": "Коціт — замерзле озеро",
       "source_ref": "Aen. VI, 323",
-      "source_sub": "Cocytus — підземна ріка",
+      "source_sub": "підземна ріка",
       "source_author": "Вергілій",
       "type": "INVERSION",
       "confidence": "HIGH",
@@ -59,7 +59,7 @@
     {
       "id": "inf_xxxii_05",
       "dante_ref": "XXXII, 56-60",
-      "dante_sub": "Caina — зрадники родичів",
+      "dante_sub": "зрадники родичів",
       "source_ref": "Gen. 4:3-16",
       "source_sub": "Каїн вбиває Авеля",
       "source_author": "Біблія",
@@ -85,7 +85,7 @@
     {
       "id": "inf_xxxii_07",
       "dante_ref": "XXXII, 88",
-      "dante_sub": "Antenòra — зрадники батьківщини",
+      "dante_sub": "зрадники батьківщини",
       "source_ref": "Aen. I, 242-249",
       "source_sub": "Антенор — засновник Падуї",
       "source_author": "Вергілій",
@@ -124,7 +124,7 @@
     {
       "id": "inf_xxxii_10",
       "dante_ref": "XXXII, 130-132",
-      "dante_sub": "conte Ugolino — початок розповіді",
+      "dante_sub": "початок розповіді",
       "source_ref": "Aen. II, 3-13",
       "source_sub": "Еней починає розповідь про Трою",
       "source_author": "Вергілій",

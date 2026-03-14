@@ -20,9 +20,9 @@
     {
       "id": "inf_xxiv_02",
       "dante_ref": "XXIV, 46–57",
-      "dante_sub": "seggendo in piuma, in fama non si vien",
+      "dante_sub": "сидячи на пуху, слави не здобути",
       "source_ref": "Ars Poetica, 412–414",
-      "source_sub": "nil sine magno labore",
+      "source_sub": "нічого без великої праці",
       "source_author": "Горацій",
       "type": "THEMATIC",
       "confidence": "MEDIUM",
@@ -85,7 +85,7 @@
     {
       "id": "inf_xxiv_07",
       "dante_ref": "XXIV, 112–120",
-      "dante_sub": "epilessia — падіння",
+      "dante_sub": "падіння",
       "source_ref": "Met. XV, 392–407",
       "source_sub": "відродження фенікса",
       "source_author": "Овідій",
@@ -98,7 +98,7 @@
     {
       "id": "inf_xxiv_08",
       "dante_ref": "XXIV, 125–129",
-      "dante_sub": "Ванні Фуччі — «bestia»",
+      "dante_sub": "Ванні Фуччі",
       "source_ref": "Aen. VIII, 193–267",
       "source_sub": "Как — звір",
       "source_author": "Вергілій",
