@@ -50,7 +50,7 @@
         },
         "dante_sub": {
           "type": "string",
-          "description": "Italian quote or Ukrainian paraphrase of the Dante passage.",
+          "description": "Short Ukrainian paraphrase of the Dante passage.",
           "minLength": 1
         },
         "source_ref": {
@@ -60,7 +60,7 @@
         },
         "source_sub": {
           "type": "string",
-          "description": "Latin quote or Ukrainian paraphrase of the source passage.",
+          "description": "Short Ukrainian paraphrase of the source passage.",
           "minLength": 1
         },
         "source_author": {

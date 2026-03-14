@@ -7,7 +7,7 @@
     {
       "id": "purg_i_01",
       "dante_ref": "I, 1–6",
-      "dante_sub": "Per correr miglior acque alza le vele",
+      "dante_sub": "корабель поезії — кращі води",
       "source_ref": "Aen. VI, 384–416",
       "source_sub": "вихід Енея з Аїду",
       "source_author": "Вергілій",
@@ -20,7 +20,7 @@
     {
       "id": "purg_i_02",
       "dante_ref": "I, 7–12",
-      "dante_sub": "risurga la morta poesì",
+      "dante_sub": "воскресіння поезії",
       "source_ref": "Met. I, 1–4",
       "source_sub": "інвокація Metamorphoses",
       "source_author": "Овідій",
@@ -33,7 +33,7 @@
     {
       "id": "purg_i_03",
       "dante_ref": "I, 7–12",
-      "dante_sub": "o sante Muse — Каліопа",
+      "dante_sub": "звертання до Муз — Каліопа",
       "source_ref": "Met. V, 338–340",
       "source_sub": "спів Каліопи",
       "source_author": "Овідій",
@@ -46,7 +46,7 @@
     {
       "id": "purg_i_04",
       "dante_ref": "I, 13–21",
-      "dante_sub": "dolce color d'oriental zaffiro",
+      "dante_sub": "небо кольору сапфіру",
       "source_ref": "Aen. VIII, 86–96",
       "source_sub": "ранковий пейзаж на Тибрі",
       "source_author": "Вергілій",
@@ -59,7 +59,7 @@
     {
       "id": "purg_i_05",
       "dante_ref": "I, 19–21",
-      "dante_sub": "lo bel pianeta che d'amar conforta — Венера",
+      "dante_sub": "планета кохання — Венера",
       "source_ref": "Aen. VIII, 590–591",
       "source_sub": "arma inter nubem — зброя від Венери",
       "source_author": "Вергілій",
@@ -85,7 +85,7 @@
     {
       "id": "purg_i_07",
       "dante_ref": "I, 31–39",
-      "dante_sub": "venerabil uomo — Катон Утицький",
+      "dante_sub": "шановний муж — Катон Утицький",
       "source_ref": "Phars. II, 234–391",
       "source_sub": "портрет Катона",
       "source_author": "Лукан",
@@ -124,7 +124,7 @@
     {
       "id": "purg_i_10",
       "dante_ref": "I, 73–75",
-      "dante_sub": "donna scese del ciel — Беатріче",
+      "dante_sub": "небесна дама — Беатріче",
       "source_ref": "Aen. VI, 119–123",
       "source_sub": "Сивілла як провідниця",
       "source_author": "Вергілій",
@@ -163,7 +163,7 @@
     {
       "id": "purg_i_13",
       "dante_ref": "I, 94–99",
-      "dante_sub": "giunco schietto — очерет покори",
+      "dante_sub": "очерет покори",
       "source_ref": "Aen. VI, 136–148",
       "source_sub": "золота гілка",
       "source_author": "Вергілій",
@@ -176,7 +176,7 @@
     {
       "id": "purg_i_14",
       "dante_ref": "I, 100–105",
-      "dante_sub": "rugiada — ранкова роса",
+      "dante_sub": "ранкова роса",
       "source_ref": "Aen. VI, 635–636",
       "source_sub": "Елісейські поля — світло й роса",
       "source_author": "Вергілій",
@@ -189,7 +189,7 @@
     {
       "id": "purg_i_15",
       "dante_ref": "I, 130–136",
-      "dante_sub": "l'umile pianta — очерет миттєво відростає",
+      "dante_sub": "очерет миттєво відростає",
       "source_ref": "Met. I, 416–437",
       "source_sub": "спонтанне відродження природи",
       "source_author": "Овідій",
