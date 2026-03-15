@@ -77,7 +77,12 @@ scripts/
   validate_json.py    Schema + semantic validation
   stats.py            Aggregate analytics
 dante-theme.css       Shared CSS with three theme variants
-dante_agent_spec_v4.md  Complete specification (source of truth)
+docs/
+  dante_agent_spec_v4.md  Complete specification (source of truth)
+  inf_xxvi_tree_v4.html   Reference HTML template (fully annotated)
+  inf_20.html             Example output (Inferno)
+  purg_01.html            Example output (Purgatorio)
+  par_10.html             Example output (Paradiso)
 ```
 
 ## Author

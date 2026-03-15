@@ -370,7 +370,7 @@ Side panel (☰):
 - Підсвічуються лише пов'язані ребра та вузли
 - Решта затемнюється (opacity: 0.04–0.1)
 
-**Шаблон HTML:** Файл `inf_xxvi_tree_v4.html` є референсною реалізацією.
+**Шаблон HTML:** Файл `docs/inf_xxvi_tree_v4.html` є референсною реалізацією.
 
 ---
 
@@ -648,8 +648,8 @@ Exit code 0 = валідація пройдена.
 
 ## 10. Референсна реалізація
 
-Файл `inf_xxvi_tree_v4.html` є референсним прикладом HTML-виводу для *Inf.* XXVI.
-Додаткові приклади: `inf_20.html` (Inferno), `purg_01.html` (Purgatorio), `par_10.html` (Paradiso).
+Файл `docs/inf_xxvi_tree_v4.html` є референсним прикладом HTML-виводу для *Inf.* XXVI.
+Додаткові приклади: `docs/inf_20.html` (Inferno), `docs/purg_01.html` (Purgatorio), `docs/par_10.html` (Paradiso).
 
 Основні характеристики:
 - d3.js v7.8.5

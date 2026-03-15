@@ -20,8 +20,8 @@ Each canto is processed independently. 100 total cantos: Inferno (34) + Purgator
 
 ### Key Files
 
-- `dante_agent_spec_v4.md` — Complete specification (primary source of truth); must stay in sync with CLAUDE.md constants and rules
-- `inf_xxvi_tree_v4.html` — Reference HTML template (fully annotated)
+- `docs/dante_agent_spec_v4.md` — Complete specification (primary source of truth); must stay in sync with CLAUDE.md constants and rules
+- `docs/inf_xxvi_tree_v4.html` — Reference HTML template (fully annotated)
 - `dante-theme.css` — Shared CSS with three theme variants via custom properties
 - `json/` — Generated JSON data files (e.g., `json/inf_01.json`)
 - `html/` — Generated HTML visualizations (gitignored, built by `render_html.py`)
@@ -32,7 +32,7 @@ Each canto is processed independently. 100 total cantos: Inferno (34) + Purgator
 - `templates/canto.html.j2` — Jinja2 template for canto HTML pages
 - `templates/index.html.j2` — Jinja2 template for index/navigation page
 - `Makefile` — Common targets: validate, render, dist, stats, serve, watch
-- Example outputs: `inf_20.html`, `purg_01.html`, `par_10.html` (reference, root level)
+- Example outputs: `docs/inf_20.html`, `docs/purg_01.html`, `docs/par_10.html` (reference)
 
 ### Data Flow
 
