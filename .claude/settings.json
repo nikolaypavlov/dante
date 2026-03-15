@@ -6,7 +6,8 @@
         "hooks": [
           {
             "type": "command",
-            "command": ".claude/hooks/validate-before-commit.sh"
+            "command": "bash .claude/hooks/validate-before-commit.sh",
+            "timeout": 30
           }
         ]
       }
