@@ -49,6 +49,16 @@ CANONICAL_AUTHORS = {
     "\u0411\u0456\u0431\u043b\u0456\u044f": {"f": "#280e0e", "s": "#ce5a5a"},
 }
 
+CANONICAL_AUTHORS_PARADISO = {
+    "\u0414\u0430\u043d\u0442\u0435": {"f": "#f0e4c8", "s": "#a07820"},
+    "\u0412\u0435\u0440\u0433\u0456\u043b\u0456\u0439": {"f": "#e8daf0", "s": "#7048a0"},
+    "\u041e\u0432\u0456\u0434\u0456\u0439": {"f": "#f0dae4", "s": "#a04068"},
+    "\u041b\u0443\u043a\u0430\u043d": {"f": "#daeaf0", "s": "#3090a0"},
+    "\u0421\u0442\u0430\u0446\u0456\u0439": {"f": "#dae0f0", "s": "#4060a0"},
+    "\u0413\u043e\u043c\u0435\u0440": {"f": "#f0e0da", "s": "#a06038"},
+    "\u0411\u0456\u0431\u043b\u0456\u044f": {"f": "#f0dada", "s": "#a04040"},
+}
+
 CANONICAL_HUES = set()
 for _style in CANONICAL_AUTHORS.values():
     r = int(_style["s"][1:3], 16) / 255
@@ -90,21 +100,27 @@ def slugify(ref: str) -> str:
     return ref.strip("_")
 
 
-def author_color(name: str) -> dict:
+def author_color(name: str, paradiso: bool = False) -> dict:
     """Generate deterministic fill/stroke colors for a non-canonical author."""
     digest = int(hashlib.md5(name.encode()).hexdigest(), 16)
     hue = digest % 360
     while any(abs(hue - ch) < 20 or abs(hue - ch) > 340 for ch in CANONICAL_HUES):
         hue = (hue + 23) % 360
     h = hue / 360.0
-    r, g, b = colorsys.hls_to_rgb(h, 0.12, 0.40)
-    fill = f"#{int(r * 255):02x}{int(g * 255):02x}{int(b * 255):02x}"
-    r, g, b = colorsys.hls_to_rgb(h, 0.60, 0.50)
-    stroke = f"#{int(r * 255):02x}{int(g * 255):02x}{int(b * 255):02x}"
+    if paradiso:
+        r, g, b = colorsys.hls_to_rgb(h, 0.92, 0.35)
+        fill = f"#{int(r * 255):02x}{int(g * 255):02x}{int(b * 255):02x}"
+        r, g, b = colorsys.hls_to_rgb(h, 0.40, 0.50)
+        stroke = f"#{int(r * 255):02x}{int(g * 255):02x}{int(b * 255):02x}"
+    else:
+        r, g, b = colorsys.hls_to_rgb(h, 0.12, 0.40)
+        fill = f"#{int(r * 255):02x}{int(g * 255):02x}{int(b * 255):02x}"
+        r, g, b = colorsys.hls_to_rgb(h, 0.60, 0.50)
+        stroke = f"#{int(r * 255):02x}{int(g * 255):02x}{int(b * 255):02x}"
     return {"f": fill, "s": stroke}
 
 
-def build_canto_data(data: dict) -> tuple[list, dict, dict]:
+def build_canto_data(data: dict, cantica: str = "") -> tuple[list, dict, dict]:
     """Transform JSON connections into LINKS_DATA, NODES_RAW, AUTHOR_STYLES."""
     connections = data["connections"]
     links = []
@@ -211,12 +227,14 @@ def build_canto_data(data: dict) -> tuple[list, dict, dict]:
                 )
 
     # Build author styles
+    is_paradiso = cantica == "Paradiso"
+    canonical = CANONICAL_AUTHORS_PARADISO if is_paradiso else CANONICAL_AUTHORS
     styles = {}
     for name in sorted(authors_seen):
-        if name in CANONICAL_AUTHORS:
-            styles[name] = CANONICAL_AUTHORS[name]
+        if name in canonical:
+            styles[name] = canonical[name]
         else:
-            styles[name] = author_color(name)
+            styles[name] = author_color(name, paradiso=is_paradiso)
 
     return links, nodes, styles
 
@@ -345,7 +363,7 @@ def render_canto(
         "par": "Paradiso",
     }[prefix]
 
-    links, nodes, styles = build_canto_data(data)
+    links, nodes, styles = build_canto_data(data, cantica=cantica_full)
     prev_link, next_link = get_nav(prefix, canto_num)
 
     template = env.get_template("canto.html.j2")
