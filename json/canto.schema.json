@@ -27,6 +27,34 @@
     "connections": {
       "type": "array",
       "items": { "$ref": "#/definitions/connection" }
+    },
+    "incipit": {
+      "type": "string",
+      "description": "Italian first line of the canto."
+    },
+    "foliation": {
+      "type": "string",
+      "description": "Folio marker, e.g. 'fol. xxvi·r'. If omitted, render_html.py derives it from canto_num."
+    },
+    "title_ua": {
+      "type": "string",
+      "description": "Ukrainian long title, e.g. 'Пісня двадцять шоста'."
+    },
+    "subtitle_ua": {
+      "type": "string",
+      "description": "Ukrainian subtitle describing the canto setting."
+    },
+    "rubric_lat": {
+      "type": "string",
+      "description": "Latin rubric band text, e.g. 'De Ulyxe et Diomede flammis involutis'."
+    },
+    "summary_ua": {
+      "type": "string",
+      "description": "Ukrainian argumentum paragraph summarizing the canto."
+    },
+    "verses": {
+      "type": "string",
+      "description": "Verse/line count descriptor, e.g. '142 рядки · терцини 1–47'."
     }
   },
   "definitions": {

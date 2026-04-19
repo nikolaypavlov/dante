@@ -125,6 +125,18 @@ def validate_file(path: Path, validator: Draft7Validator) -> list[str]:
             f"canto='{canto_label}' does not match expected '{expected_label}'"
         )
 
+    # Optional Ukrainian metadata fields: if present, must be Ukrainian
+    for field in ("title_ua", "subtitle_ua", "summary_ua"):
+        value = data.get(field)
+        if value:
+            latin_words = [
+                w for w in LATIN_WORD_RE.findall(value) if not ROMAN_RE.match(w)
+            ]
+            if latin_words:
+                errors.append(
+                    f"{field} contains Latin-script text: '{value}'"
+                )
+
     # Connection-level checks
     seen_ids: set[str] = set()
     for i, conn in enumerate(data["connections"]):
