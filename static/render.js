@@ -44,8 +44,6 @@
       const abbrev = { Inferno: 'Inf.', Purgatorio: 'Purg.', Paradiso: 'Par.' }[d.cantica] || d.cantica;
       $('canto').textContent = abbrev + ' ' + d.cantoRoman;
     }
-    $('incipit').textContent = '« ' + d.incipit + ' »';
-    $('rubricBand').textContent = d.rubric;
     $('foliation').textContent = d.foliation;
     $('versesInfo').textContent = d.verses;
     $('summaryText').innerHTML = d.summaryUa;

@@ -82,14 +82,13 @@
       <div class="canto canto-current" id="canto">{{ title }}</div>
       <div class="canto-nav canto-nav-next">{{ next_link | safe }}</div>
     </div>
-    {% if incipit %}<div class="incipit" id="incipit">« {{ incipit }} »</div>{% else %}<div class="incipit" id="incipit" style="display:none"></div>{% endif %}
+    <div class="subtitle-ua" id="subtitle"{% if not subtitle_ua %} style="display:none"{% endif %}>{{ subtitle_ua }}</div>
   </div>
 
   <div class="rule double"></div>
 
   <div class="folio-main">
     <div class="medallion-wrap">
-      {% if rubric_lat %}<div class="rubric-band" id="rubricBand">{{ rubric_lat }}</div>{% else %}<div class="rubric-band" id="rubricBand" style="display:none"></div>{% endif %}
       <div class="medallion" id="medallion">
         <svg class="tree-svg" id="tree"></svg>
         <div class="graph" id="graph"></div>

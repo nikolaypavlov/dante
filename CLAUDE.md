@@ -56,13 +56,16 @@ Canto text → Pass 1 (JSON) → Pass 2 (verified JSON) → Pass 3 (render_html.
 
 ## Five Connection Types
 
+Card border + arrow stroke colored by type (see `static/dante.css` for the CSS custom props).
+
 | Type | Code | Color | Line Style |
 |------|------|-------|------------|
-| Direct allusion/quote | `ALLUSION` | `#d4a853` gold | solid |
-| Structural borrowing | `STRUCTURE` | `#7ea88e` green | thick solid |
-| Thematic parallel | `THEMATIC` | `#8a7eb8` purple | dashed |
-| Deliberate inversion | `INVERSION` | `#c45c5c` red | solid |
-| Name/character reference | `ONOMASTIC` | `#5c8ab8` blue | dotted |
+| Direct allusion/quote | `ALLUSION` | `#d4a72c` gold | solid 1.8px |
+| Structural borrowing | `STRUCTURE` | `#3e7a3a` green | solid 3.0px (thicker) |
+| Thematic parallel | `THEMATIC` | `#7e4a9e` purple | dashed 5–4 |
+| Deliberate inversion | `INVERSION` | `#c43a14` red | solid 1.8px |
+| Name/character reference | `ONOMASTIC` | `#3a6ba8` blue | dotted 1.5–4 |
+| Indirect (chain link) | `INDIRECT` | inherits type color | dashed 1.5–3, `stroke-opacity: 0.55` |
 
 ## Three Visual Themes
 
@@ -76,9 +79,16 @@ Applied server-side via `<body class="theme-{slug}">` where `slug` is one of `in
 
 ## JSON Schema (per canto)
 
-Each connection object contains: `id`, `dante_ref`, `dante_sub`, `source_ref`, `source_sub`, `source_author`, `type`, `confidence` (HIGH/MEDIUM only, never LOW), `desc_dante`, `desc_source`, `chain` (array or null). See `json/inf_01.json` for a live example and spec §4.1 for the full schema.
+**Required canto-level fields:** `canto`, `cantica`, `canto_num`, `verified`, `connections`, `subtitle_ua`, `summary_ua`.
+- `subtitle_ua` — Ukrainian subtitle in the form `Коло/Тераса/Сфера · Підобласть · Тема · Персонажі`, e.g. `"Восьме коло · Восьмий рів · Лихі порадники · Улісс і Діомед"`.
+- `summary_ua` — Ukrainian argumentum paragraph (2–4 sentences) paraphrasing the canto's action and significance.
 
-Optional per-canto metadata (used by the folio header/colophon): `incipit`, `foliation`, `title_ua`, `subtitle_ua`, `rubric_lat`, `summary_ua`, `verses`. Missing fields render with graceful fallbacks (foliation derived from canto_num; subtitle falls back to the canto label; empty rubric/summary hide their sections).
+**Optional canto-level fields** (rendered with fallbacks):
+- `foliation` — folio marker; auto-derived as `fol. {roman}·r` if omitted.
+- `title_ua` — long Ukrainian title (reserved, currently not rendered).
+- `verses` — line-count descriptor shown in colophon bar.
+
+Each connection object contains: `id`, `dante_ref`, `dante_sub`, `source_ref`, `source_sub`, `source_author`, `type`, `confidence` (HIGH/MEDIUM only, never LOW), `desc_dante`, `desc_source`, `chain` (array or null). See `json/inf_01.json` for a live example and spec §4.1 for the full schema.
 
 Formal schema: `json/canto.schema.json` (JSON Schema Draft-07). Validation:
 
@@ -89,19 +99,19 @@ uv run scripts/validate_json.py inf_26.json  # single file
 
 JSON must pass validation before proceeding to Pass 3 (HTML rendering).
 
-Validator checks: schema structure, semantic consistency, AND Ukrainian-only text in `dante_sub`, `source_sub`, `chain[].sub`, plus optional `title_ua`, `subtitle_ua`, `summary_ua` (no Latin-script words).
+Validator checks: schema structure, semantic consistency, AND Ukrainian-only text in `dante_sub`, `source_sub`, `chain[].sub`, `subtitle_ua`, `summary_ua`, and optional `title_ua` (no Latin-script words).
 
 ## HTML Page Structure
 
-Each canto page is a folio with:
-- **Folio toolbar:** hamburger menu (opens 100-canto side panel) + prev/next arrows + link to per-cantica frontispicia
-- **Header:** kicker ("Divina Commedia · Cantica Prima"), cantica name (blackletter), canto Roman, incipit (italic), subtitle (Ukrainian)
-- **Medallion:** rubric band + 3-column card grid — **Dante passages (col 1)** → **Intermediaries Dante read (col 2)** → **Primary sources via intermediaries (col 3)** — connected by SVG bezier arrows colored by type
-- **Colophon:** argumentum (summary), nota bene (auto-generated connection counts), type legend
+Each canto page layout:
+- **Chrome** (top strip, theme-independent dark palette): `☰` hamburger + project mark (`Arbor fontium · Dantis intertextus`) on the left; three cantica buttons (`Inferno` / `Purgatorio` / `Paradiso`) linking to `frontispicia_{slug}.html` on the right; active cantica highlighted.
+- **Folio** (main page with corner ornaments):
+  - **Header:** kicker (`Divina Commedia · Cantica Prima`), cantica name in blackletter, canto row with prev/next arrows flanking current canto (`← Inf. XXV  INF. XXVI  Inf. XXVII →`), Ukrainian subtitle.
+  - **Medallion:** 3-column card grid — **Dante passages (col 1)** → **Intermediaries Dante read, `tier=direct` (col 2)** → **Primary sources transmitted through intermediaries, `tier=primary` (col 3)** — connected by SVG bezier arrows colored by type. Col 3 renders only if the canto has at least one chain-transmitted source.
+  - **Colophon:** Argumentum (`summary_ua`), Nota bene (auto-generated connection counts + brief explanation), Typi relationis (legend); colophon bar with author, foliation, verse count.
+- **Side panel** (`☰`): 100-canto navigator, grouped by cantica; current canto highlighted.
 
-Data injection: `render_html.py` bakes `window.CANTO = {...}` into each page. `static/render.js` reads it, runs `fromJson()` tier-splitting in JS mirror of Python, then builds the grid.
-
-Server-side transform: `scripts/render_html.py::from_json()` converts raw connections into tier-split records (`tier: 'direct' | 'primary'`, linked via `transmits: primaryId`). Mirrors the spec's chain semantics.
+Data flow: `scripts/render_html.py::build_canto_payload()` bakes `window.CANTO = {...}` server-side (already tier-split via `from_json()`). `static/render.js` reads `window.CANTO`, builds the card grid, aligns cards to parents, draws SVG bezier arrows in a `requestAnimationFrame` after layout, and wires tooltip + side-panel interactions.
 
 ## JSON / HTML Sync
 
@@ -128,6 +138,5 @@ Common commands:
 - **No self-allusion** (inter-canto references or other Dante texts)
 - **No theology/philosophy/chronicles/science** — secular literature + Bible only
 - **Transmission chains required** for authors Dante accessed indirectly (Homer, Plato, Aristotle, Bible, Arabic philosophers) — field `chain` must be populated
-- **Author palette is fixed** for major authors (Dante=gold, Virgil=purple, Ovid=pink, Lucan=cyan, Statius=blue, Homer=orange, Bible=red); new authors pick non-conflicting hues
 - Each connection has exactly **one type** and **two descriptions** (`desc_dante` + `desc_source`)
 - Academic indexing standards per source type (see spec §3)
