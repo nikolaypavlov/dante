@@ -82,7 +82,7 @@
       <div class="canto canto-current" id="canto">{{ title }}</div>
       <div class="canto-nav canto-nav-next">{{ next_link | safe }}</div>
     </div>
-    <div class="subtitle-ua" id="subtitle"{% if not subtitle_ua %} style="display:none"{% endif %}>{{ subtitle_ua }}</div>
+    <div class="subtitle-ua" id="subtitle">{{ subtitle_ua }}</div>
   </div>
 
   <div class="rule double"></div>
@@ -99,7 +99,7 @@
   <footer class="colophon">
     <div class="rule double"></div>
     <div class="colophon-grid">
-      <section class="col-argumentum"{% if not summary_ua %} style="display:none"{% endif %}>
+      <section class="col-argumentum">
         <h3>Argumentum</h3>
         <p id="summaryText">{{ summary_ua }}</p>
       </section>

@@ -136,7 +136,8 @@ Common commands:
 
 - **No LOW confidence** connections in output
 - **No self-allusion** (inter-canto references or other Dante texts)
-- **No theology/philosophy/chronicles/science** — secular literature + Bible only
+- **Allowed corpus:** secular literature, Bible, philosophy (Aristotle, Plato, Cicero, Seneca, Boethius, Avicenna, Averroes, Algazel + Latin intermediaries), theology (Augustine, Aquinas, Bonaventure) when Dante borrows a concrete image/scene
+- **Excluded:** chronicles (Orosius, Livy as historian, Valerius Maximus), scientific/encyclopedic texts, hagiography (*Legenda Aurea*)
 - **Transmission chains required** for authors Dante accessed indirectly (Homer, Plato, Aristotle, Bible, Arabic philosophers) — field `chain` must be populated
 - Each connection has exactly **one type** and **two descriptions** (`desc_dante` + `desc_source`)
 - Academic indexing standards per source type (see spec §3)

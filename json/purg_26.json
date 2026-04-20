@@ -3,6 +3,8 @@
   "cantica": "Purgatorio",
   "canto_num": 26,
   "verified": true,
+  "subtitle_ua": "Сьома тераса · Хтиві · Два розряди · Ґвідо Ґвініцеллі · Арнаут Даніель",
+  "summary_ua": "Два ряди душ ідуть назустріч: природні й содоміти — обіймаючись, оголошують приклади Содому і Пасіфаї. Ґвідо Ґвініцеллі, «батько» сучасної поезії, вказує Данте на Арнаута Даніеля як ще кращого. Арнаут говорить по-провансальському — єдиний такий пасаж у Комедії.",
   "connections": [
     {
       "id": "purg_xxvi_01",
@@ -47,7 +49,7 @@
       "id": "purg_xxvi_04",
       "dante_ref": "XXVI, 92–93",
       "dante_sub": "Ґвідо Ґвініцеллі — батько поезії",
-      "source_ref": "Guinizelli, \"Al cor gentil rempaira sempre amore\"",
+      "source_ref": "Guinizelli, \"Al cor gentil rempaira sempre amore\", vv. 21–30",
       "source_sub": "маніфест нового стилю",
       "source_author": "Ґвідо Ґвініцеллі",
       "type": "ALLUSION",
@@ -86,7 +88,7 @@
       "id": "purg_xxvi_07",
       "dante_ref": "XXVI, 117–120",
       "dante_sub": "Ґвіттоне — перевершений",
-      "source_ref": "Guittone d'Arezzo, канцони",
+      "source_ref": "Guittone d'Arezzo, \"Ora parrà s'eo saverò\", vv. 1–16",
       "source_sub": "риторичний стиль",
       "source_author": "Ґвіттоне д'Ареццо",
       "type": "INVERSION",

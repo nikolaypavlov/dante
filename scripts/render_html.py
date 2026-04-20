@@ -251,6 +251,12 @@ def build_canto_payload(data: dict, canto_num: int, cantica_full: str) -> dict:
     """Build the JSON payload injected as window.CANTO."""
     roman = int_to_roman(canto_num)
     slug = CANTICA_SLUG[cantica_full]
+    missing = [k for k in ("subtitle_ua", "summary_ua") if not data.get(k)]
+    if missing:
+        raise ValueError(
+            f"{data.get('canto', slug)}: required field(s) missing or empty: "
+            f"{', '.join(missing)}"
+        )
     return {
         "id": f"{slug}-{roman.lower()}",
         "cantica": cantica_full,
@@ -258,8 +264,8 @@ def build_canto_payload(data: dict, canto_num: int, cantica_full: str) -> dict:
         "cantoArabic": canto_num,
         "foliation": data.get("foliation") or f"fol. {roman.lower()}\u00b7r",
         "titleUa": data.get("title_ua", ""),
-        "subtitleUa": data.get("subtitle_ua", ""),
-        "summaryUa": data.get("summary_ua", ""),
+        "subtitleUa": data["subtitle_ua"],
+        "summaryUa": data["summary_ua"],
         "verses": data.get("verses", ""),
         "sources": from_json(data["connections"]),
     }
