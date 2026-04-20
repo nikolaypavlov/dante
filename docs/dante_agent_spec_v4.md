@@ -292,8 +292,7 @@ inf_01.html, inf_02.html, ..., inf_34.html
 purg_01.html, purg_02.html, ..., purg_33.html
 par_01.html, par_02.html, ..., par_33.html
 
-index.html                           (хаб з переліком усіх 100 канто)
-frontispicia_inferno.html            (титульна сторінка Inferno)
+index.html                           (титульна сторінка Inferno — лендінг сайту)
 frontispicia_purgatorio.html         (титульна Purgatorio)
 frontispicia_paradiso.html           (титульна Paradiso)
 ```
@@ -394,14 +393,12 @@ Side panel (☰):
 - Для картки-джерела: `.ref + .author`, тип зв'язку (badge + назва латиною + українською), латинська цитата, український переклад, рядки Данте
 - Hover підсвічує батьківські картки й стрілки ланцюга, інші елементи пригашуються (`.dim` клас)
 
-**Index (хаб, `index.html`):**
-- Folio з тими ж кутами, Unifraktur-title `Дантешопедія`, прогрес-бар з кількістю готових канто
-- Три секції за cantica; канто показано як картка з Roman-нумералом і лічильником зв'язків; відсутні канто — з opacity 0.22 + перекреслений badge
+**Лендінг (`index.html`):**
+- Це сама `frontispicia_inferno.html`, записана під ім'ям `index.html`. Ніякого окремого хаба немає — навігацію по 100 канто забезпечує бічна панель (`☰`), доступна також і на трьох frontispicia.
 
 **Шаблони:**
 - `templates/canto.html.j2` — канто-сторінка
-- `templates/index.html.j2` — хаб
-- `templates/frontispicia.html.j2` — одна Jinja-шаблонка, рендериться 3× (по одній cantica)
+- `templates/frontispicia.html.j2` — одна Jinja-шаблонка, рендериться 3× (Inferno → `index.html`, Purgatorio/Paradiso → `frontispicia_{slug}.html`)
 - Приклад готового output: `docs/inf_20.html`, `docs/purg_01.html`, `docs/par_10.html` (референс)
 
 ---
@@ -474,7 +471,7 @@ Par. I → Par. II → ... → Par. XXXIII
 Після обробки всіх 100 canti:
 1. **Зведений каталог** — JSON з усіма зв'язками
 2. **Навігація** — усі HTML-файли пов'язані стрілками ← →
-3. **Індексна сторінка** — `index.html` з переліком усіх пісень і кількістю зв'язків
+3. **Лендінг-сторінка** — `index.html` (титульна Inferno); навігація по 100 канто — через бічну панель
 4. **Статистичне зведення** — кількість зв'язків за типом, за автором, за Cantica
 
 ---
@@ -686,8 +683,7 @@ Exit code 0 = валідація пройдена.
 
 Поточний дизайн живе безпосередньо у шаблонах і статичних ресурсах проекту:
 - `templates/canto.html.j2` — канто-сторінка
-- `templates/index.html.j2` — хаб 100 канто
-- `templates/frontispicia.html.j2` — титульна сторінка cantica
+- `templates/frontispicia.html.j2` — титульна сторінка cantica (Inferno → `index.html`)
 - `static/dante.css` — CSS (теми, folio-layout, chrome, medallion, frontispicia)
 - `static/render.js` — клієнтський рендерер (картки + SVG безьє-стрілки + tooltip + side panel)
 

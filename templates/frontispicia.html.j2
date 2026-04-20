@@ -6,20 +6,30 @@
 <title>Frontispicia · {{ cantica_name }} · Дантешопедія</title>
 <link rel="stylesheet" href="{{ css_path }}" />
 </head>
-<body class="theme-{{ cantica }}">
+<body class="theme-{{ cantica }}" data-current-file="frontispicia_{{ cantica }}">
 
 <div class="chrome">
   <div class="chrome-left">
+    <button class="nav-btn" onclick="togglePanel()" aria-label="Navigatio">&#9776;</button>
     <a class="project-mark" href="index.html">
       Arbor fontium<span class="sub">&middot; Dantis intertextus &middot;</span>
     </a>
   </div>
   <div class="theme-toggle">
-    <a href="frontispicia_inferno.html"{% if cantica == 'inferno' %} class="active"{% endif %}>Inferno</a>
+    <a href="index.html"{% if cantica == 'inferno' %} class="active"{% endif %}>Inferno</a>
     <a href="frontispicia_purgatorio.html"{% if cantica == 'purgatorio' %} class="active"{% endif %}>Purgatorio</a>
     <a href="frontispicia_paradiso.html"{% if cantica == 'paradiso' %} class="active"{% endif %}>Paradiso</a>
   </div>
 </div>
+
+<div class="side-panel-overlay" id="overlay" onclick="togglePanel()"></div>
+<aside class="side-panel" id="sidePanel">
+  <div class="side-panel-header">
+    <h2>Navigatio</h2>
+    <button class="side-panel-close" onclick="togglePanel()" aria-label="Закрити">&#x2715;</button>
+  </div>
+  <div id="panelContent"></div>
+</aside>
 
 <svg width="0" height="0" style="position:absolute">
   <symbol id="fp-corner-ornament" viewBox="0 0 96 96">
@@ -36,7 +46,7 @@
   </symbol>
 </svg>
 
-<div class="frontispiece">
+<a class="frontispiece" href="{{ first_canto }}.html" title="Відкрити" aria-label="Відкрити">
   <div class="fp-border"></div>
   <svg class="fp-corner tl" viewBox="0 0 96 96"><use href="#fp-corner-ornament"/></svg>
   <svg class="fp-corner tr" viewBox="0 0 96 96"><use href="#fp-corner-ornament"/></svg>
@@ -48,7 +58,6 @@
   <div class="fp-content">
     <div class="fp-top">
       <div class="fp-kicker">Dantis Alagherii &middot; Comedia</div>
-      <div class="fp-rubric-band">{{ rubric_band }}</div>
       <div class="fp-fleuron">
         <hr/>
         <svg viewBox="0 0 36 16">
@@ -78,11 +87,7 @@
         <circle cx="130" cy="130" r="124" fill="url(#inf-abyss)" stroke="currentColor" stroke-width="1.5"/>
         <circle cx="130" cy="130" r="116" fill="none" stroke="var(--gold)" stroke-width="0.6" opacity="0.5"/>
         <circle cx="130" cy="130" r="108" fill="none" stroke="currentColor" stroke-width="0.6" opacity="0.6"/>
-        <g fill="var(--gold)" stroke="none" font-family="UnifrakturMaguntia" font-size="8" opacity="0.75">
-          <text x="130" y="36" text-anchor="middle" letter-spacing="2">&middot; per me si va &middot;</text>
-          <text x="130" y="234" text-anchor="middle" letter-spacing="2">&middot; lasciate ogne speranza &middot;</text>
-        </g>
-        <g transform="translate(130 140)">
+        <g transform="translate(130 130)">
           <circle r="60" fill="none" stroke="var(--rubric)" stroke-width="0.6" opacity="0.4"/>
           <g fill="none" stroke="var(--rubric)" stroke-width="1" opacity="0.85">
             <circle r="52"/><circle r="44"/><circle r="36"/><circle r="28"/>
@@ -120,10 +125,6 @@
         <circle cx="130" cy="130" r="124" fill="url(#pur-dawn)" stroke="currentColor" stroke-width="1.5"/>
         <circle cx="130" cy="130" r="116" fill="none" stroke="var(--gold)" stroke-width="0.6" opacity="0.6"/>
         <circle cx="130" cy="130" r="108" fill="none" stroke="currentColor" stroke-width="0.6" opacity="0.4"/>
-        <g fill="var(--border-ink)" stroke="none" font-family="UnifrakturMaguntia" font-size="8" opacity="0.9">
-          <text x="130" y="36" text-anchor="middle" letter-spacing="2">&middot; libertà va cercando &middot;</text>
-          <text x="130" y="234" text-anchor="middle" letter-spacing="2">&middot; per correr miglior acque &middot;</text>
-        </g>
         <path d="M10 180 Q 60 176 110 180 Q 160 184 210 180 Q 250 178 250 180 L 250 254 L 10 254 Z" fill="url(#pur-sea)" opacity="0.9"/>
         <g stroke="var(--paper)" stroke-width="0.6" fill="none" opacity="0.5">
           <path d="M20 190 Q 40 186 60 190 T 100 190 T 140 190 T 180 190 T 220 190 T 244 190"/>
@@ -189,10 +190,6 @@
           <line x1="45" y1="45" x2="215" y2="215"/>
           <line x1="215" y1="45" x2="45" y2="215"/>
         </g>
-        <g fill="currentColor" stroke="none" font-family="UnifrakturMaguntia" font-size="8" opacity="0.9">
-          <text x="130" y="36" text-anchor="middle" letter-spacing="2">&middot; in sua volontate è nostra pace &middot;</text>
-          <text x="130" y="234" text-anchor="middle" letter-spacing="2">&middot; l'amor che move il sole &middot;</text>
-        </g>
         <circle cx="130" cy="130" r="14" fill="url(#par-empyrean)"/>
         <g fill="currentColor" opacity="0.95">
           <g transform="translate(130 130)">
@@ -233,19 +230,11 @@
       {% endif %}
     </div>
 
-    <div class="fp-top" style="gap:10px;">
+    <div class="fp-bottom">
       <div class="fp-fleuron"><hr/><svg viewBox="0 0 36 16"><g fill="currentColor"><path d="M18 2 L 22 8 L 18 14 L 14 8 Z"/><circle cx="4" cy="8" r="1.2"/><circle cx="32" cy="8" r="1.2"/></g></svg><hr/></div>
       <blockquote class="fp-incipit">{{ incipit | safe }}</blockquote>
-      <div class="fp-incipit-ua">{{ incipit_ua | safe }}</div>
-      <div class="fp-setting">{{ setting | safe }}</div>
     </div>
-
-    <div class="fp-colophon">
-      <div class="fp-fleuron"><hr/><svg viewBox="0 0 36 16"><g fill="currentColor" opacity="0.8"><circle cx="18" cy="8" r="2"/><circle cx="8" cy="8" r="1"/><circle cx="28" cy="8" r="1"/></g></svg><hr/></div>
-      <div class="author">Dantes Alagherii</div>
-      <div class="work">Comedia &middot; Florentinus exul</div>
-      <div class="foliation">{{ foliation }}</div>
-    </div>
+    <div class="fp-setting">{{ setting | safe }}</div>
   </div>
 
   {% if cantica == 'inferno' %}
@@ -259,8 +248,9 @@
     <path d="M0 80 L 0 60 Q 40 40, 90 50 Q 140 60, 180 30 Q 220 5, 260 28 Q 290 45, 330 20 Q 370 0, 410 25 Q 450 50, 490 30 Q 530 10, 580 40 Q 620 60, 660 42 Q 700 30, 720 55 L 720 80 Z" fill="currentColor"/>
   </svg>
   {% endif %}
-</div>
+</a>
 
+<script src="{{ js_path }}"></script>
 {% if cantica == 'paradiso' %}
 <script>
 (function(){

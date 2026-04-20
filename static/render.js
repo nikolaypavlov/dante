@@ -36,6 +36,7 @@
     state.theme = themeFromBody();
 
     const d = window.CANTO;
+    if (!d) return;
     state.dataset = d;
 
     $('kicker').textContent = 'Divina Commedia · ' + ROMAN_TO_CANTICA[state.theme];
@@ -97,9 +98,9 @@
     const directs  = d.sources.filter(s => s.tier === 'direct');
     const primaries = d.sources.filter(s => s.tier === 'primary');
 
-    // Columns per spec §4.2: Dante → Посередники → Джерела
+    // Columns per spec §4.2: Dante → Латинські джерела → Першоджерела
     const colD = buildCol('dante',   'Данте',        'Divina Commedia · ' + d.cantoRoman);
-    const colS = buildCol('sources', 'Посередники',  'fontes quos Dantes legit');
+    const colS = buildCol('sources', 'Латинські джерела',  'fontes quos Dantes legit');
     const colI = buildCol('indirect','Первинні джерела', 'fontes primarii · per latinum');
 
     // Dante cards
@@ -637,6 +638,18 @@
     return t;
   }
 
+  const ROMAN_PAIRS = [
+    ['M',1000],['CM',900],['D',500],['CD',400],['C',100],['XC',90],
+    ['L',50],['XL',40],['X',10],['IX',9],['V',5],['IV',4],['I',1]
+  ];
+  function toRoman(n) {
+    let out = '';
+    for (const [lit, val] of ROMAN_PAIRS) {
+      while (n >= val) { out += lit; n -= val; }
+    }
+    return out;
+  }
+
   function buildSidePanel() {
     const panel = document.getElementById('panelContent');
     if (!panel) return;
@@ -658,7 +671,8 @@
         const stem = s.prefix + '_' + String(i).padStart(2, '0');
         const a = document.createElement('a');
         a.href = stem + '.html';
-        a.textContent = String(i);
+        a.textContent = toRoman(i);
+        a.title = s.name + ' ' + i;
         if (stem === currentFile) a.className = 'current';
         links.appendChild(a);
       }

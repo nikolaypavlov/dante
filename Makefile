@@ -1,13 +1,10 @@
-.PHONY: validate render stats serve watch check-sync index frontispicia dist all
+.PHONY: validate render stats serve watch check-sync frontispicia dist all
 
 validate:
 	uv run scripts/validate_json.py
 
 render:
 	uv run scripts/render_html.py
-
-index:
-	uv run scripts/render_html.py --index
 
 frontispicia:
 	uv run scripts/render_html.py --frontispicia
@@ -27,4 +24,4 @@ check-sync:
 dist:
 	uv run scripts/render_html.py --dist
 
-all: validate render index frontispicia check-sync
+all: validate render frontispicia check-sync

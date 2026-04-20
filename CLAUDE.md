@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Dante Intertextual Analysis ("Дантешопедія") — a literary scholarship tool that systematically catalogs intertextual connections between Dante's *Divina Commedia* and pre-Dante literature (antiquity through early XIV century). The output is 100 self-contained HTML canto pages + 3 cantica frontispicia + index hub, styled as a medieval manuscript (folio layout, rubric bands, UnifrakturMaguntia blackletter titles, card-based intertextual graph).
+Dante Intertextual Analysis ("Дантешопедія") — a literary scholarship tool that systematically catalogs intertextual connections between Dante's *Divina Commedia* and pre-Dante literature (antiquity through early XIV century). The output is 100 self-contained HTML canto pages + 3 cantica frontispicia (Inferno frontispicia is written to `index.html` and serves as the site landing), styled as a medieval manuscript (folio layout, rubric bands, UnifrakturMaguntia blackletter titles, card-based intertextual graph).
 
 **Language:** All text content is in Ukrainian. Node labels (`dante_sub`, `source_sub`) must be Ukrainian paraphrases, never Italian/Latin quotes.
 
@@ -31,7 +31,6 @@ Each canto is processed independently. 100 total cantos: Inferno (34) + Purgator
 - `scripts/stats.py` — Aggregate analytics across all canto JSON files
 - `scripts/validate_json.py` — Schema + semantic validation with `--check-sync` flag
 - `templates/canto.html.j2` — Per-canto Jinja2 template (folio + medallion + colophon)
-- `templates/index.html.j2` — Hub page with 100-canto grid + progress bar
 - `templates/frontispicia.html.j2` — Per-cantica title page (switches central device via `{% if cantica %}`)
 - `Makefile` — Common targets: validate, render, index, frontispicia, dist, stats, serve, watch
 - Example outputs: `docs/inf_20.html`, `docs/purg_01.html`, `docs/par_10.html` (reference)
@@ -109,7 +108,7 @@ Each canto page layout:
   - **Header:** kicker (`Divina Commedia · Cantica Prima`), cantica name in blackletter, canto row with prev/next arrows flanking current canto (`← Inf. XXV  INF. XXVI  Inf. XXVII →`), Ukrainian subtitle.
   - **Medallion:** 3-column card grid — **Dante passages (col 1)** → **Intermediaries Dante read, `tier=direct` (col 2)** → **Primary sources transmitted through intermediaries, `tier=primary` (col 3)** — connected by SVG bezier arrows colored by type. Col 3 renders only if the canto has at least one chain-transmitted source.
   - **Colophon:** Argumentum (`summary_ua`), Nota bene (auto-generated connection counts + brief explanation), Typi relationis (legend); colophon bar with author, foliation, verse count.
-- **Side panel** (`☰`): 100-canto navigator, grouped by cantica; current canto highlighted.
+- **Side panel** (`☰`): 100-canto navigator rendered with Roman numerals, grouped by cantica; current canto highlighted. Available on every canto page and on all three frontispicia.
 
 Data flow: `scripts/render_html.py::build_canto_payload()` bakes `window.CANTO = {...}` server-side (already tier-split via `from_json()`). `static/render.js` reads `window.CANTO`, builds the card grid, aligns cards to parents, draws SVG bezier arrows in a `requestAnimationFrame` after layout, and wires tooltip + side-panel interactions.
 
@@ -125,7 +124,6 @@ uv run scripts/render_html.py {canto}           # regenerate HTML
 Common commands:
 - `make validate` — validate all JSON files
 - `make render` — regenerate html/ from JSON
-- `make index` — rebuild index hub page only
 - `make frontispicia` — rebuild three per-cantica title pages
 - `make dist` — build flat site (html + index + frontispicia + static/) into dist/ for deployment
 - `make stats` — show aggregate analytics

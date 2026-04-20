@@ -2,13 +2,15 @@
 """Render canto JSON files to self-contained HTML visualizations.
 
 Usage:
-    uv run scripts/render_html.py              # render all json/*.json
-    uv run scripts/render_html.py inf_01       # render single canto
-    uv run scripts/render_html.py --check      # dry-run, report diffs
-    uv run scripts/render_html.py --index      # generate html/index.html
-    uv run scripts/render_html.py --dist       # build flat site into dist/
+    uv run scripts/render_html.py                # render all json/*.json
+    uv run scripts/render_html.py inf_01         # render single canto
+    uv run scripts/render_html.py --check        # dry-run, report diffs
+    uv run scripts/render_html.py --frontispicia # render three frontispicia
+                                                 # (Inferno -> index.html)
+    uv run scripts/render_html.py --dist         # build flat site into dist/
 """
 
+import hashlib
 import json
 import shutil
 import sys
@@ -21,6 +23,16 @@ JSON_DIR = ROOT / "json"
 HTML_DIR = ROOT / "html"
 TEMPLATE_DIR = ROOT / "templates"
 STATIC_DIR = ROOT / "static"
+
+
+def asset_hash(path: Path) -> str:
+    return hashlib.sha1(path.read_bytes()).hexdigest()[:10]
+
+
+def bust(path: str, kind: str) -> str:
+    """Append short content hash of static asset as a cache-busting query."""
+    src = STATIC_DIR / ("render.js" if kind == "js" else "dante.css")
+    return f"{path}?v={asset_hash(src)}"
 
 CANTICA_SEQUENCE = [
     ("Inferno", "inf", "Inf.", 34),
@@ -72,74 +84,41 @@ FRONTISPICIA = {
     "inferno": {
         "cantica_name": "Inferno",
         "ordinal": "Cantica Prima",
-        "rubric_band": "Incipit cantica prima \u00b7 De inferno",
         "incipit": (
             "Nel mezzo del cammin di nostra vita<br/>"
             "mi ritrovai per una selva oscura,<br/>"
             "ch&eacute; la diritta via era smarrita."
         ),
-        "incipit_ua": (
-            "\u041d\u0430 \u043f\u0456\u0432\u0448\u043b\u044f\u0445\u0443 "
-            "\u0436\u0438\u0442\u0442\u044f \u0437\u0435\u043c\u043d\u043e\u0433\u043e "
-            "\u043d\u0430\u0448\u043e\u0433\u043e<br/>"
-            "\u044f \u043e\u043f\u0438\u043d\u0438\u0432\u0441\u044c \u0443 "
-            "\u0442\u0435\u043c\u043d\u0456\u0439 \u043f\u0443\u0449\u0456, "
-            "\u0431\u043e \u0432\u0442\u0440\u0430\u0442\u0438\u0432<br/>"
-            "\u043f\u0443\u0442\u044c \u043f\u0440\u044f\u043c\u0443\u044e."
-        ),
         "setting": (
             "Silva obscura <span class=\"star\">\u2726</span> Nox "
             "<span class=\"star\">\u2726</span> Feriae sanctae MCCC"
         ),
-        "foliation": "fol. i \u00b7 recto",
     },
     "purgatorio": {
         "cantica_name": "Purgatorio",
         "ordinal": "Cantica Secunda",
-        "rubric_band": "Incipit cantica secunda \u00b7 De purgatorio",
         "incipit": (
             "Per correr miglior acque alza le vele<br/>"
             "omai la navicella del mio ingegno,<br/>"
             "che lascia dietro a s&eacute; mar s&igrave; crudele."
         ),
-        "incipit_ua": (
-            "\u0429\u043e\u0431 \u043f\u0435\u0440\u0435\u0431\u0456\u0433\u0442\u0438 "
-            "\u0432\u043e\u0434\u0438 \u043a\u0440\u0430\u0449\u0456, "
-            "\u0437\u0434\u0456\u0439\u043c\u0430\u0454 \u0432\u0456\u0442\u0440\u0438\u043b\u0430<br/>"
-            "\u043d\u0438\u043d\u0456 \u043a\u043e\u0440\u0430\u0431\u043b\u0438\u043a "
-            "\u043c\u043e\u0433\u043e \u043c\u0438\u0441\u0442\u0435\u0446\u0442\u0432\u0430,<br/>"
-            "\u044f\u043a\u0438\u0439 \u043b\u0438\u0448\u0430\u0454 \u043f\u043e\u0437\u0430\u0434 "
-            "\u0441\u0435\u0431\u0435 \u0442\u0430\u043a\u0435 "
-            "\u0436\u043e\u0440\u0441\u0442\u043e\u043a\u0435 \u043c\u043e\u0440\u0435."
-        ),
         "setting": (
             "Insula Purgatorii <span class=\"star\">\u2726</span> Aurora "
             "<span class=\"star\">\u2726</span> Dies paschae MCCC"
         ),
-        "foliation": "fol. lxviii \u00b7 recto",
     },
     "paradiso": {
         "cantica_name": "Paradiso",
         "ordinal": "Cantica Tertia",
-        "rubric_band": "Incipit cantica tertia \u00b7 De paradiso",
         "incipit": (
             "La gloria di colui che tutto move<br/>"
             "per l'universo penetra, e risplende<br/>"
             "in una parte pi&ugrave; e meno altrove."
         ),
-        "incipit_ua": (
-            "\u0421\u043b\u0430\u0432\u0430 \u0442\u043e\u0433\u043e, \u0445\u0442\u043e "
-            "\u0432\u0441\u0435 \u0440\u0443\u0448\u0438\u0442\u044c,<br/>"
-            "\u043f\u0440\u043e\u043d\u0438\u0437\u0443\u0454 \u0432\u0435\u0441\u044c "
-            "\u0432\u0441\u0435\u0441\u0432\u0456\u0442 \u0456 \u0441\u044f\u0454<br/>"
-            "\u043f\u043e\u0434\u0435\u043a\u0443\u0434\u0438 \u0441\u0438\u043b\u044c\u043d\u0456\u0448\u0435, "
-            "\u043f\u043e\u0434\u0435\u043a\u0443\u0434\u0438 \u0441\u043b\u0430\u0431\u0448\u0435."
-        ),
         "setting": (
             "Coeli novem <span class=\"star\">\u2726</span> Empyreum "
             "<span class=\"star\">\u2726</span> In die paschae"
         ),
-        "foliation": "fol. cxxxiv \u00b7 recto",
     },
 }
 
@@ -304,6 +283,18 @@ def get_nav(prefix: str, num: int) -> tuple[str, str]:
 
     if current_idx == len(seq) - 1:
         next_html = '<span class="nav-arrow"></span>'
+    elif prefix == "inf" and num == 34:
+        # Inf. XXXIV -> Purgatorio title page (not Purg. I directly).
+        next_html = (
+            '<a class="nav-arrow" href="frontispicia_purgatorio.html">'
+            "Purgatorio \u2192</a>"
+        )
+    elif prefix == "purg" and num == 33:
+        # Purg. XXXIII -> Paradiso title page.
+        next_html = (
+            '<a class="nav-arrow" href="frontispicia_paradiso.html">'
+            "Paradiso \u2192</a>"
+        )
     else:
         np, na, _nc, nn = seq[current_idx + 1]
         next_file = f"{np}_{nn:02d}"
@@ -351,8 +342,8 @@ def render_canto(
         next_link=next_link,
         current_file=stem,
         title=canto_label,
-        css_path=css_path,
-        js_path=js_path,
+        css_path=bust(css_path, "css"),
+        js_path=bust(js_path, "js"),
     )
 
     target = out_dir if out_dir else HTML_DIR
@@ -376,74 +367,36 @@ def render_canto(
     return True
 
 
-def render_index(
-    env: Environment,
-    out_dir: Path | None = None,
-    css_path: str = "../static/dante.css",
-) -> None:
-    """Generate index.html with 100-canto navigation grid + progress bar."""
-    seq = build_full_sequence()
-    target = out_dir if out_dir else HTML_DIR
-    cantos = []
-    total_conn = 0
-    for prefix, abbrev, cantica, num in seq:
-        stem = f"{prefix}_{num:02d}"
-        json_exists = (JSON_DIR / f"{stem}.json").exists()
-        html_exists = (target / f"{stem}.html").exists()
-        conn_count = 0
-        if json_exists:
-            with open(JSON_DIR / f"{stem}.json") as f:
-                data = json.load(f)
-            conn_count = len(data["connections"])
-            total_conn += conn_count
-        cantos.append(
-            {
-                "stem": stem,
-                "label": f"{abbrev} {int_to_roman(num)}",
-                "roman": int_to_roman(num),
-                "num": num,
-                "cantica": cantica,
-                "json_exists": json_exists,
-                "html_exists": html_exists,
-                "conn_count": conn_count,
-            }
-        )
-
-    total = len(cantos)
-    done = sum(1 for c in cantos if c["html_exists"])
-    pct = round(done / total * 100) if total else 0
-
-    template = env.get_template("index.html.j2")
-    html = template.render(
-        cantos=cantos,
-        cantica_list=CANTICA_SEQUENCE,
-        cantica_lat=CANTICA_LAT,
-        css_path=css_path,
-        done=done,
-        total=total,
-        pct=pct,
-        total_conn=total_conn,
-    )
-    target.mkdir(parents=True, exist_ok=True)
-    out_path = target / "index.html"
-    out_path.write_text(html)
-    print("  rendered index.html")
-
-
 def render_frontispicia(
     env: Environment,
     out_dir: Path | None = None,
     css_path: str = "../static/dante.css",
+    js_path: str = "../static/render.js",
 ) -> None:
-    """Render three per-cantica frontispicia HTML files."""
+    """Render three per-cantica frontispicia HTML files.
+
+    Inferno frontispicia is written to `index.html` and serves as the site
+    landing page; Purgatorio and Paradiso frontispicia keep their
+    `frontispicia_{slug}.html` names.
+    """
     target = out_dir if out_dir else HTML_DIR
     target.mkdir(parents=True, exist_ok=True)
     template = env.get_template("frontispicia.html.j2")
+    css_busted = bust(css_path, "css")
+    js_busted = bust(js_path, "js")
+    first_canto_map = {"inferno": "inf_01", "purgatorio": "purg_01", "paradiso": "par_01"}
     for slug, fields in FRONTISPICIA.items():
-        html = template.render(cantica=slug, css_path=css_path, **fields)
-        out_path = target / f"frontispicia_{slug}.html"
+        html = template.render(
+            cantica=slug,
+            css_path=css_busted,
+            js_path=js_busted,
+            first_canto=first_canto_map[slug],
+            **fields,
+        )
+        filename = "index.html" if slug == "inferno" else f"frontispicia_{slug}.html"
+        out_path = target / filename
         out_path.write_text(html)
-        print(f"  rendered frontispicia_{slug}.html")
+        print(f"  rendered {filename}")
 
 
 def build_dist(env: Environment) -> int:
@@ -468,10 +421,14 @@ def build_dist(env: Environment) -> int:
             js_path="render.js",
         )
 
-    render_index(env, out_dir=dist_dir, css_path="dante.css")
-    render_frontispicia(env, out_dir=dist_dir, css_path="dante.css")
+    render_frontispicia(
+        env,
+        out_dir=dist_dir,
+        css_path="dante.css",
+        js_path="render.js",
+    )
 
-    print(f"\nBuilt {len(json_files) + 4} files into dist/")
+    print(f"\nBuilt {len(json_files) + 3} files into dist/")
     return 0
 
 
@@ -486,10 +443,6 @@ def main() -> int:
 
     if "--dist" in args:
         return build_dist(env)
-
-    if "--index" in args:
-        render_index(env)
-        return 0
 
     if "--frontispicia" in args:
         render_frontispicia(env)
