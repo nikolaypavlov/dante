@@ -563,7 +563,7 @@
     const primaryCount = touched.filter(s => s.tier === 'primary').length;
 
     $('tipHead').textContent = d.cantica + ' · ' + d.cantoRoman;
-    $('tipSub').textContent  = passage.line;
+    $('tipSub').textContent  = '';
     const typeEl = $('tipType');
     typeEl.textContent = 'locus dantescus · Дантова терцина';
     typeEl.style.color = 'var(--gold)';
@@ -591,7 +591,7 @@
   function showTip(e, src, viaSrc) {
     const tip = $('tip');
     $('tipHead').textContent = src.author;
-    $('tipSub').textContent = `${src.work} · ${src.yearUa}`;
+    $('tipSub').textContent = '';
     const typeEl = $('tipType');
     typeEl.textContent = TYPE_LAT[src.type] + '  ·  ' + TYPE_UA[src.type] +
       (viaSrc ? '  ·  per ' + viaSrc.author : '');
@@ -601,7 +601,7 @@
       `<span style="color:var(--ink-dim); font-style:italic">« ${escapeHtml(src.quoteLat)} »</span>
        <div style="margin-top:6px; font-style:normal; font-size:12px;">${escapeHtml(src.quoteUa)}</div>`;
     $('tipLines').innerHTML =
-      `Dante: <strong>${src.lineDante}</strong> &nbsp;·&nbsp; Fons: <strong>${src.lineSource}</strong>` +
+      `Dante: <strong>${src.lineDante}</strong>` +
       (viaSrc ? `<br/><span style="color:var(--ink-dim); font-style:italic;">опосередковано через ${viaSrc.author}, ${viaSrc.work}</span>` : '');
     $('tipNote').textContent = src.note || '';
     tip.classList.add('visible');
@@ -764,8 +764,7 @@
           'direct',
           {
             type: (TYPE_UA[it.direct.type] || it.direct.type),
-            ua: it.direct.quoteUa,
-            lines: it.direct.lineSource || ''
+            ua: it.direct.quoteUa
           }
         ));
         if (it.primary) {
@@ -778,8 +777,7 @@
             'primary indirect',
             {
               type: (TYPE_UA[it.primary.type] || it.primary.type) + ' · primus fons',
-              ua: it.primary.quoteUa,
-              lines: it.primary.lineSource || ''
+              ua: it.primary.quoteUa
             }
           ));
         }
