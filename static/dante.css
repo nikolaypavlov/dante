@@ -1276,8 +1276,8 @@ body.theme-paradiso .fp-stars { display: block; }
   display: none;
   position: absolute;
   left: 30px;
-  right: 30px;
   bottom: 30px;
+  width: calc(100% - 60px);
   height: 22px;
   color: var(--rubric);
   opacity: 0.75;
@@ -1289,8 +1289,8 @@ body.theme-inferno .fp-flames { display: block; }
   display: none;
   position: absolute;
   left: 30px;
-  right: 30px;
   bottom: 30px;
+  width: calc(100% - 60px);
   height: 80px;
   color: var(--border-ink);
   opacity: 0.12;
@@ -1445,8 +1445,11 @@ body.theme-purgatorio .fp-mountain { display: block; }
   .theme-toggle a { padding: 3px 7px; font-size: 11px; letter-spacing: 0.5px; }
   .folio-header .cantica { font-size: clamp(36px, 11vw, 52px); }
   .folio-header .canto { font-size: clamp(18px, 5.5vw, 26px); }
+  .canto-row { gap: 6px; }
+  .canto-nav .nav-arrow { padding: 2px 4px; font-size: 10px; letter-spacing: 0; }
   .fp-device { width: 140px; height: 140px; }
   .fp-cantica { font-size: clamp(40px, 15vw, 72px); }
+  .fp-setting { font-size: 11px; letter-spacing: 2px; }
   .side-panel-links a { font-size: 11px; padding: 4px 2px; letter-spacing: 0.3px; }
   .medallion.narrow .card .ref { font-size: 11px; }
   .medallion.narrow .card .desc { font-size: 12px; }
