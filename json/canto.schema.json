@@ -4,7 +4,10 @@
   "title": "Dante Intertextual Canto",
   "description": "Schema for a single canto's intertextual connections in the Dante Intertextual Analysis project.",
   "type": "object",
-  "required": ["canto", "cantica", "canto_num", "verified", "connections"],
+  "required": [
+    "canto", "cantica", "canto_num", "verified", "connections",
+    "subtitle_ua", "summary_ua"
+  ],
   "additionalProperties": false,
   "properties": {
     "canto": {
@@ -27,6 +30,28 @@
     "connections": {
       "type": "array",
       "items": { "$ref": "#/definitions/connection" }
+    },
+    "foliation": {
+      "type": "string",
+      "description": "Folio marker, e.g. 'fol. xxvi·r'. If omitted, render_html.py derives it from canto_num."
+    },
+    "title_ua": {
+      "type": "string",
+      "description": "Ukrainian long title, e.g. 'Пісня двадцять шоста'."
+    },
+    "subtitle_ua": {
+      "type": "string",
+      "description": "Ukrainian subtitle describing the canto setting: circle/terrace/sphere, sub-area, main topic, main characters. Example: 'Восьме коло · Восьмий рів · Лихі порадники · Улісс і Діомед'.",
+      "minLength": 1
+    },
+    "summary_ua": {
+      "type": "string",
+      "description": "Ukrainian argumentum paragraph (~2-4 sentences) summarizing the canto's action, characters, and significance for the reader.",
+      "minLength": 1
+    },
+    "verses": {
+      "type": "string",
+      "description": "Verse/line count descriptor, e.g. '142 рядки · терцини 1–47'."
     }
   },
   "definitions": {

@@ -1,73 +1,143 @@
-<!DOCTYPE html>
-<html lang="uk"{{ ' class="' + theme_class + '"' if theme_class else '' }}>
+<!doctype html>
+<html lang="uk">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>{{ title }} -- Iнтертекстуальне дерево</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
-<link rel="stylesheet" href="{{ css_path }}">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>{{ title }} · Дантешопедія</title>
+<link rel="stylesheet" href="{{ css_path }}" />
 </head>
-<body>
-<div class="side-panel-overlay" id="overlay" onclick="togglePanel()"></div>
-<div class="side-panel" id="sidePanel"><div class="side-panel-header"><h2>Навігація</h2><button class="side-panel-close" onclick="togglePanel()">&#x2715;</button></div><div id="panelContent"></div></div>
+<body class="theme-{{ cantica_slug }}" data-current-file="{{ current_file }}">
 
-<header>
-  <button class="nav-btn" onclick="togglePanel()" title="Навігація">&#x2630;</button>
-  <div class="header-center">
-    {{ prev_link }}
-    <div class="title-block"><h1>{{ h1 }}</h1><p>Інтертекстуальне дерево джерел</p></div>
-    {{ next_link }}
+<div class="chrome">
+  <div class="chrome-left">
+    <button class="nav-btn" onclick="togglePanel()" aria-label="Navigatio">&#9776;</button>
+    <a class="project-mark" href="index.html">
+      Arbor fontium<span class="sub">&middot; Dantis intertextus &middot;</span>
+    </a>
   </div>
-</header>
-
-<div class="legend">
-  <div class="legend-item"><div class="legend-swatch" style="background:#d4a853"></div>Алюзія</div>
-  <div class="legend-item"><div class="legend-swatch thick" style="background:#7ea88e"></div>Структура</div>
-  <div class="legend-item"><div class="legend-swatch dashed" style="border-color:#8a7eb8"></div>Тематика</div>
-  <div class="legend-item"><div class="legend-swatch" style="background:#c45c5c"></div>Інверсія</div>
-  <div class="legend-item"><div class="legend-swatch dotted" style="border-color:#5c8ab8"></div>Ономастика</div>
+  <div class="theme-toggle">
+    <a href="index.html"{% if cantica_slug == 'inferno' %} class="active"{% endif %}>Inferno</a>
+    <a href="frontispicia_purgatorio.html"{% if cantica_slug == 'purgatorio' %} class="active"{% endif %}>Purgatorio</a>
+    <a href="frontispicia_paradiso.html"{% if cantica_slug == 'paradiso' %} class="active"{% endif %}>Paradiso</a>
+  </div>
 </div>
-<div id="chart-container"></div>
-<div class="tooltip" id="tooltip"></div>
 
-<script>
-{% raw %}const TYPE_UA = { ALLUSION:"Алюзія", STRUCTURE:"Структура", THEMATIC:"Тематика", INVERSION:"Інверсія", ONOMASTIC:"Ономастика" };{% endraw %}
+<div class="side-panel-overlay" id="overlay" onclick="togglePanel()"></div>
+<aside class="side-panel" id="sidePanel">
+  <div class="side-panel-header">
+    <h2>Navigatio</h2>
+    <button class="side-panel-close" onclick="togglePanel()" aria-label="Закрити">&#x2715;</button>
+  </div>
+  <div id="panelContent"></div>
+</aside>
 
-const LINKS_DATA = {{ links_data }};
+<div class="folio" id="folio">
+  <svg class="corner tl" viewBox="0 0 88 88" xmlns="http://www.w3.org/2000/svg">
+    <g stroke="currentColor" fill="none" stroke-width="1.2" style="color:var(--border-ink)">
+      <path d="M6 6 L6 80 M6 6 L80 6"/>
+      <path d="M14 14 Q 28 6, 42 20 Q 56 34, 48 48 Q 36 60, 20 52 Q 10 46, 14 30 Z"/>
+      <path d="M20 20 Q 30 18, 36 28 Q 40 36, 32 40 Q 26 42, 22 34"/>
+      <circle cx="42" cy="20" r="3" fill="var(--rubric)" stroke="var(--gold)" stroke-width="0.6"/>
+      <circle cx="14" cy="30" r="2.5" fill="var(--gold)" stroke="none"/>
+      <circle cx="48" cy="48" r="2.5" fill="var(--rubric)" stroke="var(--gold)" stroke-width="0.5"/>
+      <path d="M50 14 Q 60 8, 72 14" stroke-width="0.8"/>
+      <path d="M14 50 Q 8 60, 14 72" stroke-width="0.8"/>
+      <path d="M56 6 Q 58 14, 66 14" />
+      <path d="M6 56 Q 14 58, 14 66" />
+    </g>
+  </svg>
+  <svg class="corner tr" viewBox="0 0 88 88" xmlns="http://www.w3.org/2000/svg">
+    <g stroke="currentColor" fill="none" stroke-width="1.2" style="color:var(--border-ink)">
+      <path d="M6 6 L6 80 M6 6 L80 6"/>
+      <path d="M14 14 Q 28 6, 42 20 Q 56 34, 48 48 Q 36 60, 20 52 Q 10 46, 14 30 Z"/>
+      <circle cx="42" cy="20" r="3" fill="var(--rubric)" stroke="var(--gold)" stroke-width="0.6"/>
+      <circle cx="14" cy="30" r="2.5" fill="var(--gold)" stroke="none"/>
+      <circle cx="48" cy="48" r="2.5" fill="var(--rubric)" stroke="var(--gold)" stroke-width="0.5"/>
+    </g>
+  </svg>
+  <svg class="corner bl" viewBox="0 0 88 88" xmlns="http://www.w3.org/2000/svg">
+    <g stroke="currentColor" fill="none" stroke-width="1.2" style="color:var(--border-ink)">
+      <path d="M6 6 L6 80 M6 6 L80 6"/>
+      <path d="M14 14 Q 28 6, 42 20 Q 56 34, 48 48 Q 36 60, 20 52 Q 10 46, 14 30 Z"/>
+      <circle cx="42" cy="20" r="3" fill="var(--rubric)" stroke="var(--gold)" stroke-width="0.6"/>
+      <circle cx="14" cy="30" r="2.5" fill="var(--gold)" stroke="none"/>
+      <circle cx="48" cy="48" r="2.5" fill="var(--rubric)" stroke="var(--gold)" stroke-width="0.5"/>
+    </g>
+  </svg>
+  <svg class="corner br" viewBox="0 0 88 88" xmlns="http://www.w3.org/2000/svg">
+    <g stroke="currentColor" fill="none" stroke-width="1.2" style="color:var(--border-ink)">
+      <path d="M6 6 L6 80 M6 6 L80 6"/>
+      <path d="M14 14 Q 28 6, 42 20 Q 56 34, 48 48 Q 36 60, 20 52 Q 10 46, 14 30 Z"/>
+      <circle cx="42" cy="20" r="3" fill="var(--rubric)" stroke="var(--gold)" stroke-width="0.6"/>
+      <circle cx="14" cy="30" r="2.5" fill="var(--gold)" stroke="none"/>
+      <circle cx="48" cy="48" r="2.5" fill="var(--rubric)" stroke="var(--gold)" stroke-width="0.5"/>
+    </g>
+  </svg>
 
-const NODES_RAW = {{ nodes_raw }};
+  <div class="folio-header">
+    <div class="kicker" id="kicker">{{ kicker }}</div>
+    <div class="cantica" id="cantica">{{ cantica }}</div>
+    <div class="canto-row">
+      <div class="canto-nav canto-nav-prev">{{ prev_link | safe }}</div>
+      <div class="canto canto-current" id="canto">{{ title }}</div>
+      <div class="canto-nav canto-nav-next">{{ next_link | safe }}</div>
+    </div>
+    <div class="subtitle-ua" id="subtitle">{{ subtitle_ua }}</div>
+  </div>
 
-const AUTHOR_STYLES = {{ author_styles }};
+  <div class="rule double"></div>
 
-{% raw %}const nodeW=230,nodeH=60,gapY=11,gapX=130,padLeft=70,padTop=20;
-const nodes=Object.entries(NODES_RAW).map(([id,n])=>({id,...n,x:0,y:0}));const nodeMap={};nodes.forEach(n=>nodeMap[n.id]=n);
-const byCols=[nodes.filter(n=>n.col===0),nodes.filter(n=>n.col===1),nodes.filter(n=>n.col===2)];
-byCols[0].forEach((n,i)=>{n.y=i*(nodeH+gapY)+nodeH/2});
-byCols[1].forEach(n=>{const p=LINKS_DATA.filter(l=>l.to===n.id&&nodeMap[l.from]?.col===0).map(l=>nodeMap[l.from]);if(p.length)n.y=p.reduce((s,x)=>s+x.y,0)/p.length;else n.y=byCols[0][Math.floor(byCols[0].length/2)].y});
-rOY(byCols[1]);if(byCols[2]&&byCols[2].length){byCols[2].forEach(n=>{const p=LINKS_DATA.filter(l=>l.to===n.id&&nodeMap[l.from]).map(l=>nodeMap[l.from]);if(p.length)n.y=p.reduce((s,x)=>s+x.y,0)/p.length;else if(byCols[1].length)n.y=byCols[1][Math.floor(byCols[1].length/2)].y;else n.y=200});rOY(byCols[2])}
-function rOY(a){a.sort((a,b)=>a.y-b.y);const m=nodeH+gapY;for(let p=0;p<40;p++){let o=true;for(let i=1;i<a.length;i++){const d=a[i].y-a[i-1].y;if(d<m){const s=(m-d)/2+.5;a[i-1].y-=s;a[i].y+=s;o=false}}if(o)break}}
-const maxC=Math.max(...nodes.map(n=>n.col)),colX=[];for(let c=0;c<=maxC;c++)colX.push(padLeft+c*(nodeW+gapX)+nodeW/2);nodes.forEach(n=>{n.x=colX[n.col]});
-const minY=Math.min(...nodes.map(n=>n.y))-nodeH/2;nodes.forEach(n=>n.y-=minY-padTop);
-const svgW=padLeft+(maxC+1)*nodeW+maxC*gapX+padLeft,svgH=Math.max(...nodes.map(n=>n.y+nodeH/2))+20;
-const TC={ALLUSION:"#d4a853",STRUCTURE:"#7ea88e",THEMATIC:"#8a7eb8",INVERSION:"#c45c5c",ONOMASTIC:"#5c8ab8"};const AS=AUTHOR_STYLES;const st=getComputedStyle(document.documentElement);
-const svg=d3.select("#chart-container").append("svg").attr("width",svgW).attr("height",svgH);const defs=svg.append("defs");Object.entries(TC).forEach(([t,c])=>{defs.append("marker").attr("id","a-"+t).attr("viewBox","0 0 10 6").attr("refX",10).attr("refY",3).attr("markerWidth",7).attr("markerHeight",5).attr("orient","auto").append("path").attr("d","M0,0.5 L9,3 L0,5.5Z").attr("fill",c)});const nCols=colX.length;const cw=svgW/nCols;colX.forEach((cx,i)=>{svg.append("rect").attr("x",i*cw).attr("y",0).attr("width",cw).attr("height",svgH).attr("fill",i%2===0?st.getPropertyValue("--col-dark").trim():st.getPropertyValue("--col-light").trim())});
-function hC(s,t){const sx=s.x+nodeW/2+2,tx=t.x-nodeW/2-2,dx=tx-sx;return"M"+sx+","+s.y+" C"+(sx+dx*.45)+","+s.y+" "+(tx-dx*.45)+","+t.y+" "+tx+","+t.y}
-const linkG=svg.append("g");const linkEls=linkG.selectAll("path").data(LINKS_DATA).enter().append("path").attr("d",d=>hC(nodeMap[d.from],nodeMap[d.to])).attr("fill","none").attr("stroke",d=>TC[d.type]).attr("stroke-width",d=>d.type==="STRUCTURE"?3:1.6).attr("stroke-dasharray",d=>d.type==="THEMATIC"?"6,4":d.type==="ONOMASTIC"?"2,4":"none").attr("opacity",.5).attr("marker-end",d=>"url(#a-"+d.type+")");
-const tooltip=d3.select("#tooltip");const nodeG=svg.append("g");
-const ne=nodeG.selectAll("g").data(nodes).enter().append("g").attr("transform",d=>"translate("+(d.x-nodeW/2)+","+(d.y-nodeH/2)+")").style("cursor","pointer");
-ne.append("rect").attr("width",nodeW).attr("height",nodeH).attr("rx",5).attr("fill",d=>AS[d.author]?.f||"#1a1a1a").attr("stroke",d=>AS[d.author]?.s||"#333").attr("stroke-width",d=>d.author==="\u0414\u0430\u043d\u0442\u0435"?1.8:1);
-ne.append("text").attr("x",nodeW/2).attr("y",18).attr("text-anchor","middle").attr("fill",st.getPropertyValue('--text').trim()).attr("font-size","12px").attr("font-family","'JetBrains Mono',monospace").attr("font-weight",500).text(d=>d.label);
-ne.append("text").attr("x",nodeW/2).attr("y",35).attr("text-anchor","middle").attr("fill",st.getPropertyValue('--text-muted').trim()).attr("font-size","12px").attr("font-family","'Cormorant Garamond',serif").attr("font-style","italic").text(d=>d.sub);
-ne.filter(d=>d.col>0).append("text").attr("x",nodeW/2).attr("y",nodeH-6).attr("text-anchor","middle").attr("fill",d=>AS[d.author]?.s||"#555").attr("font-size","9px").attr("font-family","'JetBrains Mono',monospace").attr("opacity",.7).text(d=>d.author);
-function trunc(sel,mw){sel.each(function(){var t=d3.select(this),o=t.text();if(this.getComputedTextLength()<=mw)return;while(o.length>1&&this.getComputedTextLength()>mw){o=o.slice(0,-1);t.text(o+'\u2026')}})}
-ne.selectAll("text").call(trunc,nodeW-12);
-ne.on("mouseover",function(ev,d){const ids=new Set([d.id]);LINKS_DATA.forEach(l=>{if(l.from===d.id||l.to===d.id){ids.add(l.from);ids.add(l.to)}});linkEls.attr("opacity",l=>(l.from===d.id||l.to===d.id)?1:.04).attr("stroke-width",l=>{const on=l.from===d.id||l.to===d.id;return on?(l.type==="STRUCTURE"?4.5:3):(l.type==="STRUCTURE"?3:1.6)});nodeG.selectAll("g").select("rect").attr("opacity",function(){return ids.has(d3.select(this.parentNode).datum().id)?1:.1});
-var parts=LINKS_DATA.filter(l=>l.from===d.id||l.to===d.id).map(l=>{var c=TC[l.type],isF=l.from===d.id,other=isF?nodeMap[l.to]:nodeMap[l.from],desc=isF?l.dF:l.dT,arr=isF?"\u2192":"\u2190";return'<span class="tt-type" style="background:'+c+'22;color:'+c+';border:1px solid '+c+'44">'+TYPE_UA[l.type]+'</span> '+arr+' <strong>'+other.label+'</strong><br><span class="tt-desc">'+desc+'</span>'}).join("<br><br>");
-if(parts)tooltip.html('<strong>'+d.label+'</strong> <em style="color:var(--text-muted)">\u00b7 '+d.author+'</em><br><br>'+parts).style("opacity",1).style("left",Math.min(ev.clientX+14,innerWidth-440)+"px").style("top",Math.min(ev.clientY+14,innerHeight-300)+"px")
-}).on("mousemove",function(ev){tooltip.style("left",Math.min(ev.clientX+14,innerWidth-440)+"px").style("top",Math.min(ev.clientY+14,innerHeight-300)+"px")}).on("mouseout",function(){linkEls.attr("opacity",.5).attr("stroke-width",d=>d.type==="STRUCTURE"?3:1.6);nodeG.selectAll("g").select("rect").attr("opacity",1);tooltip.style("opacity",0)});
-function togglePanel(){document.getElementById('sidePanel').classList.toggle('open');document.getElementById('overlay').classList.toggle('open')}
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){document.getElementById('sidePanel').classList.remove('open');document.getElementById('overlay').classList.remove('open')}});
-(function buildNav(){var roman=function(n){var v=[1000,900,500,400,100,90,50,40,10,9,5,4,1],s=['M','CM','D','CD','C','XC','L','XL','X','IX','V','IV','I'],r='';for(var i=0;i<v.length;i++)while(n>=v[i]){r+=s[i];n-=v[i]}return r};var pad2=function(n){return String(n).padStart(2,'0')};var ct=[{t:'Inferno',a:'Inf.',x:'inf',c:34},{t:'Purgatorio',a:'Purg.',x:'purg',c:33},{t:'Paradiso',a:'Par.',x:'par',c:33}];var cur='{% endraw %}{{ current_file }}{% raw %}';var container=document.getElementById('panelContent');ct.forEach(function(c){var sec=document.createElement('div');sec.className='side-panel-section';var h3=document.createElement('h3');h3.textContent=c.t;sec.appendChild(h3);for(var i=1;i<=c.c;i++){var f=c.x+'_'+pad2(i);var a=document.createElement('a');a.href=f+'.html';a.textContent=c.a+' '+roman(i);if(f===cur)a.className='current';sec.appendChild(a)}container.appendChild(sec)})})();{% endraw %}
-</script>
+  <div class="folio-main">
+    <div class="medallion-wrap">
+      <div class="medallion" id="medallion">
+        <svg class="tree-svg" id="tree"></svg>
+        <div class="graph" id="graph"></div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="colophon">
+    <div class="rule double"></div>
+    <div class="colophon-grid">
+      <section class="col-argumentum">
+        <h3>Argumentum</h3>
+        <p id="summaryText">{{ summary_ua }}</p>
+      </section>
+      <section class="col-nota">
+        <h3>Nota bene</h3>
+        <p id="notaText"></p>
+        <p class="cue">Наведіть курсор на картку або стрілку, щоб побачити латинську цитату, український переклад і характер зв'язку.</p>
+      </section>
+      <section class="col-legend">
+        <h3>Typi relationis</h3>
+        <div class="legend">
+          <div class="legend-item"><span class="swatch ALLUSION"></span><span class="code">allusio</span><span class="lbl">пряма алюзія</span></div>
+          <div class="legend-item"><span class="swatch STRUCTURE"></span><span class="code">structura</span><span class="lbl">структурне запозичення</span></div>
+          <div class="legend-item"><span class="swatch THEMATIC"></span><span class="code">thematica</span><span class="lbl">тематична паралель</span></div>
+          <div class="legend-item"><span class="swatch INVERSION"></span><span class="code">inversio</span><span class="lbl">навмисна інверсія</span></div>
+          <div class="legend-item"><span class="swatch ONOMASTIC"></span><span class="code">nominis</span><span class="lbl">іменна референція</span></div>
+          <div class="legend-item"><span class="swatch INDIRECT"></span><span class="code">per viam</span><span class="lbl">опосередковано через латинського посередника</span></div>
+        </div>
+      </section>
+    </div>
+    <div class="colophon-bar">
+      <div><span style="font-style:italic">Dantis Alagherii</span> · Comedia</div>
+      <div class="foliation" id="foliation">{{ foliation }}</div>
+      <div id="versesInfo">{{ verses }}</div>
+    </div>
+  </footer>
+</div>
+
+<div class="tip" id="tip">
+  <div class="tip-head" id="tipHead"></div>
+  <div class="tip-sub" id="tipSub"></div>
+  <div class="tip-type" id="tipType"></div>
+  <div class="tip-quote" id="tipQuote"></div>
+  <div class="tip-note" id="tipNote"></div>
+  <div class="tip-lines" id="tipLines"></div>
+</div>
+
+<script>window.CANTO = {{ canto_json | safe }};</script>
+<script src="{{ js_path }}"></script>
 </body>
 </html>
