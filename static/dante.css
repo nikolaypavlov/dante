@@ -1308,3 +1308,146 @@ body.theme-purgatorio .fp-mountain { display: block; }
   .fp-incipit { font-size: 22px; }
   .fp-device { width: 200px; height: 200px; }
 }
+
+/* ============ RESPONSIVE ============ */
+
+/* Tablet — 768..1023px: compress paddings/gaps, keep 3-col medallion */
+@media (max-width: 1023px) {
+  .folio { padding: 44px 36px; }
+  .folio-header { padding: 8px 28px; }
+  .chrome { padding: 12px 22px; }
+  .chrome-left .project-mark .sub { display: none; }
+  .graph { gap: 28px; }
+  .canto-row { gap: 22px; }
+  .fp-cantica { font-size: clamp(80px, 11vw, 128px); }
+  .folio-header .cantica { font-size: clamp(52px, 7.2vw, 72px); }
+}
+
+/* Phone — <= 767px: switch medallion to vertical per-connection stack */
+@media (max-width: 767px) {
+  .chrome { padding: 10px 14px; }
+  .chrome-left { gap: 10px; }
+  .chrome-left .nav-btn { padding: 4px 10px; font-size: 18px; }
+  .project-mark { font-size: 15px; letter-spacing: 1px; }
+  .theme-toggle { gap: 6px; }
+  .theme-toggle a { padding: 4px 9px; font-size: 12px; letter-spacing: 1px; }
+
+  .folio { padding: 22px 14px; margin: 14px 8px; }
+  .folio-header { padding: 4px 6px; }
+  .canto-row { gap: 10px; }
+  .folio-header .cantica { font-size: clamp(44px, 10vw, 64px); }
+  .folio-header .canto { font-size: clamp(22px, 5vw, 32px); }
+  .subtitle-ua { font-size: 13px; letter-spacing: 1px; }
+  .nav-arrow { font-size: 11px; letter-spacing: 0.5px; }
+  .kicker { font-size: 10px; letter-spacing: 2px; }
+
+  /* medallion narrow mode — drawn by render.js when MQ_NARROW matches */
+  .medallion.narrow .graph.narrow-graph {
+    display: block;
+    padding: 8px 4px 20px;
+  }
+  .medallion.narrow .col-head,
+  .medallion.narrow .margin-col,
+  .medallion.narrow #tree { display: none; }
+  .medallion.narrow .conn-group {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+    padding: 16px 0;
+    border-bottom: 1px dashed var(--border-ink);
+  }
+  .medallion.narrow .conn-group:last-child { border-bottom: none; }
+  .medallion.narrow .card {
+    width: 100%;
+    cursor: pointer;
+    position: static;
+  }
+  .medallion.narrow .arrow-v {
+    display: block;
+    margin: 0 auto;
+    color: var(--ink-dim);
+  }
+
+  .arrow-v { stroke-linecap: round; stroke-linejoin: round; }
+  .arrow-v.ALLUSION  { color: var(--c-allusion); }
+  .arrow-v.STRUCTURE { color: var(--c-structure); }
+  .arrow-v.THEMATIC  { color: var(--c-thematic); }
+  .arrow-v.INVERSION { color: var(--c-inversion); }
+  .arrow-v.ONOMASTIC { color: var(--c-onomastic); }
+  .arrow-v.indirect  { opacity: 0.55; }
+
+  .medallion.narrow .card .card-details { display: none; }
+  .medallion.narrow .card.expanded {
+    box-shadow: 0 0 0 2px var(--gold);
+  }
+  .medallion.narrow .card.expanded .card-details {
+    display: block;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px dashed var(--border-ink);
+    font-family: 'EB Garamond', serif;
+  }
+  .medallion.narrow .card-details .type {
+    font-family: 'EB Garamond', serif;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+  .medallion.narrow .card-details .lat {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--rubric);
+    font-size: 14px;
+    line-height: 1.35;
+    margin-bottom: 6px;
+  }
+  .medallion.narrow .card-details .ua {
+    color: var(--ink);
+    font-size: 13px;
+    line-height: 1.4;
+  }
+  .medallion.narrow .card-details .lines {
+    color: var(--ink-dim);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-top: 8px;
+  }
+
+  /* side panel — full-height overlay, not fixed 320px */
+  .side-panel { width: min(85vw, 320px); padding: 18px 16px 32px; }
+  .side-panel-links { grid-template-columns: repeat(3, 1fr); }
+
+  /* colophon — single column, tighter */
+  .colophon-grid { padding: 0 6px; gap: 16px; }
+  .colophon-bar { flex-direction: column; gap: 6px; text-align: center; padding: 10px 4px; }
+
+  /* frontispiece adjustments on top of the @media 900 rule */
+  .frontispiece { padding: 30px 18px 22px; margin: 12px 8px; }
+  .fp-device { width: 180px; height: 180px; }
+  .fp-incipit { font-size: clamp(18px, 4.2vw, 22px); }
+  .fp-incipit::before,
+  .fp-incipit::after { display: none; }
+  .fp-cantica { font-size: clamp(56px, 14vw, 96px); }
+
+  /* tooltip — clamp to viewport on narrow */
+  .tip { max-width: calc(100vw - 32px); }
+}
+
+/* Small phone — <= 479px */
+@media (max-width: 479px) {
+  .folio { padding: 16px 8px; margin: 8px 4px; }
+  .chrome { padding: 8px 10px; }
+  .chrome-left .project-mark { font-size: 13px; letter-spacing: 0.5px; }
+  .theme-toggle a { padding: 3px 7px; font-size: 11px; letter-spacing: 0.5px; }
+  .folio-header .cantica { font-size: clamp(36px, 11vw, 52px); }
+  .folio-header .canto { font-size: clamp(18px, 5.5vw, 26px); }
+  .fp-device { width: 140px; height: 140px; }
+  .fp-cantica { font-size: clamp(40px, 15vw, 72px); }
+  .side-panel-links a { font-size: 11px; padding: 4px 2px; letter-spacing: 0.3px; }
+  .medallion.narrow .card .ref { font-size: 11px; }
+  .medallion.narrow .card .desc { font-size: 12px; }
+}

@@ -27,6 +27,8 @@
   };
   const $ = id => document.getElementById(id);
 
+  const MQ_NARROW = window.matchMedia('(max-width: 767px)');
+
   function themeFromBody() {
     const m = (document.body.className || '').match(/theme-(\w+)/);
     return m ? m[1] : 'inferno';
@@ -64,7 +66,16 @@
 
   // ---------- TREE (horizontal card graph) ----------
   function drawTree(d) {
-    drawTreeCards(d);
+    const medallion = $('medallion');
+    const graph = $('graph');
+    if (graph) graph.className = 'graph';
+    if (MQ_NARROW.matches) {
+      if (medallion) medallion.classList.add('narrow');
+      drawTreeNarrow(d);
+    } else {
+      if (medallion) medallion.classList.remove('narrow');
+      drawTreeCards(d);
+    }
   }
 
   function drawTreeCards(d) {
@@ -638,6 +649,153 @@
     return t;
   }
 
+  // ---------- NARROW (phone) renderer — vertical per-connection stack ----------
+  function makeVArrow(type, indirect) {
+    const NS = 'http://www.w3.org/2000/svg';
+    const svg = document.createElementNS(NS, 'svg');
+    let cls = 'arrow-v';
+    if (type) cls += ' ' + type;
+    if (indirect) cls += ' indirect';
+    svg.setAttribute('class', cls);
+    svg.setAttribute('viewBox', '0 0 12 28');
+    svg.setAttribute('width', '12');
+    svg.setAttribute('height', '28');
+    const path = document.createElementNS(NS, 'path');
+    path.setAttribute('d', 'M 6 2 L 6 22 M 2 18 L 6 24 L 10 18');
+    path.setAttribute('stroke', 'currentColor');
+    path.setAttribute('fill', 'none');
+    path.setAttribute('stroke-width', '1.8');
+    svg.appendChild(path);
+    return svg;
+  }
+
+  function makeDetailRow(cls, text) {
+    if (!text) return null;
+    const row = document.createElement('div');
+    row.className = cls;
+    row.textContent = text;
+    return row;
+  }
+
+  function makeNarrowCard(refText, descText, authText, typeCls, kindCls, details) {
+    const card = document.createElement('div');
+    let cls = 'card';
+    if (kindCls) cls += ' ' + kindCls;
+    if (typeCls) cls += ' ' + typeCls;
+    card.className = cls;
+    const ref = document.createElement('div');
+    ref.className = 'ref';
+    ref.textContent = refText || '';
+    card.appendChild(ref);
+    if (descText) {
+      const desc = document.createElement('div');
+      desc.className = 'desc';
+      desc.textContent = descText;
+      card.appendChild(desc);
+    }
+    if (authText) {
+      const auth = document.createElement('div');
+      auth.className = 'auth';
+      auth.textContent = authText;
+      card.appendChild(auth);
+    }
+    if (details) {
+      const box = document.createElement('div');
+      box.className = 'card-details';
+      const typeRow = makeDetailRow('type', details.type);
+      if (typeRow) box.appendChild(typeRow);
+      const latRow = makeDetailRow('lat', details.lat);
+      if (latRow) box.appendChild(latRow);
+      const uaRow = makeDetailRow('ua', details.ua);
+      if (uaRow) box.appendChild(uaRow);
+      const linesRow = makeDetailRow('lines', details.lines);
+      if (linesRow) box.appendChild(linesRow);
+      if (box.firstChild) card.appendChild(box);
+    }
+    card.addEventListener('click', () => card.classList.toggle('expanded'));
+    return card;
+  }
+
+  function drawTreeNarrow(d) {
+    const graph = $('graph');
+    const svg = $('tree');
+    if (!graph) return;
+    if (svg) while (svg.firstChild) svg.removeChild(svg.firstChild);
+    graph.className = 'graph narrow-graph';
+
+    // Group sources per Dante passage (keyed by lineDante, preserves insertion order).
+    const groups = new Map();
+    d.sources.forEach(s => {
+      if (!groups.has(s.lineDante)) {
+        groups.set(s.lineDante, { line: s.lineDante, note: s.note, items: [] });
+      }
+    });
+    const directs   = d.sources.filter(s => s.tier === 'direct');
+    const primaries = d.sources.filter(s => s.tier === 'primary');
+    const primaryByTransmitter = new Map();
+    primaries.forEach(p => { if (p.transmits) primaryByTransmitter.set(p.transmits, p); });
+    directs.forEach(dir => {
+      const g = groups.get(dir.lineDante);
+      if (!g) return;
+      g.items.push({ direct: dir, primary: primaryByTransmitter.get(dir.id) || null });
+    });
+
+    const frag = document.createDocumentFragment();
+    for (const g of groups.values()) {
+      const grp = document.createElement('div');
+      grp.className = 'conn-group';
+
+      // Dante card (no expand-details — the note is the description itself)
+      const danteCard = makeNarrowCard(
+        g.line,
+        shortenDesc(g.note, 120),
+        d.cantica + ' · ' + d.cantoRoman,
+        null,
+        'dante',
+        null
+      );
+      grp.appendChild(danteCard);
+
+      g.items.forEach(it => {
+        // arrow + direct-source card
+        grp.appendChild(makeVArrow(it.direct.type, false));
+        grp.appendChild(makeNarrowCard(
+          it.direct.work,
+          shortenDesc(it.direct.quoteLat, 90),
+          it.direct.author,
+          it.direct.type,
+          'direct',
+          {
+            type: (TYPE_UA[it.direct.type] || it.direct.type),
+            lat: it.direct.quoteLat,
+            ua: it.direct.quoteUa,
+            lines: (it.direct.lineDante ? 'Dante ' + it.direct.lineDante : '') +
+                   (it.direct.lineSource ? '  ·  ' + it.direct.lineSource : '')
+          }
+        ));
+        if (it.primary) {
+          grp.appendChild(makeVArrow(it.primary.type, true));
+          grp.appendChild(makeNarrowCard(
+            it.primary.work,
+            shortenDesc(it.primary.quoteLat, 90),
+            it.primary.author,
+            it.primary.type,
+            'primary indirect',
+            {
+              type: (TYPE_UA[it.primary.type] || it.primary.type) + ' · primus fons',
+              lat: it.primary.quoteLat,
+              ua: it.primary.quoteUa,
+              lines: (it.primary.lineDante ? 'Dante ' + it.primary.lineDante : '') +
+                     (it.primary.lineSource ? '  ·  ' + it.primary.lineSource : '')
+            }
+          ));
+        }
+      });
+      frag.appendChild(grp);
+    }
+    graph.replaceChildren(frag);
+  }
+
   const ROMAN_PAIRS = [
     ['M',1000],['CM',900],['D',500],['CD',400],['C',100],['XC',90],
     ['L',50],['XL',40],['X',10],['IX',9],['V',5],['IV',4],['I',1]
@@ -694,6 +852,10 @@
       const p = document.getElementById('sidePanel');
       if (p && p.classList.contains('open')) togglePanel();
     }
+  });
+
+  MQ_NARROW.addEventListener('change', () => {
+    if (window.CANTO) render();
   });
 
   if (document.readyState === 'loading') {
