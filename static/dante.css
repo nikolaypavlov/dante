@@ -1426,12 +1426,16 @@ body.theme-purgatorio .fp-mountain { display: block; }
   .colophon-bar { flex-direction: column; gap: 6px; text-align: center; padding: 10px 4px; }
 
   /* frontispiece adjustments on top of the @media 900 rule */
-  .frontispiece { padding: 30px 18px 22px; margin: 12px 8px; }
+  .frontispiece { padding: 28px 18px 28px; margin: 12px 8px; aspect-ratio: 3 / 4; }
   .fp-device { width: 180px; height: 180px; }
   .fp-incipit { font-size: clamp(18px, 4.2vw, 22px); }
   .fp-incipit::before,
   .fp-incipit::after { display: none; }
   .fp-cantica { font-size: clamp(56px, 14vw, 96px); }
+  .fp-setting { font-size: 11px; letter-spacing: 1.5px; }
+  .fp-flames, .fp-mountain { display: none; }
+  body.theme-inferno .fp-flames,
+  body.theme-purgatorio .fp-mountain { display: none; }
 
   /* tooltip — clamp to viewport on narrow */
   .tip { max-width: calc(100vw - 32px); }
@@ -1447,9 +1451,10 @@ body.theme-purgatorio .fp-mountain { display: block; }
   .folio-header .canto { font-size: clamp(18px, 5.5vw, 26px); }
   .canto-row { gap: 6px; }
   .canto-nav .nav-arrow { padding: 2px 4px; font-size: 10px; letter-spacing: 0; }
-  .fp-device { width: 140px; height: 140px; }
+  .fp-device { width: 130px; height: 130px; }
   .fp-cantica { font-size: clamp(40px, 15vw, 72px); }
-  .fp-setting { font-size: 11px; letter-spacing: 2px; }
+  .fp-setting { font-size: 10px; letter-spacing: 1.5px; }
+  .frontispiece { padding: 22px 14px 22px; }
   .side-panel-links a { font-size: 11px; padding: 4px 2px; letter-spacing: 0.3px; }
   .medallion.narrow .card .ref { font-size: 11px; }
   .medallion.narrow .card .desc { font-size: 12px; }
