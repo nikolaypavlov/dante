@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Dante Intertextual Analysis ("Дантешопедія") — a literary scholarship tool that systematically catalogs intertextual connections between Dante's *Divina Commedia* and pre-Dante literature (antiquity through early XIV century). The output is 100 self-contained HTML canto pages + 3 cantica frontispicia (Inferno frontispicia is written to `index.html` and serves as the site landing), styled as a medieval manuscript (folio layout, rubric bands, UnifrakturMaguntia blackletter titles, card-based intertextual graph).
+Dante Intertextual Analysis ("Данте у контексті літературних звʼязків") — a literary scholarship tool that systematically catalogs intertextual connections between Dante's *Divina Commedia* and pre-Dante literature (antiquity through early XIV century). The output is 100 self-contained HTML canto pages + 3 cantica frontispicia (Inferno frontispicia is written to `index.html` and serves as the site landing), styled as a medieval manuscript (folio layout, rubric bands, UnifrakturMaguntia blackletter titles, card-based intertextual graph).
 
 **Language:** All text content is in Ukrainian. Node labels (`dante_sub`, `source_sub`) must be Ukrainian paraphrases, never Italian/Latin quotes.
 

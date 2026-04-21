@@ -1378,6 +1378,21 @@ body.theme-purgatorio .fp-mountain { display: block; }
   .arrow-v.indirect  { opacity: 0.55; }
 
   .medallion.narrow .card .card-details { display: none; }
+  /* Dante card holds the full note in .desc and truncates visually.
+     Tapping the card removes the clamp instead of duplicating the text. */
+  .medallion.narrow .card.dante .desc {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .medallion.narrow .card.dante.expanded .desc {
+    display: block;
+    -webkit-line-clamp: unset;
+    line-clamp: unset;
+    overflow: visible;
+  }
   .medallion.narrow .card.expanded {
     box-shadow: 0 0 0 2px var(--gold);
   }
