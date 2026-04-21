@@ -704,8 +704,6 @@
       box.className = 'card-details';
       const typeRow = makeDetailRow('type', details.type);
       if (typeRow) box.appendChild(typeRow);
-      const latRow = makeDetailRow('lat', details.lat);
-      if (latRow) box.appendChild(latRow);
       const uaRow = makeDetailRow('ua', details.ua);
       if (uaRow) box.appendChild(uaRow);
       const linesRow = makeDetailRow('lines', details.lines);
@@ -745,14 +743,13 @@
       const grp = document.createElement('div');
       grp.className = 'conn-group';
 
-      // Dante card (no expand-details — the note is the description itself)
       const danteCard = makeNarrowCard(
         g.line,
         shortenDesc(g.note, 120),
         d.cantica + ' · ' + d.cantoRoman,
         null,
         'dante',
-        null
+        { ua: g.note }
       );
       grp.appendChild(danteCard);
 
@@ -767,7 +764,6 @@
           'direct',
           {
             type: (TYPE_UA[it.direct.type] || it.direct.type),
-            lat: it.direct.quoteLat,
             ua: it.direct.quoteUa,
             lines: (it.direct.lineDante ? 'Dante ' + it.direct.lineDante : '') +
                    (it.direct.lineSource ? '  ·  ' + it.direct.lineSource : '')
@@ -783,7 +779,6 @@
             'primary indirect',
             {
               type: (TYPE_UA[it.primary.type] || it.primary.type) + ' · primus fons',
-              lat: it.primary.quoteLat,
               ua: it.primary.quoteUa,
               lines: (it.primary.lineDante ? 'Dante ' + it.primary.lineDante : '') +
                      (it.primary.lineSource ? '  ·  ' + it.primary.lineSource : '')

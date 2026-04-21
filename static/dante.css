@@ -1425,14 +1425,35 @@ body.theme-purgatorio .fp-mountain { display: block; }
   .colophon-grid { padding: 0 6px; gap: 16px; }
   .colophon-bar { flex-direction: column; gap: 6px; text-align: center; padding: 10px 4px; }
 
-  /* frontispiece adjustments on top of the @media 900 rule */
-  .frontispiece { padding: 28px 18px 28px; margin: 12px 8px; aspect-ratio: 3 / 4; }
-  .fp-device { width: 180px; height: 180px; }
-  .fp-incipit { font-size: clamp(18px, 4.2vw, 22px); }
-  .fp-incipit::before,
-  .fp-incipit::after { display: none; }
-  .fp-cantica { font-size: clamp(56px, 14vw, 96px); }
-  .fp-setting { font-size: 11px; letter-spacing: 1.5px; }
+  /* Frontispicia — every size scales with the shared factor 100vw/820
+     (relative to the 820px desktop design width) clamped to [0.4, 1]. This
+     preserves the inter-element proportions from the desktop design at any
+     viewport. Decorative fleuron + incipit are hidden to reclaim space. */
+  .frontispiece {
+    padding: 28px 18px 28px;
+    margin: 12px 8px;
+    aspect-ratio: 3 / 4;
+  }
+  .fp-fleuron, .fp-bottom { display: none; }
+  .fp-top { gap: clamp(5.6px, 1.707vw, 14px); }
+  .fp-kicker {
+    font-size: clamp(5.2px, 1.585vw, 13px);
+    letter-spacing: clamp(2px, 0.61vw, 5px);
+  }
+  .fp-cantica { font-size: clamp(51.2px, 15.61vw, 128px); }
+  .fp-ordinal {
+    font-size: clamp(9.6px, 2.927vw, 24px);
+    letter-spacing: clamp(2.4px, 0.732vw, 6px);
+  }
+  .fp-setting {
+    font-size: clamp(5.6px, 1.707vw, 14px);
+    letter-spacing: clamp(1.6px, 0.488vw, 4px);
+    margin-top: clamp(9.6px, 2.927vw, 24px);
+  }
+  .fp-device {
+    width: clamp(104px, 31.707vw, 260px);
+    height: clamp(104px, 31.707vw, 260px);
+  }
   .fp-flames, .fp-mountain { display: none; }
   body.theme-inferno .fp-flames,
   body.theme-purgatorio .fp-mountain { display: none; }
@@ -1451,9 +1472,6 @@ body.theme-purgatorio .fp-mountain { display: block; }
   .folio-header .canto { font-size: clamp(18px, 5.5vw, 26px); }
   .canto-row { gap: 6px; }
   .canto-nav .nav-arrow { padding: 2px 4px; font-size: 10px; letter-spacing: 0; }
-  .fp-device { width: 130px; height: 130px; }
-  .fp-cantica { font-size: clamp(40px, 15vw, 72px); }
-  .fp-setting { font-size: 10px; letter-spacing: 1.5px; }
   .frontispiece { padding: 22px 14px 22px; }
   .side-panel-links a { font-size: 11px; padding: 4px 2px; letter-spacing: 0.3px; }
   .medallion.narrow .card .ref { font-size: 11px; }
