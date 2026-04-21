@@ -710,13 +710,7 @@
       if (linesRow) box.appendChild(linesRow);
       if (box.firstChild) card.appendChild(box);
     }
-    card.addEventListener('click', () => {
-      const wasExpanded = card.classList.contains('expanded');
-      document.querySelectorAll('.medallion.narrow .card.expanded').forEach(c => {
-        if (c !== card) c.classList.remove('expanded');
-      });
-      card.classList.toggle('expanded', !wasExpanded);
-    });
+    card.addEventListener('click', () => card.classList.toggle('expanded'));
     return card;
   }
 
