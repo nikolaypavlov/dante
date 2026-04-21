@@ -559,9 +559,8 @@
     const tip = $('tip');
     const d = state.dataset;
     const touched = (passage.sourceIds || []).map(id => findById(id)).filter(Boolean);
-    const directCount  = touched.filter(s => s.tier !== 'primary').length;
-    const primaryCount = touched.filter(s => s.tier === 'primary').length;
 
+    tip.style.removeProperty('--tip-accent');
     $('tipHead').textContent = d.cantica + ' · ' + d.cantoRoman;
     $('tipSub').textContent  = '';
     const typeEl = $('tipType');
@@ -574,15 +573,12 @@
       const col = getTypeColor(s.type);
       return `<div style="margin: 4px 0; padding-left: 10px; border-left: 2px solid ${col};">
         <div style="font-weight:600; color: var(--ink);">${escapeHtml(s.author)}<span style="color:var(--ink-dim); font-weight:400;"> · ${escapeHtml(s.work)}</span>${s.tier === 'primary' ? ' <span style="color:var(--ink-dim); font-style:italic;">(фонт)</span>' : ''}</div>
-        <div style="color: var(--ink-dim); font-size: 11px; font-style:italic;">${escapeHtml(s.quoteLat || '')}</div>
+        <div style="color: var(--ink-dim); font-size: 13px; font-style:italic;">${escapeHtml(s.quoteLat || '')}</div>
       </div>`;
     }).join('');
 
     $('tipQuote').innerHTML = srcList || '<em style="color:var(--ink-dim)">Немає пов\'язаних джерел</em>';
-    $('tipLines').innerHTML =
-      `<strong>${touched.length}</strong> ${touched.length === 1 ? 'джерело' : 'джерел'}` +
-      (directCount  ? ` · <span style="color:var(--gold);">${directCount}</span> прямих/посередницьких` : '') +
-      (primaryCount ? ` · <span style="color:var(--ink-dim);">${primaryCount}</span> первинних` : '');
+    $('tipLines').textContent = '';
     $('tipNote').textContent = passage.note || '';
     tip.classList.add('visible');
     moveTip(e);
@@ -590,6 +586,7 @@
 
   function showTip(e, src, viaSrc) {
     const tip = $('tip');
+    tip.style.setProperty('--tip-accent', getTypeColor(src.type));
     $('tipHead').textContent = src.author;
     $('tipSub').textContent = '';
     const typeEl = $('tipType');
@@ -599,7 +596,7 @@
     typeEl.style.borderColor = getTypeColor(src.type);
     $('tipQuote').innerHTML =
       `<span style="color:var(--ink-dim); font-style:italic">« ${escapeHtml(src.quoteLat)} »</span>
-       <div style="margin-top:6px; font-style:normal; font-size:12px;">${escapeHtml(src.quoteUa)}</div>`;
+       <div style="margin-top:6px; font-style:normal; font-size:14px;">${escapeHtml(src.quoteUa)}</div>`;
     $('tipLines').innerHTML =
       `Dante: <strong>${src.lineDante}</strong>` +
       (viaSrc ? `<br/><span style="color:var(--ink-dim); font-style:italic;">опосередковано через ${viaSrc.author}, ${viaSrc.work}</span>` : '');

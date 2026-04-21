@@ -804,8 +804,8 @@ body.theme-paradiso .legend { background: rgba(255,255,255,0.03); }
   color: var(--ink);
   border: 1px solid var(--border-ink);
   box-shadow: 0 12px 30px rgba(0,0,0,0.55);
-  padding: 14px 18px;
-  max-width: 340px;
+  padding: 16px 20px;
+  max-width: 400px;
   font-family: 'EB Garamond', serif;
   opacity: 0;
   transform: translateY(6px);
@@ -823,45 +823,47 @@ body.theme-paradiso .legend { background: rgba(255,255,255,0.03); }
 .tip .tip-head {
   font-family: 'UnifrakturMaguntia', serif;
   color: var(--rubric);
-  font-size: 18px;
+  font-size: 22px;
   margin-bottom: 4px;
   letter-spacing: 1px;
 }
 .tip .tip-sub {
   font-style: italic;
   color: var(--ink-dim);
-  font-size: 12px;
+  font-size: 14px;
   margin-bottom: 8px;
 }
+.tip .tip-sub:empty { margin: 0; }
 .tip .tip-type {
   display: inline-block;
   font-family: 'EB Garamond', serif;
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 2px;
   text-transform: uppercase;
-  padding: 2px 8px;
+  padding: 3px 10px;
   border: 1px solid var(--border-ink);
   margin-bottom: 10px;
   color: var(--gold);
 }
 .tip .tip-quote {
   font-style: italic;
-  font-size: 13px;
+  font-size: 15px;
   color: var(--ink);
-  border-left: 2px solid var(--border-ink);
+  border-left: 2px solid var(--tip-accent, transparent);
   padding-left: 10px;
   margin: 8px 0;
   line-height: 1.5;
 }
 .tip .tip-lines {
   font-family: 'EB Garamond', serif;
-  font-size: 11px;
+  font-size: 13px;
   color: var(--rubric);
   letter-spacing: 1px;
   margin-top: 8px;
 }
+.tip .tip-lines:empty { margin: 0; }
 .tip .tip-note {
-  font-size: 12px;
+  font-size: 14px;
   color: var(--ink);
   margin-top: 6px;
   line-height: 1.5;
