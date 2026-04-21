@@ -765,8 +765,7 @@
           {
             type: (TYPE_UA[it.direct.type] || it.direct.type),
             ua: it.direct.quoteUa,
-            lines: (it.direct.lineDante ? 'Dante ' + it.direct.lineDante : '') +
-                   (it.direct.lineSource ? '  ·  ' + it.direct.lineSource : '')
+            lines: it.direct.lineSource || ''
           }
         ));
         if (it.primary) {
@@ -780,8 +779,7 @@
             {
               type: (TYPE_UA[it.primary.type] || it.primary.type) + ' · primus fons',
               ua: it.primary.quoteUa,
-              lines: (it.primary.lineDante ? 'Dante ' + it.primary.lineDante : '') +
-                     (it.primary.lineSource ? '  ·  ' + it.primary.lineSource : '')
+              lines: it.primary.lineSource || ''
             }
           ));
         }
