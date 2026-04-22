@@ -688,9 +688,9 @@ body.theme-purgatorio .col.dante .card .ref {
 }
 
 .colophon-bar {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: end;
   margin-top: 26px;
   padding-top: 16px;
   border-top: 1px solid var(--border-ink);
@@ -699,7 +699,10 @@ body.theme-purgatorio .col.dante .card .ref {
   color: var(--ink-dim);
   letter-spacing: 1px;
 }
+.colophon-bar > :first-child { text-align: left; }
+.colophon-bar > :last-child { text-align: right; }
 .colophon-bar .foliation {
+  text-align: center;
   font-family: 'UnifrakturMaguntia', serif;
   font-size: 18px;
   color: var(--rubric);
@@ -804,8 +807,8 @@ body.theme-paradiso .legend { background: rgba(255,255,255,0.03); }
   color: var(--ink);
   border: 1px solid var(--border-ink);
   box-shadow: 0 12px 30px rgba(0,0,0,0.55);
-  padding: 14px 18px;
-  max-width: 340px;
+  padding: 16px 20px;
+  max-width: 400px;
   font-family: 'EB Garamond', serif;
   opacity: 0;
   transform: translateY(6px);
@@ -823,45 +826,47 @@ body.theme-paradiso .legend { background: rgba(255,255,255,0.03); }
 .tip .tip-head {
   font-family: 'UnifrakturMaguntia', serif;
   color: var(--rubric);
-  font-size: 18px;
+  font-size: 22px;
   margin-bottom: 4px;
   letter-spacing: 1px;
 }
 .tip .tip-sub {
   font-style: italic;
   color: var(--ink-dim);
-  font-size: 12px;
+  font-size: 14px;
   margin-bottom: 8px;
 }
+.tip .tip-sub:empty { margin: 0; }
 .tip .tip-type {
   display: inline-block;
   font-family: 'EB Garamond', serif;
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 2px;
   text-transform: uppercase;
-  padding: 2px 8px;
+  padding: 3px 10px;
   border: 1px solid var(--border-ink);
   margin-bottom: 10px;
   color: var(--gold);
 }
 .tip .tip-quote {
   font-style: italic;
-  font-size: 13px;
+  font-size: 15px;
   color: var(--ink);
-  border-left: 2px solid var(--border-ink);
+  border-left: 2px solid var(--tip-accent, transparent);
   padding-left: 10px;
   margin: 8px 0;
   line-height: 1.5;
 }
 .tip .tip-lines {
   font-family: 'EB Garamond', serif;
-  font-size: 11px;
+  font-size: 13px;
   color: var(--rubric);
   letter-spacing: 1px;
   margin-top: 8px;
 }
+.tip .tip-lines:empty { margin: 0; }
 .tip .tip-note {
-  font-size: 12px;
+  font-size: 14px;
   color: var(--ink);
   margin-top: 6px;
   line-height: 1.5;
@@ -1276,8 +1281,8 @@ body.theme-paradiso .fp-stars { display: block; }
   display: none;
   position: absolute;
   left: 30px;
-  right: 30px;
   bottom: 30px;
+  width: calc(100% - 60px);
   height: 22px;
   color: var(--rubric);
   opacity: 0.75;
@@ -1289,8 +1294,8 @@ body.theme-inferno .fp-flames { display: block; }
   display: none;
   position: absolute;
   left: 30px;
-  right: 30px;
   bottom: 30px;
+  width: calc(100% - 60px);
   height: 80px;
   color: var(--border-ink);
   opacity: 0.12;
@@ -1307,4 +1312,192 @@ body.theme-purgatorio .fp-mountain { display: block; }
   .fp-cantica { font-size: 88px; }
   .fp-incipit { font-size: 22px; }
   .fp-device { width: 200px; height: 200px; }
+}
+
+/* ============ RESPONSIVE ============ */
+
+/* Tablet — 768..1023px: compress paddings/gaps, keep 3-col medallion */
+@media (max-width: 1023px) {
+  .folio { padding: 44px 36px; }
+  .folio-header { padding: 8px 28px; }
+  .chrome { padding: 12px 22px; }
+  .chrome-left .project-mark .sub { display: none; }
+  .graph { gap: 28px; }
+  .canto-row { gap: 22px; }
+  .fp-cantica { font-size: clamp(80px, 11vw, 128px); }
+  .folio-header .cantica { font-size: clamp(52px, 7.2vw, 72px); }
+  .fp-bottom { margin-bottom: 36px; }
+}
+
+/* Phone — <= 767px: switch medallion to vertical per-connection stack */
+@media (max-width: 767px) {
+  .chrome { padding: 10px 14px; }
+  .chrome-left { gap: 10px; }
+  .chrome-left .nav-btn { padding: 4px 10px; font-size: 18px; }
+  .project-mark { font-size: 15px; letter-spacing: 1px; }
+  .theme-toggle { gap: 6px; }
+  .theme-toggle a { padding: 4px 9px; font-size: 12px; letter-spacing: 1px; }
+
+  .folio { padding: 22px 14px 90px; margin: 14px 8px; }
+  .folio-header { padding: 4px 6px; }
+  .canto-row { gap: 10px; }
+  .folio-header .cantica { font-size: clamp(44px, 10vw, 64px); }
+  .folio-header .canto { font-size: clamp(22px, 5vw, 32px); }
+  .subtitle-ua { font-size: 13px; letter-spacing: 1px; }
+  .nav-arrow { font-size: 11px; letter-spacing: 0.5px; }
+  .kicker { font-size: 10px; letter-spacing: 2px; }
+
+  /* medallion narrow mode — drawn by render.js when MQ_NARROW matches */
+  .medallion.narrow .graph.narrow-graph {
+    display: block;
+    padding: 8px 4px 20px;
+  }
+  .medallion.narrow .col-head,
+  .medallion.narrow .margin-col,
+  .medallion.narrow #tree { display: none; }
+  .medallion.narrow .conn-group {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+    padding: 16px 0;
+    border-bottom: 1px dashed var(--border-ink);
+  }
+  .medallion.narrow .conn-group:last-child { border-bottom: none; }
+  .medallion.narrow .card {
+    width: 100%;
+    cursor: pointer;
+    position: static;
+  }
+  .medallion.narrow .arrow-v {
+    display: block;
+    margin: 0 auto;
+    color: var(--ink-dim);
+  }
+
+  .arrow-v { stroke-linecap: round; stroke-linejoin: round; }
+  .arrow-v.ALLUSION  { color: var(--c-allusion); }
+  .arrow-v.STRUCTURE { color: var(--c-structure); }
+  .arrow-v.THEMATIC  { color: var(--c-thematic); }
+  .arrow-v.INVERSION { color: var(--c-inversion); }
+  .arrow-v.ONOMASTIC { color: var(--c-onomastic); }
+  .arrow-v.indirect  { opacity: 0.55; }
+
+  .medallion.narrow .card .card-details { display: none; }
+  /* Dante card holds the full note in .desc and truncates visually.
+     Tapping the card removes the clamp instead of duplicating the text. */
+  .medallion.narrow .card.dante .desc {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .medallion.narrow .card.dante.expanded .desc {
+    display: block;
+    -webkit-line-clamp: unset;
+    line-clamp: unset;
+    overflow: visible;
+  }
+  .medallion.narrow .card.expanded {
+    box-shadow: 0 0 0 2px var(--gold);
+  }
+  .medallion.narrow .card.expanded .card-details {
+    display: block;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px dashed var(--border-ink);
+    font-family: 'EB Garamond', serif;
+  }
+  .medallion.narrow .card-details .type {
+    font-family: 'EB Garamond', serif;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+  .medallion.narrow .card-details .lat {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--rubric);
+    font-size: 14px;
+    line-height: 1.35;
+    margin-bottom: 6px;
+  }
+  .medallion.narrow .card-details .ua {
+    color: var(--ink);
+    font-size: 13px;
+    line-height: 1.4;
+  }
+  .medallion.narrow .card-details .lines {
+    color: var(--ink-dim);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-top: 8px;
+  }
+
+  /* side panel — full-height overlay, not fixed 320px */
+  .side-panel { width: min(85vw, 320px); padding: 18px 16px 32px; }
+  .side-panel-links { grid-template-columns: repeat(3, 1fr); }
+
+  /* colophon — single column, tighter */
+  .colophon-grid { padding: 0 6px; gap: 16px; }
+  .colophon-bar { display: flex; flex-direction: column; gap: 6px; text-align: center; padding: 10px 4px; }
+  .colophon-bar > :first-child { display: none; }
+  .colophon-bar > :last-child { text-align: center; }
+  .colophon-bar .foliation { display: none; }
+
+  /* Frontispicia — every size scales with the shared factor 100vw/820
+     (relative to the 820px desktop design width) clamped to [0.4, 1]. This
+     preserves the inter-element proportions from the desktop design at any
+     viewport. Decorative fleuron + incipit are hidden to reclaim space. */
+  .frontispiece {
+    padding: 44px 18px 44px;
+    margin: 12px 8px;
+    aspect-ratio: 3 / 4;
+  }
+  .fp-fleuron, .fp-bottom { display: none; }
+  .fp-top { gap: clamp(5.6px, 1.707vw, 14px); }
+  .fp-kicker {
+    font-size: clamp(5.2px, 1.585vw, 13px);
+    letter-spacing: clamp(2px, 0.61vw, 5px);
+  }
+  .fp-cantica { font-size: clamp(51.2px, 15.61vw, 128px); }
+  .fp-ordinal {
+    font-size: clamp(9.6px, 2.927vw, 24px);
+    letter-spacing: clamp(2.4px, 0.732vw, 6px);
+  }
+  .fp-setting {
+    font-size: clamp(5.6px, 1.707vw, 14px);
+    letter-spacing: clamp(1px, 0.305vw, 2.5px);
+    margin-top: clamp(9.6px, 2.927vw, 24px);
+  }
+  .fp-device {
+    width: clamp(104px, 31.707vw, 260px);
+    height: clamp(104px, 31.707vw, 260px);
+  }
+  .fp-flames, .fp-mountain { display: none; }
+  body.theme-inferno .fp-flames,
+  body.theme-purgatorio .fp-mountain { display: none; }
+
+  /* tooltip — clamp to viewport on narrow */
+  .tip { max-width: calc(100vw - 32px); }
+}
+
+/* Small phone — <= 479px */
+@media (max-width: 479px) {
+  .folio { padding: 16px 8px 80px; margin: 8px 4px; }
+  .chrome { padding: 8px 10px; }
+  .chrome-left .project-mark { font-size: 13px; letter-spacing: 0.5px; }
+  .theme-toggle a { padding: 3px 7px; font-size: 11px; letter-spacing: 0.5px; }
+  .folio-header .cantica { font-size: clamp(36px, 11vw, 52px); }
+  .folio-header .canto { font-size: clamp(18px, 5.5vw, 26px); }
+  .canto-row { gap: 6px; }
+  .canto-nav .nav-arrow { padding: 2px 4px; font-size: 10px; letter-spacing: 0; }
+  .frontispiece { padding: 36px 14px 36px; }
+  .side-panel-links a { font-size: 11px; padding: 4px 2px; letter-spacing: 0.3px; }
+  .medallion.narrow .card .ref { font-size: 11px; }
+  .medallion.narrow .card .desc { font-size: 12px; }
 }

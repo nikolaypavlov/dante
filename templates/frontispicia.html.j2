@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Frontispicia · {{ cantica_name }} · Дантешопедія</title>
+<title>Frontispicia · {{ cantica_name }} · Данте у контексті літературних звʼязків</title>
 <link rel="stylesheet" href="{{ css_path }}" />
 </head>
 <body class="theme-{{ cantica }}" data-current-file="frontispicia_{{ cantica }}">
@@ -91,9 +91,9 @@
           <circle r="60" fill="none" stroke="var(--rubric)" stroke-width="0.6" opacity="0.4"/>
           <g fill="none" stroke="var(--rubric)" stroke-width="1" opacity="0.85">
             <circle r="52"/><circle r="44"/><circle r="36"/><circle r="28"/>
-            <circle r="20"/><circle r="12"/><circle r="4"/>
+            <circle r="20"/><circle r="12"/>
           </g>
-          <path d="M-2 -2 L 2 -2 L 4 2 L 0 6 L -4 2 Z" fill="var(--rubric)" stroke="var(--gold)" stroke-width="0.4"/>
+          <path d="M-2 -4 L 2 -4 L 4 0 L 0 4 L -4 0 Z" fill="var(--rubric)" stroke="var(--gold)" stroke-width="0.4"/>
           <g stroke="var(--rubric)" stroke-width="0.3" opacity="0.4">
             <line x1="0" y1="-52" x2="0" y2="-60"/>
             <line x1="0" y1="52" x2="0" y2="60"/>
@@ -121,15 +121,20 @@
             <stop offset="0%" stop-color="#4a6ba8"/>
             <stop offset="100%" stop-color="#2a3a68"/>
           </linearGradient>
+          <clipPath id="pur-disc">
+            <circle cx="130" cy="130" r="124"/>
+          </clipPath>
         </defs>
         <circle cx="130" cy="130" r="124" fill="url(#pur-dawn)" stroke="currentColor" stroke-width="1.5"/>
         <circle cx="130" cy="130" r="116" fill="none" stroke="var(--gold)" stroke-width="0.6" opacity="0.6"/>
         <circle cx="130" cy="130" r="108" fill="none" stroke="currentColor" stroke-width="0.6" opacity="0.4"/>
-        <path d="M10 180 Q 60 176 110 180 Q 160 184 210 180 Q 250 178 250 180 L 250 254 L 10 254 Z" fill="url(#pur-sea)" opacity="0.9"/>
-        <g stroke="var(--paper)" stroke-width="0.6" fill="none" opacity="0.5">
-          <path d="M20 190 Q 40 186 60 190 T 100 190 T 140 190 T 180 190 T 220 190 T 244 190"/>
-          <path d="M24 200 Q 44 196 64 200 T 104 200 T 144 200 T 184 200 T 224 200 T 244 200"/>
-          <path d="M30 212 Q 50 208 70 212 T 110 212 T 150 212 T 190 212 T 230 212"/>
+        <g clip-path="url(#pur-disc)">
+          <path d="M10 180 Q 60 176 110 180 Q 160 184 210 180 Q 250 178 250 180 L 250 254 L 10 254 Z" fill="url(#pur-sea)" opacity="0.9"/>
+          <g stroke="var(--paper)" stroke-width="0.6" fill="none" opacity="0.5">
+            <path d="M20 190 Q 40 186 60 190 T 100 190 T 140 190 T 180 190 T 220 190 T 244 190"/>
+            <path d="M24 200 Q 44 196 64 200 T 104 200 T 144 200 T 184 200 T 224 200 T 244 200"/>
+            <path d="M30 212 Q 50 208 70 212 T 110 212 T 150 212 T 190 212 T 230 212"/>
+          </g>
         </g>
         <g>
           <ellipse cx="130" cy="180" rx="66" ry="8" fill="var(--ink)" opacity="0.4"/>
@@ -142,11 +147,6 @@
             <path d="M111 136 L 149 136"/>
             <path d="M116 130 L 144 130"/>
             <path d="M120 126 L 140 126"/>
-          </g>
-          <g transform="translate(130 116)">
-            <circle r="4" fill="var(--border-ink)"/>
-            <path d="M-8 -2 Q 0 -10 8 -2" fill="none" stroke="currentColor" stroke-width="0.8"/>
-            <path d="M-6 -6 L 0 -12 L 6 -6" fill="none" stroke="currentColor" stroke-width="0.6"/>
           </g>
         </g>
         <g fill="var(--gold)" stroke="var(--border-ink)" stroke-width="0.4">
