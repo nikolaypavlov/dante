@@ -1326,6 +1326,7 @@ body.theme-purgatorio .fp-mountain { display: block; }
   .canto-row { gap: 22px; }
   .fp-cantica { font-size: clamp(80px, 11vw, 128px); }
   .folio-header .cantica { font-size: clamp(52px, 7.2vw, 72px); }
+  .fp-bottom { margin-bottom: 36px; }
 }
 
 /* Phone — <= 767px: switch medallion to vertical per-connection stack */
