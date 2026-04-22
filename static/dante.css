@@ -1447,7 +1447,7 @@ body.theme-purgatorio .fp-mountain { display: block; }
      preserves the inter-element proportions from the desktop design at any
      viewport. Decorative fleuron + incipit are hidden to reclaim space. */
   .frontispiece {
-    padding: 28px 18px 28px;
+    padding: 44px 18px 44px;
     margin: 12px 8px;
     aspect-ratio: 3 / 4;
   }
@@ -1464,7 +1464,7 @@ body.theme-purgatorio .fp-mountain { display: block; }
   }
   .fp-setting {
     font-size: clamp(5.6px, 1.707vw, 14px);
-    letter-spacing: clamp(1.6px, 0.488vw, 4px);
+    letter-spacing: clamp(1px, 0.305vw, 2.5px);
     margin-top: clamp(9.6px, 2.927vw, 24px);
   }
   .fp-device {
@@ -1489,7 +1489,7 @@ body.theme-purgatorio .fp-mountain { display: block; }
   .folio-header .canto { font-size: clamp(18px, 5.5vw, 26px); }
   .canto-row { gap: 6px; }
   .canto-nav .nav-arrow { padding: 2px 4px; font-size: 10px; letter-spacing: 0; }
-  .frontispiece { padding: 22px 14px 22px; }
+  .frontispiece { padding: 36px 14px 36px; }
   .side-panel-links a { font-size: 11px; padding: 4px 2px; letter-spacing: 0.3px; }
   .medallion.narrow .card .ref { font-size: 11px; }
   .medallion.narrow .card .desc { font-size: 12px; }
