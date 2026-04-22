@@ -72,9 +72,11 @@ viewport.
 
 ## Tests
 
-| Script             | What it checks                                                        |
-|--------------------|-----------------------------------------------------------------------|
-| `responsive.js`    | 4 viewports x 5 pages render; no horizontal overflow                  |
-| `dedup-purg19.js`  | Purg. XIX: shared Latin intermediary renders once, transmits to both primaries |
-| `order-par04.js`   | Par. IV: Dante cards in col 1 are sorted by first verse number        |
-| `diagnose.js`      | Helper: print overflow offenders for a given page/viewport            |
+| Script                    | What it checks                                                 |
+|---------------------------|----------------------------------------------------------------|
+| `responsive.js`           | 4 viewports x 5 pages render; no horizontal overflow           |
+| `dedup-purg19.js`         | Purg. XIX: shared Latin intermediary renders once, transmits to both primaries |
+| `order-par04.js`          | Par. IV: Dante cards in col 1 are sorted by first verse number |
+| `mobile-arrow-styles.js`  | Mobile arrows get per-type color + stroke-width / dasharray    |
+| `mobile-type-label.js`    | Mobile expanded-card "type" label colored per connection type  |
+| `diagnose.js`             | Helper: print overflow offenders for a given page/viewport     |

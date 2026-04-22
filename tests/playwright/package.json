@@ -9,7 +9,9 @@
     "diagnose": "node diagnose.js",
     "dedup-purg19": "node dedup-purg19.js",
     "order-par04": "node order-par04.js",
-    "all": "node responsive.js && node dedup-purg19.js && node order-par04.js"
+    "mobile-arrows": "node mobile-arrow-styles.js",
+    "mobile-type-label": "node mobile-type-label.js",
+    "all": "node responsive.js && node dedup-purg19.js && node order-par04.js && node mobile-arrow-styles.js && node mobile-type-label.js"
   },
   "dependencies": {
     "playwright": "1.58.2"

@@ -1372,16 +1372,25 @@ body.theme-purgatorio .fp-mountain { display: block; }
   .medallion.narrow .arrow-v {
     display: block;
     margin: 0 auto;
-    color: var(--ink-dim);
   }
 
-  .arrow-v { stroke-linecap: round; stroke-linejoin: round; }
+  /* Type colors: kept at single-class specificity so the per-type rules
+     override the base. Base `color` is the fallback for untyped arrows. */
+  .arrow-v { stroke-linecap: round; stroke-linejoin: round; color: var(--ink-dim); }
   .arrow-v.ALLUSION  { color: var(--c-allusion); }
   .arrow-v.STRUCTURE { color: var(--c-structure); }
   .arrow-v.THEMATIC  { color: var(--c-thematic); }
   .arrow-v.INVERSION { color: var(--c-inversion); }
   .arrow-v.ONOMASTIC { color: var(--c-onomastic); }
   .arrow-v.indirect  { opacity: 0.55; }
+
+  /* Type-specific stroke variants (mirror desktop .link.* rules, scaled
+     for the 12x28 viewBox). Applied on the inner <path> so they override
+     the stroke-width presentation attribute set by makeVArrow. */
+  .arrow-v.STRUCTURE path { stroke-width: 2.8; }
+  .arrow-v.THEMATIC  path { stroke-dasharray: 3 2.5; }
+  .arrow-v.ONOMASTIC path { stroke-dasharray: 0.8 2.5; }
+  .arrow-v.indirect  path { stroke-dasharray: 1 2; stroke-width: 1.2; }
 
   .medallion.narrow .card .card-details { display: none; }
   /* Dante card holds the full note in .desc and truncates visually.
@@ -1417,6 +1426,14 @@ body.theme-purgatorio .fp-mountain { display: block; }
     color: var(--accent);
     margin-bottom: 6px;
   }
+  /* Per-type colors for the expanded connection-name label. Mirror the
+     .auth coloring so the "Пряма алюзія / Структурне запозичення / ..."
+     line under the author reads in the same connection-type hue. */
+  .medallion.narrow .card.ALLUSION  .card-details .type { color: var(--c-allusion); }
+  .medallion.narrow .card.STRUCTURE .card-details .type { color: var(--c-structure); }
+  .medallion.narrow .card.THEMATIC  .card-details .type { color: var(--c-thematic); }
+  .medallion.narrow .card.INVERSION .card-details .type { color: var(--c-inversion); }
+  .medallion.narrow .card.ONOMASTIC .card-details .type { color: var(--c-onomastic); }
   .medallion.narrow .card-details .lat {
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
