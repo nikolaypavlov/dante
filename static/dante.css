@@ -688,9 +688,9 @@ body.theme-purgatorio .col.dante .card .ref {
 }
 
 .colophon-bar {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: end;
   margin-top: 26px;
   padding-top: 16px;
   border-top: 1px solid var(--border-ink);
@@ -699,7 +699,10 @@ body.theme-purgatorio .col.dante .card .ref {
   color: var(--ink-dim);
   letter-spacing: 1px;
 }
+.colophon-bar > :first-child { text-align: left; }
+.colophon-bar > :last-child { text-align: right; }
 .colophon-bar .foliation {
+  text-align: center;
   font-family: 'UnifrakturMaguntia', serif;
   font-size: 18px;
   color: var(--rubric);
@@ -1334,7 +1337,7 @@ body.theme-purgatorio .fp-mountain { display: block; }
   .theme-toggle { gap: 6px; }
   .theme-toggle a { padding: 4px 9px; font-size: 12px; letter-spacing: 1px; }
 
-  .folio { padding: 22px 14px; margin: 14px 8px; }
+  .folio { padding: 22px 14px 90px; margin: 14px 8px; }
   .folio-header { padding: 4px 6px; }
   .canto-row { gap: 10px; }
   .folio-header .cantica { font-size: clamp(44px, 10vw, 64px); }
@@ -1440,7 +1443,10 @@ body.theme-purgatorio .fp-mountain { display: block; }
 
   /* colophon — single column, tighter */
   .colophon-grid { padding: 0 6px; gap: 16px; }
-  .colophon-bar { flex-direction: column; gap: 6px; text-align: center; padding: 10px 4px; }
+  .colophon-bar { display: flex; flex-direction: column; gap: 6px; text-align: center; padding: 10px 4px; }
+  .colophon-bar > :first-child { display: none; }
+  .colophon-bar > :last-child { text-align: center; }
+  .colophon-bar .foliation { display: none; }
 
   /* Frontispicia — every size scales with the shared factor 100vw/820
      (relative to the 820px desktop design width) clamped to [0.4, 1]. This
@@ -1481,7 +1487,7 @@ body.theme-purgatorio .fp-mountain { display: block; }
 
 /* Small phone — <= 479px */
 @media (max-width: 479px) {
-  .folio { padding: 16px 8px; margin: 8px 4px; }
+  .folio { padding: 16px 8px 80px; margin: 8px 4px; }
   .chrome { padding: 8px 10px; }
   .chrome-left .project-mark { font-size: 13px; letter-spacing: 0.5px; }
   .theme-toggle a { padding: 3px 7px; font-size: 11px; letter-spacing: 0.5px; }
