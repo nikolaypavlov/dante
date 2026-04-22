@@ -34,11 +34,25 @@
     return m ? m[1] : 'inferno';
   }
 
+  function firstVerseNum(lineRef) {
+    const m = String(lineRef || '').match(/\d+/);
+    return m ? parseInt(m[0], 10) : 0;
+  }
+
   function render() {
     state.theme = themeFromBody();
 
     const d = window.CANTO;
     if (!d) return;
+    // Sort sources by Dante-passage verse number so col 1 (Dante cards) always
+    // reads in terzin order regardless of how connections were authored in JSON.
+    // Stable: sources sharing the same lineDante keep their original order.
+    if (Array.isArray(d.sources)) {
+      d.sources = d.sources
+        .map((s, i) => ({ s, i }))
+        .sort((a, b) => firstVerseNum(a.s.lineDante) - firstVerseNum(b.s.lineDante) || a.i - b.i)
+        .map(o => o.s);
+    }
     state.dataset = d;
 
     $('kicker').textContent = 'Divina Commedia · ' + ROMAN_TO_CANTICA[state.theme];
@@ -154,7 +168,7 @@
         src: s
       });
       // find the direct that transmits THIS primary
-      const transmitter = directs.find(d => d.transmits === s.id);
+      const transmitter = directs.find(d => Array.isArray(d.transmits) && d.transmits.includes(s.id));
       if (transmitter) c.dataset.parent = transmitter.id;
       colI.body.appendChild(c);
     });
@@ -378,12 +392,12 @@
   // - If src is a primary, return the first intermediary that transmits it (if any).
   function resolveChainPartner(src) {
     if (!src) return null;
-    if (src.tier === 'direct' && src.transmits) {
-      return findById(src.transmits) || null;
+    if (src.tier === 'direct' && Array.isArray(src.transmits) && src.transmits.length) {
+      return findById(src.transmits[0]) || null;
     }
     if (src.tier === 'primary') {
       return (state.dataset.sources || []).find(
-        s => s.tier === 'direct' && s.transmits === src.id
+        s => s.tier === 'direct' && Array.isArray(s.transmits) && s.transmits.includes(src.id)
       ) || null;
     }
     return null;
@@ -412,10 +426,11 @@
       appendArrow(svg, fromId, s.id, s.type, false);
     });
 
-    // 2. Direct (intermediary) → Primary — same style as Dante → Direct
+    // 2. Direct (intermediary) → Primary — same style as Dante → Direct.
+    //    One direct may transmit multiple primaries (dedup'd intermediary).
     directs.forEach(s => {
-      if (!s.transmits) return;
-      appendArrow(svg, s.id, s.transmits, s.type, false);
+      if (!Array.isArray(s.transmits) || !s.transmits.length) return;
+      s.transmits.forEach(pid => appendArrow(svg, s.id, pid, s.type, false));
     });
   }
 
@@ -515,7 +530,9 @@
     // also include primaries transmitted by those sources
     passage.sourceIds.forEach(sid => {
       const s = findById(sid);
-      if (s && s.transmits) touchedSourceIds.add(s.transmits);
+      if (s && Array.isArray(s.transmits)) {
+        s.transmits.forEach(t => touchedSourceIds.add(t));
+      }
     });
     const allIds = new Set([uid, ...touchedSourceIds]);
     document.querySelectorAll('.card').forEach(c => {
@@ -726,13 +743,13 @@
       }
     });
     const directs   = d.sources.filter(s => s.tier === 'direct');
-    const primaries = d.sources.filter(s => s.tier === 'primary');
-    const primaryByTransmitter = new Map();
-    primaries.forEach(p => { if (p.transmits) primaryByTransmitter.set(p.transmits, p); });
     directs.forEach(dir => {
       const g = groups.get(dir.lineDante);
       if (!g) return;
-      g.items.push({ direct: dir, primary: primaryByTransmitter.get(dir.id) || null });
+      const dirPrimaries = Array.isArray(dir.transmits)
+        ? dir.transmits.map(pid => findById(pid)).filter(Boolean)
+        : [];
+      g.items.push({ direct: dir, primaries: dirPrimaries });
     });
 
     const frag = document.createDocumentFragment();
@@ -764,20 +781,20 @@
             ua: it.direct.quoteUa
           }
         ));
-        if (it.primary) {
-          grp.appendChild(makeVArrow(it.primary.type, true));
+        it.primaries.forEach(p => {
+          grp.appendChild(makeVArrow(p.type, true));
           grp.appendChild(makeNarrowCard(
-            it.primary.work,
-            shortenDesc(it.primary.quoteLat, 90),
-            it.primary.author,
-            it.primary.type,
+            p.work,
+            shortenDesc(p.quoteLat, 90),
+            p.author,
+            p.type,
             'primary indirect',
             {
-              type: (TYPE_UA[it.primary.type] || it.primary.type) + ' · primus fons',
-              ua: it.primary.quoteUa
+              type: (TYPE_UA[p.type] || p.type) + ' · primus fons',
+              ua: p.quoteUa
             }
           ));
-        }
+        });
       });
       frag.appendChild(grp);
     }

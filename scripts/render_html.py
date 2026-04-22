@@ -34,13 +34,18 @@ def bust(path: str, kind: str) -> str:
     src = STATIC_DIR / ("render.js" if kind == "js" else "dante.css")
     return f"{path}?v={asset_hash(src)}"
 
+
 CANTICA_SEQUENCE = [
     ("Inferno", "inf", "Inf.", 34),
     ("Purgatorio", "purg", "Purg.", 33),
     ("Paradiso", "par", "Par.", 33),
 ]
 
-CANTICA_SLUG = {"Inferno": "inferno", "Purgatorio": "purgatorio", "Paradiso": "paradiso"}
+CANTICA_SLUG = {
+    "Inferno": "inferno",
+    "Purgatorio": "purgatorio",
+    "Paradiso": "paradiso",
+}
 
 CANTICA_LAT = {
     "Inferno": "Cantica Prima",
@@ -90,8 +95,8 @@ FRONTISPICIA = {
             "ch&eacute; la diritta via era smarrita."
         ),
         "setting": (
-            "Silva obscura <span class=\"star\">\u2726</span> Nox "
-            "<span class=\"star\">\u2726</span> Feriae sanctae MCCC"
+            'Silva obscura <span class="star">\u2726</span> Nox '
+            '<span class="star">\u2726</span> Feriae sanctae MCCC'
         ),
     },
     "purgatorio": {
@@ -103,8 +108,8 @@ FRONTISPICIA = {
             "che lascia dietro a s&eacute; mar s&igrave; crudele."
         ),
         "setting": (
-            "Insula Purgatorii <span class=\"star\">\u2726</span> Aurora "
-            "<span class=\"star\">\u2726</span> Dies paschae MCCC"
+            'Insula Purgatorii <span class="star">\u2726</span> Aurora '
+            '<span class="star">\u2726</span> Dies paschae MCCC'
         ),
     },
     "paradiso": {
@@ -116,8 +121,8 @@ FRONTISPICIA = {
             "in una parte pi&ugrave; e meno altrove."
         ),
         "setting": (
-            "Coeli novem <span class=\"star\">\u2726</span> Empyreum "
-            "<span class=\"star\">\u2726</span> In die paschae"
+            'Coeli novem <span class="star">\u2726</span> Empyreum '
+            '<span class="star">\u2726</span> In die paschae'
         ),
     },
 }
@@ -162,9 +167,13 @@ def from_json(conns: list) -> list:
         chain[] = intermediaries that Dante actually read (col 2).
     When chain is null: emit one 'direct' record (Dante read the source).
     When chain is non-empty: emit one 'primary' + one 'direct' per chain item.
-    Intermediaries link to their primary via `transmits`.
+    Intermediaries link to their primaries via `transmits` (a list of
+    primary ids). When two connections from the same Dante passage route
+    through the same (author, ref) intermediary, one intermediary card is
+    emitted and its `transmits` lists both primaries.
     """
     out: list[dict] = []
+    inter_by_key: dict[tuple[str, str, str], dict] = {}
     for c in conns:
         base_weight = weight_of(c["confidence"])
         chain = c.get("chain") or []
@@ -206,23 +215,28 @@ def from_json(conns: list) -> list:
                 }
             )
             for i, ch in enumerate(chain):
-                out.append(
-                    {
-                        "id": f"{c['id']}_inter_{i}",
-                        "tier": "direct",
-                        "author": ch["author"],
-                        "work": ch["ref"],
-                        "icon": icon_for(ch["author"]),
-                        "type": c["type"],
-                        "weight": base_weight,
-                        "lineDante": c["dante_ref"],
-                        "lineSource": ch["ref"],
-                        "quoteLat": ch["sub"],
-                        "quoteUa": ch["desc"],
-                        "note": c["desc_dante"],
-                        "transmits": primary_id,
-                    }
-                )
+                key = (c["dante_ref"], ch["author"], ch["ref"])
+                existing = inter_by_key.get(key)
+                if existing is not None:
+                    existing["transmits"].append(primary_id)
+                    continue
+                record = {
+                    "id": f"{c['id']}_inter_{i}",
+                    "tier": "direct",
+                    "author": ch["author"],
+                    "work": ch["ref"],
+                    "icon": icon_for(ch["author"]),
+                    "type": c["type"],
+                    "weight": base_weight,
+                    "lineDante": c["dante_ref"],
+                    "lineSource": ch["ref"],
+                    "quoteLat": ch["sub"],
+                    "quoteUa": ch["desc"],
+                    "note": c["desc_dante"],
+                    "transmits": [primary_id],
+                }
+                inter_by_key[key] = record
+                out.append(record)
     return out
 
 
@@ -292,8 +306,7 @@ def get_nav(prefix: str, num: int) -> tuple[str, str]:
     elif prefix == "purg" and num == 33:
         # Purg. XXXIII -> Paradiso title page.
         next_html = (
-            '<a class="nav-arrow" href="frontispicia_paradiso.html">'
-            "Paradiso \u2192</a>"
+            '<a class="nav-arrow" href="frontispicia_paradiso.html">Paradiso \u2192</a>'
         )
     else:
         np, na, _nc, nn = seq[current_idx + 1]
@@ -384,7 +397,11 @@ def render_frontispicia(
     template = env.get_template("frontispicia.html.j2")
     css_busted = bust(css_path, "css")
     js_busted = bust(js_path, "js")
-    first_canto_map = {"inferno": "inf_01", "purgatorio": "purg_01", "paradiso": "par_01"}
+    first_canto_map = {
+        "inferno": "inf_01",
+        "purgatorio": "purg_01",
+        "paradiso": "par_01",
+    }
     for slug, fields in FRONTISPICIA.items():
         html = template.render(
             cantica=slug,
